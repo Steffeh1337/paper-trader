@@ -319,7 +319,7 @@ def run(day):
             if any(p["symbol"] == sym for p in open_pos):
                 decision[sym] = (t, "skipped: already holding it", None)
                 continue
-            if pf["cash"] < h["price"]:
+            if pf["cash"] - equity_start * 0.05 < h["price"]:   # the 5% cash buffer stays untouched
                 decision[sym] = (t, "skipped: cash tied up in open trades", None)
                 continue
             if analyzed >= MAX_TM_CANDIDATES:
