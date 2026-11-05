@@ -77,6 +77,13 @@
     </section>
   </div>
 
+  <section class="pt-card" id="calibration">
+    <h2>Does the Time Machine's forecast hold up?</h2>
+    <p class="pt-note">Trades grouped by the expected R the Time Machine gave them at entry, against the R they actually made. If higher forecasts lead to better results, a minimum expected R would help; if not, the ranking adds little. Small groups swing a lot: read this once there are 150 or more trades. Hover or press a group for its numbers.</p>
+    <div class="pt-legend"><span><span class="pt-sw" data-draw="cw0">—</span>Expected R (average forecast)</span><span><span class="pt-sw" data-draw="cw1">—</span>Actual R (average result)</span></div>
+    <div class="pt-chart" data-draw="calchart" data-source="calibration"></div>
+  </section>
+
   <section class="pt-card" id="trades">
     <h2>Trades</h2>
     <p class="pt-note">Every simulated trade, newest first. Entry is the open of the bar after the signal plus 0.05% slippage; a bar that touches both the stop and the target counts as the stop.</p>
@@ -147,6 +154,18 @@
     },
   });
 
+  dash.calc('calibration', {
+    title: 'Expected against actual R',
+    description: 'Trades grouped by the Time Machine’s expected R at entry: count, winners, average expected and average actual R.',
+    inputs: ['trades'],
+    fn: (trades) => [[-1, 0.05, 'under +0.05'], [0.05, 0.10, '+0.05 to +0.10'], [0.10, 0.20, '+0.10 to +0.20'], [0.20, 99, '+0.20 and up']]
+      .map(([lo, hi, group]) => {
+        const g = trades.filter((t) => t.tm_expected_R >= lo && t.tm_expected_R < hi);
+        const avg = (k) => g.length ? Math.round(g.reduce((s, t) => s + t[k], 0) / g.length * 100) / 100 : 0;
+        return { group, trades: g.length, winners: g.filter((t) => t.pnl_usd > 0).length, expected_R: avg('tm_expected_R'), actual_R: avg('R') };
+      }),
+  });
+
   dash.calc('daily_pnl', {
     title: 'Profit and loss per day',
     description: 'Each day’s trades summed; a day with no trades is 0.',
@@ -190,10 +209,12 @@
   text('targetr', 'status', 'target_r', String);
   text('flatby', 'status', 'flat_by', String);
   ['sw0', 'sw1', 'sw2'].forEach((n, i) => dash.draw(n, (el) => { el.textContent = ''; el.style.background = dash.colors[i]; }));
+  dash.draw('cw0', (el) => { el.textContent = ''; el.style.background = 'var(--cds-chart-muted)'; });
+  dash.draw('cw1', (el) => { el.textContent = ''; el.style.background = dash.colors[0]; });
 </script>
 
 <script>
-  const { money, signedMoney } = window.pt;
+  const { money, signedMoney, r2 } = window.pt;
   const parse = (s) => new Date(s + 'T00:00:00Z');
   const fmtDay = d3.utcFormat('%b %-d');
 
@@ -312,6 +333,47 @@
     const hits = svg.selectAll(null).data(rows).enter().append('rect')
       .attr('x', (r) => x(r.date) - x.step() * x.paddingInner() / 2).attr('width', x.step()).attr('y', 0).attr('height', h - 20).attr('fill', 'transparent');
     bindTip(hits, el, (ev, r) => { setTip(t, fmtDay(parse(r.date)), [[null, 'P&L', signedMoney(r.pnl_usd)]]); t.hidden = false; const [mx, my] = d3.pointer(ev, el); placeTip(el, t, mx, my); }, () => { t.hidden = true; });
+  });
+
+  dash.draw('calchart', (el) => {
+    const g = dash.data('calibration');
+    if (g.status !== 'ok' || !g.data.length) { placeholder(el, g); return; }
+    el.replaceChildren();
+    const rows = g.data;
+    const { svg, w, h } = frame(el, 240);
+    const vals = rows.flatMap((r) => [r.expected_R, r.actual_R]);
+    const y = d3.scaleLinear([Math.min(-0.5, d3.min(vals)), Math.max(0.5, d3.max(vals))], [h - 44, 12]).nice();
+    const fmt = (v) => (v > 0 ? '+' : '') + d3.format('.1f')(v) + 'R';
+    const probe = svg.append('text').style('font-size', 'var(--cds-font-size-caption)').text(fmt(y.domain()[0]));
+    const left = probe.node().getComputedTextLength() + 12; probe.remove();
+    const x0 = d3.scaleBand(rows.map((r) => r.group), [left, w - 12]).padding(0.25);
+    const x1 = d3.scaleBand(['expected_R', 'actual_R'], [0, x0.bandwidth()]).padding(0.1);
+    yAxis(svg, y, w, left, 12, fmt);
+    svg.append('line').attr('x1', left).attr('x2', w - 12).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', 'var(--cds-chart-axis)');
+    const narrow = x0.bandwidth() < 80;
+    rows.forEach((r) => {
+      svg.append('text').attr('x', x0(r.group) + x0.bandwidth() / 2).attr('y', h - 26).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(narrow ? r.group.replace(' to ', '–').replace(' and up', '+').replace('under ', '<') : r.group);
+      svg.append('text').attr('x', x0(r.group) + x0.bandwidth() / 2).attr('y', h - 8).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(d3.format(',')(r.trades) + (narrow ? '' : r.trades === 1 ? ' trade' : ' trades'));
+      [['expected_R', 'var(--cds-chart-muted)'], ['actual_R', null]].forEach(([k, c]) => {
+        if (!r.trades) return;
+        const v = r[k];
+        const bw = Math.min(32, x1.bandwidth());
+        svg.append('rect').attr('x', x0(r.group) + x1(k) + (x1.bandwidth() - bw) / 2).attr('width', bw)
+          .attr('y', y(Math.max(0, v))).attr('height', Math.max(1, Math.abs(y(v) - y(0)))).attr('rx', 3)
+          .attr('fill', c || (v < 0 ? 'var(--cds-chart-status-critical)' : dash.colors[0]));
+      });
+    });
+    const t = tip(el);
+    const hits = svg.selectAll(null).data(rows).enter().append('rect')
+      .attr('x', (r) => x0(r.group) - x0.step() * x0.paddingInner() / 2).attr('width', x0.step()).attr('y', 0).attr('height', h - 20).attr('fill', 'transparent');
+    bindTip(hits, el, (ev, r) => {
+      setTip(t, 'Expected ' + r.group, [
+        ['var(--cds-chart-muted)', 'Expected', r2(r.expected_R) + 'R'],
+        [dash.colors[0], 'Actual', r2(r.actual_R) + 'R'],
+        [null, 'Trades', d3.format(',')(r.trades) + ', ' + d3.format(',')(r.winners) + ' winners'],
+      ]);
+      t.hidden = false; const [mx, my] = d3.pointer(ev, el); placeTip(el, t, mx, my);
+    }, () => { t.hidden = true; });
   });
 
   dash.draw('funnelchart', (el) => {
