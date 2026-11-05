@@ -64,12 +64,18 @@ def download(day, symbols):
     A.OUT = WORK
     start = (day - dt.timedelta(days=100)).isoformat() + "T00:00:00Z"
     end = (day + dt.timedelta(days=1)).isoformat() + "T00:00:00Z"
-    for i in range(0, len(symbols), 20):
-        batch = symbols[i:i + 20]
-        got = A.bars(batch, "5Min", start, end)
-        for s in batch:
-            if got.get(s):
-                A.save(s, got[s])
+    import concurrent.futures as cf
+
+    def one(sym):
+        try:
+            got = A.bars([sym], "5Min", start, end)
+        except RuntimeError:
+            return
+        if got.get(sym):
+            A.save(sym, got[sym])
+
+    with cf.ThreadPoolExecutor(A.WORKERS) as ex:   # parallel, under the free plan's request limit
+        list(ex.map(one, symbols))
 
 
 def run(day):
