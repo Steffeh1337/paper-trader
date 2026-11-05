@@ -1,28 +1,7 @@
-2026-11-03  account $221.27  max loss/trade $6.64  daily loss limit $22.13
-  ... and 457 more in the watchlist (--show N for more).
-507 breakouts between 9:50 and 15:30; 206 cheap enough for a position of at most a third of the account.
-  09:50 BUY 1 COHU at 51.84  stop 50.63  target 54.44  risk $1.21  expected +0.28R
-  09:50 BUY 2 ALGM at 33.85  stop 33.43  target 34.84  risk $0.84  expected +0.08R
-  09:50 BUY 1 HUT at 60.61  stop 57.41  target 67.19  risk $3.20  expected +0.03R
-  09:50 INTC: sizing refused: No order: one share of INTC costs $62.58, more than your cash limit (cash $41.12 in trader/portfolio.json minus the $11.06 buffer = $30.06 / 62.58). No order.
-  09:50 BUY 1 ENPH at 29.00  stop 28.43  target 30.20  risk $0.57  expected +0.02R
-  09:50 CSIQ: sizing refused: No order: one share of CSIQ costs $9.85, more than your cash limit (cash $12.12 in trader/portfolio.json minus the $11.06 buffer = $1.06 / 9.85). No order.
-    EXIT 10:50 ENPH at 30.20 (target)  P&L $+1.20  day so far $+1.20
-  10:50 BUY 1 VFC at 19.60  stop 19.46  target 19.82  risk $0.14  expected +0.22R
-  10:50 ASST: sizing refused: No order: one share of ASST costs $21.50, more than your cash limit (cash $22.72 in trader/portfolio.json minus the $11.06 buffer = $11.66 / 21.50). No order.
-  10:50 FIG: sizing refused: No order: one share of FIG costs $21.84, more than your cash limit (cash $22.72 in trader/portfolio.json minus the $11.06 buffer = $11.66 / 21.84). No order.
-  10:55 BUY 1 VITL at 9.44  stop 9.08  target 10.16  risk $0.36  expected +0.01R
-    EXIT 11:00 VFC at 19.45 (stop)  P&L $-0.15  day so far $+1.05
-    EXIT 11:05 ALGM at 34.84 (target)  P&L $+1.98  day so far $+3.03
-  11:05 BUY 4 RPD at 15.06  stop 14.71  target 15.73  risk $1.40  expected +0.17R
-  11:25 BUY 1 SARO at 25.50  stop 25.16  target 26.15  risk $0.34  expected +0.00R
-    EXIT 11:30 COHU at 50.35 (stop)  P&L $-1.49  day so far $+1.54
-  12:00 BUY 1 DT at 49.28  stop 47.36  target 53.03  risk $1.92  expected +0.01R
-    EXIT 12:50 SARO at 25.15 (stop)  P&L $-0.35  day so far $+1.19
-    EXIT 13:50 RPD at 14.70 (stop)  P&L $-1.44  day so far $-0.25
-    EXIT 14:25 VITL at 10.16 (target)  P&L $+0.72  day so far $+0.47
-  14:25 BUY 6 PURR at 10.45  stop 10.15  target 11.02  risk $1.80  expected +0.04R
-    EXIT 15:20 PURR at 10.14 (stop)  P&L $-1.86  day so far $-1.39
-    EXIT 15:40 DT at 47.34 (stop)  P&L $-1.94  day so far $-3.33
-    EXIT 15:55 HUT at 63.58 (flat by close)  P&L $+2.97  day so far $-0.36
-End of day: account $220.91 | deposited $223.84 | SPY benchmark $222.35
+2026-11-03: using saved Alpaca bars in backtest/cache/alpaca
+2026-11-03  account $222.54  rules {"min_exp_R": null, "target_R": 2.0, "stop": "mid", "breakeven": false, "last_entry": "15:30", "max_trades": 3, "risk": 0.03, "daily_loss": 0.1}
+201 breakouts between 9:50 and 15:30, each scored by the Time Machine at its signal time.
+  09:50 BUY 1 BOX at 42.73 -> 10:00 42.51 (stop)  P&L $-0.22
+  09:50 BUY 1 U at 39.18 -> 10:40 40.00 (target)  P&L $+0.82
+  09:50 BUY 3 BMNR at 20.42 -> 15:55 20.50 (flat by close)  P&L $+0.24
+End of day: account $223.38 | deposited $224.32 | SPY benchmark $222.81

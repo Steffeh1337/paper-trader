@@ -1,38 +1,7 @@
-2026-11-04  account $220.91  max loss/trade $6.63  daily loss limit $22.09
-  ... and 585 more in the watchlist (--show N for more).
-635 breakouts between 9:50 and 15:30; 285 cheap enough for a position of at most a third of the account.
-  09:50 BUY 2 DXYZ at 27.46  stop 26.85  target 28.56  risk $1.22  expected +0.24R
-  09:50 BUY 6 STGW at 11.19  stop 11.10  target 11.58  risk $0.54  expected +0.23R
-  09:50 BUY 3 BMNR at 21.44  stop 20.95  target 22.36  risk $1.47  expected +0.14R
-  09:50 BUY 4 PRME at 4.96  stop 4.84  target 5.14  risk $0.48  expected +0.14R
-  09:50 ASX: sizing refused: No order: one share of ASX costs $38.95, more than your cash limit (cash $14.69 in trader/portfolio.json minus the $11.05 buffer = $3.64 / 38.95). No order.
-  09:50 RPD: sizing refused: No order: one share of RPD costs $15.65, more than your cash limit (cash $14.69 in trader/portfolio.json minus the $11.05 buffer = $3.64 / 15.65). No order.
-  09:50 FOXA: sizing refused: No order: one share of FOXA costs $68.51, more than your cash limit (cash $14.69 in trader/portfolio.json minus the $11.05 buffer = $3.64 / 68.51). No order.
-  09:50 HTFL: sizing refused: No order: one share of HTFL costs $56.31, more than your cash limit (cash $14.69 in trader/portfolio.json minus the $11.05 buffer = $3.64 / 56.31). No order.
-  09:50 AVAH: sizing refused: No order: one share of AVAH costs $13.93, more than your cash limit (cash $14.69 in trader/portfolio.json minus the $11.05 buffer = $3.64 / 13.93). No order.
-  09:50 CRSP: sizing refused: No order: one share of CRSP costs $52.20, more than your cash limit (cash $14.69 in trader/portfolio.json minus the $11.05 buffer = $3.64 / 52.20). No order.
-  09:50 FRSH: sizing refused: No order: one share of FRSH costs $14.19, more than your cash limit (cash $14.69 in trader/portfolio.json minus the $11.05 buffer = $3.64 / 14.19). No order.
-  09:50 MTCH: sizing refused: No order: one share of MTCH costs $40.54, more than your cash limit (cash $14.69 in trader/portfolio.json minus the $11.05 buffer = $3.64 / 40.54). No order.
-  09:50 XNCR: sizing refused: No order: one share of XNCR costs $31.68, more than your cash limit (cash $14.69 in trader/portfolio.json minus the $11.05 buffer = $3.64 / 31.68). No order.
-  09:50 YOU: sizing refused: No order: one share of YOU costs $60.65, more than your cash limit (cash $14.69 in trader/portfolio.json minus the $11.05 buffer = $3.64 / 60.65). No order.
-  09:50 AUGO: sizing refused: No order: one share of AUGO costs $71.15, more than your cash limit (cash $14.69 in trader/portfolio.json minus the $11.05 buffer = $3.64 / 71.15). No order.
-  09:50 BOX: sizing refused: No order: one share of BOX costs $43.92, more than your cash limit (cash $14.69 in trader/portfolio.json minus the $11.05 buffer = $3.64 / 43.92). No order.
-    EXIT 10:00 PRME at 4.84 (stop)  P&L $-0.48  day so far $-0.48
-  10:05 BUY 1 XP at 15.14  stop 15.02  target 15.38  risk $0.12  expected +0.16R
-  10:15 BUY 1 VLRS at 7.29  stop 7.13  target 7.58  risk $0.16  expected +0.04R
-    EXIT 10:25 XP at 15.01 (stop)  P&L $-0.13  day so far $-0.61
-    EXIT 10:55 DXYZ at 26.84 (stop)  P&L $-1.24  day so far $-1.85
-  11:00 BUY 3 VFC at 20.80  stop 20.59  target 21.19  risk $0.63  expected +0.27R
-  11:00 ZG: sizing refused: No order: one share of ZG costs $34.73, more than your cash limit (cash $17.91 in trader/portfolio.json minus the $11.05 buffer = $6.86 / 34.73). No order.
-    EXIT 11:05 STGW at 11.09 (stop)  P&L $-0.60  day so far $-2.45
-  11:10 BUY 2 RELY at 27.24  stop 26.81  target 27.98  risk $0.86  expected +0.11R
-  11:10 TEVA: sizing refused: No order: one share of TEVA costs $42.09, more than your cash limit (cash $29.97 in trader/portfolio.json minus the $11.05 buffer = $18.92 / 42.09). No order.
-    EXIT 11:50 VFC at 21.19 (target)  P&L $+1.17  day so far $-1.28
-  11:50 BUY 1 ACM at 67.67  stop 67.01  target 68.78  risk $0.66  expected +0.11R
-  11:50 BUY 1 QXO at 12.58  stop 12.39  target 12.93  risk $0.19  expected +0.03R
-    EXIT 11:55 BMNR at 22.36 (target)  P&L $+2.76  day so far $+1.48
-    EXIT 12:00 ACM at 66.98 (stop)  P&L $-0.69  day so far $+0.79
-    EXIT 13:45 RELY at 27.98 (target)  P&L $+1.48  day so far $+2.27
-    EXIT 15:55 VLRS at 7.40 (flat by close)  P&L $+0.11  day so far $+2.38
-    EXIT 15:55 QXO at 12.61 (flat by close)  P&L $+0.03  day so far $+2.41
-End of day: account $223.32 | deposited $223.84 | SPY benchmark $225.99
+2026-11-04: using saved Alpaca bars in backtest/cache/alpaca
+2026-11-04  account $223.38  rules {"min_exp_R": null, "target_R": 2.0, "stop": "mid", "breakeven": false, "last_entry": "15:30", "max_trades": 3, "risk": 0.03, "daily_loss": 0.1}
+224 breakouts between 9:50 and 15:30, each scored by the Time Machine at its signal time.
+  09:50 BUY 2 IBN at 30.83 -> 10:55 31.20 (target)  P&L $+0.74
+  09:50 BUY 1 PYPL at 60.43 -> 15:55 60.13 (flat by close)  P&L $-0.30
+  09:50 BUY 3 BMNR at 21.48 -> 15:55 21.60 (flat by close)  P&L $+0.36
+End of day: account $224.18 | deposited $224.32 | SPY benchmark $226.46

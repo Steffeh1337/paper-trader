@@ -78,7 +78,7 @@ def download(day, symbols):
         list(ex.map(one, symbols))
 
 
-def run(day):
+def run(day, data_dir=None):
     os.makedirs(D.RUNLOG, exist_ok=True)
     open(os.path.join(D.RUNLOG, "latest.log"), "w").close()
     log = D.log
@@ -88,8 +88,13 @@ def run(day):
         return 0
     rules = dict(engine.DEFAULT_RULES, **D.read_json(RULES, {}))
     symbols = D.read_json(UNIVERSE)
-    log("%s: downloading 5-minute bars for %d stocks and SPY from Alpaca..." % (day, len(symbols)))
-    download(day, symbols + ["SPY"])
+    global WORK
+    if data_dir:
+        WORK = data_dir
+        log("%s: using saved Alpaca bars in %s" % (day, data_dir))
+    else:
+        log("%s: downloading 5-minute bars for %d stocks and SPY from Alpaca..." % (day, len(symbols)))
+        download(day, symbols + ["SPY"])
 
     spy_raw = json.load(gzip.open(os.path.join(WORK, "SPY.json.gz"), "rt"))
     _, sbars, _ = C.tm.parse_bars(spy_raw["chart"]["result"][0], C.FAR_FUTURE)
@@ -162,20 +167,22 @@ def run(day):
                    "min_expected_r": rules["min_exp_R"], "stop_rule": rules["stop"], "breakeven": rules["breakeven"],
                    "data": "Alpaca (IEX)"})
     D.write_json(os.path.join(D.DASH, "status.json"), [status])
-    shutil.rmtree(WORK, ignore_errors=True)
+    if not data_dir:
+        shutil.rmtree(WORK, ignore_errors=True)
     return 0
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--date", help="YYYY-MM-DD (default: today in New York)")
+    ap.add_argument("--data-dir", help="reuse saved Alpaca bars (for replaying past days) instead of downloading")
     a = ap.parse_args()
     day = dt.date.fromisoformat(a.date) if a.date else dt.datetime.now(NY).date()
     if day == dt.datetime.now(NY).date() and dt.datetime.now(NY).time() < dt.time(16, 20):
         print("The session for %s is not over yet (it is %s in New York). Run after 16:20."
               % (day, dt.datetime.now(NY).strftime("%H:%M")))
         return 1
-    return run(day)
+    return run(day, a.data_dir)
 
 
 if __name__ == "__main__":

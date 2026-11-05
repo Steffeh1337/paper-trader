@@ -4,11 +4,11 @@ Simulated with the day-trader-skill, EUR 200 a month, paper only. Updated 2026-1
 
 | | USD |
 |---|---:|
-| Deposited | 223.84 |
-| Day-trading account | 223.32 (-0.2%) |
-| Same money in SPY | 225.99 (+1.0%) |
+| Deposited | 224.32 |
+| Day-trading account | 224.18 (-0.1%) |
+| Same money in SPY | 226.46 (+1.0%) |
 
-Trading days: 3. Trades: 23, winners 10, total P&L $-0.52.
+Trading days: 3. Trades: 9, winners 4, total P&L $-0.14.
 
 Details: `sim/trades.csv`, `sim/equity.csv`, last run's log in `sim/logs/latest.log`.
 

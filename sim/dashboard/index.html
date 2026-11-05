@@ -44,7 +44,7 @@
 <div class="pt">
   <header class="pt-head">
     <h1 class="pt-title" id="top">Paper Trader</h1>
-    <p class="pt-lede">Automatic day trading on paper with the day-trader-skill, funded with €200 a month. Every trading day after the US close, the simulator replays the session: every opening-range breakout from 9:50 to 3:30 New York time, in the order they happened, checked by the Time Machine and filled from real 5-minute bars. The benchmark puts the same money into SPY on the same day.</p>
+    <p class="pt-lede">Automatic day trading on paper with the day-trader-skill, funded with €200 a month. Every trading day after the US close, the simulator replays the session on Alpaca's 5-minute bars for the 600 most-traded US stocks priced $5 to $150: it takes the first three 15-minute opening-range breakouts of the day (several at once: best Time Machine score first), targets 2R with the stop at the range midpoint, and fills them from real bars. These rules (variant B) were chosen by the six-month backtest below. The benchmark puts the same money into SPY on the same day.</p>
     <p class="pt-sub">Last run <span data-draw="lastrun" data-source="status" data-field="last_run_utc" data-row="0">—</span> for the session of <span data-draw="lastsession" data-source="status" data-field="last_session" data-row="0">—</span>.</p>
   </header>
 
@@ -72,7 +72,7 @@
     </section>
     <section class="pt-card" id="funnel">
       <h2>From scan to trade</h2>
-      <p class="pt-note">Per day: breakouts found, cheap enough for one share, analysed, with a positive expected R, and traded. Hover or press a day for the counts.</p>
+      <p class="pt-note">Per day: breakouts found, cheap enough for a position, scored by the Time Machine, passing the filter (with the filter off, all of them), and traded. Hover or press a day for the counts.</p>
       <div class="pt-chart" data-draw="funnelchart" data-source="days"></div>
     </section>
   </div>
@@ -107,6 +107,21 @@
     </div>
   </section>
 
+  <section class="pt-card" id="backtest">
+    <h2>Backtest: how the rules were chosen</h2>
+    <p class="pt-note">320 rule variants replayed on 132 trading days (April 29 to November 4, 2026), 600 stocks, 27,807 breakouts, the same engine as the live run. The first 79 days picked; the last 53, never used for picking, checked. Returns are on the money deposited (€200 a month, taken as $224), against SPY bought with the same deposits.</p>
+    <div class="pt-tablebox">
+      <table class="pt-table" data-source="backtest_pivot" data-row-key="variant">
+        <thead><tr><th data-field="variant">Variant</th><th data-field="first" class="n">First 79 days</th><th data-field="unseen" class="n">Unseen 53 days</th><th data-field="all" class="n">All 132 days</th><th data-field="spy_all" class="n">SPY, all days</th><th data-field="trades_all" class="n">Trades</th><th data-field="avg_R_all" class="n">Avg R a trade</th><th data-field="max_dd_all" class="n">Worst drawdown</th></tr></thead>
+        <tbody data-draw="btbody" data-source="backtest_pivot"></tbody>
+      </table>
+    </div>
+    <p class="pt-note">SPY made +3.6% on the first 79 days and +0.5% on the unseen 53. The variant that earned most on the first 79 days (F) lost on the unseen days, a sign of overfitting. B made money in both periods and roughly tied SPY overall; every variant still averaged slightly below 0R a trade, so none shows a reliable edge.</p>
+    <h2 id="forecast-check">Did a higher Time Machine forecast mean a better trade?</h2>
+    <p class="pt-note">All 27,807 breakouts grouped by the expected R the Time Machine gave them, against the R they made (2R target, midpoint stop). Hover or press a group for its numbers.</p>
+    <div class="pt-chart" data-draw="btforecast" data-source="backtest_forecast"></div>
+  </section>
+
   <section class="pt-card" id="rules">
     <h2>Rules in force</h2>
     <p class="pt-note">Set in the simulator; the risk limits scale with the account.</p>
@@ -116,7 +131,10 @@
       <dt>Daily loss limit</dt><dd>no new trades once the day's net loss plus open risk reaches <span data-draw="dailypct" data-source="status" data-field="daily_risk_pct" data-row="0">—</span> of the account</dd>
       <dt>Max trades per day</dt><dd><span data-draw="maxtrades" data-source="status" data-field="max_trades" data-row="0">—</span></dd>
       <dt>Entry window</dt><dd><span data-draw="scanat" data-source="status" data-field="scan_at" data-row="0">—</span> New York, breakouts of the 15-minute opening range</dd>
-      <dt>Target</dt><dd><span data-draw="targetr" data-source="status" data-field="target_r" data-row="0">—</span>R; stop at the range midpoint</dd>
+      <dt>Target</dt><dd><span data-draw="targetr" data-source="status" data-field="target_r" data-row="0">—</span>R, R being the distance from the entry to the stop</dd>
+      <dt>Time Machine filter</dt><dd data-draw="minr" data-source="status" data-field="min_expected_r" data-row="0">—</dd>
+      <dt>Stop</dt><dd><span data-draw="stoprule" data-source="status" data-field="stop_rule" data-row="0">—</span>; breakeven move <span data-draw="breakeven" data-source="status" data-field="breakeven" data-row="0">—</span></dd>
+      <dt>Data</dt><dd data-draw="datasrc" data-source="status" data-field="data" data-row="0">—</dd>
       <dt>Flat by</dt><dd><span data-draw="flatby" data-source="status" data-field="flat_by" data-row="0">—</span> New York, no overnight positions</dd>
     </dl>
     <p class="pt-note">Paper only: no broker, no real money. Not financial advice. A few weeks of results is a small sample.</p>
@@ -166,6 +184,22 @@
       }),
   });
 
+  dash.calc('backtest_pivot', {
+    title: 'Backtest by variant',
+    description: 'Each variant’s return on deposits in the first 79 days, the unseen 53 days and all 132, with trades, average R and worst drawdown over all days.',
+    inputs: ['backtest_variants'],
+    fn: (backtest_variants) => {
+      const by = {};
+      backtest_variants.forEach((r) => {
+        const v = by[r.variant] || (by[r.variant] = { variant: r.variant });
+        if (r.period.startsWith('First')) v.first = r.return_pct;
+        else if (r.period.startsWith('Unseen')) v.unseen = r.return_pct;
+        else { v.all = r.return_pct; v.spy_all = r.spy_return_pct; v.trades_all = r.trades; v.avg_R_all = r.avg_R; v.max_dd_all = r.max_drawdown_usd; }
+      });
+      return Object.values(by);
+    },
+  });
+
   dash.calc('daily_pnl', {
     title: 'Profit and loss per day',
     description: 'Each day’s trades summed; a day with no trades is 0.',
@@ -208,6 +242,10 @@
   text('scanat', 'status', 'scan_at', String);
   text('targetr', 'status', 'target_r', String);
   text('flatby', 'status', 'flat_by', String);
+  text('minr', 'status', 'min_expected_r', (v) => v == null ? 'off: every breakout qualifies' : 'expected R above ' + r2(v) + ' and a positive history');
+  text('stoprule', 'status', 'stop_rule', (v) => v === 'low' ? 'at the opening-range low' : 'at the opening-range midpoint');
+  text('breakeven', 'status', 'breakeven', (v) => v ? 'on at +1R' : 'off');
+  text('datasrc', 'status', 'data', String);
   ['sw0', 'sw1', 'sw2'].forEach((n, i) => dash.draw(n, (el) => { el.textContent = ''; el.style.background = dash.colors[i]; }));
   dash.draw('cw0', (el) => { el.textContent = ''; el.style.background = 'var(--cds-chart-muted)'; });
   dash.draw('cw1', (el) => { el.textContent = ''; el.style.background = dash.colors[0]; });
@@ -376,12 +414,45 @@
     }, () => { t.hidden = true; });
   });
 
+  dash.draw('btforecast', (el) => {
+    const g = dash.data('backtest_forecast');
+    if (g.status !== 'ok' || !g.data.length) { placeholder(el, g); return; }
+    el.replaceChildren();
+    const rows = g.data;
+    const { svg, w, h } = frame(el, 220);
+    const y = d3.scaleLinear([Math.min(-0.25, d3.min(rows, (r) => r.actual_R)), 0.1], [h - 44, 12]).nice();
+    const fmt = (v) => (v > 0 ? '+' : '') + d3.format('.2f')(v) + 'R';
+    const probe = svg.append('text').style('font-size', 'var(--cds-font-size-caption)').text(fmt(y.domain()[0]));
+    const left = probe.node().getComputedTextLength() + 12; probe.remove();
+    const x = d3.scaleBand(rows.map((r) => r.group), [left, w - 12]).padding(0.3);
+    yAxis(svg, y, w, left, 12, fmt);
+    svg.append('line').attr('x1', left).attr('x2', w - 12).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', 'var(--cds-chart-axis)');
+    const narrow = x.bandwidth() < 70;
+    rows.forEach((r) => {
+      const bw = Math.min(32, x.bandwidth());
+      svg.append('rect').attr('x', x(r.group) + (x.bandwidth() - bw) / 2).attr('width', bw)
+        .attr('y', y(Math.max(0, r.actual_R))).attr('height', Math.max(1, Math.abs(y(r.actual_R) - y(0)))).attr('rx', 3)
+        .attr('fill', r.actual_R < 0 ? 'var(--cds-chart-status-critical)' : dash.colors[0]);
+      svg.append('text').attr('x', x(r.group) + x.bandwidth() / 2).attr('y', h - 26).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)')
+        .text(narrow ? r.group.replace(' to ', '–').replace(' and up', '+').replace('below ', '<') : r.group);
+      svg.append('text').attr('x', x(r.group) + x.bandwidth() / 2).attr('y', h - 8).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)')
+        .text(d3.format(',')(r.breakouts));
+    });
+    const t = tip(el);
+    const hits = svg.selectAll(null).data(rows).enter().append('rect')
+      .attr('x', (r) => x(r.group) - x.step() * x.paddingInner() / 2).attr('width', x.step()).attr('y', 0).attr('height', h - 20).attr('fill', 'transparent');
+    bindTip(hits, el, (ev, r) => {
+      setTip(t, 'Expected ' + r.group, [[null, 'Actual', fmt(r.actual_R) + ' a trade'], [null, 'Breakouts', d3.format(',')(r.breakouts)]]);
+      t.hidden = false; const [mx, my] = d3.pointer(ev, el); placeTip(el, t, mx, my);
+    }, () => { t.hidden = true; });
+  });
+
   dash.draw('funnelchart', (el) => {
     const g = dash.data('days');
     if (g.status !== 'ok' || !g.data.length) { placeholder(el, g); return; }
     el.replaceChildren();
     const rows = g.data.slice(-10);
-    const keys = [['breakouts', 'Breakouts'], ['affordable', 'Affordable'], ['analyzed', 'Analysed'], ['positive', 'Positive'], ['traded', 'Traded']];
+    const keys = [['breakouts', 'Breakouts'], ['affordable', 'Affordable'], ['analyzed', 'Analysed'], ['positive', 'Pass the filter'], ['traded', 'Traded']];
     const { svg, w, h } = frame(el, 220);
     const y = d3.scaleLinear([0, d3.max(rows, (r) => r.breakouts) || 1], [h - 28, 12]).nice();
     const fmt = d3.format(',');
@@ -419,6 +490,20 @@
       cell(tr, money(r.exit), 'n'); pill(tr, r.outcome);
       const p = cell(tr, signedMoney(r.pnl_usd), 'n'); p.classList.add(r.pnl_usd >= 0 ? 'pt-good' : 'pt-bad');
       cell(tr, r2(r.R), 'n'); cell(tr, r2(r.tm_expected_R), 'n');
+      tb.appendChild(tr);
+    });
+  });
+
+  dash.draw('btbody', (tb) => {
+    tb.replaceChildren();
+    const g = dash.data('backtest_pivot');
+    if (g.status !== 'ok') return;
+    const pc = (v) => v == null ? '' : d3.format('+.1%')(v);
+    g.data.forEach((r) => {
+      const tr = document.createElement('tr'); tr.dataset.key = encodeURIComponent(r.variant);
+      cell(tr, r.variant);
+      [r.first, r.unseen, r.all].forEach((v) => { const td = cell(tr, pc(v), 'n'); td.classList.add(v >= 0 ? 'pt-good' : 'pt-bad'); });
+      cell(tr, pc(r.spy_all), 'n'); cell(tr, d3.format(',')(r.trades_all), 'n'); cell(tr, r2(r.avg_R_all), 'n'); cell(tr, money(r.max_dd_all), 'n');
       tb.appendChild(tr);
     });
   });

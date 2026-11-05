@@ -1,26 +1,26 @@
 [
   {
     "date": "2026-11-02",
-    "breakouts": 658,
-    "affordable": 278,
-    "analyzed": 108,
-    "positive": 19,
+    "breakouts": 256,
+    "affordable": 203,
+    "analyzed": 256,
+    "positive": 256,
     "traded": 3
   },
   {
     "date": "2026-11-03",
-    "breakouts": 507,
-    "affordable": 206,
-    "analyzed": 45,
-    "positive": 14,
-    "traded": 10
+    "breakouts": 201,
+    "affordable": 154,
+    "analyzed": 201,
+    "positive": 201,
+    "traded": 3
   },
   {
     "date": "2026-11-04",
-    "breakouts": 635,
-    "affordable": 285,
-    "analyzed": 93,
-    "positive": 25,
-    "traded": 10
+    "breakouts": 224,
+    "affordable": 166,
+    "analyzed": 224,
+    "positive": 224,
+    "traded": 3
   }
 ]

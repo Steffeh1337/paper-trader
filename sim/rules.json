@@ -1,10 +1,10 @@
 {
-  "min_exp_R": 0.0,
+  "min_exp_R": null,
   "target_R": 2.0,
   "stop": "mid",
   "breakeven": false,
   "last_entry": "15:30",
-  "max_trades": 10,
+  "max_trades": 3,
   "risk": 0.03,
   "daily_loss": 0.1
 }

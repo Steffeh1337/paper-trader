@@ -1,27 +1,8 @@
-Deposit: EUR 200 at 1.1192 = $223.84. Benchmark bought SPY at $759.45.
-2026-11-02  account $223.84  max loss/trade $6.72  daily loss limit $22.38
-  ... and 608 more in the watchlist (--show N for more).
-658 breakouts between 9:50 and 15:30; 278 cheap enough for a position of at most a third of the account.
-  09:50 BUY 7 CHPT at 10.26  stop 9.87  target 11.01  risk $2.73  expected +0.23R
-  09:50 BUY 2 EGO at 32.38  stop 31.81  target 33.52  risk $1.14  expected +0.10R
-  09:50 BUY 3 ENR at 24.11  stop 23.65  target 24.97  risk $1.38  expected +0.09R
-  09:50 BYND: sizing refused: No order: one share of BYND costs $7.55, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 7.55). No order.
-  09:50 VFC: sizing refused: No order: one share of VFC costs $18.86, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 18.86). No order.
-  09:50 SMG: sizing refused: No order: one share of SMG costs $64.12, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 64.12). No order.
-  09:50 ACM: sizing refused: No order: one share of ACM costs $64.76, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 64.76). No order.
-  09:50 NWSA: sizing refused: No order: one share of NWSA costs $29.80, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 29.80). No order.
-  09:50 Z: sizing refused: No order: one share of Z costs $32.78, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 32.78). No order.
-  09:50 CDE: sizing refused: No order: one share of CDE costs $13.71, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 13.71). No order.
-  09:50 FISV: sizing refused: No order: one share of FISV costs $51.31, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 51.31). No order.
-  09:50 PAAS: sizing refused: No order: one share of PAAS costs $39.70, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 39.70). No order.
-  09:55 GDYN: sizing refused: No order: one share of GDYN costs $13.60, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 13.60). No order.
-  09:55 NWL: sizing refused: No order: one share of NWL costs $5.43, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 5.43). No order.
-  10:00 DC: sizing refused: No order: one share of DC costs $5.32, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 5.32). No order.
-  10:10 SBET: sizing refused: No order: one share of SBET costs $6.89, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 6.89). No order.
-  10:10 FWDI: sizing refused: No order: one share of FWDI costs $6.46, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 6.46). No order.
-  10:10 PURR: sizing refused: No order: one share of PURR costs $10.89, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 10.89). No order.
-  10:45 SECZ: sizing refused: No order: one share of SECZ costs $7.99, more than your cash limit (cash $14.93 in trader/portfolio.json minus the $11.19 buffer = $3.74 / 7.99). No order.
-    EXIT 15:50 CHPT at 9.87 (stop)  P&L $-2.73  day so far $-2.73
-    EXIT 15:55 EGO at 32.22 (flat by close)  P&L $-0.32  day so far $-3.05
-    EXIT 15:55 ENR at 24.27 (flat by close)  P&L $+0.48  day so far $-2.57
-End of day: account $221.27 | deposited $223.84 | SPY benchmark $221.68
+2026-11-02: using saved Alpaca bars in backtest/cache/alpaca
+Deposit: EUR 200 at 1.1216 (ECB) = $224.32. Benchmark bought SPY at $759.49.
+2026-11-02  account $224.32  rules {"min_exp_R": null, "target_R": 2.0, "stop": "mid", "breakeven": false, "last_entry": "15:30", "max_trades": 3, "risk": 0.03, "daily_loss": 0.1}
+256 breakouts between 9:50 and 15:30, each scored by the Time Machine at its signal time.
+  09:50 BUY 2 CELH at 30.23 -> 10:05 29.80 (stop)  P&L $-0.86
+  09:50 BUY 4 BEKE at 18.15 -> 12:45 18.00 (stop)  P&L $-0.60
+  09:50 BUY 2 EGO at 32.38 -> 15:55 32.22 (flat by close)  P&L $-0.32
+End of day: account $222.54 | deposited $224.32 | SPY benchmark $222.12
