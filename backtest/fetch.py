@@ -2,8 +2,7 @@
 """Backtest step 1: download Yahoo's 60 days of 5-minute bars once per stock.
 
 Universe: trader/universe.txt (the skill's Nasdaq Trader list of US common
-stocks), narrowed with one Yahoo spark pass to stocks priced $5-$150 with some
-trading volume today. Each chart is saved as the raw Yahoo answer (gzip), the
+stocks); step 2 keeps the liquid ones priced $5-$150. Each chart is saved as the raw Yahoo answer (gzip), the
 format the skill's tools read with --offline.
 
   python3 backtest/fetch.py
@@ -48,23 +47,10 @@ def main():
     os.makedirs(CACHE, exist_ok=True)
     syms = [l.split("|")[0] for l in open(os.path.join(ROOT, "trader", "universe.txt")) if l.strip()]
     ysym = lambda s: s.replace(".", "-")
-    keep = []
-    for i in range(0, len(syms), 20):
-        batch = syms[i:i + 20]
-        try:
-            doc = json.loads(get("/v7/finance/spark?symbols=%s&range=5d&interval=1d" % ",".join(map(ysym, batch))))
-        except RuntimeError as e:
-            print("spark failed:", e, file=sys.stderr)
-            continue
-        for r in (doc.get("spark") or {}).get("result") or []:
-            try:
-                meta = r["response"][0]["meta"]
-            except (KeyError, IndexError, TypeError):
-                continue
-            px, vol = meta.get("regularMarketPrice") or 0, meta.get("regularMarketVolume") or 0
-            if MIN_PRICE <= px <= MAX_PRICE and vol >= MIN_VOLUME:
-                keep.append(r["symbol"])
-    print("universe %d, kept %d by price $%.0f-$%.0f and volume >= %d" % (len(syms), len(keep), MIN_PRICE, MAX_PRICE, MIN_VOLUME), flush=True)
+    # Yahoo's bulk spark endpoint refuses this client, so every stock's chart is
+    # downloaded and step 2 filters by price and volume from the bars themselves.
+    keep = [ysym(x) for x in syms]
+    print("universe %d stocks, downloading charts one at a time" % len(keep), flush=True)
 
     def one(sym):
         out = os.path.join(CACHE, sym + ".json.gz")
@@ -84,7 +70,7 @@ def main():
             done += 1
             if status.startswith("failed"):
                 print(sym, status, file=sys.stderr)
-            if done % 200 == 0:
+            if done % 250 == 0:
                 print("charts %d of %d" % (done, len(keep)), flush=True)
     json.dump(keep, open(os.path.join(ROOT, "backtest", "cache", "symbols.json"), "w"))
     print("done", flush=True)

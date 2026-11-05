@@ -30,6 +30,7 @@ CACHE = os.path.join(ROOT, "backtest", "cache")
 WARMUP = 12          # sessions before the first tested day
 REPLAYS = 2000       # per candidate (the live run uses 10,000; this keeps the backtest fast)
 MIN_PRICE = 5.0
+MIN_DOLLAR_VOLUME = 5_000_000   # median dollars traded a day
 LAST_SIGNAL_MIN = 15 * 60 + 30
 FAR_FUTURE = tm.parse_now("2030-01-01 00:00")
 
@@ -47,6 +48,15 @@ def one(path):
     except Exception as e:  # a bad or empty chart: skip the stock
         return sym, [], "skip: %s" % e
     days = tm.split_sessions(bars)
+    # Liquid stocks priced $5-$150 only, judged on the whole window (median of the days)
+    full = [days[d] for d in days if len(days[d]) == tm.SESSION_BARS]
+    if len(full) < 20:
+        return sym, [], "skip: too few full sessions"
+    closes = sorted(s[tm.SESSION_BARS - 1]["c"] for s in full)
+    dollars = sorted(sum(b["c"] * b["v"] for b in s.values()) for s in full)
+    med_close, med_dollars = closes[len(closes) // 2], dollars[len(dollars) // 2]
+    if not (MIN_PRICE <= med_close <= 150) or med_dollars < MIN_DOLLAR_VOLUME:
+        return sym, [], "skip: price %.2f, daily dollar volume %.0f" % (med_close, med_dollars)
     test_days = set(TEST_DAYS)
     out = []
     for d in sorted(days):
