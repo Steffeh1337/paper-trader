@@ -3,3 +3,4 @@ __pycache__/
 backtest/cache/
 backtest/fetch.log
 backtest/*.log
+sim/cache/

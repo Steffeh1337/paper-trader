@@ -5,7 +5,7 @@ Keys come from the environment (APCA_API_KEY_ID, APCA_API_SECRET_KEY) and are
 never printed or written. Free plan: the IEX feed (one exchange's trades), so
 volumes are a slice of the market's, but prices and breakouts track it.
 
-1. Universe: trader/universe.txt. Liquidity is judged on SELECTION_MONTH, before
+1. Universe: trader/universe.txt (top 600). Liquidity is judged on SELECTION_MONTH, before
    the test period, so the stock list does not know what happened later.
    Keep stocks with a median close of $5-$150, rank by median daily IEX dollar
    volume, keep the top N.
@@ -30,8 +30,9 @@ OUT = os.path.join(ROOT, "backtest", "cache", "alpaca")
 BASE = "https://data.alpaca.markets/v2/stocks/bars"
 SELECTION = ("2026-01-02T00:00:00Z", "2026-01-31T00:00:00Z")
 START, END = "2026-02-01T00:00:00Z", "2026-11-05T00:00:00Z"
-TOP_N = 800
-PAUSE = 0.35   # ~170 requests a minute, under the free plan's 200
+TOP_N = 600
+PAUSE = 0.35
+WORKERS = 6    # parallel downloads: about 100 requests a minute, under the free plan's 200
 
 
 def headers():
@@ -115,17 +116,24 @@ def main():
     print("January 2026: %d stocks with data, kept the top %d priced $5-$150 by IEX dollar volume" % (len(stats), len(keep)), flush=True)
 
     todo = [s for s in keep + ["SPY"] if not os.path.exists(os.path.join(OUT, s + ".json.gz"))]
-    for i in range(0, len(todo), 20):
-        batch = todo[i:i + 20]
+
+    def one(sym):
         try:
-            got = bars(batch, "5Min", START, END)
+            got = bars([sym], "5Min", START, END)
         except RuntimeError as e:
-            print("5-minute batch failed:", e, file=sys.stderr)
-            continue
-        for s in batch:
-            if got.get(s):
-                save(s, got[s])
-        print("5-minute bars: %d of %d stocks" % (min(i + 20, len(todo)), len(todo)), flush=True)
+            return sym, "failed %s" % e
+        if got.get(sym):
+            save(sym, got[sym])
+            return sym, "ok"
+        return sym, "no bars"
+
+    import concurrent.futures as cf
+    with cf.ThreadPoolExecutor(WORKERS) as ex:
+        for i, (sym, status) in enumerate(ex.map(one, todo)):
+            if status != "ok":
+                print(sym, status, file=sys.stderr)
+            if (i + 1) % 25 == 0:
+                print("5-minute bars: %d of %d stocks" % (i + 1, len(todo)), flush=True)
     print("done", flush=True)
 
 
