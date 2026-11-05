@@ -133,5 +133,50 @@
     "pnl_usd": 0.36,
     "R": 0.23,
     "tm_expected_R": 0.151
+  },
+  {
+    "date": "2026-11-05",
+    "symbol": "OVV",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 63.7,
+    "stop": 63.4,
+    "target": 64.3,
+    "exit_time": "10:00",
+    "exit": 64.3,
+    "outcome": "target",
+    "pnl_usd": 0.6,
+    "R": 2.0,
+    "tm_expected_R": 0.147
+  },
+  {
+    "date": "2026-11-05",
+    "symbol": "CMS",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 71.9,
+    "stop": 71.64,
+    "target": 72.42,
+    "exit_time": "10:30",
+    "exit": 71.6,
+    "outcome": "stop",
+    "pnl_usd": -0.3,
+    "R": -1.15,
+    "tm_expected_R": 0.11
+  },
+  {
+    "date": "2026-11-05",
+    "symbol": "RELX",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 41.61,
+    "stop": 41.41,
+    "target": 42.01,
+    "exit_time": "10:40",
+    "exit": 42.01,
+    "outcome": "target",
+    "pnl_usd": 0.4,
+    "R": 2.0,
+    "tm_expected_R": 0.216
   }
 ]

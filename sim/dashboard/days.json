@@ -22,5 +22,13 @@
     "analyzed": 224,
     "positive": 224,
     "traded": 3
+  },
+  {
+    "date": "2026-11-05",
+    "breakouts": 83,
+    "affordable": 62,
+    "analyzed": 83,
+    "positive": 83,
+    "traded": 3
   }
 ]
