@@ -1,64 +1,184 @@
 {
   "orders": [
     {
-      "at": "2026-11-05T07:23:30-05:00",
-      "date": "2026-11-04",
+      "at": "2026-11-05T07:33:08-05:00",
+      "date": "2026-11-02",
       "status": "filled",
-      "symbol": "CELH",
+      "symbol": "ZTS",
+      "side": "buy",
+      "qty": "2",
+      "price": 81.94,
+      "plain": "BUY 2 ZTS at 81.94"
+    },
+    {
+      "at": "2026-11-05T07:33:08-05:00",
+      "date": "2026-11-02",
+      "status": "filled",
+      "symbol": "ZTS",
+      "side": "sell",
+      "qty": "2",
+      "price": 83.0,
+      "plain": "SELL 2 ZTS at 83.00"
+    },
+    {
+      "at": "2026-11-05T07:33:11-05:00",
+      "date": "2026-11-02",
+      "status": "filled",
+      "symbol": "CPRT",
       "side": "buy",
       "qty": "6",
-      "price": 31.02,
-      "plain": "BUY 6 CELH at 31.02"
+      "price": 31.06,
+      "plain": "BUY 6 CPRT at 31.06"
     },
     {
-      "at": "2026-11-05T07:23:30-05:00",
-      "date": "2026-11-04",
+      "at": "2026-11-05T07:33:11-05:00",
+      "date": "2026-11-02",
       "status": "filled",
-      "symbol": "CELH",
+      "symbol": "CPRT",
       "side": "sell",
       "qty": "6",
-      "price": 31.48,
-      "plain": "SELL 6 CELH at 31.48"
+      "price": 32.01,
+      "plain": "SELL 6 CPRT at 32.01"
     },
     {
-      "at": "2026-11-05T07:23:37-05:00",
-      "date": "2026-11-04",
+      "at": "2026-11-05T07:33:24-05:00",
+      "date": "2026-11-02",
+      "status": "filled",
+      "symbol": "EGO",
+      "side": "buy",
+      "qty": "6",
+      "price": 32.38,
+      "plain": "BUY 6 EGO at 32.38"
+    },
+    {
+      "at": "2026-11-05T07:33:24-05:00",
+      "date": "2026-11-02",
+      "status": "filled",
+      "symbol": "EGO",
+      "side": "sell",
+      "qty": "6",
+      "price": 32.22,
+      "plain": "SELL 6 EGO at 32.22"
+    },
+    {
+      "at": "2026-11-05T07:38:53-05:00",
+      "date": "2026-11-03",
+      "status": "filled",
+      "symbol": "MSTR",
+      "side": "buy",
+      "qty": "1",
+      "price": 134.37,
+      "plain": "BUY 1 MSTR at 134.37"
+    },
+    {
+      "at": "2026-11-05T07:38:53-05:00",
+      "date": "2026-11-03",
+      "status": "filled",
+      "symbol": "MSTR",
+      "side": "sell",
+      "qty": "1",
+      "price": 137.77,
+      "plain": "SELL 1 MSTR at 137.77"
+    },
+    {
+      "at": "2026-11-05T07:38:54-05:00",
+      "date": "2026-11-03",
       "status": "filled",
       "symbol": "BMNR",
       "side": "buy",
-      "qty": "9",
-      "price": 21.44,
-      "plain": "BUY 9 BMNR at 21.44"
+      "qty": "10",
+      "price": 20.42,
+      "plain": "BUY 10 BMNR at 20.42"
     },
     {
-      "at": "2026-11-05T07:23:37-05:00",
-      "date": "2026-11-04",
+      "at": "2026-11-05T07:38:54-05:00",
+      "date": "2026-11-03",
       "status": "filled",
       "symbol": "BMNR",
       "side": "sell",
-      "qty": "9",
-      "price": 22.36,
-      "plain": "SELL 9 BMNR at 22.36"
+      "qty": "10",
+      "price": 20.5,
+      "plain": "SELL 10 BMNR at 20.50"
     },
     {
-      "at": "2026-11-05T07:23:37-05:00",
-      "date": "2026-11-04",
+      "at": "2026-11-05T07:38:54-05:00",
+      "date": "2026-11-03",
       "status": "filled",
-      "symbol": "ASX",
+      "symbol": "EMBJ",
       "side": "buy",
-      "qty": "5",
-      "price": 38.79,
-      "plain": "BUY 5 ASX at 38.79"
+      "qty": "2",
+      "price": 75.77,
+      "plain": "BUY 2 EMBJ at 75.77"
     },
     {
-      "at": "2026-11-05T07:23:37-05:00",
+      "at": "2026-11-05T07:38:54-05:00",
+      "date": "2026-11-03",
+      "status": "filled",
+      "symbol": "EMBJ",
+      "side": "sell",
+      "qty": "2",
+      "price": 75.13,
+      "plain": "SELL 2 EMBJ at 75.13"
+    },
+    {
+      "at": "2026-11-05T07:45:12-05:00",
       "date": "2026-11-04",
       "status": "filled",
-      "symbol": "ASX",
+      "symbol": "DVA",
+      "side": "buy",
+      "qty": "1",
+      "price": 189.54,
+      "plain": "BUY 1 DVA at 189.54"
+    },
+    {
+      "at": "2026-11-05T07:45:12-05:00",
+      "date": "2026-11-04",
+      "status": "filled",
+      "symbol": "DVA",
       "side": "sell",
-      "qty": "5",
-      "price": 38.17,
-      "plain": "SELL 5 ASX at 38.17"
+      "qty": "1",
+      "price": 187.41,
+      "plain": "SELL 1 DVA at 187.41"
+    },
+    {
+      "at": "2026-11-05T07:45:15-05:00",
+      "date": "2026-11-04",
+      "status": "filled",
+      "symbol": "MSTR",
+      "side": "buy",
+      "qty": "1",
+      "price": 140.82,
+      "plain": "BUY 1 MSTR at 140.82"
+    },
+    {
+      "at": "2026-11-05T07:45:15-05:00",
+      "date": "2026-11-04",
+      "status": "filled",
+      "symbol": "MSTR",
+      "side": "sell",
+      "qty": "1",
+      "price": 145.79,
+      "plain": "SELL 1 MSTR at 145.79"
+    },
+    {
+      "at": "2026-11-05T07:45:15-05:00",
+      "date": "2026-11-04",
+      "status": "filled",
+      "symbol": "OLLI",
+      "side": "buy",
+      "qty": "2",
+      "price": 94.16,
+      "plain": "BUY 2 OLLI at 94.16"
+    },
+    {
+      "at": "2026-11-05T07:45:15-05:00",
+      "date": "2026-11-04",
+      "status": "filled",
+      "symbol": "OLLI",
+      "side": "sell",
+      "qty": "2",
+      "price": 92.44,
+      "plain": "SELL 2 OLLI at 92.44"
     }
   ]
 }

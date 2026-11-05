@@ -5,39 +5,39 @@
   "results": [
     {
       "index": 1,
-      "symbol": "ASX",
+      "symbol": "OLLI",
       "side": "buy",
       "kind": "entry",
-      "amount": "5 shares",
-      "value_usd": 194.75,
-      "entry_ref": 38.95,
+      "amount": "2 shares",
+      "value_usd": 188.22,
+      "entry_ref": 94.11,
       "entry_ref_from": "plan",
-      "stop": 38.19,
-      "target": 40.47,
-      "risk_per_share": 0.76,
-      "max_loss": 3.8,
+      "stop": 92.49,
+      "target": 97.35,
+      "risk_per_share": 1.62,
+      "max_loss": 3.24,
       "reward_risk": 2.0,
-      "fingerprint": "22a231576d36b0fd",
+      "fingerprint": "0e39ca8f284d4184",
       "verdict": "PASS",
       "reasons": [],
       "warnings": [],
       "info": [
-        "entry 38.95 (the plan's entry), stop 38.19, target 40.47: risk 0.76 a share",
-        "max loss $3.80 (limit $11.23), reward:risk 2.00 (min 1)",
-        "today before this: 0 of 3 trades, $0 of $22.45 daily loss"
+        "entry 94.11 (the plan's entry), stop 92.49, target 97.35: risk 1.62 a share",
+        "max loss $3.24 (limit $11.68), reward:risk 2.00 (min 1)",
+        "today before this: 0 of 3 trades, $0 of $23.36 daily loss"
       ]
     }
   ],
   "pass": 1,
   "block": 0,
   "warnings": [],
-  "cash_after": 40.83,
+  "cash_after": 48.24,
   "today": {
     "orders_placed": 0,
     "entries_placed": 0,
     "loss_at_risk": 0.0,
     "day_trades_5d": null
   },
-  "checked_at": "2026-11-05T12:23:37Z",
+  "checked_at": "2026-11-05T12:45:15Z",
   "orders_file": "trader/orders.json"
 }

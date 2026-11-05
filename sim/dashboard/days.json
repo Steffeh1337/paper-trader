@@ -1,0 +1,26 @@
+[
+  {
+    "date": "2026-11-02",
+    "breakouts": 99,
+    "affordable": 60,
+    "analyzed": 60,
+    "positive": 14,
+    "traded": 3
+  },
+  {
+    "date": "2026-11-03",
+    "breakouts": 61,
+    "affordable": 44,
+    "analyzed": 42,
+    "positive": 13,
+    "traded": 3
+  },
+  {
+    "date": "2026-11-04",
+    "breakouts": 81,
+    "affordable": 69,
+    "analyzed": 68,
+    "positive": 25,
+    "traded": 3
+  }
+]

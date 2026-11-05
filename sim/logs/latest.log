@@ -1,20 +1,75 @@
-Deposit: EUR 200 at 1.1227 = $224.54. Benchmark bought SPY at $762.99.
-2026-11-04  account $224.54  max loss/trade $11.23  daily risk cap $22.45
+2026-11-04  account $233.62  max loss/trade $11.68  daily risk cap $23.36
   ... and 31 more in the watchlist (--show N for more).
-81 breakouts at 09:50; 68 cheap enough for at least one share.
+81 breakouts at 09:50; 69 cheap enough for at least one share.
+  DVA    expected +0.24R  target first 32.3%  stop first 49.0%  history +0.15R
+  MSTR   expected +0.23R  target first 28.8%  stop first 47.2%  history +0.10R
+  PYPL   expected +0.23R  target first 10.7%  stop first 25.3%  history -0.08R
+  OLLI   expected +0.17R  target first 15.2%  stop first 32.9%  history +0.30R
+  PURR   expected +0.17R  target first 31.1%  stop first 52.6%  history +0.18R
   CELH   expected +0.15R  target first 38.1%  stop first 61.1%  history +0.11R
   BMNR   expected +0.14R  target first 20.1%  stop first 41.9%  history +0.10R
+  GME    expected +0.14R  target first 30.7%  stop first 55.0%  history +0.18R
   ASX    expected +0.13R  target first  5.2%  stop first 25.8%  history +0.30R
+  SWKS   expected +0.13R  target first  0.5%  stop first  9.3%  history +0.18R
   ASST   expected +0.13R  target first  4.7%  stop first 21.6%  history -0.02R
+  CHKP   expected +0.09R  target first  3.6%  stop first 21.9%  history +0.05R
+  ECO    expected +0.09R  target first 14.9%  stop first 41.0%  history -0.09R
+  LOGI   expected +0.09R  target first  8.6%  stop first 34.6%  history +0.22R
+  WMT    expected +0.09R  target first 12.9%  stop first 39.4%  history +0.20R
+  HPQ    expected +0.09R  target first  5.1%  stop first 27.3%  history -0.15R
+  ROKU   expected +0.09R  target first 27.8%  stop first 55.3%  history +0.17R
+  FOXA   expected +0.09R  target first 27.2%  stop first 54.7%  history +0.17R
+  ELF    expected +0.08R  target first 33.7%  stop first 61.8%  history -0.04R
+  EBAY   expected +0.07R  target first  5.8%  stop first 27.1%  history +0.00R
+  S      expected +0.07R  target first 15.4%  stop first 43.3%  history +0.36R
+  HNGE   expected +0.07R  target first  2.1%  stop first 20.5%  history -0.17R
+  SONY   expected +0.07R  target first  0.8%  stop first 12.2%  history +0.24R
+  FROG   expected +0.07R  target first  4.4%  stop first 26.4%  history +0.19R
   CDW    expected +0.07R  target first  0.6%  stop first 12.6%  history -0.17R
+  LYFT   expected +0.06R  target first  0.2%  stop first 10.5%  history -0.01R
+  FRSH   expected +0.06R  target first  0.0%  stop first  0.3%  history +0.16R
+  GTLB   expected +0.05R  target first 15.3%  stop first 44.8%  history -0.03R
+  MTCH   expected +0.05R  target first  1.1%  stop first 15.7%  history +0.17R
+  SPCX   expected +0.05R  target first 12.3%  stop first 39.9%  history -0.07R
   BKH    expected +0.05R  target first  5.8%  stop first 28.1%  history -0.21R
+  ZM     expected +0.03R  target first  9.2%  stop first 36.3%  history +0.31R
+  RBRK   expected +0.03R  target first  6.4%  stop first 33.5%  history +0.28R
+  PLTR   expected +0.03R  target first  2.1%  stop first 20.7%  history -0.15R
+  XYZ    expected +0.02R  target first  0.1%  stop first  6.8%  history -0.27R
+  YOU    expected +0.01R  target first  0.0%  stop first  0.0%  history +0.22R
+  KD     expected +0.01R  target first  0.0%  stop first  0.8%  history -0.12R
   BABA   expected +0.01R  target first 22.2%  stop first 54.7%  history -0.15R
   APTV   expected +0.01R  target first  2.7%  stop first 23.7%  history +0.09R
+  COIN   expected +0.00R  target first  6.2%  stop first 33.4%  history +0.03R
+  NTR    expected +0.00R  target first  8.1%  stop first 37.9%  history -0.05R
+  SBAC   expected -0.00R  target first  0.8%  stop first 18.9%  history +0.03R
   BN     expected -0.01R  target first 12.7%  stop first 45.2%  history -0.15R
+  HIMS   expected -0.01R  target first  0.2%  stop first  9.6%  history +0.25R
+  TTWO   expected -0.02R  target first 16.3%  stop first 46.2%  history -0.29R
+  IOVA   expected -0.02R  target first 30.4%  stop first 65.6%  history +0.10R
+  SBUX   expected -0.03R  target first 25.3%  stop first 60.8%  history -0.09R
+  DLR    expected -0.03R  target first 12.4%  stop first 46.6%  history +0.01R
+  HOOD   expected -0.03R  target first 14.0%  stop first 46.0%  history -0.20R
+  FRO    expected -0.04R  target first 22.9%  stop first 59.1%  history -0.16R
+  SIRI   expected -0.04R  target first  3.4%  stop first 30.6%  history +0.11R
+  TMUS   expected -0.04R  target first 20.9%  stop first 55.9%  history +0.10R
+  VALE   expected -0.05R  target first 30.4%  stop first 67.0%  history +0.38R
+  JKHY   expected -0.05R  target first  0.0%  stop first  3.7%  history +0.03R
   ANET   expected -0.05R  target first  0.1%  stop first 10.4%  history -0.14R
+  UPST   expected -0.06R  target first  0.2%  stop first 14.9%  history -0.15R
+  ETSY   expected -0.06R  target first  5.1%  stop first 34.4%  history +0.03R
+  CNC    expected -0.06R  target first  2.2%  stop first 29.0%  history -0.18R
   ABNB   expected -0.08R  target first  8.4%  stop first 42.8%  history +0.05R
+  LTH    expected -0.08R  target first 10.7%  stop first 46.0%  history -0.23R
+  RVMD   expected -0.09R  target first 22.1%  stop first 61.5%  history +0.04R
+  NFLX   expected -0.09R  target first  7.6%  stop first 43.0%  history +0.21R
+  P      expected -0.10R  target first 18.4%  stop first 57.9%  history -0.06R
+  CSCO   expected -0.10R  target first  9.6%  stop first 48.0%  history -0.24R
+  GFI    expected -0.11R  target first 14.6%  stop first 55.5%  history -0.13R
+  INSW   expected -0.11R  target first  6.3%  stop first 41.9%  history -0.36R
+  FANG   expected -0.12R  target first  6.4%  stop first 43.1%  history -0.23R
   ACHC   expected -0.21R  target first  0.5%  stop first 27.9%  history -0.14R
-  TRADE CELH: 6 @ 31.02 (09:50) -> 31.48 (12:05, target)  P&L $+2.76
-  TRADE BMNR: 9 @ 21.44 (09:50) -> 22.36 (11:55, target)  P&L $+8.28
-  TRADE ASX: 5 @ 38.79 (09:50) -> 38.17 (10:20, stop)  P&L $-3.10
-End of day: account $232.48 | deposited $224.54 | SPY benchmark $225.64
+  TRADE DVA: 1 @ 189.54 (09:50) -> 187.41 (10:10, stop)  P&L $-2.13
+  TRADE MSTR: 1 @ 140.82 (09:50) -> 145.79 (10:15, target)  P&L $+4.97
+  TRADE OLLI: 2 @ 94.16 (09:50) -> 92.44 (10:05, stop)  P&L $-3.44
+End of day: account $233.02 | deposited $223.84 | SPY benchmark $225.99
