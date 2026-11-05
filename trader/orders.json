@@ -1,0 +1,31 @@
+{
+  "created_by": "trader-budget",
+  "created_at": "2026-11-04T14:50:00Z",
+  "status": "proposed",
+  "paper": true,
+  "note": "Proposals only. Nothing is placed until trader-risk passes each order and you say yes to it in the chat.",
+  "source": "trader/plan.json (ASX orb 2026-11-04)",
+  "orders": [
+    {
+      "symbol": "ASX",
+      "side": "buy",
+      "qty": "5",
+      "type": "market",
+      "time_in_force": "day",
+      "order_class": "bracket",
+      "take_profit_limit_price": "40.47",
+      "stop_loss_stop_price": "38.19",
+      "why": "opening-range breakout on ASX: 5 shares, bound by your position cap (5 x 0.76 = $3.80 at the stop)",
+      "plan": {
+        "entry": 38.95,
+        "stop": 38.19,
+        "target": 40.47,
+        "risk_per_share": 0.76,
+        "max_loss": 3.8,
+        "setup": "orb",
+        "entry_time": "9:50 AM",
+        "flat_by": "15:55"
+      }
+    }
+  ]
+}

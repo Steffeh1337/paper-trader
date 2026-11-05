@@ -1,0 +1,64 @@
+{
+  "orders": [
+    {
+      "at": "2026-11-05T07:23:30-05:00",
+      "date": "2026-11-04",
+      "status": "filled",
+      "symbol": "CELH",
+      "side": "buy",
+      "qty": "6",
+      "price": 31.02,
+      "plain": "BUY 6 CELH at 31.02"
+    },
+    {
+      "at": "2026-11-05T07:23:30-05:00",
+      "date": "2026-11-04",
+      "status": "filled",
+      "symbol": "CELH",
+      "side": "sell",
+      "qty": "6",
+      "price": 31.48,
+      "plain": "SELL 6 CELH at 31.48"
+    },
+    {
+      "at": "2026-11-05T07:23:37-05:00",
+      "date": "2026-11-04",
+      "status": "filled",
+      "symbol": "BMNR",
+      "side": "buy",
+      "qty": "9",
+      "price": 21.44,
+      "plain": "BUY 9 BMNR at 21.44"
+    },
+    {
+      "at": "2026-11-05T07:23:37-05:00",
+      "date": "2026-11-04",
+      "status": "filled",
+      "symbol": "BMNR",
+      "side": "sell",
+      "qty": "9",
+      "price": 22.36,
+      "plain": "SELL 9 BMNR at 22.36"
+    },
+    {
+      "at": "2026-11-05T07:23:37-05:00",
+      "date": "2026-11-04",
+      "status": "filled",
+      "symbol": "ASX",
+      "side": "buy",
+      "qty": "5",
+      "price": 38.79,
+      "plain": "BUY 5 ASX at 38.79"
+    },
+    {
+      "at": "2026-11-05T07:23:37-05:00",
+      "date": "2026-11-04",
+      "status": "filled",
+      "symbol": "ASX",
+      "side": "sell",
+      "qty": "5",
+      "price": 38.17,
+      "plain": "SELL 5 ASX at 38.17"
+    }
+  ]
+}

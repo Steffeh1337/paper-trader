@@ -1,0 +1,20 @@
+Deposit: EUR 200 at 1.1227 = $224.54. Benchmark bought SPY at $762.99.
+2026-11-04  account $224.54  max loss/trade $11.23  daily risk cap $22.45
+  ... and 31 more in the watchlist (--show N for more).
+81 breakouts at 09:50; 68 cheap enough for at least one share.
+  CELH   expected +0.15R  target first 38.1%  stop first 61.1%  history +0.11R
+  BMNR   expected +0.14R  target first 20.1%  stop first 41.9%  history +0.10R
+  ASX    expected +0.13R  target first  5.2%  stop first 25.8%  history +0.30R
+  ASST   expected +0.13R  target first  4.7%  stop first 21.6%  history -0.02R
+  CDW    expected +0.07R  target first  0.6%  stop first 12.6%  history -0.17R
+  BKH    expected +0.05R  target first  5.8%  stop first 28.1%  history -0.21R
+  BABA   expected +0.01R  target first 22.2%  stop first 54.7%  history -0.15R
+  APTV   expected +0.01R  target first  2.7%  stop first 23.7%  history +0.09R
+  BN     expected -0.01R  target first 12.7%  stop first 45.2%  history -0.15R
+  ANET   expected -0.05R  target first  0.1%  stop first 10.4%  history -0.14R
+  ABNB   expected -0.08R  target first  8.4%  stop first 42.8%  history +0.05R
+  ACHC   expected -0.21R  target first  0.5%  stop first 27.9%  history -0.14R
+  TRADE CELH: 6 @ 31.02 (09:50) -> 31.48 (12:05, target)  P&L $+2.76
+  TRADE BMNR: 9 @ 21.44 (09:50) -> 22.36 (11:55, target)  P&L $+8.28
+  TRADE ASX: 5 @ 38.79 (09:50) -> 38.17 (10:20, stop)  P&L $-3.10
+End of day: account $232.48 | deposited $224.54 | SPY benchmark $225.64

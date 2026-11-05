@@ -1,0 +1,28 @@
+{
+  "created_by": "trader-exit",
+  "symbol": "ASX",
+  "side": "buy",
+  "date": "2026-11-04",
+  "setup": "orb",
+  "entry": 38.95,
+  "entry_time": "9:50 AM",
+  "entry_bar": 3,
+  "interval": "5m",
+  "opening_range": {
+    "high": 38.94,
+    "low": 37.44,
+    "minutes": 15
+  },
+  "stop": 38.19,
+  "stop_rule": "or_mid",
+  "stop_label": "opening-range midpoint",
+  "target": 40.47,
+  "target_r": 2.0,
+  "target_label": "2R (two times the risk)",
+  "risk_per_share": 0.76,
+  "reward_risk": 2.0,
+  "flat_by": "15:55",
+  "stop_detail": "($38.94 + $37.44) / 2 = $38.19",
+  "created_at": "2026-11-04T14:50:00Z",
+  "note": "A stop is a plan, not a guarantee: a gap or a fast market can fill past it."
+}
