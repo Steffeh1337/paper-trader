@@ -7,11 +7,12 @@ prices from later in the day:
 
   scan      every US stock's 15-minute opening-range breakouts, 9:50 to 15:30 ET,
             each with the time its 5-minute bar first closed above the range
-  walk      the day in time order: at each breakout, book any exits that have
-            happened, then (if there is cash, risk room and fewer than 10 trades)
-            entry -> exit plan (2R) -> Time Machine -> size -> risk check, all with
-            --now pinned to that breakout's time; take it only if the expected R
-            and the history are both positive
+  walk      the day in time order, one 5-minute bar at a time: book any exits
+            that have happened, then for each breakout of that bar (if there is
+            cash, risk room and fewer than 10 trades) entry -> exit plan (2R) ->
+            Time Machine, all with --now pinned to that time; breakouts of the
+            same bar are taken best expected R first, and only if the expected R
+            and the history are both positive -> size -> risk check -> buy
   fills     simulated from the day's real 5-minute bars:
             buy at the open of the next bar after the signal (+ slippage),
             then the stop, the target, or flat at 15:55, whichever comes first;
@@ -276,90 +277,110 @@ def run(day):
                     % (f["exit_time"], p["symbol"], f["exit"], f["outcome"], pnl, realized))
                 open_pos.remove(p)
 
+    def blocked():
+        """Why no new trade can be taken right now, or None."""
+        open_risk = sum(p["qty"] * p["risk_per_share"] for p in open_pos)
+        if len(trades) >= MAX_TRADES:
+            return "skipped: %d trades already" % MAX_TRADES
+        if max(0.0, -realized) + open_risk >= daily_cap:
+            return "skipped: daily loss limit reached"
+        return None
+
+    # Breakouts that fire in the same 5-minute bar compete: all of them get a
+    # Time Machine run and the best expected R goes first. Across the day it is
+    # first come, first served, since a later breakout is not known yet.
+    groups = {}
     for h in hits:
-        sym, t = h["symbol"], h["hhmm"]
+        groups.setdefault(h["hhmm"], []).append(h)
+    for t in sorted(groups):
         close_until(t)
         now = "%s %s" % (day.isoformat(), t)
         pf = read_json(pf_path, pf)
-        open_risk = sum(p["qty"] * p["risk_per_share"] for p in open_pos)
-        loss_so_far = max(0.0, -realized)
-        # Cheap checks first: no Time Machine run when the trade could not be taken anyway.
-        if len(trades) >= MAX_TRADES:
-            decision[sym] = (t, "skipped: %d trades already" % MAX_TRADES, None)
-            continue
-        if loss_so_far + open_risk >= daily_cap:
-            decision[sym] = (t, "skipped: daily loss limit reached", None)
-            continue
-        if any(p["symbol"] == sym for p in open_pos):
-            decision[sym] = (t, "skipped: already holding it", None)
-            continue
-        if pf["cash"] < h["price"]:
-            decision[sym] = (t, "skipped: cash tied up in open trades", None)
-            continue
-        if analyzed >= MAX_TM_CANDIDATES:
-            decision[sym] = (t, "skipped: analysis limit for the day", None)
-            continue
-        analyzed += 1
-        c1, _ = tool("trader-entry", "entry.py", "check", sym, "--setup", "orb", "--now", now,
-                     "--write", "trader/cand/%s-entry.json" % sym)
-        c2, _ = tool("trader-exit", "exit.py", "plan", "--from", "trader/cand/%s-entry.json" % sym,
-                     "--target", "2R", "--now", now, "--write", "trader/cand/%s-plan.json" % sym)
-        if c2 != 0:
-            decision[sym] = (t, "no valid exit plan", None)
-            continue
-        c3, _ = tool("trader-timemachine", "timemachine.py", "run", "--plan", "trader/cand/%s-plan.json" % sym,
-                     "--now", now, "--write", "trader/cand/%s-tm.json" % sym)
-        tm = read_json(os.path.join(TRADER, "cand", "%s-tm.json" % sym))
-        if c3 != 0 or not tm:
-            decision[sym] = (t, "time machine failed", None)
-            continue
-        mc, hist = tm["mc"], tm.get("history", {})
-        r = {"symbol": sym, "avg_R": mc["avg_R"], "p_target": mc["p_target"], "p_stop": mc["p_stop"],
-             "hist_avg_R": hist.get("avg_R")}
-        ranked.append(r)
-        if r["avg_R"] <= 0:
-            decision[sym] = (t, "skipped: expected R not positive", r)
-            continue
-        if (r["hist_avg_R"] or 0) <= 0:
-            decision[sym] = (t, "skipped: history not positive", r)
-            continue
-        plan_src = os.path.join(TRADER, "cand", "%s-plan.json" % sym)
-        plan = read_json(plan_src)
-        write_json(os.path.join(TRADER, "plan.json"), plan)
-        c, out = tool("trader-budget", "size.py", "--now", now, "--write")
-        if c != 0:
-            log("  %s %s: sizing refused: %s" % (t, sym, out.splitlines()[-1] if out else "?"))
-            decision[sym] = (t, "sizing refused", r)
-            continue
-        c, out = tool("trader-risk", "check.py", "--now", now, "--today", day.isoformat())
-        if c != 0 or "PASS" not in out.split("\n", 1)[0]:
-            log("  %s %s: risk check BLOCKED: %s" % (t, sym, out.splitlines()[0] if out else "?"))
-            decision[sym] = (t, "risk check blocked", r)
-            continue
-        order = read_json(os.path.join(TRADER, "orders.json"))["orders"][0]
-        qty, stop, target = int(order["qty"]), float(order["stop_loss_stop_price"]), float(order["take_profit_limit_price"])
-        if sym not in bar_cache:
-            bar_cache[sym] = session_bars(sym, day)
-        sig = dt.datetime.strptime(plan["entry_time"], "%I:%M %p").strftime("%H:%M")
-        fill = simulate(bar_cache[sym], sig, stop, target)
-        if not fill or "skipped" in fill:
-            decision[sym] = (t, "no fill", r)
-            continue
-        risk_ps = max(0.01, fill["entry"] - stop)
-        qty = min(qty, int(pf["cash"] // fill["entry"]))
-        room = daily_cap - loss_so_far - open_risk
-        qty = min(qty, int(room // risk_ps))
-        if qty < 1:
-            decision[sym] = (t, "skipped: no cash or daily risk room left", r)
-            continue
-        tool("trader-broker", "ticket.py", "fill", "--symbol", sym, "--side", "buy", "--qty", qty,
-             "--price", fill["entry"], "--date", day.isoformat(), check=True)
-        open_pos.append({"symbol": sym, "qty": qty, "stop": stop, "target": target, "fill": fill,
-                         "risk_per_share": risk_ps, "exp_R": r["avg_R"]})
-        trades.append(sym)
-        decision[sym] = (t, "traded", r)
-        log("  %s BUY %d %s at %.2f  stop %.2f  target %.2f  risk $%.2f  expected %+.2fR"
-            % (fill["entry_time"], qty, sym, fill["entry"], stop, target, qty * risk_ps, r["avg_R"]))
+        eligible = []
+        for h in groups[t]:
+            sym = h["symbol"]
+            why = blocked()
+            if why:
+                decision[sym] = (t, why, None)
+                continue
+            if any(p["symbol"] == sym for p in open_pos):
+                decision[sym] = (t, "skipped: already holding it", None)
+                continue
+            if pf["cash"] < h["price"]:
+                decision[sym] = (t, "skipped: cash tied up in open trades", None)
+                continue
+            if analyzed >= MAX_TM_CANDIDATES:
+                decision[sym] = (t, "skipped: analysis limit for the day", None)
+                continue
+            analyzed += 1
+            tool("trader-entry", "entry.py", "check", sym, "--setup", "orb", "--now", now,
+                 "--write", "trader/cand/%s-entry.json" % sym)
+            c2, _ = tool("trader-exit", "exit.py", "plan", "--from", "trader/cand/%s-entry.json" % sym,
+                         "--target", "2R", "--now", now, "--write", "trader/cand/%s-plan.json" % sym)
+            if c2 != 0:
+                decision[sym] = (t, "no valid exit plan", None)
+                continue
+            c3, _ = tool("trader-timemachine", "timemachine.py", "run", "--plan", "trader/cand/%s-plan.json" % sym,
+                         "--now", now, "--write", "trader/cand/%s-tm.json" % sym)
+            tm = read_json(os.path.join(TRADER, "cand", "%s-tm.json" % sym))
+            if c3 != 0 or not tm:
+                decision[sym] = (t, "time machine failed", None)
+                continue
+            mc, hist = tm["mc"], tm.get("history", {})
+            r = {"symbol": sym, "avg_R": mc["avg_R"], "p_target": mc["p_target"], "p_stop": mc["p_stop"],
+                 "hist_avg_R": hist.get("avg_R")}
+            ranked.append(r)
+            if r["avg_R"] <= 0:
+                decision[sym] = (t, "skipped: expected R not positive", r)
+            elif (r["hist_avg_R"] or 0) <= 0:
+                decision[sym] = (t, "skipped: history not positive", r)
+            else:
+                eligible.append(r)
+
+        for r in sorted(eligible, key=lambda r: r["avg_R"], reverse=True):
+            sym = r["symbol"]
+            why = blocked()
+            if why:
+                decision[sym] = (t, why.replace("skipped:", "skipped (a better one at the same time went first):"), r)
+                continue
+            pf = read_json(pf_path, pf)
+            plan_src = os.path.join(TRADER, "cand", "%s-plan.json" % sym)
+            plan = read_json(plan_src)
+            write_json(os.path.join(TRADER, "plan.json"), plan)
+            c, out = tool("trader-budget", "size.py", "--now", now, "--write")
+            if c != 0:
+                log("  %s %s: sizing refused: %s" % (t, sym, out.splitlines()[-1] if out else "?"))
+                decision[sym] = (t, "sizing refused", r)
+                continue
+            c, out = tool("trader-risk", "check.py", "--now", now, "--today", day.isoformat())
+            if c != 0 or "PASS" not in out.split("\n", 1)[0]:
+                log("  %s %s: risk check BLOCKED: %s" % (t, sym, out.splitlines()[0] if out else "?"))
+                decision[sym] = (t, "risk check blocked", r)
+                continue
+            order = read_json(os.path.join(TRADER, "orders.json"))["orders"][0]
+            qty, stop, target = int(order["qty"]), float(order["stop_loss_stop_price"]), float(order["take_profit_limit_price"])
+            if sym not in bar_cache:
+                bar_cache[sym] = session_bars(sym, day)
+            sig = dt.datetime.strptime(plan["entry_time"], "%I:%M %p").strftime("%H:%M")
+            fill = simulate(bar_cache[sym], sig, stop, target)
+            if not fill or "skipped" in fill:
+                decision[sym] = (t, "no fill", r)
+                continue
+            risk_ps = max(0.01, fill["entry"] - stop)
+            open_risk = sum(p["qty"] * p["risk_per_share"] for p in open_pos)
+            room = daily_cap - max(0.0, -realized) - open_risk
+            qty = min(qty, int(pf["cash"] // fill["entry"]), int(room // risk_ps))
+            if qty < 1:
+                decision[sym] = (t, "skipped: no cash or daily risk room left", r)
+                continue
+            tool("trader-broker", "ticket.py", "fill", "--symbol", sym, "--side", "buy", "--qty", qty,
+                 "--price", fill["entry"], "--date", day.isoformat(), check=True)
+            open_pos.append({"symbol": sym, "qty": qty, "stop": stop, "target": target, "fill": fill,
+                             "risk_per_share": risk_ps, "exp_R": r["avg_R"]})
+            trades.append(sym)
+            decision[sym] = (t, "traded", r)
+            log("  %s BUY %d %s at %.2f  stop %.2f  target %.2f  risk $%.2f  expected %+.2fR"
+                % (fill["entry_time"], qty, sym, fill["entry"], stop, target, qty * risk_ps, r["avg_R"]))
     close_until("23:59")
     if not trades:
         log("  No trade today: no breakout with a positive expected R passed the rules.")
