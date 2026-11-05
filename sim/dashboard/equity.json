@@ -1,23 +1,23 @@
 [
   {
     "date": "2026-11-02",
-    "equity_usd": 230.7,
+    "equity_usd": 221.27,
     "deposited_usd": 223.84,
     "spy_benchmark_usd": 221.68,
     "trades": 3
   },
   {
     "date": "2026-11-03",
-    "equity_usd": 233.62,
+    "equity_usd": 220.91,
     "deposited_usd": 223.84,
     "spy_benchmark_usd": 222.35,
-    "trades": 3
+    "trades": 10
   },
   {
     "date": "2026-11-04",
-    "equity_usd": 233.02,
+    "equity_usd": 223.32,
     "deposited_usd": 223.84,
     "spy_benchmark_usd": 225.99,
-    "trades": 3
+    "trades": 10
   }
 ]

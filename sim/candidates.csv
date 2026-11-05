@@ -1,171 +1,770 @@
-date,symbol,price,pct_over,expected_R,p_target,p_stop,history_R,decision
-2026-11-02,FCX,64.04,0.21,0.235,0.3723,0.5505,-0.17,skipped: history not positive
-2026-11-02,NYT,71.03,0.14,0.144,0.3545,0.5911,-0.039,skipped: history not positive
-2026-11-02,ZTS,81.82,0.15,0.143,0.0901,0.2938,0.345,traded
-2026-11-02,CPRT,31.05,0.18,0.117,0.0607,0.256,0.008,traded
-2026-11-02,NEM,110.32,0.06,0.107,0.1745,0.4451,-0.039,skipped: history not positive
-2026-11-02,EGO,32.38,0.05,0.101,0.1266,0.369,0.144,traded
-2026-11-02,HONA,160.21,0.01,0.101,0.3137,0.5769,0.065,skipped: already 3 trades
-2026-11-02,PEP,139.64,0.01,0.09,0.1858,0.453,0.045,skipped: already 3 trades
-2026-11-02,PPG,123.22,0.33,0.089,0.1358,0.3919,-0.296,skipped: history not positive
-2026-11-02,MNST,48.31,0.02,0.078,0.2726,0.555,0.152,skipped: already 3 trades
-2026-11-02,CRH,94.85,0.59,0.074,0.0346,0.2189,-0.185,skipped: history not positive
-2026-11-02,EFX,188.12,0.26,0.073,0.3018,0.587,0.073,skipped: already 3 trades
-2026-11-02,APH,81.9,0.33,0.068,0.1224,0.3925,0.056,skipped: already 3 trades
-2026-11-02,LYFT,16.73,0.45,0.063,0.0713,0.3517,-0.008,skipped: history not positive
-2026-11-02,DIS,113.19,0.16,0.051,0.1433,0.4351,-0.082,skipped: history not positive
-2026-11-02,CMG,33.3,0.27,0.049,0.0251,0.1503,0.027,skipped: already 3 trades
-2026-11-02,CDE,13.71,0.07,0.038,0.2665,0.5675,0.171,skipped: already 3 trades
-2026-11-02,XYZ,78.37,0.04,0.038,0.1125,0.391,-0.225,skipped: history not positive
-2026-11-02,BABA,103.6,0.14,0.035,0.1402,0.4411,-0.125,skipped: history not positive
-2026-11-02,FISV,51.31,0.23,0.034,0.1462,0.4361,0.146,skipped: already 3 trades
-2026-11-02,DUOL,134.3,0.01,0.032,0.2961,0.6094,0.433,skipped: already 3 trades
-2026-11-02,EXE,90.79,0.03,0.031,0.3199,0.6299,-0.121,skipped: history not positive
-2026-11-02,ON,73.24,0.47,0.028,0.1936,0.5183,-0.058,skipped: history not positive
-2026-11-02,SE,76.95,0.34,0.027,0.1354,0.4097,-0.342,skipped: history not positive
-2026-11-02,CART,57.22,0.03,0.02,0.3048,0.6255,0.114,skipped: already 3 trades
-2026-11-02,SWK,106.15,0.14,0.018,0.0693,0.361,-0.162,skipped: history not positive
-2026-11-02,MDLZ,65.76,0.21,0.015,0.24,0.5592,-0.135,skipped: history not positive
-2026-11-02,DKNG,21.53,0.8,0.002,0.0681,0.3524,0.001,skipped: already 3 trades
-2026-11-02,IFF,94.86,0.26,-0.002,0.0783,0.3562,-0.045,skipped: expected R not positive
-2026-11-02,TTWO,192.95,0.49,-0.004,0.2557,0.571,-0.245,skipped: expected R not positive
-2026-11-02,NXT,88.02,0.71,-0.005,0.0251,0.2436,0.015,skipped: expected R not positive
-2026-11-02,TOST,33.4,0.01,-0.006,0.0431,0.2893,-0.213,skipped: expected R not positive
-2026-11-02,BROS,44.2,0.39,-0.009,0.05,0.3068,-0.088,skipped: expected R not positive
-2026-11-02,STM,48.77,0.42,-0.012,0.2172,0.5538,-0.252,skipped: expected R not positive
-2026-11-02,DHI,150.33,0.02,-0.02,0.114,0.4416,-0.316,skipped: expected R not positive
-2026-11-02,ONON,34.73,0.09,-0.027,0.2762,0.625,0.071,skipped: expected R not positive
-2026-11-02,AFRM,76.38,0.5,-0.029,0.1482,0.4968,0.149,skipped: expected R not positive
-2026-11-02,DASH,185.58,0.57,-0.038,0.013,0.2187,0.011,skipped: expected R not positive
-2026-11-02,FLUT,85.09,1.0,-0.04,0.0616,0.3661,-0.06,skipped: expected R not positive
-2026-11-02,UBER,66.99,0.3,-0.04,0.0734,0.3924,-0.368,skipped: expected R not positive
-2026-11-02,MMM,177.81,0.03,-0.041,0.2734,0.6335,-0.012,skipped: expected R not positive
-2026-11-02,CCL,30.0,0.17,-0.065,0.2815,0.6525,-0.147,skipped: expected R not positive
-2026-11-02,LYV,180.64,0.44,-0.067,0.0149,0.2515,-0.298,skipped: expected R not positive
-2026-11-02,CBRE,134.45,0.22,-0.076,0.0035,0.1727,-0.114,skipped: expected R not positive
-2026-11-02,WFC,84.77,0.07,-0.08,0.2899,0.678,0.068,skipped: expected R not positive
-2026-11-02,MS,187.51,0.28,-0.082,0.2411,0.6254,0.066,skipped: expected R not positive
-2026-11-02,C,124.13,0.25,-0.087,0.2044,0.588,-0.254,skipped: expected R not positive
-2026-11-02,HSY,169.71,0.57,-0.091,0.0251,0.3164,-0.371,skipped: expected R not positive
-2026-11-02,ABNB,170.88,0.49,-0.096,0.0216,0.2908,0.046,skipped: expected R not positive
-2026-11-02,SWKS,89.04,0.05,-0.106,0.2976,0.7017,0.215,skipped: expected R not positive
-2026-11-02,SOFI,17.15,0.26,-0.135,0.1801,0.5948,0.212,skipped: expected R not positive
-2026-11-02,KKR,97.07,0.25,-0.136,0.1466,0.5506,-0.315,skipped: expected R not positive
-2026-11-02,TPR,118.68,0.3,-0.144,0.1272,0.5413,-0.373,skipped: expected R not positive
-2026-11-02,BKNG,153.63,0.59,-0.147,0.0279,0.3422,-0.236,skipped: expected R not positive
-2026-11-02,RTX,201.45,0.09,-0.167,0.2729,0.7173,-0.107,skipped: expected R not positive
-2026-11-02,DXCM,84.1,0.13,-0.171,0.13,0.5575,-0.07,skipped: expected R not positive
-2026-11-02,BBIO,75.55,0.58,-0.192,0.1385,0.5836,-0.082,skipped: expected R not positive
-2026-11-02,BRZE,45.83,0.07,-0.201,0.2665,0.7335,0.23,skipped: expected R not positive
-2026-11-02,FITB,54.7,0.18,-0.201,0.1735,0.6339,-0.53,skipped: expected R not positive
-2026-11-02,USB,60.25,0.02,-0.21,0.2518,0.7253,-0.156,skipped: expected R not positive
-2026-11-03,MSTR,134.25,0.26,0.258,0.3858,0.5497,0.043,traded
-2026-11-03,BMNR,20.42,0.77,0.176,0.2833,0.4939,0.091,traded
-2026-11-03,U,39.21,0.18,0.172,0.3032,0.5191,-0.042,skipped: history not positive
-2026-11-03,EMBJ,75.77,0.05,0.097,0.3115,0.5731,0.041,traded
-2026-11-03,SIMO,200.56,1.66,0.06,0.0944,0.3738,0.231,skipped: already 3 trades
-2026-11-03,PBR.A,18.38,0.03,0.046,0.2159,0.5161,-0.209,skipped: history not positive
-2026-11-03,BKH,82.38,0.06,0.045,0.348,0.6514,-0.19,skipped: history not positive
-2026-11-03,SMTC,131.84,0.27,0.036,0.1207,0.4114,-0.145,skipped: history not positive
-2026-11-03,HUT,60.67,1.68,0.034,0.0156,0.1791,0.047,skipped: already 3 trades
-2026-11-03,CLSK,7.66,0.79,0.032,0.0764,0.3458,0.135,skipped: already 3 trades
-2026-11-03,IBKR,76.62,0.2,0.026,0.2035,0.5047,0.04,skipped: already 3 trades
-2026-11-03,INTC,62.58,0.23,0.023,0.2227,0.539,0.07,skipped: already 3 trades
-2026-11-03,RUN,8.56,0.18,0.023,0.12,0.4033,0.107,skipped: already 3 trades
-2026-11-03,ENPH,29.02,0.69,0.021,0.1444,0.4777,0.021,skipped: already 3 trades
-2026-11-03,MARA,6.76,0.59,0.021,0.1972,0.503,0.404,skipped: already 3 trades
-2026-11-03,NBIS,150.79,0.13,0.021,0.1609,0.4726,0.207,skipped: already 3 trades
-2026-11-03,RIOT,12.74,1.07,0.013,0.0347,0.2721,0.135,skipped: already 3 trades
-2026-11-03,DOCN,91.96,0.23,-0.001,0.0942,0.3943,-0.069,skipped: expected R not positive
-2026-11-03,LDOS,135.91,0.76,-0.004,0.0,0.0016,-0.198,skipped: expected R not positive
-2026-11-03,HPE,54.36,0.09,-0.008,0.0348,0.2901,0.06,skipped: expected R not positive
-2026-11-03,COIN,143.52,0.07,-0.01,0.1437,0.4642,-0.026,skipped: expected R not positive
-2026-11-03,POWL,163.99,0.07,-0.013,0.2731,0.6092,0.238,skipped: expected R not positive
-2026-11-03,ROKU,158.11,0.37,-0.014,0.0,0.0373,0.149,skipped: expected R not positive
-2026-11-03,VLTO,114.75,0.06,-0.015,0.095,0.4064,-0.305,skipped: expected R not positive
-2026-11-03,FOXA,64.91,0.89,-0.018,0.0014,0.0946,0.14,skipped: expected R not positive
-2026-11-03,CIFR,7.67,0.92,-0.028,0.0409,0.3019,-0.106,skipped: expected R not positive
-2026-11-03,YUMC,46.45,0.95,-0.029,0.0,0.0217,-0.039,skipped: expected R not positive
-2026-11-03,GLXY,15.95,0.28,-0.033,0.0768,0.3686,0.276,skipped: expected R not positive
-2026-11-03,AXTI,52.06,0.62,-0.038,0.0572,0.3387,0.111,skipped: expected R not positive
-2026-11-03,CRWV,53.04,0.83,-0.057,0.0968,0.4224,0.165,skipped: expected R not positive
-2026-11-03,IREN,23.86,0.13,-0.057,0.0394,0.3296,-0.239,skipped: expected R not positive
-2026-11-03,SBAC,181.13,0.1,-0.069,0.27,0.6466,-0.081,skipped: expected R not positive
-2026-11-03,CECO,51.92,0.15,-0.071,0.2134,0.5567,0.267,skipped: expected R not positive
-2026-11-03,WULF,11.76,0.98,-0.073,0.0371,0.3308,-0.157,skipped: expected R not positive
-2026-11-03,HSIC,83.82,0.37,-0.074,0.0023,0.1426,0.001,skipped: expected R not positive
-2026-11-03,CORZ,13.15,0.15,-0.08,0.0623,0.4041,-0.099,skipped: expected R not positive
-2026-11-03,AVT,89.43,0.07,-0.088,0.102,0.4869,0.106,skipped: expected R not positive
-2026-11-03,NVTS,8.68,0.23,-0.092,0.0675,0.4052,-0.168,skipped: expected R not positive
-2026-11-03,APLD,17.29,0.82,-0.106,0.0201,0.3221,-0.268,skipped: expected R not positive
-2026-11-03,IESC,206.87,0.52,-0.191,0.1658,0.6063,-0.253,skipped: expected R not positive
-2026-11-03,ONTO,206.61,0.28,-0.197,0.1055,0.5575,-0.432,skipped: expected R not positive
-2026-11-03,BNL,17.66,0.17,-0.295,0.1184,0.6447,-0.291,skipped: expected R not positive
-2026-11-04,DVA,189.54,0.02,0.24,0.3232,0.49,0.148,traded
-2026-11-04,MSTR,140.79,0.0,0.226,0.2884,0.4724,0.096,traded
-2026-11-04,PYPL,60.4,0.12,0.226,0.1069,0.2533,-0.082,skipped: history not positive
-2026-11-04,OLLI,94.11,0.14,0.175,0.152,0.329,0.302,traded
-2026-11-04,PURR,10.31,0.29,0.175,0.3106,0.5256,0.18,skipped: already 3 trades
-2026-11-04,CELH,31.04,0.01,0.155,0.3814,0.6106,0.108,skipped: already 3 trades
-2026-11-04,BMNR,21.42,0.12,0.144,0.2012,0.4188,0.096,skipped: already 3 trades
-2026-11-04,GME,24.67,0.24,0.144,0.3068,0.5501,0.18,skipped: already 3 trades
-2026-11-04,ASX,38.95,0.03,0.13,0.0517,0.2581,0.304,skipped: already 3 trades
-2026-11-04,SWKS,77.99,1.25,0.13,0.0052,0.0933,0.179,skipped: already 3 trades
-2026-11-04,ASST,22.45,1.38,0.127,0.0473,0.2163,-0.02,skipped: history not positive
-2026-11-04,CHKP,145.99,1.23,0.093,0.0358,0.2187,0.051,skipped: already 3 trades
-2026-11-04,ECO,90.94,0.75,0.091,0.1494,0.41,-0.093,skipped: history not positive
-2026-11-04,LOGI,99.23,0.27,0.091,0.086,0.3462,0.218,skipped: already 3 trades
-2026-11-04,WMT,127.57,0.11,0.09,0.1293,0.3942,0.199,skipped: already 3 trades
-2026-11-04,HPQ,29.57,0.41,0.089,0.0505,0.2725,-0.152,skipped: history not positive
-2026-11-04,ROKU,161.67,0.04,0.086,0.2778,0.5532,0.174,skipped: already 3 trades
-2026-11-04,FOXA,68.51,0.12,0.085,0.2718,0.5472,0.173,skipped: already 3 trades
-2026-11-04,ELF,115.83,0.07,0.077,0.3373,0.6182,-0.041,skipped: history not positive
-2026-11-04,EBAY,124.32,0.39,0.074,0.0582,0.2708,0.004,skipped: already 3 trades
-2026-11-04,S,23.39,0.15,0.074,0.1541,0.4328,0.365,skipped: already 3 trades
-2026-11-04,HNGE,123.42,0.04,0.072,0.0212,0.2047,-0.171,skipped: history not positive
-2026-11-04,SONY,25.74,0.06,0.072,0.0083,0.1215,0.24,skipped: already 3 trades
-2026-11-04,FROG,89.55,1.17,0.067,0.0442,0.2644,0.192,skipped: already 3 trades
-2026-11-04,CDW,164.19,0.85,0.065,0.0058,0.1256,-0.175,skipped: history not positive
-2026-11-04,LYFT,18.13,0.12,0.062,0.0021,0.1047,-0.011,skipped: history not positive
-2026-11-04,FRSH,14.19,0.64,0.057,0.0,0.0027,0.156,skipped: already 3 trades
-2026-11-04,GTLB,52.99,0.04,0.053,0.1529,0.448,-0.025,skipped: history not positive
-2026-11-04,MTCH,40.54,0.1,0.049,0.011,0.1571,0.175,skipped: already 3 trades
-2026-11-04,SPCX,137.98,0.18,0.049,0.1231,0.3994,-0.067,skipped: history not positive
-2026-11-04,BKH,84.23,0.12,0.046,0.0582,0.2815,-0.215,skipped: history not positive
-2026-11-04,ZM,94.58,0.82,0.034,0.0925,0.3634,0.31,skipped: already 3 trades
-2026-11-04,RBRK,120.32,0.58,0.032,0.0641,0.3354,0.281,skipped: already 3 trades
-2026-11-04,PLTR,172.55,0.06,0.028,0.0212,0.2066,-0.151,skipped: history not positive
-2026-11-04,XYZ,87.61,0.59,0.018,0.0005,0.0683,-0.269,skipped: history not positive
-2026-11-04,YOU,60.65,0.44,0.015,0.0,0.0001,0.224,skipped: already 3 trades
-2026-11-04,KD,16.5,0.86,0.012,0.0,0.0075,-0.115,skipped: history not positive
-2026-11-04,BABA,106.0,0.13,0.011,0.2224,0.5471,-0.152,skipped: history not positive
-2026-11-04,APTV,43.15,0.62,0.009,0.0273,0.2374,0.089,skipped: already 3 trades
-2026-11-04,COIN,149.09,0.39,0.001,0.0622,0.3339,0.034,skipped: already 3 trades
-2026-11-04,NTR,70.29,0.21,0.0,0.081,0.3791,-0.048,skipped: expected R not positive
-2026-11-04,SBAC,196.72,0.01,-0.001,0.0079,0.1891,0.028,skipped: expected R not positive
-2026-11-04,BN,42.38,0.02,-0.011,0.1268,0.4519,-0.146,skipped: expected R not positive
-2026-11-04,HIMS,28.5,0.78,-0.015,0.002,0.0955,0.248,skipped: expected R not positive
-2026-11-04,TTWO,202.36,0.18,-0.022,0.1633,0.4618,-0.291,skipped: expected R not positive
-2026-11-04,IOVA,8.97,0.11,-0.024,0.304,0.6564,0.103,skipped: expected R not positive
-2026-11-04,SBUX,107.25,0.08,-0.03,0.2533,0.6077,-0.092,skipped: expected R not positive
-2026-11-04,DLR,180.43,0.1,-0.032,0.1241,0.4664,0.009,skipped: expected R not positive
-2026-11-04,HOOD,86.35,0.24,-0.032,0.1404,0.4598,-0.197,skipped: expected R not positive
-2026-11-04,FRO,50.84,0.2,-0.038,0.2286,0.5911,-0.16,skipped: expected R not positive
-2026-11-04,SIRI,32.11,0.17,-0.039,0.0336,0.3059,0.113,skipped: expected R not positive
-2026-11-04,TMUS,158.51,0.06,-0.041,0.209,0.5586,0.1,skipped: expected R not positive
-2026-11-04,VALE,11.29,0.09,-0.05,0.3039,0.6704,0.376,skipped: expected R not positive
-2026-11-04,JKHY,171.58,0.59,-0.051,0.0,0.0369,0.03,skipped: expected R not positive
-2026-11-04,ANET,187.6,0.41,-0.053,0.0012,0.1037,-0.137,skipped: expected R not positive
-2026-11-04,UPST,23.16,0.04,-0.058,0.0021,0.1489,-0.151,skipped: expected R not positive
-2026-11-04,ETSY,96.63,0.18,-0.062,0.0506,0.3437,0.028,skipped: expected R not positive
-2026-11-04,CNC,72.8,0.37,-0.064,0.0224,0.2903,-0.183,skipped: expected R not positive
-2026-11-04,ABNB,176.2,0.37,-0.079,0.0843,0.4278,0.048,skipped: expected R not positive
-2026-11-04,LTH,45.42,0.02,-0.083,0.1074,0.4602,-0.23,skipped: expected R not positive
-2026-11-04,RVMD,200.18,0.15,-0.085,0.2214,0.6151,0.042,skipped: expected R not positive
-2026-11-04,NFLX,65.3,0.09,-0.094,0.0757,0.4295,0.214,skipped: expected R not positive
-2026-11-04,P,116.7,0.08,-0.1,0.1837,0.5789,-0.062,skipped: expected R not positive
-2026-11-04,CSCO,104.36,0.25,-0.102,0.0955,0.48,-0.241,skipped: expected R not positive
-2026-11-04,GFI,36.92,0.47,-0.107,0.1461,0.5555,-0.13,skipped: expected R not positive
-2026-11-04,INSW,103.88,0.64,-0.112,0.0633,0.4193,-0.361,skipped: expected R not positive
-2026-11-04,FANG,190.15,0.15,-0.115,0.0642,0.4315,-0.233,skipped: expected R not positive
-2026-11-04,ACHC,31.98,0.24,-0.209,0.0048,0.2787,-0.144,skipped: expected R not positive
+date,time,symbol,price,pct_over,expected_R,p_target,p_stop,history_R,decision
+2026-11-02,09:50,AAON,69.03,0.48,-0.061,0.2788,0.6518,0.16,skipped: expected R not positive
+2026-11-02,09:50,ACM,64.76,0.25,0.064,0.2396,0.5203,0.024,sizing refused
+2026-11-02,09:50,ALIT,9.4,1.08,,,,,time machine failed
+2026-11-02,09:50,AMRZ,42.87,0.15,-0.161,0.1413,0.5688,0.047,skipped: expected R not positive
+2026-11-02,09:50,APPS,9.27,0.16,-0.085,0.2065,0.5915,0.233,skipped: expected R not positive
+2026-11-02,09:50,ARXS,51.28,0.73,0.175,0.3527,0.5668,-0.102,skipped: history not positive
+2026-11-02,09:50,ATMU,47.31,0.84,0.011,0.0794,0.3569,-0.389,skipped: history not positive
+2026-11-02,09:50,BAM,49.8,0.82,-0.058,0.0121,0.2359,-0.009,skipped: expected R not positive
+2026-11-02,09:50,BCS,22.65,0.2,-0.213,0.1675,0.6505,-0.302,skipped: expected R not positive
+2026-11-02,09:50,BEN,32.25,0.03,-0.066,0.3035,0.6812,-0.415,skipped: expected R not positive
+2026-11-02,09:50,BILL,49.73,1.09,-0.016,0.0336,0.3068,-0.237,skipped: expected R not positive
+2026-11-02,09:50,BIRK,34.29,0.18,0.001,0.2932,0.6216,-0.159,skipped: history not positive
+2026-11-02,09:50,BN,40.36,0.76,-0.042,0.0072,0.1903,-0.197,skipped: expected R not positive
+2026-11-02,09:50,BROS,44.2,0.39,-0.009,0.05,0.3068,-0.088,skipped: expected R not positive
+2026-11-02,09:50,BYND,7.55,1.41,0.085,0.0516,0.2743,0.033,sizing refused
+2026-11-02,09:50,CALY,15.89,0.76,-0.11,0.0103,0.23,-0.662,skipped: expected R not positive
+2026-11-02,09:50,CARG,33.67,0.66,-0.053,0.0141,0.2648,-0.17,skipped: expected R not positive
+2026-11-02,09:50,CCL,30.0,0.17,-0.065,0.2815,0.6525,-0.147,skipped: expected R not positive
+2026-11-02,09:50,CDE,13.71,0.07,0.038,0.2665,0.5675,0.171,sizing refused
+2026-11-02,09:50,CHPT,10.25,2.28,0.225,0.1819,0.3338,0.052,traded
+2026-11-02,09:50,CHWY,22.03,0.69,0.094,0.0403,0.2172,-0.085,skipped: history not positive
+2026-11-02,09:50,CHYM,28.84,0.52,-0.037,0.1608,0.5149,0.249,skipped: expected R not positive
+2026-11-02,09:50,CMCO,15.55,0.78,,,,,time machine failed
+2026-11-02,09:50,CSGP,31.25,0.21,0.085,0.0591,0.2807,-0.196,skipped: history not positive
+2026-11-02,09:50,CUBE,43.22,0.23,-0.07,0.0838,0.4152,-0.285,skipped: expected R not positive
+2026-11-02,09:50,EDU,49.5,0.48,-0.042,0.1086,0.4252,-0.276,skipped: expected R not positive
+2026-11-02,09:50,EGO,32.38,0.05,0.101,0.1266,0.369,0.144,traded
+2026-11-02,09:50,ENR,24.09,0.83,0.086,0.085,0.3303,0.443,traded
+2026-11-02,09:50,EPAC,42.06,0.6,,,,,time machine failed
+2026-11-02,09:50,FCX,64.04,0.21,0.235,0.3721,0.5506,-0.17,skipped: history not positive
+2026-11-02,09:50,FER,57.61,0.09,-0.082,0.2783,0.6672,-0.433,skipped: expected R not positive
+2026-11-02,09:50,FISV,51.31,0.23,0.034,0.1462,0.4361,0.146,sizing refused
+2026-11-02,09:50,FOUR,41.94,0.83,0.001,0.0949,0.3788,-0.383,skipped: history not positive
+2026-11-02,09:50,FOXF,16.71,0.63,,,,,time machine failed
+2026-11-02,09:50,GBX,40.66,0.44,,,,,time machine failed
+2026-11-02,09:50,GEN,29.86,0.62,-0.061,0.0627,0.3907,0.176,skipped: expected R not positive
+2026-11-02,09:50,GXO,51.31,0.01,-0.075,0.3032,0.6862,-0.089,skipped: expected R not positive
+2026-11-02,09:50,HOG,32.81,0.05,0.067,0.056,0.3063,-0.013,skipped: history not positive
+2026-11-02,09:50,IP,37.01,0.05,-0.039,0.3137,0.6722,-0.388,skipped: expected R not positive
+2026-11-02,09:50,JEF,48.35,0.21,0.027,0.0093,0.17,-0.216,skipped: history not positive
+2026-11-02,09:50,LAUR,34.72,0.36,-0.122,0.0019,0.1756,0.184,skipped: expected R not positive
+2026-11-02,09:50,LINC,21.38,0.02,,,,,time machine failed
+2026-11-02,09:50,LOAR,66.29,1.17,0.209,0.1005,0.285,-0.171,skipped: history not positive
+2026-11-02,09:50,LTM,44.3,0.2,-0.1,0.1213,0.503,-0.15,skipped: expected R not positive
+2026-11-02,09:50,LZB,31.53,0.46,-0.185,0.0432,0.4029,-0.364,skipped: expected R not positive
+2026-11-02,09:50,MBGL,19.2,0.73,-0.028,0.0528,0.3553,-0.047,skipped: expected R not positive
+2026-11-02,09:50,MC,60.61,0.18,-0.029,0.2391,0.594,-0.14,skipped: expected R not positive
+2026-11-02,09:50,MDLZ,65.76,0.21,0.016,0.2403,0.5591,-0.135,skipped: history not positive
+2026-11-02,09:50,MGA,65.29,0.06,-0.011,0.0561,0.3378,-0.271,skipped: expected R not positive
+2026-11-02,09:50,MTW,23.88,0.08,,,,,time machine failed
+2026-11-02,09:50,NATL,46.26,0.17,-0.028,0.0369,0.3533,0.342,skipped: expected R not positive
+2026-11-02,09:50,NSSC,32.84,0.37,,,,,time machine failed
+2026-11-02,09:50,NVST,24.52,0.45,-0.135,0.0074,0.252,-0.1,skipped: expected R not positive
+2026-11-02,09:50,NWSA,29.8,0.1,0.045,0.2261,0.535,0.18,sizing refused
+2026-11-02,09:50,NX,21.56,0.28,,,,,time machine failed
+2026-11-02,09:50,NYT,71.03,0.14,0.144,0.3545,0.5911,-0.039,skipped: history not positive
+2026-11-02,09:50,PAAS,39.7,0.07,0.032,0.1458,0.4585,0.077,sizing refused
+2026-11-02,09:50,PB,73.0,0.25,-0.144,0.1719,0.5921,-0.002,skipped: expected R not positive
+2026-11-02,09:50,PII,61.21,0.16,-0.092,0.2991,0.6945,-0.036,skipped: expected R not positive
+2026-11-02,09:50,PNR,68.64,0.4,-0.015,0.0574,0.3115,-0.35,skipped: expected R not positive
+2026-11-02,09:50,PRM,28.81,0.8,-0.139,0.1488,0.5352,-0.082,skipped: expected R not positive
+2026-11-02,09:50,PSN,51.83,0.42,-0.051,0.1679,0.5317,-0.221,skipped: expected R not positive
+2026-11-02,09:50,PTRN,16.89,0.45,-0.047,0.3023,0.6682,0.11,skipped: expected R not positive
+2026-11-02,09:50,QSR,73.12,0.12,-0.066,0.3056,0.6817,-0.21,skipped: expected R not positive
+2026-11-02,09:50,QTWO,69.08,0.07,-0.058,0.1636,0.5374,-0.32,skipped: expected R not positive
+2026-11-02,09:50,QXO,11.7,0.41,-0.005,0.0868,0.3861,0.087,skipped: expected R not positive
+2026-11-02,09:50,RCI,32.88,0.06,-0.071,0.2592,0.6385,-0.147,skipped: expected R not positive
+2026-11-02,09:50,REAL,12.68,0.63,-0.008,0.1178,0.4203,-0.216,skipped: expected R not positive
+2026-11-02,09:50,SF,67.98,0.28,-0.081,0.2315,0.6138,-0.264,skipped: expected R not positive
+2026-11-02,09:50,SKT,37.33,0.15,-0.053,0.0933,0.4616,-0.089,skipped: expected R not positive
+2026-11-02,09:50,SMG,64.12,0.39,0.072,0.0809,0.313,0.184,sizing refused
+2026-11-02,09:50,SOFI,17.15,0.26,-0.135,0.1801,0.5948,0.212,skipped: expected R not positive
+2026-11-02,09:50,STM,48.77,0.42,-0.012,0.2172,0.5538,-0.252,skipped: expected R not positive
+2026-11-02,09:50,TECK,62.31,0.19,0.152,0.2904,0.5309,-0.193,skipped: history not positive
+2026-11-02,09:50,TEX,57.72,0.17,-0.002,0.2541,0.5796,-0.091,skipped: expected R not positive
+2026-11-02,09:50,TH,14.02,0.5,-0.126,0.1871,0.5961,-0.053,skipped: expected R not positive
+2026-11-02,09:50,THRM,31.66,0.44,0.06,0.3215,0.6139,-0.205,skipped: history not positive
+2026-11-02,09:50,TPG,48.35,0.22,-0.06,0.1643,0.5254,-0.232,skipped: expected R not positive
+2026-11-02,09:50,TRP,64.19,0.02,-0.077,0.2839,0.6706,0.115,skipped: expected R not positive
+2026-11-02,09:50,TTD,12.7,0.24,-0.002,0.1887,0.5199,-0.015,skipped: expected R not positive
+2026-11-02,09:50,TTEK,39.16,0.28,-0.007,0.0516,0.3314,-0.308,skipped: expected R not positive
+2026-11-02,09:50,UBER,66.99,0.3,-0.04,0.0734,0.3924,-0.368,skipped: expected R not positive
+2026-11-02,09:50,UTI,23.28,0.04,-0.017,0.2877,0.6302,-0.106,skipped: expected R not positive
+2026-11-02,09:50,VFC,18.86,0.03,0.084,0.2456,0.5304,0.234,sizing refused
+2026-11-02,09:50,VSNT,32.38,0.25,-0.034,0.0702,0.3648,-0.214,skipped: expected R not positive
+2026-11-02,09:50,VVV,33.36,0.18,-0.056,0.1357,0.4833,-0.252,skipped: expected R not positive
+2026-11-02,09:50,WLK,69.38,0.33,-0.112,0.087,0.4904,0.453,skipped: expected R not positive
+2026-11-02,09:50,WNC,12.26,0.45,0.029,0.1986,0.4807,-0.081,skipped: history not positive
+2026-11-02,09:50,Z,32.78,0.12,0.042,0.049,0.2947,0.315,sizing refused
+2026-11-02,09:55,AAL,13.3,0.38,-0.078,0.0782,0.414,0.063,skipped: expected R not positive
+2026-11-02,09:55,ADC,67.31,0.06,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,AGI,28.47,0.44,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,ALK,38.81,0.35,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,APAM,37.72,0.21,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,ASB,30.82,0.16,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,BALL,67.79,0.35,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,BL,34.19,0.57,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,BOBS,17.63,1.85,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,BSX,42.62,0.39,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,BSY,41.75,0.05,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,CAPR,7.04,1.59,-0.047,0.1862,0.5428,0.503,skipped: expected R not positive
+2026-11-02,09:55,CENX,34.49,0.06,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,CG,41.51,0.78,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,CMC,66.52,0.07,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,COLM,69.27,1.21,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,CVNA,72.84,0.62,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,CWK,14.07,1.22,-0.037,0.0091,0.1841,0.032,skipped: expected R not positive
+2026-11-02,09:55,DBX,36.15,0.03,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,EFOR,38.51,1.45,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,ESAB,73.61,0.51,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,FA,22.21,0.86,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,FLO,6.45,0.16,-0.091,0.2052,0.6033,0.071,skipped: expected R not positive
+2026-11-02,09:55,FND,49.43,0.59,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,FTV,66.89,0.04,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,GBCI,49.47,0.3,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,GDYN,13.6,1.15,0.294,0.0283,0.1005,0.077,sizing refused
+2026-11-02,09:55,GFI,35.0,0.32,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,GNTX,20.34,0.59,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,HNI,50.26,0.43,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,HRB,51.82,0.18,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,HWC,73.09,0.04,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,IART,13.39,0.3,-0.152,0.1589,0.588,0.071,skipped: expected R not positive
+2026-11-02,09:55,IMNM,18.89,0.07,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,JHX,28.15,0.14,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,KBH,49.61,0.75,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,KBR,38.73,0.23,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,KVYO,20.58,0.78,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,LAZ,39.45,0.43,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,LIFE,44.25,0.07,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,LW,55.64,0.86,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,MIAX,34.89,0.35,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,NAVN,26.43,0.53,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,NKE,39.47,0.34,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,NWL,5.43,2.65,0.005,0.0002,0.0538,0.177,sizing refused
+2026-11-02,09:55,OR,32.9,0.1,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,PCOR,62.18,0.42,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,PIPR,66.43,0.78,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,PLAB,27.98,0.43,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,POWI,45.83,0.11,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,PPLI,36.52,0.63,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,PYPL,58.12,0.65,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,SHAK,72.67,0.49,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,ST,41.43,0.86,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,TRMB,66.33,0.5,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,TSCO,34.53,0.44,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,U,39.15,0.01,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,VERA,32.41,0.71,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,VGNT,42.48,0.17,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,VKTX,27.48,0.07,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,XENE,37.81,0.32,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,ZG,34.18,1.51,,,,,skipped: cash tied up in open trades
+2026-11-02,09:55,ZION,66.37,0.15,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,AMBA,63.15,0.51,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,APG,45.35,0.21,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,ARWR,61.03,0.16,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,AXGN,50.25,0.5,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,B,38.27,0.17,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,BEP,28.89,0.05,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,BETR,21.62,4.2,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,BKR,55.11,0.11,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,CARR,54.74,0.42,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,CLBK,11.18,0.22,-0.093,0.0779,0.4423,-0.222,skipped: expected R not positive
+2026-11-02,10:00,CNM,45.92,0.28,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,DC,5.32,0.0,0.076,0.21,0.4959,0.207,sizing refused
+2026-11-02,10:00,FFBC,32.88,0.23,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,FLG,10.69,0.14,-0.243,0.0869,0.543,-0.329,skipped: expected R not positive
+2026-11-02,10:00,FLR,47.78,0.18,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,FTI,68.74,0.25,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,GOLD,39.24,0.69,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,GTY,28.22,0.34,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,HIMS,28.3,0.64,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,KRC,36.6,0.03,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,MEC,15.74,0.19,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,MP,40.33,0.12,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,NJR,53.47,0.04,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,RAL,68.22,0.47,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,RF,28.97,0.12,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,RPRX,67.04,0.05,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,SLB,53.41,0.54,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,SON,50.88,0.37,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,SQM,55.29,0.05,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,STAG,37.43,0.27,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,VICI,24.65,0.08,,,,,skipped: cash tied up in open trades
+2026-11-02,10:00,WKC,37.36,1.07,,,,,skipped: cash tied up in open trades
+2026-11-02,10:05,AEVA,9.36,1.02,-0.099,0.1203,0.5084,-0.373,skipped: expected R not positive
+2026-11-02,10:05,CGAU,20.82,0.46,,,,,skipped: cash tied up in open trades
+2026-11-02,10:05,CRCL,73.85,0.03,,,,,skipped: cash tied up in open trades
+2026-11-02,10:05,CWEN,32.65,0.17,,,,,skipped: cash tied up in open trades
+2026-11-02,10:05,FPI,8.48,0.12,,,,,time machine failed
+2026-11-02,10:05,MMED,18.47,0.11,,,,,skipped: cash tied up in open trades
+2026-11-02,10:05,NU,11.84,0.17,-0.043,0.1719,0.5215,0.15,skipped: expected R not positive
+2026-11-02,10:05,PUBM,16.51,1.73,,,,,skipped: cash tied up in open trades
+2026-11-02,10:05,RRR,51.09,0.61,,,,,skipped: cash tied up in open trades
+2026-11-02,10:05,SFM,52.35,0.67,,,,,skipped: cash tied up in open trades
+2026-11-02,10:05,SNAP,5.45,0.46,-0.019,0.2551,0.5969,0.059,skipped: expected R not positive
+2026-11-02,10:05,TSN,57.76,0.07,,,,,skipped: cash tied up in open trades
+2026-11-02,10:10,ACMR,46.6,0.11,,,,,skipped: cash tied up in open trades
+2026-11-02,10:10,BOOM,9.65,0.84,,,,,time machine failed
+2026-11-02,10:10,CLMT,49.77,0.61,,,,,skipped: cash tied up in open trades
+2026-11-02,10:10,COHU,51.36,0.12,,,,,skipped: cash tied up in open trades
+2026-11-02,10:10,DOX,63.31,0.29,,,,,skipped: cash tied up in open trades
+2026-11-02,10:10,EQT,55.37,0.04,,,,,skipped: cash tied up in open trades
+2026-11-02,10:10,FWDI,6.46,1.41,0.235,0.2734,0.4556,0.298,sizing refused
+2026-11-02,10:10,NNE,11.95,0.48,-0.037,0.1544,0.5015,-0.002,skipped: expected R not positive
+2026-11-02,10:10,OUST,30.46,0.45,,,,,skipped: cash tied up in open trades
+2026-11-02,10:10,PURR,10.89,0.79,0.163,0.2648,0.4847,0.254,sizing refused
+2026-11-02,10:10,SBET,6.89,0.07,0.274,0.4223,0.5729,0.364,sizing refused
+2026-11-02,10:10,XE,11.14,0.27,-0.104,0.2172,0.6145,0.007,skipped: expected R not positive
+2026-11-02,10:15,APTV,44.8,0.04,,,,,skipped: cash tied up in open trades
+2026-11-02,10:15,DXYZ,26.05,0.19,,,,,skipped: cash tied up in open trades
+2026-11-02,10:15,G,39.97,0.29,,,,,skipped: cash tied up in open trades
+2026-11-02,10:15,ICHR,39.58,0.2,,,,,skipped: cash tied up in open trades
+2026-11-02,10:15,IVZ,28.55,0.21,,,,,skipped: cash tied up in open trades
+2026-11-02,10:15,LNT,72.36,0.03,,,,,skipped: cash tied up in open trades
+2026-11-02,10:15,MAIR,23.88,0.03,,,,,skipped: cash tied up in open trades
+2026-11-02,10:15,NAMS,20.82,0.31,,,,,skipped: cash tied up in open trades
+2026-11-02,10:15,OII,40.74,0.15,,,,,skipped: cash tied up in open trades
+2026-11-02,10:15,OKLO,25.75,0.41,,,,,skipped: cash tied up in open trades
+2026-11-02,10:15,WHD,65.47,0.4,,,,,skipped: cash tied up in open trades
+2026-11-02,10:20,CTSH,65.32,0.12,,,,,skipped: cash tied up in open trades
+2026-11-02,10:20,EPR,58.25,0.09,,,,,skipped: cash tied up in open trades
+2026-11-02,10:20,KD,13.85,0.14,0.037,0.3158,0.6247,-0.09,skipped: history not positive
+2026-11-02,10:20,PDFS,42.15,0.12,,,,,skipped: cash tied up in open trades
+2026-11-02,10:20,PEGA,34.24,0.01,,,,,skipped: cash tied up in open trades
+2026-11-02,10:20,RBLX,44.6,0.93,,,,,skipped: cash tied up in open trades
+2026-11-02,10:25,AEHR,56.17,0.59,,,,,skipped: cash tied up in open trades
+2026-11-02,10:25,AMKR,39.86,0.76,,,,,skipped: cash tied up in open trades
+2026-11-02,10:25,AMSC,27.91,0.29,,,,,skipped: cash tied up in open trades
+2026-11-02,10:25,BEPC,29.7,0.04,,,,,skipped: cash tied up in open trades
+2026-11-02,10:25,CORZ,13.38,0.28,-0.031,0.0322,0.3058,-0.068,skipped: expected R not positive
+2026-11-02,10:25,DPC,28.41,0.11,,,,,skipped: cash tied up in open trades
+2026-11-02,10:25,GFS,42.76,0.43,,,,,skipped: cash tied up in open trades
+2026-11-02,10:25,IONQ,30.58,0.49,,,,,skipped: cash tied up in open trades
+2026-11-02,10:25,LUNR,10.86,1.02,-0.076,0.0223,0.2858,0.014,skipped: expected R not positive
+2026-11-02,10:25,RDW,8.49,0.21,-0.186,0.0358,0.3996,-0.476,skipped: expected R not positive
+2026-11-02,10:25,REPL,18.43,0.66,,,,,skipped: cash tied up in open trades
+2026-11-02,10:25,TSSI,7.1,0.28,-0.097,0.1224,0.4561,-0.233,skipped: expected R not positive
+2026-11-02,10:25,UCTT,50.87,0.72,,,,,skipped: cash tied up in open trades
+2026-11-02,10:25,UMAC,15.84,0.13,,,,,skipped: cash tied up in open trades
+2026-11-02,10:25,WOLF,22.4,0.72,,,,,skipped: cash tied up in open trades
+2026-11-02,10:30,PAY,33.65,0.45,,,,,skipped: cash tied up in open trades
+2026-11-02,10:35,AM,21.42,0.12,,,,,skipped: cash tied up in open trades
+2026-11-02,10:35,CC,13.69,0.22,-0.099,0.1293,0.527,-0.284,skipped: expected R not positive
+2026-11-02,10:35,CE,49.01,0.25,,,,,skipped: cash tied up in open trades
+2026-11-02,10:35,CRBG,35.51,0.21,,,,,skipped: cash tied up in open trades
+2026-11-02,10:35,MGM,30.97,0.29,,,,,skipped: cash tied up in open trades
+2026-11-02,10:35,PFSI,63.99,0.01,,,,,skipped: cash tied up in open trades
+2026-11-02,10:40,AGIO,31.35,0.32,,,,,skipped: cash tied up in open trades
+2026-11-02,10:40,AOSL,23.43,0.34,,,,,skipped: cash tied up in open trades
+2026-11-02,10:40,MTG,28.6,0.03,,,,,skipped: cash tied up in open trades
+2026-11-02,10:40,RYZ,32.76,0.19,,,,,skipped: cash tied up in open trades
+2026-11-02,10:45,CAVA,62.0,0.19,,,,,skipped: cash tied up in open trades
+2026-11-02,10:45,QBTS,10.91,0.05,-0.124,0.1267,0.5291,-0.413,skipped: expected R not positive
+2026-11-02,10:45,SECZ,7.99,0.25,0.117,0.3218,0.5865,0.354,sizing refused
+2026-11-02,10:45,USAR,9.84,0.38,-0.146,0.1061,0.5116,0.015,skipped: expected R not positive
+2026-11-02,10:55,EMN,67.43,0.4,,,,,skipped: cash tied up in open trades
+2026-11-02,10:55,KMPR,33.81,0.25,,,,,skipped: cash tied up in open trades
+2026-11-02,11:00,ES,68.75,0.08,,,,,skipped: cash tied up in open trades
+2026-11-02,11:05,IRT,14.89,0.07,-0.067,0.081,0.3967,-0.143,skipped: expected R not positive
+2026-11-02,11:05,WRBY,25.67,0.16,,,,,skipped: cash tied up in open trades
+2026-11-02,11:10,KR,67.25,0.08,,,,,skipped: cash tied up in open trades
+2026-11-02,11:10,LYB,67.0,0.13,,,,,skipped: cash tied up in open trades
+2026-11-02,11:10,NNN,41.28,0.02,,,,,skipped: cash tied up in open trades
+2026-11-02,11:35,PPL,35.81,0.04,,,,,skipped: cash tied up in open trades
+2026-11-02,11:45,CMS,70.21,0.05,,,,,skipped: cash tied up in open trades
+2026-11-02,11:45,PRCT,19.67,0.25,,,,,skipped: cash tied up in open trades
+2026-11-02,11:50,TFSL,16.49,0.09,,,,,skipped: cash tied up in open trades
+2026-11-02,11:55,BFAM,55.33,0.25,,,,,skipped: cash tied up in open trades
+2026-11-02,11:55,OSCR,30.8,0.37,,,,,skipped: cash tied up in open trades
+2026-11-02,12:10,AVPT,17.24,0.45,,,,,skipped: cash tied up in open trades
+2026-11-02,12:30,URGN,33.74,0.1,,,,,skipped: cash tied up in open trades
+2026-11-02,12:55,PFE,30.64,0.02,,,,,skipped: cash tied up in open trades
+2026-11-02,13:05,WPC,64.41,0.02,,,,,skipped: cash tied up in open trades
+2026-11-02,13:15,KDP,36.07,0.03,,,,,skipped: cash tied up in open trades
+2026-11-02,13:15,ORI,38.84,0.15,,,,,skipped: cash tied up in open trades
+2026-11-02,13:35,BTI,61.76,0.02,,,,,skipped: cash tied up in open trades
+2026-11-02,13:40,BLCO,20.2,0.2,,,,,skipped: cash tied up in open trades
+2026-11-02,14:40,PBH,50.15,0.02,,,,,skipped: cash tied up in open trades
+2026-11-03,09:50,ALGM,33.9,0.03,0.077,0.3001,0.5849,0.012,traded
+2026-11-03,09:50,AXTI,52.06,0.62,-0.038,0.0572,0.3387,0.111,skipped: expected R not positive
+2026-11-03,09:50,AZTA,37.1,0.34,-0.065,0.073,0.3774,0.38,skipped: expected R not positive
+2026-11-03,09:50,BSAC,32.0,0.57,,,,,time machine failed
+2026-11-03,09:50,CECO,51.92,0.15,-0.071,0.2134,0.5567,0.267,skipped: expected R not positive
+2026-11-03,09:50,CGEM,15.56,0.13,-0.02,0.249,0.5932,-0.124,skipped: expected R not positive
+2026-11-03,09:50,COHU,51.9,0.14,0.275,0.2242,0.3651,0.049,traded
+2026-11-03,09:50,CORZ,13.15,0.15,-0.08,0.0621,0.4041,-0.115,skipped: expected R not positive
+2026-11-03,09:50,CRWV,53.04,0.83,-0.057,0.0968,0.4226,0.165,skipped: expected R not positive
+2026-11-03,09:50,CSIQ,9.85,0.31,0.019,0.157,0.474,0.033,sizing refused
+2026-11-03,09:50,DFTX,34.53,0.71,-0.09,0.0337,0.3274,-0.004,skipped: expected R not positive
+2026-11-03,09:50,ENPH,29.02,0.69,0.021,0.1444,0.4777,0.021,traded
+2026-11-03,09:50,FOXA,64.91,0.89,-0.018,0.0014,0.0946,0.14,skipped: expected R not positive
+2026-11-03,09:50,HLF,14.73,0.72,-0.01,0.0001,0.0572,-0.297,skipped: expected R not positive
+2026-11-03,09:50,HPE,54.36,0.09,-0.008,0.0348,0.2901,0.06,skipped: expected R not positive
+2026-11-03,09:50,HUT,60.67,1.68,0.034,0.0156,0.1791,0.047,traded
+2026-11-03,09:50,IBTA,60.64,0.33,,,,,time machine failed
+2026-11-03,09:50,INTC,62.58,0.23,0.023,0.2227,0.539,0.07,sizing refused
+2026-11-03,09:50,IREN,23.86,0.13,-0.057,0.0394,0.3296,-0.239,skipped: expected R not positive
+2026-11-03,09:50,MRX,66.17,0.33,,,,,time machine failed
+2026-11-03,09:50,NHP,15.15,0.5,,,,,time machine failed
+2026-11-03,09:50,NSSC,32.78,1.28,,,,,time machine failed
+2026-11-03,09:50,PACS,46.18,0.01,-0.065,0.2883,0.6626,-0.486,skipped: expected R not positive
+2026-11-03,09:50,RYAN,45.33,0.34,-0.001,0.3116,0.6451,-0.034,skipped: expected R not positive
+2026-11-03,09:50,SHAZ,23.88,0.95,-0.018,0.0211,0.211,-0.076,skipped: expected R not positive
+2026-11-03,09:50,TH,14.05,0.11,-0.107,0.2429,0.6456,-0.084,skipped: expected R not positive
+2026-11-03,09:50,WOLF,22.33,0.0,0.013,0.2356,0.5723,-0.056,skipped: history not positive
+2026-11-03,09:50,WULF,11.76,0.98,-0.073,0.0371,0.3308,-0.157,skipped: expected R not positive
+2026-11-03,09:50,WYFI,10.1,1.0,-0.057,0.0756,0.3984,-0.143,skipped: expected R not positive
+2026-11-03,09:50,YUMC,46.45,0.95,-0.029,0.0,0.0217,-0.039,skipped: expected R not positive
+2026-11-03,09:55,ARMK,54.22,0.08,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,BAC,49.62,0.08,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,BCAX,8.61,0.16,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,CRBG,36.25,0.78,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,CRI,32.05,0.38,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,CWEN,34.34,0.15,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,ELAN,24.34,0.41,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,EXEL,72.08,0.09,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,FWRG,13.68,0.37,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,LTC,45.34,0.24,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,MEOH,68.5,0.23,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,MGNI,21.97,0.37,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,MTH,68.46,0.18,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,PTCT,65.56,0.89,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,SEDG,31.48,0.99,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,SIRI,30.16,0.05,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,TGTX,62.09,0.14,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,TRP,63.78,0.01,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,TTEK,39.31,0.41,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,VNO,35.67,0.78,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,WKC,37.97,0.16,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,ZD,53.14,0.56,,,,,skipped: cash tied up in open trades
+2026-11-03,09:55,ZION,66.42,0.06,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,APAM,38.52,0.23,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,ASTS,37.98,0.11,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,BTSG,67.35,0.23,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,CALM,65.74,0.04,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,CBC,36.92,0.19,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,CBSH,55.68,0.04,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,CDP,33.11,0.2,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,CLF,14.27,0.14,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,COO,60.91,0.03,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,CVNA,72.19,0.27,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,DYN,17.76,0.79,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,FCEL,11.36,0.09,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,INGM,26.25,0.61,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,INIO,17.68,0.63,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,JAN,29.78,0.2,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,KRC,36.43,0.18,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,LION,12.32,0.16,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,NTR,69.79,0.02,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,PSN,52.32,0.5,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,RAL,70.4,0.31,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,RIVN,13.52,0.15,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,RLI,67.32,0.39,,,,,skipped: cash tied up in open trades
+2026-11-03,10:00,RSI,12.26,0.34,,,,,skipped: cash tied up in open trades
+2026-11-03,10:05,BILL,49.24,0.26,,,,,skipped: cash tied up in open trades
+2026-11-03,10:05,HAWK,14.17,0.04,,,,,skipped: cash tied up in open trades
+2026-11-03,10:05,IMAX,50.86,0.14,,,,,skipped: cash tied up in open trades
+2026-11-03,10:05,RBLX,44.57,0.16,,,,,skipped: cash tied up in open trades
+2026-11-03,10:10,AADX,11.52,0.61,,,,,skipped: cash tied up in open trades
+2026-11-03,10:10,AEHR,64.0,0.88,,,,,skipped: cash tied up in open trades
+2026-11-03,10:10,AESI,8.19,0.61,,,,,skipped: cash tied up in open trades
+2026-11-03,10:10,DRS,37.44,0.28,,,,,skipped: cash tied up in open trades
+2026-11-03,10:10,EBS,7.1,0.18,,,,,skipped: cash tied up in open trades
+2026-11-03,10:10,HGTY,16.72,0.12,,,,,skipped: cash tied up in open trades
+2026-11-03,10:10,KGS,46.1,0.17,,,,,skipped: cash tied up in open trades
+2026-11-03,10:10,KNTK,54.42,0.21,,,,,skipped: cash tied up in open trades
+2026-11-03,10:10,LFST,13.51,0.19,,,,,skipped: cash tied up in open trades
+2026-11-03,10:10,NVAX,9.88,0.05,,,,,skipped: cash tied up in open trades
+2026-11-03,10:10,TSN,56.74,0.16,,,,,skipped: cash tied up in open trades
+2026-11-03,10:10,VOR,19.75,0.03,,,,,skipped: cash tied up in open trades
+2026-11-03,10:10,VSH,27.32,0.26,,,,,skipped: cash tied up in open trades
+2026-11-03,10:10,ZETA,30.33,0.08,,,,,skipped: cash tied up in open trades
+2026-11-03,10:15,AAON,70.3,0.24,,,,,skipped: cash tied up in open trades
+2026-11-03,10:15,ASAN,10.88,0.18,,,,,skipped: cash tied up in open trades
+2026-11-03,10:15,CARR,55.66,0.06,,,,,skipped: cash tied up in open trades
+2026-11-03,10:15,DJT,5.76,0.17,,,,,skipped: cash tied up in open trades
+2026-11-03,10:15,EVER,27.43,1.44,,,,,skipped: cash tied up in open trades
+2026-11-03,10:15,GTLB,51.82,0.37,,,,,skipped: cash tied up in open trades
+2026-11-03,10:15,KRP,16.39,0.12,,,,,skipped: cash tied up in open trades
+2026-11-03,10:15,MWH,25.88,0.27,,,,,skipped: cash tied up in open trades
+2026-11-03,10:15,PBR,21.01,0.05,,,,,skipped: cash tied up in open trades
+2026-11-03,10:15,RDW,8.21,0.18,,,,,skipped: cash tied up in open trades
+2026-11-03,10:15,RKLB,54.55,0.65,,,,,skipped: cash tied up in open trades
+2026-11-03,10:15,TEVA,42.85,0.19,,,,,skipped: cash tied up in open trades
+2026-11-03,10:15,TTI,6.05,0.92,,,,,skipped: cash tied up in open trades
+2026-11-03,10:20,FPS,26.72,0.64,,,,,skipped: cash tied up in open trades
+2026-11-03,10:20,LPTH,8.07,0.43,,,,,skipped: cash tied up in open trades
+2026-11-03,10:20,MAZE,31.2,0.48,,,,,skipped: cash tied up in open trades
+2026-11-03,10:20,NTNX,65.54,0.21,,,,,skipped: cash tied up in open trades
+2026-11-03,10:20,PL,13.52,0.26,,,,,skipped: cash tied up in open trades
+2026-11-03,10:20,QURE,23.64,0.42,,,,,skipped: cash tied up in open trades
+2026-11-03,10:20,TBBB,60.42,0.69,,,,,skipped: cash tied up in open trades
+2026-11-03,10:20,TNGX,22.91,1.48,,,,,skipped: cash tied up in open trades
+2026-11-03,10:25,ELS,60.38,0.22,,,,,skipped: cash tied up in open trades
+2026-11-03,10:25,EQT,55.44,0.13,,,,,skipped: cash tied up in open trades
+2026-11-03,10:25,G,40.19,0.31,,,,,skipped: cash tied up in open trades
+2026-11-03,10:25,GXO,52.86,0.36,,,,,skipped: cash tied up in open trades
+2026-11-03,10:25,HOG,33.26,0.15,,,,,skipped: cash tied up in open trades
+2026-11-03,10:25,JHX,27.8,0.42,,,,,skipped: cash tied up in open trades
+2026-11-03,10:25,OPLN,39.66,0.06,,,,,skipped: cash tied up in open trades
+2026-11-03,10:25,RRC,55.08,0.15,,,,,skipped: cash tied up in open trades
+2026-11-03,10:25,SSL,15.98,0.03,,,,,skipped: cash tied up in open trades
+2026-11-03,10:25,TREX,51.16,0.41,,,,,skipped: cash tied up in open trades
+2026-11-03,10:30,ACHC,30.25,0.03,,,,,skipped: cash tied up in open trades
+2026-11-03,10:30,AR,41.06,0.11,,,,,skipped: cash tied up in open trades
+2026-11-03,10:30,EPD,37.91,0.13,,,,,skipped: cash tied up in open trades
+2026-11-03,10:30,FIGR,22.15,0.09,,,,,skipped: cash tied up in open trades
+2026-11-03,10:30,MD,30.62,0.23,,,,,skipped: cash tied up in open trades
+2026-11-03,10:30,ROL,37.04,0.23,,,,,skipped: cash tied up in open trades
+2026-11-03,10:30,SOLS,60.83,0.22,,,,,skipped: cash tied up in open trades
+2026-11-03,10:35,CART,57.72,0.03,,,,,skipped: cash tied up in open trades
+2026-11-03,10:35,SGML,5.68,0.89,,,,,skipped: cash tied up in open trades
+2026-11-03,10:35,TRMB,65.47,0.04,,,,,skipped: cash tied up in open trades
+2026-11-03,10:40,BSY,42.04,0.3,,,,,skipped: cash tied up in open trades
+2026-11-03,10:40,BUSE,29.16,0.03,,,,,skipped: cash tied up in open trades
+2026-11-03,10:40,CELH,29.81,0.04,,,,,skipped: cash tied up in open trades
+2026-11-03,10:40,CURB,29.16,0.28,,,,,skipped: cash tied up in open trades
+2026-11-03,10:40,ERO,29.57,0.07,,,,,skipped: cash tied up in open trades
+2026-11-03,10:40,FISV,56.81,0.02,,,,,skipped: cash tied up in open trades
+2026-11-03,10:40,FRPT,68.78,0.26,,,,,skipped: cash tied up in open trades
+2026-11-03,10:40,HOMB,30.44,0.03,,,,,skipped: cash tied up in open trades
+2026-11-03,10:40,KEY,21.52,0.09,,,,,skipped: cash tied up in open trades
+2026-11-03,10:40,LEGN,21.59,0.05,,,,,skipped: cash tied up in open trades
+2026-11-03,10:40,TMDX,68.14,0.63,,,,,skipped: cash tied up in open trades
+2026-11-03,10:40,VNOM,45.44,0.14,,,,,skipped: cash tied up in open trades
+2026-11-03,10:45,BAM,51.79,0.21,,,,,skipped: cash tied up in open trades
+2026-11-03,10:45,BN,41.66,0.11,,,,,skipped: cash tied up in open trades
+2026-11-03,10:45,EIX,59.73,0.02,,,,,skipped: cash tied up in open trades
+2026-11-03,10:45,KNX,62.38,0.1,,,,,skipped: cash tied up in open trades
+2026-11-03,10:45,MDLZ,65.89,0.04,,,,,skipped: cash tied up in open trades
+2026-11-03,10:45,XENE,38.83,0.15,,,,,skipped: cash tied up in open trades
+2026-11-03,10:50,ASST,21.5,0.21,0.148,0.2978,0.5342,0.006,sizing refused
+2026-11-03,10:50,EEFT,66.44,0.08,,,,,skipped: cash tied up in open trades
+2026-11-03,10:50,FIG,21.84,0.71,0.028,0.0797,0.3557,0.11,sizing refused
+2026-11-03,10:50,JBIO,14.76,0.17,,,,,time machine failed
+2026-11-03,10:50,VFC,19.58,0.09,0.218,0.3748,0.5653,0.293,traded
+2026-11-03,10:55,AROC,31.79,0.11,,,,,skipped: cash tied up in open trades
+2026-11-03,10:55,CMS,70.5,0.08,,,,,skipped: cash tied up in open trades
+2026-11-03,10:55,FOUR,42.38,0.06,,,,,skipped: cash tied up in open trades
+2026-11-03,10:55,PII,63.75,0.02,,,,,skipped: cash tied up in open trades
+2026-11-03,10:55,VITL,9.44,0.43,0.011,0.0055,0.1393,0.097,traded
+2026-11-03,10:55,VZ,45.13,0.07,,,,,skipped: cash tied up in open trades
+2026-11-03,10:55,WAY,27.37,0.15,,,,,skipped: cash tied up in open trades
+2026-11-03,11:00,DBX,35.42,0.06,,,,,skipped: cash tied up in open trades
+2026-11-03,11:00,MDLN,33.72,0.01,,,,,skipped: cash tied up in open trades
+2026-11-03,11:00,SLB,52.65,0.08,,,,,skipped: cash tied up in open trades
+2026-11-03,11:00,SOFI,16.82,0.06,-0.17,0.1117,0.5254,0.279,skipped: expected R not positive
+2026-11-03,11:05,CTSH,63.82,0.09,0.041,0.1602,0.4496,-0.061,skipped: history not positive
+2026-11-03,11:05,LGN,38.98,0.12,-0.129,0.0477,0.3977,0.018,skipped: expected R not positive
+2026-11-03,11:05,MEI,15.75,0.06,-0.066,0.2094,0.5652,0.312,skipped: expected R not positive
+2026-11-03,11:05,RPD,15.05,0.3,0.169,0.1325,0.3505,0.159,traded
+2026-11-03,11:05,SEI,70.92,0.07,0.005,0.0698,0.3672,-0.115,skipped: history not positive
+2026-11-03,11:10,SAIL,19.43,0.05,0.05,0.0977,0.3496,-0.05,skipped: history not positive
+2026-11-03,11:15,CMCO,18.52,0.11,,,,,time machine failed
+2026-11-03,11:25,SARO,25.49,0.04,0.001,0.0277,0.252,0.387,traded
+2026-11-03,11:30,RYZ,33.45,0.18,,,,,time machine failed
+2026-11-03,11:35,WPC,64.52,0.03,,,,,skipped: cash tied up in open trades
+2026-11-03,12:00,CLMT,47.41,0.23,-0.158,0.2129,0.6585,-0.076,skipped: expected R not positive
+2026-11-03,12:00,DK,72.04,0.03,,,,,skipped: cash tied up in open trades
+2026-11-03,12:00,DT,49.25,0.1,0.01,0.0,0.001,0.112,traded
+2026-11-03,12:05,UPST,21.7,0.35,,,,,skipped: cash tied up in open trades
+2026-11-03,12:10,OUST,30.15,0.43,,,,,skipped: cash tied up in open trades
+2026-11-03,12:40,RCUS,18.83,0.43,,,,,skipped: cash tied up in open trades
+2026-11-03,12:50,SUN,70.56,0.56,,,,,skipped: cash tied up in open trades
+2026-11-03,13:00,CMBT,17.42,0.06,-0.021,0.0585,0.3377,-0.308,skipped: expected R not positive
+2026-11-03,13:05,FPI,8.74,0.06,,,,,time machine failed
+2026-11-03,13:05,VERA,30.99,0.05,-0.009,0.0482,0.3411,0.16,skipped: expected R not positive
+2026-11-03,13:10,BHC,8.11,0.05,-0.089,0.0384,0.3545,0.093,skipped: expected R not positive
+2026-11-03,13:10,YOU,47.9,0.04,,,,,skipped: cash tied up in open trades
+2026-11-03,13:10,YPF,44.19,0.08,,,,,skipped: cash tied up in open trades
+2026-11-03,13:15,RPRX,67.38,0.01,,,,,skipped: cash tied up in open trades
+2026-11-03,13:20,OSW,30.19,0.13,,,,,time machine failed
+2026-11-03,13:20,TVTX,47.9,0.32,,,,,skipped: cash tied up in open trades
+2026-11-03,13:25,ADEA,17.99,0.28,-0.039,0.0,0.0141,-0.12,skipped: expected R not positive
+2026-11-03,13:40,EPR,59.62,0.04,,,,,skipped: cash tied up in open trades
+2026-11-03,13:40,NFLX,63.05,0.05,,,,,skipped: cash tied up in open trades
+2026-11-03,13:45,RVLV,22.46,0.72,-0.08,0.0008,0.1218,-0.02,skipped: expected R not positive
+2026-11-03,14:25,PURR,10.44,0.72,0.036,0.0324,0.1555,0.216,traded
+2026-11-03,14:35,BMRN,55.71,0.16,,,,,skipped: 10 trades already
+2026-11-03,14:45,RDAC,11.56,2.35,,,,,skipped: 10 trades already
+2026-11-03,14:45,TXG,66.13,0.24,,,,,skipped: 10 trades already
+2026-11-03,15:00,CAPR,7.62,0.13,,,,,skipped: 10 trades already
+2026-11-03,15:10,FRO,52.72,0.24,,,,,skipped: 10 trades already
+2026-11-03,15:30,EQNR,45.68,0.04,,,,,skipped: 10 trades already
+2026-11-04,09:50,AAUC,20.23,0.15,,,,,time machine failed
+2026-11-04,09:50,ASST,22.45,1.38,0.126,0.0472,0.2169,-0.003,skipped: history not positive
+2026-11-04,09:50,ASX,38.95,0.03,0.13,0.0517,0.2581,0.304,sizing refused
+2026-11-04,09:50,AUGO,71.15,0.23,0.009,0.1404,0.4571,0.12,sizing refused
+2026-11-04,09:50,AVAH,13.93,1.02,0.067,0.0608,0.309,0.018,sizing refused
+2026-11-04,09:50,BMNR,21.42,0.12,0.144,0.2012,0.4188,0.096,traded
+2026-11-04,09:50,BN,42.38,0.02,-0.011,0.1268,0.4519,-0.146,skipped: expected R not positive
+2026-11-04,09:50,BOX,43.92,0.01,0.003,0.299,0.6325,0.172,sizing refused
+2026-11-04,09:50,BVN,28.43,0.37,-0.133,0.1674,0.5893,-0.399,skipped: expected R not positive
+2026-11-04,09:50,CARG,36.35,0.36,-0.035,0.0105,0.2206,-0.16,skipped: expected R not positive
+2026-11-04,09:50,CNC,72.8,0.37,-0.064,0.0224,0.2903,-0.183,skipped: expected R not positive
+2026-11-04,09:50,CON,41.23,0.02,0.039,0.3202,0.6249,-0.169,skipped: history not positive
+2026-11-04,09:50,CRSP,52.2,0.25,0.067,0.3292,0.6165,0.012,sizing refused
+2026-11-04,09:50,CRSR,13.05,1.12,0.037,0.0117,0.1798,-0.349,skipped: history not positive
+2026-11-04,09:50,DXYZ,27.42,0.29,0.241,0.2297,0.4046,0.248,traded
+2026-11-04,09:50,ENOV,23.8,1.22,0.015,0.0038,0.1023,-0.032,skipped: history not positive
+2026-11-04,09:50,FMS,22.84,0.09,-0.08,0.2067,0.5853,-0.082,skipped: expected R not positive
+2026-11-04,09:50,FOXA,68.51,0.12,0.085,0.2718,0.5472,0.173,sizing refused
+2026-11-04,09:50,FRSH,14.19,0.64,0.057,0.0,0.0027,0.156,sizing refused
+2026-11-04,09:50,GO,13.57,0.37,0.046,0.0444,0.2455,-0.013,skipped: history not positive
+2026-11-04,09:50,GTLB,52.99,0.04,0.053,0.1529,0.448,-0.025,skipped: history not positive
+2026-11-04,09:50,HIMS,28.5,0.78,-0.015,0.002,0.0955,0.248,skipped: expected R not positive
+2026-11-04,09:50,HTFL,56.31,0.21,0.072,0.2825,0.5646,0.311,sizing refused
+2026-11-04,09:50,KD,16.5,0.86,0.012,0.0,0.0075,-0.115,skipped: history not positive
+2026-11-04,09:50,LPG,51.71,0.04,0.148,0.3459,0.58,-0.131,skipped: history not positive
+2026-11-04,09:50,LTH,45.42,0.02,-0.083,0.1074,0.4602,-0.23,skipped: expected R not positive
+2026-11-04,09:50,LYFT,18.13,0.12,0.062,0.0021,0.1047,-0.011,skipped: history not positive
+2026-11-04,09:50,MQ,18.64,0.22,0.041,0.0,0.0069,-0.198,skipped: history not positive
+2026-11-04,09:50,MTCH,40.54,0.1,0.049,0.011,0.1571,0.175,sizing refused
+2026-11-04,09:50,NAVN,26.27,0.42,-0.002,0.0088,0.1871,-0.292,skipped: expected R not positive
+2026-11-04,09:50,NFLX,65.3,0.09,-0.094,0.0757,0.4295,0.214,skipped: expected R not positive
+2026-11-04,09:50,NHP,16.09,0.75,,,,,time machine failed
+2026-11-04,09:50,NVGS,20.98,0.21,,,,,time machine failed
+2026-11-04,09:50,NWS,33.03,0.06,0.047,0.1465,0.4505,-0.075,skipped: history not positive
+2026-11-04,09:50,PICS,7.32,0.27,,,,,time machine failed
+2026-11-04,09:50,PLAY,9.02,0.61,0.042,0.0459,0.2867,-0.133,skipped: history not positive
+2026-11-04,09:50,PRME,4.94,0.03,0.14,0.3451,0.5861,0.401,traded
+2026-11-04,09:50,PTRN,17.84,0.03,-0.006,0.1842,0.528,0.11,skipped: expected R not positive
+2026-11-04,09:50,PZZA,19.81,0.43,-0.062,0.0162,0.2689,-0.193,skipped: expected R not positive
+2026-11-04,09:50,RPD,15.65,1.95,0.11,0.0261,0.1963,0.122,sizing refused
+2026-11-04,09:50,SAIL,19.26,0.16,-0.07,0.2102,0.5805,-0.077,skipped: expected R not positive
+2026-11-04,09:50,SFD,19.12,0.24,-0.224,0.0288,0.4196,-0.352,skipped: expected R not positive
+2026-11-04,09:50,SIRI,32.11,0.17,-0.039,0.0336,0.3059,0.113,skipped: expected R not positive
+2026-11-04,09:50,SMMT,16.39,0.15,-0.041,0.2692,0.6245,0.096,skipped: expected R not positive
+2026-11-04,09:50,SNDA,35.6,0.31,,,,,time machine failed
+2026-11-04,09:50,STGW,11.26,0.33,0.227,0.2808,0.4734,0.035,traded
+2026-11-04,09:50,TRIP,9.97,0.05,0.019,0.0684,0.3582,-0.284,skipped: history not positive
+2026-11-04,09:50,WAY,29.0,0.35,-0.018,0.0602,0.3601,-0.089,skipped: expected R not positive
+2026-11-04,09:50,WD,37.38,0.21,,,,,time machine failed
+2026-11-04,09:50,XNCR,31.68,0.64,0.048,0.2804,0.5846,0.007,sizing refused
+2026-11-04,09:50,YOU,60.65,0.44,0.015,0.0,0.0001,0.224,sizing refused
+2026-11-04,09:55,AMN,47.67,0.62,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,AVA,39.02,0.05,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,AXGN,51.1,0.2,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,BSP,46.51,0.23,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,BSY,42.87,0.05,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,CART,59.34,0.04,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,CNM,47.89,0.13,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,CPB,22.92,0.07,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,CRCT,8.04,0.88,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,CURB,29.77,0.1,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,FWDI,6.44,0.16,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,OFRM,9.89,0.33,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,PPLI,40.1,0.96,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,RBLX,47.56,0.05,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,REAL,13.57,0.26,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,REZI,20.47,0.1,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,ROL,38.6,0.16,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,SDGR,28.14,0.48,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,SHC,16.49,0.12,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,SMG,69.21,0.63,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,SQM,57.05,0.43,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,TTEK,39.97,0.01,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,UBER,69.49,0.67,,,,,skipped: cash tied up in open trades
+2026-11-04,09:55,VCEL,43.65,0.36,,,,,skipped: cash tied up in open trades
+2026-11-04,10:00,CBLL,27.57,0.35,,,,,skipped: cash tied up in open trades
+2026-11-04,10:00,CMCSA,24.65,0.16,,,,,skipped: cash tied up in open trades
+2026-11-04,10:00,CXT,61.28,0.5,,,,,skipped: cash tied up in open trades
+2026-11-04,10:00,DFIN,70.38,0.5,,,,,skipped: cash tied up in open trades
+2026-11-04,10:00,ENR,25.42,0.2,,,,,skipped: cash tied up in open trades
+2026-11-04,10:00,GEN,30.88,0.09,,,,,skipped: cash tied up in open trades
+2026-11-04,10:00,KDP,36.26,0.19,,,,,skipped: cash tied up in open trades
+2026-11-04,10:00,KR,68.87,0.09,,,,,skipped: cash tied up in open trades
+2026-11-04,10:00,NATL,47.3,0.02,,,,,skipped: cash tied up in open trades
+2026-11-04,10:00,PAR,19.11,0.24,-0.111,0.1308,0.5103,-0.35,skipped: expected R not positive
+2026-11-04,10:00,SIBN,25.16,0.62,,,,,skipped: cash tied up in open trades
+2026-11-04,10:00,SKM,32.13,0.03,,,,,skipped: cash tied up in open trades
+2026-11-04,10:00,ZETA,31.96,0.25,,,,,skipped: cash tied up in open trades
+2026-11-04,10:05,COCO,63.26,0.19,,,,,skipped: cash tied up in open trades
+2026-11-04,10:05,DOCS,34.07,0.29,,,,,skipped: cash tied up in open trades
+2026-11-04,10:05,EC,16.55,0.18,-0.053,0.1923,0.5466,0.036,skipped: expected R not positive
+2026-11-04,10:05,FISV,61.39,0.64,,,,,skipped: cash tied up in open trades
+2026-11-04,10:05,INOD,43.78,0.29,,,,,skipped: cash tied up in open trades
+2026-11-04,10:05,LIF,47.24,0.75,,,,,skipped: cash tied up in open trades
+2026-11-04,10:05,MMYT,50.47,0.19,,,,,skipped: cash tied up in open trades
+2026-11-04,10:05,PRCT,22.11,0.55,-0.06,0.0132,0.2234,0.262,skipped: expected R not positive
+2026-11-04,10:05,RCI,34.54,0.07,,,,,skipped: cash tied up in open trades
+2026-11-04,10:05,REYN,24.52,0.08,,,,,skipped: cash tied up in open trades
+2026-11-04,10:05,TREX,55.74,0.32,,,,,skipped: cash tied up in open trades
+2026-11-04,10:05,U,42.22,0.74,,,,,skipped: cash tied up in open trades
+2026-11-04,10:05,XP,15.14,0.03,0.156,0.3756,0.6061,0.175,traded
+2026-11-04,10:05,ZD,56.94,0.35,,,,,skipped: cash tied up in open trades
+2026-11-04,10:10,BVS,11.81,0.9,,,,,skipped: cash tied up in open trades
+2026-11-04,10:10,GLOB,48.6,0.21,,,,,skipped: cash tied up in open trades
+2026-11-04,10:10,HGTY,17.42,0.09,,,,,skipped: cash tied up in open trades
+2026-11-04,10:10,RKT,14.82,0.03,,,,,skipped: cash tied up in open trades
+2026-11-04,10:10,VECO,37.9,0.17,,,,,skipped: cash tied up in open trades
+2026-11-04,10:15,AGRO,9.54,0.32,,,,,skipped: cash tied up in open trades
+2026-11-04,10:15,CRTO,15.41,0.26,,,,,skipped: cash tied up in open trades
+2026-11-04,10:15,DLB,65.2,0.34,,,,,skipped: cash tied up in open trades
+2026-11-04,10:15,DOX,44.57,0.16,,,,,skipped: cash tied up in open trades
+2026-11-04,10:15,ETOR,23.25,0.04,,,,,skipped: cash tied up in open trades
+2026-11-04,10:15,FIVN,37.64,0.59,,,,,skipped: cash tied up in open trades
+2026-11-04,10:15,NKE,40.33,0.02,,,,,skipped: cash tied up in open trades
+2026-11-04,10:15,REX,40.25,1.04,,,,,skipped: cash tied up in open trades
+2026-11-04,10:15,RGTI,11.51,0.48,,,,,skipped: cash tied up in open trades
+2026-11-04,10:15,TOST,35.22,0.28,,,,,skipped: cash tied up in open trades
+2026-11-04,10:15,VLRS,7.28,0.62,0.041,0.0757,0.3087,0.083,traded
+2026-11-04,10:20,ABTC,6.92,0.04,,,,,skipped: cash tied up in open trades
+2026-11-04,10:20,ASO,65.69,0.25,,,,,skipped: cash tied up in open trades
+2026-11-04,10:20,CTSH,65.51,0.05,,,,,skipped: cash tied up in open trades
+2026-11-04,10:20,EMA,50.61,0.02,,,,,skipped: cash tied up in open trades
+2026-11-04,10:20,PCOR,72.1,0.03,,,,,skipped: cash tied up in open trades
+2026-11-04,10:20,PHG,30.36,0.16,,,,,skipped: cash tied up in open trades
+2026-11-04,10:20,RELX,40.9,0.05,,,,,skipped: cash tied up in open trades
+2026-11-04,10:20,VZ,46.0,0.02,,,,,skipped: cash tied up in open trades
+2026-11-04,10:25,EFOR,36.17,0.07,,,,,skipped: cash tied up in open trades
+2026-11-04,10:25,MIAX,35.15,0.42,,,,,skipped: cash tied up in open trades
+2026-11-04,10:30,SSRM,27.18,0.2,,,,,skipped: cash tied up in open trades
+2026-11-04,10:30,TBBB,63.79,0.08,,,,,skipped: cash tied up in open trades
+2026-11-04,10:35,AEO,20.87,0.35,,,,,skipped: cash tied up in open trades
+2026-11-04,10:35,BTI,62.29,0.14,,,,,skipped: cash tied up in open trades
+2026-11-04,10:35,DEI,10.41,0.1,-0.124,0.0023,0.1926,-0.306,skipped: expected R not positive
+2026-11-04,10:35,IMAX,51.78,0.27,,,,,skipped: cash tied up in open trades
+2026-11-04,10:35,MDLZ,66.86,0.25,,,,,skipped: cash tied up in open trades
+2026-11-04,10:35,MKC,50.23,0.11,,,,,skipped: cash tied up in open trades
+2026-11-04,10:35,MNST,48.29,0.17,,,,,skipped: cash tied up in open trades
+2026-11-04,10:35,T,21.98,0.11,,,,,skipped: cash tied up in open trades
+2026-11-04,10:35,UL,66.74,0.04,,,,,skipped: cash tied up in open trades
+2026-11-04,10:40,AMCR,49.04,0.14,,,,,skipped: cash tied up in open trades
+2026-11-04,10:40,G,40.95,0.07,,,,,skipped: cash tied up in open trades
+2026-11-04,10:40,GPK,11.89,0.13,-0.146,0.0248,0.3517,-0.408,skipped: expected R not positive
+2026-11-04,10:40,HOG,34.66,0.03,,,,,skipped: cash tied up in open trades
+2026-11-04,10:40,UNFI,47.43,0.02,,,,,skipped: cash tied up in open trades
+2026-11-04,10:45,BXP,64.92,0.17,,,,,skipped: cash tied up in open trades
+2026-11-04,10:45,CALM,68.52,0.03,,,,,skipped: cash tied up in open trades
+2026-11-04,10:45,ELS,61.54,0.07,,,,,skipped: cash tied up in open trades
+2026-11-04,10:45,HTO,61.47,0.07,,,,,skipped: cash tied up in open trades
+2026-11-04,10:45,LVS,40.4,0.66,,,,,skipped: cash tied up in open trades
+2026-11-04,10:45,MGA,65.0,0.02,,,,,skipped: cash tied up in open trades
+2026-11-04,10:45,OGE,49.84,0.02,,,,,skipped: cash tied up in open trades
+2026-11-04,10:45,PAY,33.31,0.38,,,,,skipped: cash tied up in open trades
+2026-11-04,10:45,SON,50.65,0.3,,,,,skipped: cash tied up in open trades
+2026-11-04,10:50,AAP,50.05,0.04,,,,,skipped: cash tied up in open trades
+2026-11-04,10:50,BILL,52.0,0.02,,,,,skipped: cash tied up in open trades
+2026-11-04,10:50,CAVA,63.03,0.01,,,,,skipped: cash tied up in open trades
+2026-11-04,10:50,CPRT,32.54,0.25,,,,,skipped: cash tied up in open trades
+2026-11-04,10:50,ES,70.45,0.04,,,,,skipped: cash tied up in open trades
+2026-11-04,10:50,EXC,45.82,0.11,,,,,skipped: cash tied up in open trades
+2026-11-04,10:50,FTS,60.28,0.07,,,,,skipped: cash tied up in open trades
+2026-11-04,10:50,GDYN,13.62,0.29,0.423,0.3619,0.4191,-0.008,skipped: history not positive
+2026-11-04,10:50,GLBE,44.06,0.25,,,,,skipped: cash tied up in open trades
+2026-11-04,10:50,LNT,72.74,0.11,,,,,skipped: cash tied up in open trades
+2026-11-04,10:50,NJR,54.46,0.23,,,,,skipped: cash tied up in open trades
+2026-11-04,10:50,O,58.52,0.05,,,,,skipped: cash tied up in open trades
+2026-11-04,10:50,OXLC,6.64,0.23,-0.295,0.0535,0.5492,-0.301,skipped: expected R not positive
+2026-11-04,10:50,WY,21.59,0.28,,,,,skipped: cash tied up in open trades
+2026-11-04,10:50,XRAY,10.69,0.14,-0.061,0.0001,0.0618,-0.008,skipped: expected R not positive
+2026-11-04,10:50,Z,34.22,0.35,,,,,skipped: cash tied up in open trades
+2026-11-04,10:55,ARE,44.21,0.03,-0.004,0.099,0.4142,0.02,skipped: expected R not positive
+2026-11-04,10:55,BAC,51.38,0.03,-0.199,0.0893,0.5159,-0.05,skipped: expected R not positive
+2026-11-04,10:55,CMS,70.74,0.26,,,,,skipped: cash tied up in open trades
+2026-11-04,10:55,FAF,67.35,0.0,-0.142,0.066,0.4166,-0.369,skipped: expected R not positive
+2026-11-04,10:55,JEF,50.81,0.03,-0.039,0.1216,0.4683,-0.209,skipped: expected R not positive
+2026-11-04,10:55,RLI,68.23,0.16,0.121,0.1516,0.3811,-0.08,skipped: history not positive
+2026-11-04,10:55,UBS,50.39,0.09,-0.075,0.1477,0.5255,-0.214,skipped: expected R not positive
+2026-11-04,11:00,AOS,66.9,0.08,0.07,0.0074,0.1155,-0.079,skipped: history not positive
+2026-11-04,11:00,ATEC,8.03,0.56,-0.017,0.0004,0.0621,0.001,skipped: expected R not positive
+2026-11-04,11:00,BBVA,25.48,0.12,-0.06,0.1952,0.5712,-0.068,skipped: expected R not positive
+2026-11-04,11:00,CHWY,23.62,0.23,-0.026,0.0031,0.1326,-0.069,skipped: expected R not positive
+2026-11-04,11:00,CTO,20.47,0.34,,,,,time machine failed
+2026-11-04,11:00,EFC,11.77,0.04,-0.199,0.0061,0.2808,-0.388,skipped: expected R not positive
+2026-11-04,11:00,NI,44.83,0.32,-0.043,0.0035,0.1355,0.059,skipped: expected R not positive
+2026-11-04,11:00,NLY,18.95,0.24,-0.217,0.0048,0.2888,-0.373,skipped: expected R not positive
+2026-11-04,11:00,RTO,24.3,0.14,0.015,0.0843,0.3467,-0.213,skipped: history not positive
+2026-11-04,11:00,VFC,20.79,0.07,0.266,0.2395,0.4109,0.252,traded
+2026-11-04,11:00,ZG,34.73,0.35,0.023,0.0103,0.1655,0.273,sizing refused
+2026-11-04,11:05,ATRC,63.87,0.13,0.006,0.0,0.0112,-0.12,skipped: history not positive
+2026-11-04,11:05,CXW,30.5,0.13,-0.089,0.0093,0.2325,-0.228,skipped: expected R not positive
+2026-11-04,11:05,D,69.68,0.08,-0.047,0.002,0.1277,-0.004,skipped: expected R not positive
+2026-11-04,11:05,KRG,25.95,0.04,-0.037,0.0291,0.3019,0.144,skipped: expected R not positive
+2026-11-04,11:05,MFA,6.72,0.37,-0.138,0.0,0.072,-0.242,skipped: expected R not positive
+2026-11-04,11:05,NNN,42.16,0.09,-0.059,0.0012,0.1512,-0.131,skipped: expected R not positive
+2026-11-04,11:10,RELY,27.2,0.02,0.113,0.1096,0.3297,0.008,traded
+2026-11-04,11:10,TEVA,42.09,0.18,0.031,0.0992,0.3752,0.01,sizing refused
+2026-11-04,11:15,DYN,18.84,0.86,-0.011,0.0514,0.3361,-0.204,skipped: expected R not positive
+2026-11-04,11:30,AHR,55.76,0.05,,,,,skipped: cash tied up in open trades
+2026-11-04,11:35,EEFT,70.07,0.11,,,,,skipped: cash tied up in open trades
+2026-11-04,11:35,OHI,48.92,0.01,,,,,skipped: cash tied up in open trades
+2026-11-04,11:40,AGI,29.0,0.17,,,,,skipped: cash tied up in open trades
+2026-11-04,11:40,APAM,40.04,0.35,,,,,skipped: cash tied up in open trades
+2026-11-04,11:40,BAX,26.96,0.02,,,,,skipped: cash tied up in open trades
+2026-11-04,11:40,GSK,51.03,0.06,,,,,skipped: cash tied up in open trades
+2026-11-04,11:40,HASI,40.74,0.28,,,,,skipped: cash tied up in open trades
+2026-11-04,11:40,LTM,47.01,0.06,,,,,skipped: cash tied up in open trades
+2026-11-04,11:40,PNR,72.37,0.21,,,,,skipped: cash tied up in open trades
+2026-11-04,11:40,PRVA,22.44,0.13,,,,,skipped: cash tied up in open trades
+2026-11-04,11:40,SLGN,42.9,0.18,,,,,skipped: cash tied up in open trades
+2026-11-04,11:40,UAA,5.66,0.18,-0.021,0.0285,0.2707,-0.086,skipped: expected R not positive
+2026-11-04,11:45,CTGO,15.06,0.8,-0.058,0.0161,0.2589,-0.176,skipped: expected R not positive
+2026-11-04,11:45,GOLD,41.19,0.49,,,,,skipped: cash tied up in open trades
+2026-11-04,11:45,INSP,67.07,0.42,,,,,skipped: cash tied up in open trades
+2026-11-04,11:45,MC,62.9,0.02,,,,,skipped: cash tied up in open trades
+2026-11-04,11:45,NCLH,18.19,0.14,-0.108,0.0731,0.4212,-0.383,skipped: expected R not positive
+2026-11-04,11:45,ONON,38.47,0.04,,,,,skipped: cash tied up in open trades
+2026-11-04,11:45,PAAS,40.94,0.27,,,,,skipped: cash tied up in open trades
+2026-11-04,11:45,SARO,25.87,0.43,,,,,skipped: cash tied up in open trades
+2026-11-04,11:45,SKE,28.87,0.38,,,,,skipped: cash tied up in open trades
+2026-11-04,11:45,WLTH,10.96,0.05,-0.124,0.0392,0.3707,0.102,skipped: expected R not positive
+2026-11-04,11:50,AAL,13.72,0.59,-0.087,0.0106,0.2381,0.027,skipped: expected R not positive
+2026-11-04,11:50,ACM,67.6,0.2,0.114,0.1836,0.4197,0.12,traded
+2026-11-04,11:50,CCL,30.93,1.09,-0.103,0.0007,0.087,-0.077,skipped: expected R not positive
+2026-11-04,11:50,COLM,72.54,0.09,,,,,time machine failed
+2026-11-04,11:50,FIGR,23.37,0.33,-0.151,0.0168,0.3088,-0.175,skipped: expected R not positive
+2026-11-04,11:50,FOUR,44.35,0.29,-0.086,0.0238,0.269,-0.386,skipped: expected R not positive
+2026-11-04,11:50,FTV,67.93,0.03,0.043,0.2152,0.5217,-0.024,skipped: history not positive
+2026-11-04,11:50,LTC,46.74,0.11,-0.067,0.0017,0.1473,0.319,skipped: expected R not positive
+2026-11-04,11:50,QXO,12.57,0.2,0.027,0.1051,0.3911,0.079,traded
+2026-11-04,11:50,STEP,47.38,0.28,0.005,0.0204,0.1969,0.028,skipped (a better one at the same time went first): 10 trades already
+2026-11-04,11:55,ARIS,15.61,0.16,,,,,skipped: 10 trades already
+2026-11-04,11:55,CARR,57.13,0.08,,,,,skipped: 10 trades already
+2026-11-04,11:55,CDE,14.52,0.07,,,,,skipped: 10 trades already
+2026-11-04,11:55,CG,42.76,0.09,,,,,skipped: 10 trades already
+2026-11-04,11:55,HYMC,17.71,0.11,,,,,skipped: 10 trades already
+2026-11-04,11:55,IVZ,29.11,0.07,,,,,skipped: 10 trades already
+2026-11-04,11:55,RLAY,17.82,0.22,,,,,skipped: 10 trades already
+2026-11-04,11:55,SHOO,46.26,0.16,,,,,skipped: 10 trades already
+2026-11-04,11:55,ULCC,7.18,0.35,,,,,skipped: 10 trades already
+2026-11-04,12:00,AG,15.24,0.03,,,,,skipped: 10 trades already
+2026-11-04,12:00,PPTA,17.56,0.03,,,,,skipped: 10 trades already
+2026-11-04,12:05,FMC,6.43,0.55,,,,,skipped: 10 trades already
+2026-11-04,12:05,RYAN,47.44,0.02,,,,,skipped: 10 trades already
+2026-11-04,12:10,HG,37.22,0.05,,,,,skipped: 10 trades already
+2026-11-04,12:15,AVNT,48.91,0.09,,,,,skipped: 10 trades already
+2026-11-04,12:15,OLN,18.09,0.55,,,,,skipped: 10 trades already
+2026-11-04,12:20,BLDR,69.71,0.26,,,,,skipped: 10 trades already
+2026-11-04,12:20,MLYS,16.5,0.15,,,,,skipped: 10 trades already
+2026-11-04,12:20,TPG,50.81,0.12,,,,,skipped: 10 trades already
+2026-11-04,12:20,UTI,22.51,0.4,,,,,skipped: 10 trades already
+2026-11-04,12:20,VKTX,27.48,0.17,,,,,skipped: 10 trades already
+2026-11-04,12:25,BTSG,70.75,0.28,,,,,skipped: 10 trades already
+2026-11-04,12:25,PII,67.2,0.01,,,,,skipped: 10 trades already
+2026-11-04,12:30,ELVN,45.76,0.04,,,,,skipped: 10 trades already
+2026-11-04,12:30,PCVX,63.38,0.21,,,,,skipped: 10 trades already
+2026-11-04,12:30,SHAZ,26.17,0.75,,,,,skipped: 10 trades already
+2026-11-04,12:30,VNO,35.34,0.13,,,,,skipped: 10 trades already
+2026-11-04,12:35,AEVA,9.45,0.37,,,,,skipped: 10 trades already
+2026-11-04,12:40,GXO,56.06,0.11,,,,,skipped: 10 trades already
+2026-11-04,12:40,INVA,21.51,0.21,,,,,skipped: 10 trades already
+2026-11-04,12:50,SGI,69.87,0.01,,,,,skipped: 10 trades already
+2026-11-04,13:00,ARQT,33.15,0.12,,,,,skipped: 10 trades already
+2026-11-04,13:05,ARWR,61.79,0.07,,,,,skipped: 10 trades already
+2026-11-04,13:10,CHYM,30.2,0.07,,,,,skipped: 10 trades already
+2026-11-04,13:10,HIW,31.91,0.11,,,,,skipped: 10 trades already
+2026-11-04,13:10,NESR,20.53,0.29,,,,,skipped: 10 trades already
+2026-11-04,13:15,CMPS,8.81,0.11,,,,,skipped: 10 trades already
+2026-11-04,13:15,FRPT,70.22,0.52,,,,,skipped: 10 trades already
+2026-11-04,13:20,ATAT,34.73,0.1,,,,,skipped: 10 trades already
+2026-11-04,13:40,GBX,43.4,0.03,,,,,skipped: 10 trades already
+2026-11-04,13:40,SMA,37.82,0.04,,,,,skipped: 10 trades already
+2026-11-04,13:45,LOAR,69.66,0.01,,,,,skipped: 10 trades already
+2026-11-04,14:00,AS,32.18,0.07,,,,,skipped: 10 trades already
+2026-11-04,14:00,RAL,71.68,0.39,,,,,skipped: 10 trades already
+2026-11-04,14:10,ACAD,21.38,0.42,,,,,skipped: 10 trades already
+2026-11-04,14:10,WT,20.12,0.02,,,,,skipped: 10 trades already
+2026-11-04,14:20,ELAN,25.44,0.16,,,,,skipped: 10 trades already
+2026-11-04,14:25,TTAM,14.36,0.03,,,,,skipped: 10 trades already
+2026-11-04,14:30,TRAX,50.13,0.88,,,,,skipped: 10 trades already
+2026-11-04,14:40,DIN,36.15,0.03,,,,,skipped: 10 trades already
+2026-11-04,14:55,OUST,33.37,0.12,,,,,skipped: 10 trades already
+2026-11-04,15:00,WTRG,45.06,0.03,,,,,skipped: 10 trades already
+2026-11-04,15:25,RPRX,67.33,0.22,,,,,skipped: 10 trades already
+2026-11-04,15:30,BMRN,57.29,0.12,,,,,skipped: 10 trades already
+2026-11-04,15:30,STAG,37.77,0.03,,,,,skipped: 10 trades already
+2026-11-04,15:30,TGLS,42.2,0.21,,,,,skipped: 10 trades already

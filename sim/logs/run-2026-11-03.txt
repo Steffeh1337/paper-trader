@@ -1,49 +1,28 @@
-2026-11-03  account $230.70  max loss/trade $11.54  daily risk cap $23.07
-  ... and 11 more in the watchlist (--show N for more).
-61 breakouts at 09:50; 44 cheap enough for at least one share.
-  MSTR   expected +0.26R  target first 38.6%  stop first 55.0%  history +0.04R
-  BMNR   expected +0.18R  target first 28.3%  stop first 49.4%  history +0.09R
-  U      expected +0.17R  target first 30.3%  stop first 51.9%  history -0.04R
-  EMBJ   expected +0.10R  target first 31.1%  stop first 57.3%  history +0.04R
-  SIMO   expected +0.06R  target first  9.4%  stop first 37.4%  history +0.23R
-  PBR.A  expected +0.05R  target first 21.6%  stop first 51.6%  history -0.21R
-  BKH    expected +0.04R  target first 34.8%  stop first 65.1%  history -0.19R
-  SMTC   expected +0.04R  target first 12.1%  stop first 41.1%  history -0.14R
-  HUT    expected +0.03R  target first  1.6%  stop first 17.9%  history +0.05R
-  CLSK   expected +0.03R  target first  7.6%  stop first 34.6%  history +0.14R
-  IBKR   expected +0.03R  target first 20.3%  stop first 50.5%  history +0.04R
-  INTC   expected +0.02R  target first 22.3%  stop first 53.9%  history +0.07R
-  RUN    expected +0.02R  target first 12.0%  stop first 40.3%  history +0.11R
-  ENPH   expected +0.02R  target first 14.4%  stop first 47.8%  history +0.02R
-  MARA   expected +0.02R  target first 19.7%  stop first 50.3%  history +0.40R
-  NBIS   expected +0.02R  target first 16.1%  stop first 47.3%  history +0.21R
-  RIOT   expected +0.01R  target first  3.5%  stop first 27.2%  history +0.14R
-  DOCN   expected -0.00R  target first  9.4%  stop first 39.4%  history -0.07R
-  LDOS   expected -0.00R  target first  0.0%  stop first  0.2%  history -0.20R
-  HPE    expected -0.01R  target first  3.5%  stop first 29.0%  history +0.06R
-  COIN   expected -0.01R  target first 14.4%  stop first 46.4%  history -0.03R
-  POWL   expected -0.01R  target first 27.3%  stop first 60.9%  history +0.24R
-  ROKU   expected -0.01R  target first  0.0%  stop first  3.7%  history +0.15R
-  VLTO   expected -0.01R  target first  9.5%  stop first 40.6%  history -0.30R
-  FOXA   expected -0.02R  target first  0.1%  stop first  9.5%  history +0.14R
-  CIFR   expected -0.03R  target first  4.1%  stop first 30.2%  history -0.11R
-  YUMC   expected -0.03R  target first  0.0%  stop first  2.2%  history -0.04R
-  GLXY   expected -0.03R  target first  7.7%  stop first 36.9%  history +0.28R
-  AXTI   expected -0.04R  target first  5.7%  stop first 33.9%  history +0.11R
-  CRWV   expected -0.06R  target first  9.7%  stop first 42.2%  history +0.17R
-  IREN   expected -0.06R  target first  3.9%  stop first 33.0%  history -0.24R
-  SBAC   expected -0.07R  target first 27.0%  stop first 64.7%  history -0.08R
-  CECO   expected -0.07R  target first 21.3%  stop first 55.7%  history +0.27R
-  WULF   expected -0.07R  target first  3.7%  stop first 33.1%  history -0.16R
-  HSIC   expected -0.07R  target first  0.2%  stop first 14.3%  history +0.00R
-  CORZ   expected -0.08R  target first  6.2%  stop first 40.4%  history -0.10R
-  AVT    expected -0.09R  target first 10.2%  stop first 48.7%  history +0.11R
-  NVTS   expected -0.09R  target first  6.8%  stop first 40.5%  history -0.17R
-  APLD   expected -0.11R  target first  2.0%  stop first 32.2%  history -0.27R
-  IESC   expected -0.19R  target first 16.6%  stop first 60.6%  history -0.25R
-  ONTO   expected -0.20R  target first 10.5%  stop first 55.8%  history -0.43R
-  BNL    expected -0.29R  target first 11.8%  stop first 64.5%  history -0.29R
-  TRADE MSTR: 1 @ 134.37 (09:50) -> 137.77 (10:45, target)  P&L $+3.40
-  TRADE BMNR: 10 @ 20.42 (09:50) -> 20.50 (15:55, flat by close)  P&L $+0.80
-  TRADE EMBJ: 2 @ 75.77 (09:50) -> 75.13 (12:30, stop)  P&L $-1.28
-End of day: account $233.62 | deposited $223.84 | SPY benchmark $222.35
+2026-11-03  account $221.27  max loss/trade $6.64  daily loss limit $22.13
+  ... and 457 more in the watchlist (--show N for more).
+507 breakouts between 9:50 and 15:30; 206 cheap enough for a position of at most a third of the account.
+  09:50 BUY 1 COHU at 51.84  stop 50.63  target 54.44  risk $1.21  expected +0.28R
+  09:50 BUY 2 ALGM at 33.85  stop 33.43  target 34.84  risk $0.84  expected +0.08R
+  09:50 BUY 1 HUT at 60.61  stop 57.41  target 67.19  risk $3.20  expected +0.03R
+  09:50 INTC: sizing refused: No order: one share of INTC costs $62.58, more than your cash limit (cash $41.12 in trader/portfolio.json minus the $11.06 buffer = $30.06 / 62.58). No order.
+  09:50 BUY 1 ENPH at 29.00  stop 28.43  target 30.20  risk $0.57  expected +0.02R
+  09:50 CSIQ: sizing refused: No order: one share of CSIQ costs $9.85, more than your cash limit (cash $12.12 in trader/portfolio.json minus the $11.06 buffer = $1.06 / 9.85). No order.
+    EXIT 10:50 ENPH at 30.20 (target)  P&L $+1.20  day so far $+1.20
+  10:50 BUY 1 VFC at 19.60  stop 19.46  target 19.82  risk $0.14  expected +0.22R
+  10:50 ASST: sizing refused: No order: one share of ASST costs $21.50, more than your cash limit (cash $22.72 in trader/portfolio.json minus the $11.06 buffer = $11.66 / 21.50). No order.
+  10:50 FIG: sizing refused: No order: one share of FIG costs $21.84, more than your cash limit (cash $22.72 in trader/portfolio.json minus the $11.06 buffer = $11.66 / 21.84). No order.
+  10:55 BUY 1 VITL at 9.44  stop 9.08  target 10.16  risk $0.36  expected +0.01R
+    EXIT 11:00 VFC at 19.45 (stop)  P&L $-0.15  day so far $+1.05
+    EXIT 11:05 ALGM at 34.84 (target)  P&L $+1.98  day so far $+3.03
+  11:05 BUY 4 RPD at 15.06  stop 14.71  target 15.73  risk $1.40  expected +0.17R
+  11:25 BUY 1 SARO at 25.50  stop 25.16  target 26.15  risk $0.34  expected +0.00R
+    EXIT 11:30 COHU at 50.35 (stop)  P&L $-1.49  day so far $+1.54
+  12:00 BUY 1 DT at 49.28  stop 47.36  target 53.03  risk $1.92  expected +0.01R
+    EXIT 12:50 SARO at 25.15 (stop)  P&L $-0.35  day so far $+1.19
+    EXIT 13:50 RPD at 14.70 (stop)  P&L $-1.44  day so far $-0.25
+    EXIT 14:25 VITL at 10.16 (target)  P&L $+0.72  day so far $+0.47
+  14:25 BUY 6 PURR at 10.45  stop 10.15  target 11.02  risk $1.80  expected +0.04R
+    EXIT 15:20 PURR at 10.14 (stop)  P&L $-1.86  day so far $-1.39
+    EXIT 15:40 DT at 47.34 (stop)  P&L $-1.94  day so far $-3.33
+    EXIT 15:55 HUT at 63.58 (flat by close)  P&L $+2.97  day so far $-0.36
+End of day: account $220.91 | deposited $223.84 | SPY benchmark $222.35
