@@ -42,6 +42,9 @@ SIM = os.path.join(ROOT, "sim")
 STATE = os.path.join(SIM, "state.json")
 TRADES_CSV = os.path.join(SIM, "trades.csv")
 EQUITY_CSV = os.path.join(SIM, "equity.csv")
+CANDS_CSV = os.path.join(SIM, "candidates.csv")
+DAYS_CSV = os.path.join(SIM, "days.csv")
+DASH = os.path.join(SIM, "dashboard")
 RUNLOG = os.path.join(SIM, "logs")
 
 MONTHLY_EUR = 200.0
@@ -234,6 +237,8 @@ def run(day):
 
     # Rank by the Time Machine's expected R, using only data up to the signal.
     ranked = []
+    decision = {}
+    price_of = {h["symbol"]: h for h in hits}
     for h in hits[:MAX_TM_CANDIDATES]:
         sym = h["symbol"]
         c1, _ = tool("trader-entry", "entry.py", "check", sym, "--setup", "orb", "--now", now,
@@ -241,11 +246,13 @@ def run(day):
         c2, _ = tool("trader-exit", "exit.py", "plan", "--from", "trader/cand/%s-entry.json" % sym,
                      "--target", "2R", "--now", now, "--write", "trader/cand/%s-plan.json" % sym)
         if c2 != 0:
+            decision[sym] = "no valid exit plan"
             continue
         c3, _ = tool("trader-timemachine", "timemachine.py", "run", "--plan", "trader/cand/%s-plan.json" % sym,
                      "--now", now, "--write", "trader/cand/%s-tm.json" % sym)
         tm = read_json(os.path.join(TRADER, "cand", "%s-tm.json" % sym))
         if c3 != 0 or not tm:
+            decision[sym] = "time machine failed"
             continue
         mc, hist = tm["mc"], tm.get("history", {})
         ranked.append({"symbol": sym, "avg_R": mc["avg_R"], "p_target": mc["p_target"],
@@ -256,21 +263,27 @@ def run(day):
             % (r["symbol"], r["avg_R"], 100 * r["p_target"], 100 * r["p_stop"], r["hist_avg_R"] or 0))
 
     picks = [r for r in ranked if r["avg_R"] > 0 and (r["hist_avg_R"] or 0) > 0]
+    for r in ranked:
+        if r not in picks:
+            decision[r["symbol"]] = "skipped: expected R not positive" if r["avg_R"] <= 0 else "skipped: history not positive"
     trades = []
     for r in picks:
-        if len(trades) >= MAX_TRADES:
-            break
         sym = r["symbol"]
+        if len(trades) >= MAX_TRADES:
+            decision[sym] = "skipped: already 3 trades"
+            continue
         plan_src = os.path.join(TRADER, "cand", "%s-plan.json" % sym)
         write_json(os.path.join(TRADER, "plan.json"), read_json(plan_src))
         c, out = tool("trader-budget", "size.py", "--now", now, "--write")
         if c != 0:
             log("  %s: sizing refused: %s" % (sym, out.splitlines()[-1] if out else "?"))
+            decision[sym] = "sizing refused"
             continue
         c, out = tool("trader-risk", "check.py", "--now", now, "--today", day.isoformat())
         verdict = read_json(os.path.join(TRADER, "state", "risk.json"), {})
         if c != 0 or "PASS" not in out.split("\n", 1)[0]:
             log("  %s: risk check BLOCKED: %s" % (sym, out.splitlines()[0] if out else "?"))
+            decision[sym] = "risk check blocked"
             continue
         order = read_json(os.path.join(TRADER, "orders.json"))["orders"][0]
         qty, stop, target = int(order["qty"]), float(order["stop_loss_stop_price"]), float(order["take_profit_limit_price"])
@@ -280,11 +293,13 @@ def run(day):
         fill = simulate(bars, sig, stop, target)
         if not fill or "skipped" in fill:
             log("  %s: no fill (%s)" % (sym, (fill or {}).get("skipped", "no bars")))
+            decision[sym] = "no fill"
             continue
         if qty * fill["entry"] > pf["cash"]:
             qty = int(pf["cash"] // fill["entry"])
             if qty < 1:
                 log("  %s: no cash left for a share at %.2f" % (sym, fill["entry"]))
+                decision[sym] = "skipped: no cash left"
                 continue
         tool("trader-broker", "ticket.py", "fill", "--symbol", sym, "--side", "buy", "--qty", qty,
              "--price", fill["entry"], "--date", day.isoformat(), check=True)
@@ -294,6 +309,7 @@ def run(day):
         pnl = round(qty * (fill["exit"] - fill["entry"]), 2)
         R = round((fill["exit"] - fill["entry"]) / (plan["entry"] - stop), 2) if plan["entry"] > stop else 0
         trades.append(sym)
+        decision[sym] = "traded"
         append_csv(TRADES_CSV,
                    ["date", "symbol", "qty", "entry_time", "entry", "stop", "target", "exit_time", "exit",
                     "outcome", "pnl_usd", "R", "tm_expected_R"],
@@ -303,6 +319,15 @@ def run(day):
             % (sym, qty, fill["entry"], fill["entry_time"], fill["exit"], fill["exit_time"], fill["outcome"], pnl))
     if not trades:
         log("  No trade today: no breakout with a positive expected R passed the rules.")
+
+    for r in ranked:
+        h = price_of.get(r["symbol"], {})
+        append_csv(CANDS_CSV, ["date", "symbol", "price", "pct_over", "expected_R", "p_target", "p_stop",
+                               "history_R", "decision"],
+                   [day, r["symbol"], h.get("price"), h.get("pct_over"), r["avg_R"], r["p_target"], r["p_stop"],
+                    r["hist_avg_R"], decision.get(r["symbol"], "")])
+    append_csv(DAYS_CSV, ["date", "breakouts", "affordable", "analyzed", "positive", "traded"],
+               [day, len(wl.get("hits", [])), len(hits), len(ranked), len(picks), len(trades)])
 
     pf = read_json(pf_path, pf)
     deposited = sum(d["usd"] for d in state["deposits"])
@@ -314,7 +339,32 @@ def run(day):
     log("End of day: account $%.2f | deposited $%.2f | SPY benchmark $%.2f"
         % (pf["cash"], deposited, spy_value))
     write_summary(state)
+    export_dashboard(state, day)
     return 0
+
+
+def export_dashboard(state, day):
+    """JSON copies of the logs for the dashboard (uploaded after each run)."""
+    os.makedirs(DASH, exist_ok=True)
+    num = lambda v: None if v in ("", None) else (float(v) if any(ch in v for ch in ".e") else int(v))
+    for name, path, text in (("equity", EQUITY_CSV, ()), ("trades", TRADES_CSV, ("symbol", "entry_time", "exit_time", "outcome")),
+                             ("candidates", CANDS_CSV, ("symbol", "decision")), ("days", DAYS_CSV, ())):
+        rows = []
+        if os.path.exists(path):
+            for row in csv.DictReader(open(path)):
+                rows.append({k: (v if k == "date" or k in text else num(v)) for k, v in row.items()})
+        write_json(os.path.join(DASH, name + ".json"), rows)
+    cfg = read_json(os.path.join(TRADER, "config.json"), {})
+    write_json(os.path.join(DASH, "status.json"), [{
+        "last_run_utc": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "last_session": day.isoformat(),
+        "monthly_eur": MONTHLY_EUR,
+        "risk_pct": RISK_PCT, "daily_risk_pct": DAILY_LOSS_PCT, "max_trades": MAX_TRADES,
+        "scan_at": SCAN_AT, "target_r": 2, "flat_by": cfg.get("flat_by", "15:55"),
+        "max_loss_per_trade_usd": cfg.get("max_loss_per_trade_usd"),
+        "deposits": len(state["deposits"]),
+        "eur_deposited": MONTHLY_EUR * len(state["deposits"]),
+    }])
 
 
 def write_summary(state):

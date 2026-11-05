@@ -1,0 +1,375 @@
+<meta name="dash-one-writer">
+<style>
+  .pt { display: grid; gap: var(--cds-gap-lg); font-family: var(--font-anthropic-sans); }
+  .pt-head { display: grid; gap: var(--cds-gap-xs); }
+  .pt-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .pt-lede { color: var(--color-fg-muted); margin: 0; max-width: 70ch; }
+  .pt-tiles { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); }
+  .pt-tile, .pt-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+  .pt-tile { display: grid; gap: var(--cds-gap-xs); align-content: start; }
+  .pt-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .pt-big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; min-height: 1.3em; }
+  .pt-sub { font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; color: var(--color-fg-muted); min-height: 1.2em; }
+  .pt-good { color: var(--color-ok); }
+  .pt-bad { color: var(--color-bad); }
+  .pt-grid { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); }
+  .pt-card h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+  .pt-card .pt-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-xs) 0 var(--cds-gap-md); }
+  .pt-chart { position: relative; min-height: 260px; }
+  .pt-chart svg { display: block; }
+  .pt-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; white-space: nowrap; z-index: 2; }
+  .pt-tip .d { color: var(--cds-text-secondary); }
+  .pt-sw { display: inline-block; width: .6rem; height: .6rem; border-radius: 2px; margin-right: .35rem; }
+  .pt-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-sm); }
+  .pt-tablebox { max-height: 26rem; overflow: auto; }
+  .pt-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .pt-table th { position: sticky; top: 0; background: var(--color-panel); text-align: left; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .pt-table td { padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .pt-table .n { text-align: right; }
+  .pt-pill { display: inline-block; padding: 0 .45rem; border-radius: 999px; border: 1px solid var(--color-border-line); }
+  .pt-pill.target, .pt-pill.traded { color: var(--color-ok); }
+  .pt-pill.stop { color: var(--color-bad); }
+  .pt-rules { display: grid; grid-template-columns: max-content 1fr; gap: var(--cds-gap-xs) var(--cds-gap-md); font-size: var(--cds-font-size-caption); margin: 0; }
+  .pt-rules dt { color: var(--color-fg-muted); }
+  .pt-rules dd { margin: 0; font-variant-numeric: tabular-nums; }
+  .pt-tabs { display: flex; gap: var(--cds-gap-sm); flex-wrap: wrap; }
+  .pt-tabs button { font: inherit; font-size: var(--cds-font-size-caption); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-radius: var(--cds-radius); border: 1px solid var(--color-border-line); background: transparent; color: var(--color-fg); cursor: pointer; }
+  .pt-tabs button[aria-pressed="true"] { background: var(--color-fg); color: var(--color-bg); }
+  .pt-tabs button:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+  [data-dash-source-state=empty] { color: transparent; }
+  [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+</style>
+
+<div class="pt">
+  <header class="pt-head">
+    <h1 class="pt-title" id="top">Paper Trader</h1>
+    <p class="pt-lede">Automatic day trading on paper with the day-trader-skill, funded with €200 a month. Every trading day after the US close, the simulator replays the session: opening-range breakouts at 9:50 New York time, ranked by the Time Machine, filled from real 5-minute bars. The benchmark puts the same money into SPY on the same day.</p>
+    <p class="pt-sub">Last run <span data-draw="lastrun" data-source="status" data-field="last_run_utc" data-row="0">—</span> for the session of <span data-draw="lastsession" data-source="status" data-field="last_session" data-row="0">—</span>.</p>
+  </header>
+
+  <section class="pt-tiles" id="summary" aria-label="Summary">
+    <div class="pt-tile"><span class="pt-label">Day-trading account</span><span class="pt-big" data-draw="equity" data-source="summary" data-field="equity" data-row="0">—</span><span class="pt-sub" data-draw="equitypct" data-source="summary" data-field="return_pct" data-row="0">—</span></div>
+    <div class="pt-tile"><span class="pt-label">Same money in SPY</span><span class="pt-big" data-draw="spy" data-source="summary" data-field="spy" data-row="0">—</span><span class="pt-sub" data-draw="spypct" data-source="summary" data-field="spy_return_pct" data-row="0">—</span></div>
+    <div class="pt-tile"><span class="pt-label">Ahead of SPY</span><span class="pt-big" data-draw="vsspy" data-source="summary" data-field="vs_spy" data-row="0">—</span><span class="pt-sub">positive means day trading is winning</span></div>
+    <div class="pt-tile"><span class="pt-label">Deposited</span><span class="pt-big" data-draw="deposited" data-source="summary" data-field="deposited" data-row="0">—</span><span class="pt-sub">€<span data-draw="eur" data-source="status" data-field="eur_deposited" data-row="0">—</span> converted at each month's rate</span></div>
+    <div class="pt-tile"><span class="pt-label">Trades</span><span class="pt-big" data-draw="ntrades" data-source="summary" data-field="trades" data-row="0">—</span><span class="pt-sub"><span data-draw="winrate" data-source="summary" data-field="win_rate" data-row="0">—</span> winners</span></div>
+    <div class="pt-tile"><span class="pt-label">Average result per trade</span><span class="pt-big" data-draw="avgr" data-source="summary" data-field="avg_R" data-row="0">—</span><span class="pt-sub">in R, the amount risked; above 0 makes money</span></div>
+  </section>
+
+  <section class="pt-card" id="equity-chart">
+    <h2>Account against SPY</h2>
+    <p class="pt-note">Value at each day's close, in US dollars. The dashed line is the money paid in.</p>
+    <div class="pt-legend"><span><span class="pt-sw" data-draw="sw0">—</span>Day-trading account</span><span><span class="pt-sw" data-draw="sw1">—</span>SPY benchmark</span><span><span class="pt-sw" data-draw="sw2">—</span>Deposited</span></div>
+    <div class="pt-chart" data-draw="equitychart" data-source="equity"></div>
+  </section>
+
+  <div class="pt-grid">
+    <section class="pt-card" id="pnl-chart">
+      <h2>Profit and loss per day</h2>
+      <p class="pt-note">Sum of the day's closed trades, in US dollars.</p>
+      <div class="pt-chart" data-draw="pnlchart" data-source="daily_pnl"></div>
+    </section>
+    <section class="pt-card" id="funnel">
+      <h2>From scan to trade</h2>
+      <p class="pt-note">Per day: breakouts found, cheap enough for one share, analysed, with a positive expected R, and traded.</p>
+      <div class="pt-chart" data-draw="funnelchart" data-source="days"></div>
+    </section>
+  </div>
+
+  <section class="pt-card" id="trades">
+    <h2>Trades</h2>
+    <p class="pt-note">Every simulated trade, newest first. Entry is the open of the bar after the signal plus 0.05% slippage; a bar that touches both the stop and the target counts as the stop.</p>
+    <div class="pt-tablebox">
+      <table class="pt-table" data-source="trades" data-row-key="date,symbol">
+        <thead><tr><th data-field="date">Date</th><th data-field="symbol">Stock</th><th data-field="qty" class="n">Shares</th><th data-field="entry_time">In</th><th data-field="entry" class="n">Entry</th><th data-field="stop" class="n">Stop</th><th data-field="target" class="n">Target</th><th data-field="exit_time">Out</th><th data-field="exit" class="n">Exit</th><th data-field="outcome">Result</th><th data-field="pnl_usd" class="n">P&amp;L</th><th data-field="R" class="n">R</th><th data-field="tm_expected_R" class="n">Expected R</th></tr></thead>
+        <tbody data-draw="tradesbody" data-source="trades"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="pt-card" id="candidates">
+    <h2>What the scanner saw</h2>
+    <p class="pt-note">Every breakout the Time Machine analysed, with its odds and what the simulator did with it. Pick a day:</p>
+    <div class="pt-tabs" data-draw="daytabs" data-source="days"></div>
+    <div class="pt-tablebox">
+      <table class="pt-table" data-source="candidates" data-row-key="date,symbol">
+        <thead><tr><th data-field="date">Date</th><th data-field="symbol">Stock</th><th data-field="price" class="n">Price</th><th data-field="pct_over" class="n">Over range</th><th data-field="expected_R" class="n">Expected R</th><th data-field="p_target" class="n">Target first</th><th data-field="p_stop" class="n">Stop first</th><th data-field="history_R" class="n">History R</th><th data-field="decision">Decision</th></tr></thead>
+        <tbody data-draw="candbody" data-source="candidates"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="pt-card" id="rules">
+    <h2>Rules in force</h2>
+    <p class="pt-note">Set in the simulator; the risk limits scale with the account.</p>
+    <dl class="pt-rules">
+      <dt>Monthly deposit</dt><dd>€<span data-draw="monthly" data-source="status" data-field="monthly_eur" data-row="0">—</span></dd>
+      <dt>Max loss per trade</dt><dd><span data-draw="riskpct" data-source="status" data-field="risk_pct" data-row="0">—</span> of the account, now $<span data-draw="maxloss" data-source="status" data-field="max_loss_per_trade_usd" data-row="0">—</span></dd>
+      <dt>Max risk per day</dt><dd><span data-draw="dailypct" data-source="status" data-field="daily_risk_pct" data-row="0">—</span> of the account</dd>
+      <dt>Max trades per day</dt><dd><span data-draw="maxtrades" data-source="status" data-field="max_trades" data-row="0">—</span></dd>
+      <dt>Signal time</dt><dd><span data-draw="scanat" data-source="status" data-field="scan_at" data-row="0">—</span> New York, 15-minute opening range</dd>
+      <dt>Target</dt><dd><span data-draw="targetr" data-source="status" data-field="target_r" data-row="0">—</span>R; stop at the range midpoint</dd>
+      <dt>Flat by</dt><dd><span data-draw="flatby" data-source="status" data-field="flat_by" data-row="0">—</span> New York, no overnight positions</dd>
+    </dl>
+    <p class="pt-note">Paper only: no broker, no real money. Not financial advice. A few weeks of results is a small sample.</p>
+  </section>
+</div>
+
+<script>
+  const money = d3.format('$,.2f');
+  const signedMoney = (v) => (v > 0 ? '+' : v < 0 ? '−' : '') + money(Math.abs(v));
+  const pct = d3.format('+.1%');
+  const share = d3.format('.0%');
+  const r2 = (v) => (v > 0 ? '+' : '') + d3.format('.2f')(v);
+  const ok = (id) => dash.data(id).status === 'ok';
+  window.pt = { money, signedMoney, pct, share, r2, ok, day: null };
+
+  dash.calc('summary', {
+    title: 'Account summary',
+    description: 'Latest account, deposits and SPY value, with trade count, win rate and average R.',
+    inputs: ['equity', 'trades'],
+    fn: (equity, trades) => {
+      if (!equity.length) return [];
+      const last = equity[equity.length - 1];
+      const wins = trades.filter((t) => t.pnl_usd > 0).length;
+      return [{
+        equity: last.equity_usd,
+        deposited: last.deposited_usd,
+        spy: last.spy_benchmark_usd,
+        return_pct: last.deposited_usd ? last.equity_usd / last.deposited_usd - 1 : 0,
+        spy_return_pct: last.deposited_usd ? last.spy_benchmark_usd / last.deposited_usd - 1 : 0,
+        vs_spy: Math.round((last.equity_usd - last.spy_benchmark_usd) * 100) / 100,
+        trades: trades.length,
+        win_rate: trades.length ? wins / trades.length : 0,
+        avg_R: trades.length ? trades.reduce((s, t) => s + t.R, 0) / trades.length : 0,
+      }];
+    },
+  });
+
+  dash.calc('daily_pnl', {
+    title: 'Profit and loss per day',
+    description: 'Each day’s trades summed; a day with no trades is 0.',
+    inputs: ['days', 'trades'],
+    fn: (days, trades) => days.map((d) => ({
+      date: d.date,
+      pnl_usd: Math.round(trades.filter((t) => t.date === d.date).reduce((s, t) => s + t.pnl_usd, 0) * 100) / 100,
+    })),
+  });
+</script>
+
+<script>
+  const { money, signedMoney, pct, share, r2, ok } = window.pt;
+  const text = (name, id, field, fmt, cls) => dash.draw(name, (el) => {
+    const g = dash.data(id);
+    if (g.status !== 'ok' || !g.data.length) { el.textContent = '—'; el.classList.remove('pt-good', 'pt-bad'); return; }
+    const v = g.data[0][field];
+    el.textContent = fmt(v);
+    if (cls) { el.classList.toggle('pt-good', v > 0); el.classList.toggle('pt-bad', v < 0); }
+  });
+  text('equity', 'summary', 'equity', money);
+  text('equitypct', 'summary', 'return_pct', (v) => pct(v) + ' on deposits', true);
+  text('spy', 'summary', 'spy', money);
+  text('spypct', 'summary', 'spy_return_pct', (v) => pct(v) + ' on deposits', true);
+  text('vsspy', 'summary', 'vs_spy', signedMoney, true);
+  text('deposited', 'summary', 'deposited', money);
+  text('ntrades', 'summary', 'trades', d3.format(','));
+  text('winrate', 'summary', 'win_rate', share);
+  text('avgr', 'summary', 'avg_R', (v) => r2(v) + 'R', true);
+  const when = (v) => new Date(v).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+  const day = (v) => new Date(v + 'T12:00:00Z').toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' });
+  text('lastrun', 'status', 'last_run_utc', when);
+  text('lastsession', 'status', 'last_session', day);
+  text('eur', 'status', 'eur_deposited', d3.format(',.0f'));
+  text('monthly', 'status', 'monthly_eur', d3.format(',.0f'));
+  text('riskpct', 'status', 'risk_pct', share);
+  text('maxloss', 'status', 'max_loss_per_trade_usd', d3.format(',.2f'));
+  text('dailypct', 'status', 'daily_risk_pct', share);
+  text('maxtrades', 'status', 'max_trades', String);
+  text('scanat', 'status', 'scan_at', String);
+  text('targetr', 'status', 'target_r', String);
+  text('flatby', 'status', 'flat_by', String);
+  ['sw0', 'sw1', 'sw2'].forEach((n, i) => dash.draw(n, (el) => { el.textContent = ''; el.style.background = dash.colors[i]; }));
+</script>
+
+<script>
+  const { money, signedMoney } = window.pt;
+  const parse = (s) => new Date(s + 'T00:00:00Z');
+  const fmtDay = d3.utcFormat('%b %-d');
+
+  function frame(el, h) {
+    const w = Math.max(280, el.clientWidth);
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${w} ${h}`);
+    return { svg, w, h };
+  }
+  function yAxis(svg, y, w, left, right, fmt) {
+    const g = svg.append('g').attr('font-size', null).attr('font-family', null);
+    y.ticks(5).forEach((t) => {
+      g.append('line').attr('x1', left).attr('x2', w - right).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', 'var(--cds-chart-grid)');
+      g.append('text').attr('x', left - 6).attr('y', y(t)).attr('dy', '0.32em').attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fmt(t));
+    });
+  }
+  function tip(el) {
+    let t = el.querySelector('.pt-tip');
+    if (!t) { t = document.createElement('div'); t.className = 'pt-tip'; t.hidden = true; el.appendChild(t); }
+    return t;
+  }
+  function placeTip(el, t, x, y) {
+    const w = t.offsetWidth, max = el.clientWidth - w - 4;
+    t.style.left = Math.max(4, Math.min(max, x + 12)) + 'px';
+    t.style.top = Math.max(0, y - 10) + 'px';
+  }
+  function setTip(t, date, lines) {
+    t.replaceChildren();
+    const d = document.createElement('div'); d.className = 'd'; d.textContent = date; t.appendChild(d);
+    lines.forEach(([color, name, value]) => {
+      const row = document.createElement('div');
+      if (color) { const s = document.createElement('span'); s.className = 'pt-sw'; s.style.background = color; row.appendChild(s); }
+      row.appendChild(document.createTextNode(name + ' ' + value));
+      t.appendChild(row);
+    });
+  }
+  function placeholder(el, g) {
+    el.replaceChildren();
+    if (g.status === 'error') {
+      const p = document.createElement('div');
+      p.style.cssText = 'display:flex;align-items:center;justify-content:center;gap:.4rem;min-height:260px;color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)';
+      const dot = document.createElement('span'); dot.style.cssText = 'width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad)';
+      p.append(dot, document.createTextNode('Failed to load'));
+      el.appendChild(p);
+    }
+  }
+
+  dash.draw('equitychart', (el) => {
+    const g = dash.data('equity');
+    if (g.status !== 'ok' || !g.data.length) { placeholder(el, g); return; }
+    el.replaceChildren();
+    const rows = g.data.map((r) => ({ ...r, d: parse(r.date) }));
+    const series = [['equity_usd', 'Account'], ['spy_benchmark_usd', 'SPY'], ['deposited_usd', 'Deposited']];
+    const { svg, w, h } = frame(el, 260);
+    const vals = rows.flatMap((r) => series.map(([k]) => r[k]));
+    const y = d3.scaleLinear([d3.min(vals) * 0.98, d3.max(vals) * 1.02], [h - 28, 12]).nice();
+    const fmt = d3.format('$,.0f');
+    const probe = svg.append('text').style('font-size', 'var(--cds-font-size-caption)').text(fmt(y.domain()[1]));
+    const left = probe.node().getComputedTextLength() + 12; probe.remove();
+    const right = 12;
+    const x = rows.length > 1 ? d3.scaleUtc(d3.extent(rows, (r) => r.d), [left, w - right]) : () => (left + w - right) / 2;
+    yAxis(svg, y, w, left, right, fmt);
+    const ticks = rows.length > 1 ? x.ticks(Math.min(rows.length, Math.floor(w / 80))) : [rows[0].d];
+    ticks.forEach((t) => svg.append('text').attr('x', x(t)).attr('y', h - 8).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fmtDay(t)));
+    series.forEach(([k], i) => {
+      const line = d3.line().x((r) => x(r.d)).y((r) => y(r[k]));
+      svg.append('path').datum(rows).attr('d', line).attr('fill', 'none').attr('stroke', dash.colors[i]).attr('stroke-width', 2)
+        .attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('stroke-dasharray', k === 'deposited_usd' ? '4 4' : null);
+      svg.selectAll(null).data(rows).enter().append('circle').attr('cx', (r) => x(r.d)).attr('cy', (r) => y(r[k])).attr('r', rows.length < 40 ? 3 : 0).attr('fill', dash.colors[i]);
+    });
+    const rule = svg.append('line').attr('y1', 12).attr('y2', h - 28).attr('stroke', 'var(--cds-chart-reference)').attr('opacity', 0);
+    const t = tip(el);
+    svg.on('pointermove', (ev) => {
+      const [mx] = d3.pointer(ev);
+      const r = rows.reduce((a, b) => Math.abs(x(b.d) - mx) < Math.abs(x(a.d) - mx) ? b : a);
+      rule.attr('x1', x(r.d)).attr('x2', x(r.d)).attr('opacity', 1);
+      setTip(t, fmtDay(r.d), series.map(([k, n], i) => [dash.colors[i], n, money(r[k])]));
+      t.hidden = false; placeTip(el, t, x(r.d) * el.clientWidth / w, 20);
+    }).on('pointerleave', () => { t.hidden = true; rule.attr('opacity', 0); });
+  });
+
+  dash.draw('pnlchart', (el) => {
+    const g = dash.data('daily_pnl');
+    if (g.status !== 'ok' || !g.data.length) { placeholder(el, g); return; }
+    el.replaceChildren();
+    const rows = g.data;
+    const { svg, w, h } = frame(el, 220);
+    const ext = d3.extent([0, ...rows.map((r) => r.pnl_usd)]);
+    const y = d3.scaleLinear([Math.min(ext[0], -1), Math.max(ext[1], 1)], [h - 28, 12]).nice();
+    const fmt = d3.format('$,.0f');
+    const probe = svg.append('text').style('font-size', 'var(--cds-font-size-caption)').text(fmt(y.domain()[0]));
+    const left = probe.node().getComputedTextLength() + 12; probe.remove();
+    const x = d3.scaleBand(rows.map((r) => r.date), [left, w - 12]).padding(0.3);
+    yAxis(svg, y, w, left, 12, fmt);
+    svg.append('line').attr('x1', left).attr('x2', w - 12).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', 'var(--cds-chart-axis)');
+    const every = Math.ceil(rows.length / Math.max(1, Math.floor((w - left) / 60)));
+    rows.forEach((r, i) => { if (i % every === 0) svg.append('text').attr('x', x(r.date) + x.bandwidth() / 2).attr('y', h - 8).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fmtDay(parse(r.date))); });
+    const t = tip(el);
+    svg.selectAll(null).data(rows).enter().append('rect')
+      .attr('x', (r) => x(r.date) + Math.max(0, (x.bandwidth() - 32) / 2)).attr('width', Math.min(32, x.bandwidth()))
+      .attr('y', (r) => y(Math.max(0, r.pnl_usd))).attr('height', (r) => Math.max(1, Math.abs(y(r.pnl_usd) - y(0))))
+      .attr('rx', 3).attr('fill', (r) => r.pnl_usd < 0 ? 'var(--cds-chart-status-critical)' : dash.colors[0])
+      .on('pointermove', (ev, r) => { setTip(t, fmtDay(parse(r.date)), [[null, 'P&L', signedMoney(r.pnl_usd)]]); t.hidden = false; const [mx, my] = d3.pointer(ev, el); placeTip(el, t, mx, my); })
+      .on('pointerleave', () => { t.hidden = true; });
+  });
+
+  dash.draw('funnelchart', (el) => {
+    const g = dash.data('days');
+    if (g.status !== 'ok' || !g.data.length) { placeholder(el, g); return; }
+    el.replaceChildren();
+    const rows = g.data.slice(-10);
+    const keys = [['breakouts', 'Breakouts'], ['affordable', 'Affordable'], ['analyzed', 'Analysed'], ['positive', 'Positive'], ['traded', 'Traded']];
+    const { svg, w, h } = frame(el, 220);
+    const y = d3.scaleLinear([0, d3.max(rows, (r) => r.breakouts) || 1], [h - 28, 12]).nice();
+    const fmt = d3.format(',');
+    const left = 36;
+    const x0 = d3.scaleBand(rows.map((r) => r.date), [left, w - 12]).padding(0.2);
+    const x1 = d3.scaleBand(keys.map((k) => k[0]), [0, x0.bandwidth()]).padding(0.1);
+    yAxis(svg, y, w, left, 12, fmt);
+    rows.forEach((r) => svg.append('text').attr('x', x0(r.date) + x0.bandwidth() / 2).attr('y', h - 8).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fmtDay(parse(r.date))));
+    const t = tip(el);
+    rows.forEach((r) => keys.forEach(([k], i) => {
+      svg.append('rect').attr('x', x0(r.date) + x1(k)).attr('width', x1.bandwidth()).attr('y', y(r[k])).attr('height', Math.max(0, y(0) - y(r[k])))
+        .attr('rx', 2).attr('fill', dash.colors[i])
+        .on('pointermove', (ev) => { setTip(t, fmtDay(parse(r.date)), keys.map(([kk, n], j) => [dash.colors[j], n, fmt(r[kk])])); t.hidden = false; const [mx, my] = d3.pointer(ev, el); placeTip(el, t, mx, my); })
+        .on('pointerleave', () => { t.hidden = true; });
+    }));
+  });
+</script>
+
+<script>
+  const { money, signedMoney, share, r2 } = window.pt;
+  const cell = (tr, v, cls) => { const td = document.createElement('td'); td.textContent = v; if (cls) td.className = cls; tr.appendChild(td); return td; };
+  const pill = (tr, v) => { const td = document.createElement('td'); const s = document.createElement('span'); s.className = 'pt-pill ' + String(v).split(/[ :]/)[0]; s.textContent = v; td.appendChild(s); tr.appendChild(td); };
+  const key = (r) => encodeURIComponent(r.date) + ',' + encodeURIComponent(r.symbol);
+  const num = (f) => (v) => v == null ? '' : f(v);
+
+  dash.draw('tradesbody', (tb) => {
+    tb.replaceChildren();
+    const g = dash.data('trades');
+    if (g.status !== 'ok') return;
+    g.data.slice().reverse().forEach((r) => {
+      const tr = document.createElement('tr'); tr.dataset.key = key(r);
+      cell(tr, r.date); cell(tr, r.symbol); cell(tr, r.qty, 'n'); cell(tr, r.entry_time);
+      cell(tr, money(r.entry), 'n'); cell(tr, money(r.stop), 'n'); cell(tr, money(r.target), 'n'); cell(tr, r.exit_time);
+      cell(tr, money(r.exit), 'n'); pill(tr, r.outcome);
+      const p = cell(tr, signedMoney(r.pnl_usd), 'n'); p.classList.add(r.pnl_usd >= 0 ? 'pt-good' : 'pt-bad');
+      cell(tr, r2(r.R), 'n'); cell(tr, r2(r.tm_expected_R), 'n');
+      tb.appendChild(tr);
+    });
+  });
+
+  dash.draw('daytabs', (box) => {
+    box.replaceChildren();
+    const g = dash.data('days');
+    if (g.status !== 'ok' || !g.data.length) return;
+    const dates = g.data.map((d) => d.date);
+    if (!window.pt.day || !dates.includes(window.pt.day)) window.pt.day = dates[dates.length - 1];
+    dates.slice(-15).forEach((d) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.textContent = d3.utcFormat('%a %b %-d')(new Date(d + 'T00:00:00Z'));
+      b.setAttribute('aria-pressed', String(d === window.pt.day));
+      b.addEventListener('click', () => { window.pt.day = d; dash.draw('daytabs'); dash.draw('candbody'); });
+      box.appendChild(b);
+    });
+  });
+
+  dash.draw('candbody', (tb) => {
+    tb.replaceChildren();
+    const g = dash.data('candidates');
+    if (g.status !== 'ok') return;
+    const day = window.pt.day || (g.data.length ? g.data[g.data.length - 1].date : null);
+    g.data.filter((r) => r.date === day).sort((a, b) => b.expected_R - a.expected_R).forEach((r) => {
+      const tr = document.createElement('tr'); tr.dataset.key = key(r);
+      cell(tr, r.date); cell(tr, r.symbol); cell(tr, num(money)(r.price), 'n'); cell(tr, num((v) => d3.format('.2f')(v) + '%')(r.pct_over), 'n');
+      cell(tr, r2(r.expected_R), 'n'); cell(tr, share(r.p_target), 'n'); cell(tr, share(r.p_stop), 'n'); cell(tr, num(r2)(r.history_R), 'n');
+      pill(tr, r.decision);
+      tb.appendChild(tr);
+    });
+  });
+</script>
