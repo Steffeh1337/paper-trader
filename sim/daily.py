@@ -58,6 +58,7 @@ MONTHLY_EUR = 200.0
 RISK_PCT = 0.03          # max loss per trade, share of the account
 DAILY_LOSS_PCT = 0.10    # stop new trades when the day's net loss plus open risk reaches this
 MAX_TRADES = 10
+MAX_POSITION_PCT = 33     # one position may use at most this share of the account, so ~3 can be open
 MAX_TM_CANDIDATES = 150  # Time Machine runs per day at most
 LAST_ENTRY = "15:30"     # breakouts from 9:50 up to this time are considered
 SLIPPAGE = 0.0005        # 0.05 % worse on market fills
@@ -179,13 +180,25 @@ def configure(equity):
         "max_loss_per_trade_usd": round(equity * RISK_PCT, 2),
         "max_daily_loss_usd": round(equity, 2),   # sim/daily.py enforces the real daily limit
         "max_order_usd": round(equity, 2),
-        "max_position_pct": 95,
+        "max_position_pct": MAX_POSITION_PCT,
         "cash_buffer_pct": 5,
         "max_trades_per_day": MAX_TRADES,
         "paper": True,
     })
     write_json(os.path.join(TRADER, "config.json"), cfg)
     return cfg
+
+
+def reason(out, prefix=None):
+    """The informative line of a tool's output (not its disclaimer or warnings)."""
+    lines = [l.strip() for l in out.splitlines() if l.strip()]
+    if prefix:
+        hit = [l for l in lines if l.startswith(prefix)]
+        if hit:
+            return hit[0]
+    skip = ("Education and tooling", "WARNING", "Next:", "A stop is", "Nothing")
+    useful = [l for l in lines if not l.startswith(skip)]
+    return (useful[-1] if useful else (lines[-1] if lines else "?"))[:200]
 
 
 def append_csv(path, header, row):
@@ -245,9 +258,9 @@ def run(day):
     all_hits = wl.get("hits", [])
     for h in all_hits:
         h["hhmm"] = dt.datetime.strptime(h["at"], "%I:%M %p").strftime("%H:%M")
-    hits = sorted((h for h in all_hits if h.get("price") and h["price"] <= equity_start * 0.9
+    hits = sorted((h for h in all_hits if h.get("price") and h["price"] <= equity_start * MAX_POSITION_PCT / 100
                    and h["hhmm"] <= LAST_ENTRY), key=lambda h: (h["hhmm"], h["symbol"]))
-    log("%d breakouts between 9:50 and %s; %d cheap enough for at least one share."
+    log("%d breakouts between 9:50 and %s; %d cheap enough for a position of at most a third of the account."
         % (len(all_hits), LAST_ENTRY, len(hits)))
 
     daily_cap = round(equity_start * DAILY_LOSS_PCT, 2)
@@ -349,12 +362,12 @@ def run(day):
             write_json(os.path.join(TRADER, "plan.json"), plan)
             c, out = tool("trader-budget", "size.py", "--now", now, "--write")
             if c != 0:
-                log("  %s %s: sizing refused: %s" % (t, sym, out.splitlines()[-1] if out else "?"))
+                log("  %s %s: sizing refused: %s" % (t, sym, reason(out)))
                 decision[sym] = (t, "sizing refused", r)
                 continue
             c, out = tool("trader-risk", "check.py", "--now", now, "--today", day.isoformat())
-            if c != 0 or "PASS" not in out.split("\n", 1)[0]:
-                log("  %s %s: risk check BLOCKED: %s" % (t, sym, out.splitlines()[0] if out else "?"))
+            if c != 0 or not any(line.startswith("PASS") for line in out.splitlines()):
+                log("  %s %s: risk check BLOCKED: %s" % (t, sym, reason(out, "BLOCK")))
                 decision[sym] = (t, "risk check blocked", r)
                 continue
             order = read_json(os.path.join(TRADER, "orders.json"))["orders"][0]
