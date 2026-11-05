@@ -1,0 +1,2817 @@
+{
+ "days": {
+  "train": [
+   "2026-04-29",
+   "2026-08-20",
+   79
+  ],
+  "test": [
+   "2026-08-21",
+   "2026-11-04",
+   53
+  ]
+ },
+ "breakouts": 27807,
+ "variants": 320,
+ "eligible": 320,
+ "winner": {
+  "params": {
+   "min_exp_R": null,
+   "target_R": 1.5,
+   "stop": "mid",
+   "breakeven": true,
+   "last_entry": "15:30",
+   "max_trades": 10
+  },
+  "label": "min none | 1.5R target | stop midpoint | breakeven at +1R | until 15:30 | max 10",
+  "train": {
+   "trades": 785,
+   "win_rate": 0.36942675159235666,
+   "avg_R": -0.06911730522805072,
+   "pnl": 58.81,
+   "return_pct": 0.052508928571428415,
+   "spy_return_pct": 0.03611607142857154,
+   "profit_factor": 1.1208143309092402,
+   "max_drawdown": 59.79
+  },
+  "test": {
+   "trades": 520,
+   "win_rate": 0.36730769230769234,
+   "avg_R": -0.07451104874039281,
+   "pnl": -8.38,
+   "return_pct": -0.009352678571428519,
+   "spy_return_pct": 0.004955357142857109,
+   "profit_factor": 0.9616335500412053,
+   "max_drawdown": 55.63
+  }
+ },
+ "current": {
+  "params": {
+   "min_exp_R": 0.0,
+   "target_R": 2.0,
+   "stop": "mid",
+   "breakeven": false,
+   "last_entry": "15:30",
+   "max_trades": 10
+  },
+  "label": "min +0.00R | 2R target | stop midpoint | no breakeven | until 15:30 | max 10",
+  "train": {
+   "trades": 728,
+   "win_rate": 0.37637362637362637,
+   "avg_R": -0.1116012154171553,
+   "pnl": -36.9,
+   "return_pct": -0.0329464285714286,
+   "spy_return_pct": 0.03611607142857154,
+   "profit_factor": 0.9332827077457153,
+   "max_drawdown": 59.91
+  },
+  "test": {
+   "trades": 472,
+   "win_rate": 0.3516949152542373,
+   "avg_R": -0.16558375268747205,
+   "pnl": -13.83,
+   "return_pct": -0.015435267857142887,
+   "spy_return_pct": 0.004955357142857109,
+   "profit_factor": 0.941308776099135,
+   "max_drawdown": 75.2
+  }
+ },
+ "top10": [
+  {
+   "label": "min none | 1.5R target | stop midpoint | breakeven at +1R | until 15:30 | max 10",
+   "params": {
+    "min_exp_R": null,
+    "target_R": 1.5,
+    "stop": "mid",
+    "breakeven": true,
+    "last_entry": "15:30",
+    "max_trades": 10
+   },
+   "train": {
+    "trades": 785,
+    "win_rate": 0.36942675159235666,
+    "avg_R": -0.06911730522805072,
+    "pnl": 58.81,
+    "return_pct": 0.052508928571428415,
+    "spy_return_pct": 0.03611607142857154,
+    "profit_factor": 1.1208143309092402,
+    "max_drawdown": 59.79
+   },
+   "test": {
+    "trades": 520,
+    "win_rate": 0.36730769230769234,
+    "avg_R": -0.07451104874039281,
+    "pnl": -8.38,
+    "return_pct": -0.009352678571428519,
+    "spy_return_pct": 0.004955357142857109,
+    "profit_factor": 0.9616335500412053,
+    "max_drawdown": 55.63
+   }
+  },
+  {
+   "label": "min +0.05R | 1.5R target | stop midpoint | breakeven at +1R | until 10:30 | max 10",
+   "params": {
+    "min_exp_R": 0.05,
+    "target_R": 1.5,
+    "stop": "mid",
+    "breakeven": true,
+    "last_entry": "10:30",
+    "max_trades": 10
+   },
+   "train": {
+    "trades": 604,
+    "win_rate": 0.34602649006622516,
+    "avg_R": -0.1211588169210093,
+    "pnl": 46.72,
+    "return_pct": 0.041714285714285815,
+    "spy_return_pct": 0.03611607142857154,
+    "profit_factor": 1.1189136908549462,
+    "max_drawdown": 48.04
+   },
+   "test": {
+    "trades": 373,
+    "win_rate": 0.34316353887399464,
+    "avg_R": -0.14538214285339224,
+    "pnl": -23.07,
+    "return_pct": -0.025747767857142945,
+    "spy_return_pct": 0.004955357142857109,
+    "profit_factor": 0.8846384638463847,
+    "max_drawdown": 56.6
+   }
+  },
+  {
+   "label": "min none | 1.5R target | stop midpoint | breakeven at +1R | until 10:30 | max 10",
+   "params": {
+    "min_exp_R": null,
+    "target_R": 1.5,
+    "stop": "mid",
+    "breakeven": true,
+    "last_entry": "10:30",
+    "max_trades": 10
+   },
+   "train": {
+    "trades": 673,
+    "win_rate": 0.3640416047548291,
+    "avg_R": -0.06617809297429912,
+    "pnl": 44.76,
+    "return_pct": 0.039964285714285674,
+    "spy_return_pct": 0.03611607142857154,
+    "profit_factor": 1.1078736172366423,
+    "max_drawdown": 53.21
+   },
+   "test": {
+    "trades": 408,
+    "win_rate": 0.35784313725490197,
+    "avg_R": -0.08166224115679235,
+    "pnl": 7.33,
+    "return_pct": 0.008180803571428585,
+    "spy_return_pct": 0.004955357142857109,
+    "profit_factor": 1.0405285856463566,
+    "max_drawdown": 41.23
+   }
+  },
+  {
+   "label": "min +0.05R | 1.5R target | stop midpoint | no breakeven | until 10:30 | max 10",
+   "params": {
+    "min_exp_R": 0.05,
+    "target_R": 1.5,
+    "stop": "mid",
+    "breakeven": false,
+    "last_entry": "10:30",
+    "max_trades": 10
+   },
+   "train": {
+    "trades": 598,
+    "win_rate": 0.3979933110367893,
+    "avg_R": -0.10710465966986568,
+    "pnl": 37.24,
+    "return_pct": 0.03325,
+    "spy_return_pct": 0.03611607142857154,
+    "profit_factor": 1.0867297032931198,
+    "max_drawdown": 36.48
+   },
+   "test": {
+    "trades": 367,
+    "win_rate": 0.3651226158038147,
+    "avg_R": -0.16743287425668105,
+    "pnl": -31.34,
+    "return_pct": -0.03497767857142864,
+    "spy_return_pct": 0.004955357142857109,
+    "profit_factor": 0.8513494284494617,
+    "max_drawdown": 61.54
+   }
+  },
+  {
+   "label": "min +0.10R | 1.5R target | stop midpoint | breakeven at +1R | until 10:30 | max 10",
+   "params": {
+    "min_exp_R": 0.1,
+    "target_R": 1.5,
+    "stop": "mid",
+    "breakeven": true,
+    "last_entry": "10:30",
+    "max_trades": 10
+   },
+   "train": {
+    "trades": 565,
+    "win_rate": 0.37168141592920356,
+    "avg_R": -0.06315323562350533,
+    "pnl": 36.21,
+    "return_pct": 0.03233035714285726,
+    "spy_return_pct": 0.03611607142857154,
+    "profit_factor": 1.0928842602093163,
+    "max_drawdown": 47.73
+   },
+   "test": {
+    "trades": 351,
+    "win_rate": 0.358974358974359,
+    "avg_R": -0.11078879465552081,
+    "pnl": -18.07,
+    "return_pct": -0.02016741071428574,
+    "spy_return_pct": 0.004955357142857109,
+    "profit_factor": 0.9103937320241993,
+    "max_drawdown": 49.98
+   }
+  },
+  {
+   "label": "min +0.05R | 1.5R target | stop midpoint | no breakeven | until 10:30 | max 3",
+   "params": {
+    "min_exp_R": 0.05,
+    "target_R": 1.5,
+    "stop": "mid",
+    "breakeven": false,
+    "last_entry": "10:30",
+    "max_trades": 3
+   },
+   "train": {
+    "trades": 237,
+    "win_rate": 0.4177215189873418,
+    "avg_R": -0.04959776039721534,
+    "pnl": 35.9,
+    "return_pct": 0.03205357142857146,
+    "spy_return_pct": 0.03611607142857154,
+    "profit_factor": 1.1389050106403558,
+    "max_drawdown": 40.72
+   },
+   "test": {
+    "trades": 158,
+    "win_rate": 0.3987341772151899,
+    "avg_R": -0.10673167681065329,
+    "pnl": -5.01,
+    "return_pct": -0.005591517857142847,
+    "spy_return_pct": 0.004955357142857109,
+    "profit_factor": 0.9588061174148993,
+    "max_drawdown": 35.77
+   }
+  },
+  {
+   "label": "min +0.05R | 1.5R target | stop midpoint | no breakeven | until 15:30 | max 3",
+   "params": {
+    "min_exp_R": 0.05,
+    "target_R": 1.5,
+    "stop": "mid",
+    "breakeven": false,
+    "last_entry": "15:30",
+    "max_trades": 3
+   },
+   "train": {
+    "trades": 237,
+    "win_rate": 0.4177215189873418,
+    "avg_R": -0.04959776039721534,
+    "pnl": 35.9,
+    "return_pct": 0.03205357142857146,
+    "spy_return_pct": 0.03611607142857154,
+    "profit_factor": 1.1389050106403558,
+    "max_drawdown": 40.72
+   },
+   "test": {
+    "trades": 159,
+    "win_rate": 0.39622641509433965,
+    "avg_R": -0.11349322715661278,
+    "pnl": -5.14,
+    "return_pct": -0.005736607142857175,
+    "spy_return_pct": 0.004955357142857109,
+    "profit_factor": 0.9577823408624235,
+    "max_drawdown": 35.9
+   }
+  },
+  {
+   "label": "min +0.10R | 1.5R target | stop midpoint | no breakeven | until 10:30 | max 3",
+   "params": {
+    "min_exp_R": 0.1,
+    "target_R": 1.5,
+    "stop": "mid",
+    "breakeven": false,
+    "last_entry": "10:30",
+    "max_trades": 3
+   },
+   "train": {
+    "trades": 237,
+    "win_rate": 0.4219409282700422,
+    "avg_R": -0.043116408723508255,
+    "pnl": 35.6,
+    "return_pct": 0.031785714285714306,
+    "spy_return_pct": 0.03611607142857154,
+    "profit_factor": 1.1370126621252357,
+    "max_drawdown": 40.72
+   },
+   "test": {
+    "trades": 158,
+    "win_rate": 0.3987341772151899,
+    "avg_R": -0.10770381155593318,
+    "pnl": -0.33,
+    "return_pct": -0.0003683035714285854,
+    "spy_return_pct": 0.004955357142857109,
+    "profit_factor": 0.9972245584524815,
+    "max_drawdown": 30.95
+   }
+  },
+  {
+   "label": "min +0.10R | 1.5R target | stop midpoint | no breakeven | until 15:30 | max 3",
+   "params": {
+    "min_exp_R": 0.1,
+    "target_R": 1.5,
+    "stop": "mid",
+    "breakeven": false,
+    "last_entry": "15:30",
+    "max_trades": 3
+   },
+   "train": {
+    "trades": 237,
+    "win_rate": 0.4219409282700422,
+    "avg_R": -0.043116408723508255,
+    "pnl": 35.6,
+    "return_pct": 0.031785714285714306,
+    "spy_return_pct": 0.03611607142857154,
+    "profit_factor": 1.1370126621252357,
+    "max_drawdown": 40.72
+   },
+   "test": {
+    "trades": 159,
+    "win_rate": 0.39622641509433965,
+    "avg_R": -0.11445924784689092,
+    "pnl": -0.46,
+    "return_pct": -0.0005133928571429136,
+    "spy_return_pct": 0.004955357142857109,
+    "profit_factor": 0.9961354280433509,
+    "max_drawdown": 31.08
+   }
+  },
+  {
+   "label": "min +0.00R | 1.5R target | stop midpoint | breakeven at +1R | until 10:30 | max 10",
+   "params": {
+    "min_exp_R": 0.0,
+    "target_R": 1.5,
+    "stop": "mid",
+    "breakeven": true,
+    "last_entry": "10:30",
+    "max_trades": 10
+   },
+   "train": {
+    "trades": 620,
+    "win_rate": 0.34516129032258064,
+    "avg_R": -0.11675145033412804,
+    "pnl": 35.0,
+    "return_pct": 0.03125,
+    "spy_return_pct": 0.03611607142857154,
+    "profit_factor": 1.0852099817407177,
+    "max_drawdown": 50.03
+   },
+   "test": {
+    "trades": 395,
+    "win_rate": 0.3468354430379747,
+    "avg_R": -0.13190194738258615,
+    "pnl": -16.35,
+    "return_pct": -0.018247767857142883,
+    "spy_return_pct": 0.004955357142857109,
+    "profit_factor": 0.9204302121861009,
+    "max_drawdown": 49.72
+   }
+  }
+ ],
+ "test_rank_of_winner": 154,
+ "test_share_profitable": 0.275,
+ "risk": [
+  {
+   "risk": 0.01,
+   "train": {
+    "trades": 785,
+    "win_rate": 0.36942675159235666,
+    "avg_R": -0.06911730522805072,
+    "pnl": 57.17,
+    "return_pct": 0.05104464285714294,
+    "spy_return_pct": 0.03611607142857154,
+    "profit_factor": 1.1170508988165921,
+    "max_drawdown": 59.79
+   },
+   "test": {
+    "trades": 518,
+    "win_rate": 0.3474903474903475,
+    "avg_R": -0.1216334417708089,
+    "pnl": -15.81,
+    "return_pct": -0.017645089285714177,
+    "spy_return_pct": 0.004955357142857109,
+    "profit_factor": 0.9288190536220792,
+    "max_drawdown": 59.04
+   },
+   "all": {
+    "trades": 1305,
+    "win_rate": 0.3716475095785441,
+    "avg_R": -0.07508860735904443,
+    "pnl": 25.34,
+    "return_pct": 0.014140625000000018,
+    "spy_return_pct": 0.028420758928571432,
+    "profit_factor": 1.022489860037453,
+    "max_drawdown": 138.95
+   }
+  },
+  {
+   "risk": 0.02,
+   "train": {
+    "trades": 785,
+    "win_rate": 0.36942675159235666,
+    "avg_R": -0.06911730522805072,
+    "pnl": 58.81,
+    "return_pct": 0.052508928571428415,
+    "spy_return_pct": 0.03611607142857154,
+    "profit_factor": 1.1208143309092402,
+    "max_drawdown": 59.79
+   },
+   "test": {
+    "trades": 520,
+    "win_rate": 0.36730769230769234,
+    "avg_R": -0.07451104874039281,
+    "pnl": -8.38,
+    "return_pct": -0.009352678571428519,
+    "spy_return_pct": 0.004955357142857109,
+    "profit_factor": 0.9616335500412053,
+    "max_drawdown": 55.63
+   },
+   "all": {
+    "trades": 1305,
+    "win_rate": 0.37624521072796935,
+    "avg_R": -0.06668457203709728,
+    "pnl": 55.81,
+    "return_pct": 0.031143973214285747,
+    "spy_return_pct": 0.028420758928571432,
+    "profit_factor": 1.0512276836936063,
+    "max_drawdown": 112.66
+   }
+  },
+  {
+   "risk": 0.03,
+   "train": {
+    "trades": 785,
+    "win_rate": 0.36942675159235666,
+    "avg_R": -0.06911730522805072,
+    "pnl": 58.81,
+    "return_pct": 0.052508928571428415,
+    "spy_return_pct": 0.03611607142857154,
+    "profit_factor": 1.1208143309092402,
+    "max_drawdown": 59.79
+   },
+   "test": {
+    "trades": 520,
+    "win_rate": 0.36730769230769234,
+    "avg_R": -0.07451104874039281,
+    "pnl": -8.38,
+    "return_pct": -0.009352678571428519,
+    "spy_return_pct": 0.004955357142857109,
+    "profit_factor": 0.9616335500412053,
+    "max_drawdown": 55.63
+   },
+   "all": {
+    "trades": 1305,
+    "win_rate": 0.37624521072796935,
+    "avg_R": -0.06668457203709728,
+    "pnl": 55.81,
+    "return_pct": 0.031143973214285747,
+    "spy_return_pct": 0.028420758928571432,
+    "profit_factor": 1.0512276836936063,
+    "max_drawdown": 112.66
+   }
+  },
+  {
+   "risk": 0.05,
+   "train": {
+    "trades": 785,
+    "win_rate": 0.36942675159235666,
+    "avg_R": -0.06911730522805072,
+    "pnl": 58.81,
+    "return_pct": 0.052508928571428415,
+    "spy_return_pct": 0.03611607142857154,
+    "profit_factor": 1.1208143309092402,
+    "max_drawdown": 59.79
+   },
+   "test": {
+    "trades": 520,
+    "win_rate": 0.36730769230769234,
+    "avg_R": -0.07451104874039281,
+    "pnl": -8.38,
+    "return_pct": -0.009352678571428519,
+    "spy_return_pct": 0.004955357142857109,
+    "profit_factor": 0.9616335500412053,
+    "max_drawdown": 55.63
+   },
+   "all": {
+    "trades": 1305,
+    "win_rate": 0.37624521072796935,
+    "avg_R": -0.06668457203709728,
+    "pnl": 55.81,
+    "return_pct": 0.031143973214285747,
+    "spy_return_pct": 0.028420758928571432,
+    "profit_factor": 1.0512276836936063,
+    "max_drawdown": 112.66
+   }
+  },
+  {
+   "risk": 0.08,
+   "train": {
+    "trades": 785,
+    "win_rate": 0.36942675159235666,
+    "avg_R": -0.06911730522805072,
+    "pnl": 58.81,
+    "return_pct": 0.052508928571428415,
+    "spy_return_pct": 0.03611607142857154,
+    "profit_factor": 1.1208143309092402,
+    "max_drawdown": 59.79
+   },
+   "test": {
+    "trades": 520,
+    "win_rate": 0.36730769230769234,
+    "avg_R": -0.07451104874039281,
+    "pnl": -8.38,
+    "return_pct": -0.009352678571428519,
+    "spy_return_pct": 0.004955357142857109,
+    "profit_factor": 0.9616335500412053,
+    "max_drawdown": 55.63
+   },
+   "all": {
+    "trades": 1305,
+    "win_rate": 0.37624521072796935,
+    "avg_R": -0.06668457203709728,
+    "pnl": 55.81,
+    "return_pct": 0.031143973214285747,
+    "spy_return_pct": 0.028420758928571432,
+    "profit_factor": 1.0512276836936063,
+    "max_drawdown": 112.66
+   }
+  }
+ ],
+ "calibration": [
+  {
+   "group": "below 0",
+   "breakouts": 12950,
+   "actual_R": -0.123
+  },
+  {
+   "group": "0 to +0.05",
+   "breakouts": 3780,
+   "actual_R": -0.123
+  },
+  {
+   "group": "+0.05 to +0.10",
+   "breakouts": 3520,
+   "actual_R": -0.156
+  },
+  {
+   "group": "+0.10 to +0.20",
+   "breakouts": 4607,
+   "actual_R": -0.171
+  },
+  {
+   "group": "+0.20 and up",
+   "breakouts": 2912,
+   "actual_R": -0.109
+  }
+ ],
+ "curves": {
+  "winner": [
+   {
+    "date": "2026-08-21",
+    "equity": 225.19,
+    "deposited": 224.0,
+    "spy": 223.9
+   },
+   {
+    "date": "2026-08-24",
+    "equity": 225.1,
+    "deposited": 224.0,
+    "spy": 223.28
+   },
+   {
+    "date": "2026-08-25",
+    "equity": 231.22,
+    "deposited": 224.0,
+    "spy": 223.94
+   },
+   {
+    "date": "2026-08-26",
+    "equity": 230.56,
+    "deposited": 224.0,
+    "spy": 223.99
+   },
+   {
+    "date": "2026-08-27",
+    "equity": 230.38,
+    "deposited": 224.0,
+    "spy": 225.52
+   },
+   {
+    "date": "2026-08-28",
+    "equity": 230.24,
+    "deposited": 224.0,
+    "spy": 224.96
+   },
+   {
+    "date": "2026-08-31",
+    "equity": 231.6,
+    "deposited": 224.0,
+    "spy": 224.26
+   },
+   {
+    "date": "2026-09-01",
+    "equity": 450.71,
+    "deposited": 448.0,
+    "spy": 446.62
+   },
+   {
+    "date": "2026-09-02",
+    "equity": 452.63,
+    "deposited": 448.0,
+    "spy": 448.67
+   },
+   {
+    "date": "2026-09-03",
+    "equity": 452.63,
+    "deposited": 448.0,
+    "spy": 453.41
+   },
+   {
+    "date": "2026-09-04",
+    "equity": 451.27,
+    "deposited": 448.0,
+    "spy": 451.63
+   },
+   {
+    "date": "2026-09-08",
+    "equity": 448.01,
+    "deposited": 448.0,
+    "spy": 449.21
+   },
+   {
+    "date": "2026-09-09",
+    "equity": 448.88,
+    "deposited": 448.0,
+    "spy": 447.08
+   },
+   {
+    "date": "2026-09-10",
+    "equity": 443.03,
+    "deposited": 448.0,
+    "spy": 444.41
+   },
+   {
+    "date": "2026-09-11",
+    "equity": 448.43,
+    "deposited": 448.0,
+    "spy": 448.09
+   },
+   {
+    "date": "2026-09-14",
+    "equity": 444.03,
+    "deposited": 448.0,
+    "spy": 446.1
+   },
+   {
+    "date": "2026-09-15",
+    "equity": 441.15,
+    "deposited": 448.0,
+    "spy": 444.15
+   },
+   {
+    "date": "2026-09-16",
+    "equity": 436.4,
+    "deposited": 448.0,
+    "spy": 442.17
+   },
+   {
+    "date": "2026-09-17",
+    "equity": 438.87,
+    "deposited": 448.0,
+    "spy": 447.21
+   },
+   {
+    "date": "2026-09-18",
+    "equity": 438.34,
+    "deposited": 448.0,
+    "spy": 446.61
+   },
+   {
+    "date": "2026-09-21",
+    "equity": 441.9,
+    "deposited": 448.0,
+    "spy": 453.59
+   },
+   {
+    "date": "2026-09-22",
+    "equity": 436.36,
+    "deposited": 448.0,
+    "spy": 453.54
+   },
+   {
+    "date": "2026-09-23",
+    "equity": 432.6,
+    "deposited": 448.0,
+    "spy": 450.31
+   },
+   {
+    "date": "2026-09-24",
+    "equity": 429.77,
+    "deposited": 448.0,
+    "spy": 449.94
+   },
+   {
+    "date": "2026-09-25",
+    "equity": 429.16,
+    "deposited": 448.0,
+    "spy": 452.32
+   },
+   {
+    "date": "2026-09-28",
+    "equity": 424.72,
+    "deposited": 448.0,
+    "spy": 448.88
+   },
+   {
+    "date": "2026-09-29",
+    "equity": 418.13,
+    "deposited": 448.0,
+    "spy": 448.23
+   },
+   {
+    "date": "2026-09-30",
+    "equity": 419.22,
+    "deposited": 448.0,
+    "spy": 447.03
+   },
+   {
+    "date": "2026-10-01",
+    "equity": 636.17,
+    "deposited": 672.0,
+    "spy": 671.99
+   },
+   {
+    "date": "2026-10-02",
+    "equity": 640.81,
+    "deposited": 672.0,
+    "spy": 676.88
+   },
+   {
+    "date": "2026-10-05",
+    "equity": 645.29,
+    "deposited": 672.0,
+    "spy": 681.55
+   },
+   {
+    "date": "2026-10-06",
+    "equity": 644.44,
+    "deposited": 672.0,
+    "spy": 685.19
+   },
+   {
+    "date": "2026-10-07",
+    "equity": 642.64,
+    "deposited": 672.0,
+    "spy": 683.47
+   },
+   {
+    "date": "2026-10-08",
+    "equity": 636.28,
+    "deposited": 672.0,
+    "spy": 680.58
+   },
+   {
+    "date": "2026-10-09",
+    "equity": 629.08,
+    "deposited": 672.0,
+    "spy": 684.67
+   },
+   {
+    "date": "2026-10-12",
+    "equity": 628.11,
+    "deposited": 672.0,
+    "spy": 684.25
+   },
+   {
+    "date": "2026-10-13",
+    "equity": 623.97,
+    "deposited": 672.0,
+    "spy": 684.25
+   },
+   {
+    "date": "2026-10-14",
+    "equity": 629.05,
+    "deposited": 672.0,
+    "spy": 676.88
+   },
+   {
+    "date": "2026-10-15",
+    "equity": 643.01,
+    "deposited": 672.0,
+    "spy": 678.74
+   },
+   {
+    "date": "2026-10-16",
+    "equity": 642.85,
+    "deposited": 672.0,
+    "spy": 671.32
+   },
+   {
+    "date": "2026-10-19",
+    "equity": 636.28,
+    "deposited": 672.0,
+    "spy": 674.19
+   },
+   {
+    "date": "2026-10-20",
+    "equity": 641.88,
+    "deposited": 672.0,
+    "spy": 676.38
+   },
+   {
+    "date": "2026-10-21",
+    "equity": 649.08,
+    "deposited": 672.0,
+    "spy": 679.94
+   },
+   {
+    "date": "2026-10-22",
+    "equity": 657.99,
+    "deposited": 672.0,
+    "spy": 671.93
+   },
+   {
+    "date": "2026-10-23",
+    "equity": 663.79,
+    "deposited": 672.0,
+    "spy": 668.24
+   },
+   {
+    "date": "2026-10-26",
+    "equity": 655.08,
+    "deposited": 672.0,
+    "spy": 672.98
+   },
+   {
+    "date": "2026-10-27",
+    "equity": 654.09,
+    "deposited": 672.0,
+    "spy": 676.92
+   },
+   {
+    "date": "2026-10-28",
+    "equity": 652.68,
+    "deposited": 672.0,
+    "spy": 679.19
+   },
+   {
+    "date": "2026-10-29",
+    "equity": 659.43,
+    "deposited": 672.0,
+    "spy": 676.73
+   },
+   {
+    "date": "2026-10-30",
+    "equity": 658.49,
+    "deposited": 672.0,
+    "spy": 664.62
+   },
+   {
+    "date": "2026-11-02",
+    "equity": 887.35,
+    "deposited": 896.0,
+    "spy": 883.19
+   },
+   {
+    "date": "2026-11-03",
+    "equity": 891.62,
+    "deposited": 896.0,
+    "spy": 885.94
+   },
+   {
+    "date": "2026-11-04",
+    "equity": 887.62,
+    "deposited": 896.0,
+    "spy": 900.44
+   }
+  ],
+  "current": [
+   {
+    "date": "2026-08-21",
+    "equity": 223.31,
+    "deposited": 224.0,
+    "spy": 223.9
+   },
+   {
+    "date": "2026-08-24",
+    "equity": 222.24,
+    "deposited": 224.0,
+    "spy": 223.28
+   },
+   {
+    "date": "2026-08-25",
+    "equity": 225.52,
+    "deposited": 224.0,
+    "spy": 223.94
+   },
+   {
+    "date": "2026-08-26",
+    "equity": 225.01,
+    "deposited": 224.0,
+    "spy": 223.99
+   },
+   {
+    "date": "2026-08-27",
+    "equity": 223.93,
+    "deposited": 224.0,
+    "spy": 225.52
+   },
+   {
+    "date": "2026-08-28",
+    "equity": 223.3,
+    "deposited": 224.0,
+    "spy": 224.96
+   },
+   {
+    "date": "2026-08-31",
+    "equity": 222.72,
+    "deposited": 224.0,
+    "spy": 224.26
+   },
+   {
+    "date": "2026-09-01",
+    "equity": 440.74,
+    "deposited": 448.0,
+    "spy": 446.62
+   },
+   {
+    "date": "2026-09-02",
+    "equity": 443.0,
+    "deposited": 448.0,
+    "spy": 448.67
+   },
+   {
+    "date": "2026-09-03",
+    "equity": 443.06,
+    "deposited": 448.0,
+    "spy": 453.41
+   },
+   {
+    "date": "2026-09-04",
+    "equity": 436.13,
+    "deposited": 448.0,
+    "spy": 451.63
+   },
+   {
+    "date": "2026-09-08",
+    "equity": 430.85,
+    "deposited": 448.0,
+    "spy": 449.21
+   },
+   {
+    "date": "2026-09-09",
+    "equity": 429.19,
+    "deposited": 448.0,
+    "spy": 447.08
+   },
+   {
+    "date": "2026-09-10",
+    "equity": 425.18,
+    "deposited": 448.0,
+    "spy": 444.41
+   },
+   {
+    "date": "2026-09-11",
+    "equity": 425.41,
+    "deposited": 448.0,
+    "spy": 448.09
+   },
+   {
+    "date": "2026-09-14",
+    "equity": 425.92,
+    "deposited": 448.0,
+    "spy": 446.1
+   },
+   {
+    "date": "2026-09-15",
+    "equity": 419.45,
+    "deposited": 448.0,
+    "spy": 444.15
+   },
+   {
+    "date": "2026-09-16",
+    "equity": 414.79,
+    "deposited": 448.0,
+    "spy": 442.17
+   },
+   {
+    "date": "2026-09-17",
+    "equity": 413.64,
+    "deposited": 448.0,
+    "spy": 447.21
+   },
+   {
+    "date": "2026-09-18",
+    "equity": 413.06,
+    "deposited": 448.0,
+    "spy": 446.61
+   },
+   {
+    "date": "2026-09-21",
+    "equity": 419.17,
+    "deposited": 448.0,
+    "spy": 453.59
+   },
+   {
+    "date": "2026-09-22",
+    "equity": 413.67,
+    "deposited": 448.0,
+    "spy": 453.54
+   },
+   {
+    "date": "2026-09-23",
+    "equity": 408.23,
+    "deposited": 448.0,
+    "spy": 450.31
+   },
+   {
+    "date": "2026-09-24",
+    "equity": 403.25,
+    "deposited": 448.0,
+    "spy": 449.94
+   },
+   {
+    "date": "2026-09-25",
+    "equity": 399.28,
+    "deposited": 448.0,
+    "spy": 452.32
+   },
+   {
+    "date": "2026-09-28",
+    "equity": 396.2,
+    "deposited": 448.0,
+    "spy": 448.88
+   },
+   {
+    "date": "2026-09-29",
+    "equity": 387.47,
+    "deposited": 448.0,
+    "spy": 448.23
+   },
+   {
+    "date": "2026-09-30",
+    "equity": 387.53,
+    "deposited": 448.0,
+    "spy": 447.03
+   },
+   {
+    "date": "2026-10-01",
+    "equity": 610.56,
+    "deposited": 672.0,
+    "spy": 671.99
+   },
+   {
+    "date": "2026-10-02",
+    "equity": 612.49,
+    "deposited": 672.0,
+    "spy": 676.88
+   },
+   {
+    "date": "2026-10-05",
+    "equity": 610.55,
+    "deposited": 672.0,
+    "spy": 681.55
+   },
+   {
+    "date": "2026-10-06",
+    "equity": 607.99,
+    "deposited": 672.0,
+    "spy": 685.19
+   },
+   {
+    "date": "2026-10-07",
+    "equity": 608.33,
+    "deposited": 672.0,
+    "spy": 683.47
+   },
+   {
+    "date": "2026-10-08",
+    "equity": 600.97,
+    "deposited": 672.0,
+    "spy": 680.58
+   },
+   {
+    "date": "2026-10-09",
+    "equity": 602.98,
+    "deposited": 672.0,
+    "spy": 684.67
+   },
+   {
+    "date": "2026-10-12",
+    "equity": 603.5,
+    "deposited": 672.0,
+    "spy": 684.25
+   },
+   {
+    "date": "2026-10-13",
+    "equity": 598.32,
+    "deposited": 672.0,
+    "spy": 684.25
+   },
+   {
+    "date": "2026-10-14",
+    "equity": 603.44,
+    "deposited": 672.0,
+    "spy": 676.88
+   },
+   {
+    "date": "2026-10-15",
+    "equity": 618.8,
+    "deposited": 672.0,
+    "spy": 678.74
+   },
+   {
+    "date": "2026-10-16",
+    "equity": 611.0,
+    "deposited": 672.0,
+    "spy": 671.32
+   },
+   {
+    "date": "2026-10-19",
+    "equity": 613.1,
+    "deposited": 672.0,
+    "spy": 674.19
+   },
+   {
+    "date": "2026-10-20",
+    "equity": 619.48,
+    "deposited": 672.0,
+    "spy": 676.38
+   },
+   {
+    "date": "2026-10-21",
+    "equity": 617.31,
+    "deposited": 672.0,
+    "spy": 679.94
+   },
+   {
+    "date": "2026-10-22",
+    "equity": 626.09,
+    "deposited": 672.0,
+    "spy": 671.93
+   },
+   {
+    "date": "2026-10-23",
+    "equity": 630.5,
+    "deposited": 672.0,
+    "spy": 668.24
+   },
+   {
+    "date": "2026-10-26",
+    "equity": 622.31,
+    "deposited": 672.0,
+    "spy": 672.98
+   },
+   {
+    "date": "2026-10-27",
+    "equity": 625.49,
+    "deposited": 672.0,
+    "spy": 676.92
+   },
+   {
+    "date": "2026-10-28",
+    "equity": 624.36,
+    "deposited": 672.0,
+    "spy": 679.19
+   },
+   {
+    "date": "2026-10-29",
+    "equity": 633.0,
+    "deposited": 672.0,
+    "spy": 676.73
+   },
+   {
+    "date": "2026-10-30",
+    "equity": 634.32,
+    "deposited": 672.0,
+    "spy": 664.62
+   },
+   {
+    "date": "2026-11-02",
+    "equity": 859.87,
+    "deposited": 896.0,
+    "spy": 883.19
+   },
+   {
+    "date": "2026-11-03",
+    "equity": 866.84,
+    "deposited": 896.0,
+    "spy": 885.94
+   },
+   {
+    "date": "2026-11-04",
+    "equity": 882.17,
+    "deposited": 896.0,
+    "spy": 900.44
+   }
+  ],
+  "winner_all": [
+   {
+    "date": "2026-04-29",
+    "equity": 223.79,
+    "deposited": 224.0,
+    "spy": 224.19
+   },
+   {
+    "date": "2026-04-30",
+    "equity": 225.17,
+    "deposited": 224.0,
+    "spy": 226.34
+   },
+   {
+    "date": "2026-05-01",
+    "equity": 448.45,
+    "deposited": 448.0,
+    "spy": 450.76
+   },
+   {
+    "date": "2026-05-04",
+    "equity": 443.21,
+    "deposited": 448.0,
+    "spy": 449.26
+   },
+   {
+    "date": "2026-05-05",
+    "equity": 447.99,
+    "deposited": 448.0,
+    "spy": 452.8
+   },
+   {
+    "date": "2026-05-06",
+    "equity": 455.83,
+    "deposited": 448.0,
+    "spy": 459.07
+   },
+   {
+    "date": "2026-05-07",
+    "equity": 450.66,
+    "deposited": 448.0,
+    "spy": 457.67
+   },
+   {
+    "date": "2026-05-08",
+    "equity": 450.53,
+    "deposited": 448.0,
+    "spy": 461.43
+   },
+   {
+    "date": "2026-05-11",
+    "equity": 451.12,
+    "deposited": 448.0,
+    "spy": 462.47
+   },
+   {
+    "date": "2026-05-12",
+    "equity": 456.74,
+    "deposited": 448.0,
+    "spy": 461.84
+   },
+   {
+    "date": "2026-05-13",
+    "equity": 454.52,
+    "deposited": 448.0,
+    "spy": 464.41
+   },
+   {
+    "date": "2026-05-14",
+    "equity": 451.18,
+    "deposited": 448.0,
+    "spy": 468.04
+   },
+   {
+    "date": "2026-05-15",
+    "equity": 448.98,
+    "deposited": 448.0,
+    "spy": 462.4
+   },
+   {
+    "date": "2026-05-18",
+    "equity": 444.36,
+    "deposited": 448.0,
+    "spy": 461.97
+   },
+   {
+    "date": "2026-05-19",
+    "equity": 442.63,
+    "deposited": 448.0,
+    "spy": 459.09
+   },
+   {
+    "date": "2026-05-20",
+    "equity": 446.46,
+    "deposited": 448.0,
+    "spy": 463.79
+   },
+   {
+    "date": "2026-05-21",
+    "equity": 443.86,
+    "deposited": 448.0,
+    "spy": 464.66
+   },
+   {
+    "date": "2026-05-22",
+    "equity": 443.65,
+    "deposited": 448.0,
+    "spy": 466.52
+   },
+   {
+    "date": "2026-05-26",
+    "equity": 441.29,
+    "deposited": 448.0,
+    "spy": 469.51
+   },
+   {
+    "date": "2026-05-27",
+    "equity": 439.06,
+    "deposited": 448.0,
+    "spy": 469.59
+   },
+   {
+    "date": "2026-05-28",
+    "equity": 443.53,
+    "deposited": 448.0,
+    "spy": 472.15
+   },
+   {
+    "date": "2026-05-29",
+    "equity": 443.97,
+    "deposited": 448.0,
+    "spy": 473.19
+   },
+   {
+    "date": "2026-06-01",
+    "equity": 675.1,
+    "deposited": 672.0,
+    "spy": 699.36
+   },
+   {
+    "date": "2026-06-02",
+    "equity": 684.39,
+    "deposited": 672.0,
+    "spy": 700.31
+   },
+   {
+    "date": "2026-06-03",
+    "equity": 689.67,
+    "deposited": 672.0,
+    "spy": 695.43
+   },
+   {
+    "date": "2026-06-04",
+    "equity": 705.81,
+    "deposited": 672.0,
+    "spy": 698.0
+   },
+   {
+    "date": "2026-06-05",
+    "equity": 705.46,
+    "deposited": 672.0,
+    "spy": 680.0
+   },
+   {
+    "date": "2026-06-08",
+    "equity": 714.95,
+    "deposited": 672.0,
+    "spy": 681.65
+   },
+   {
+    "date": "2026-06-09",
+    "equity": 700.58,
+    "deposited": 672.0,
+    "spy": 679.65
+   },
+   {
+    "date": "2026-06-10",
+    "equity": 692.98,
+    "deposited": 672.0,
+    "spy": 669.06
+   },
+   {
+    "date": "2026-06-11",
+    "equity": 696.32,
+    "deposited": 672.0,
+    "spy": 680.21
+   },
+   {
+    "date": "2026-06-12",
+    "equity": 699.85,
+    "deposited": 672.0,
+    "spy": 683.89
+   },
+   {
+    "date": "2026-06-15",
+    "equity": 705.14,
+    "deposited": 672.0,
+    "spy": 695.96
+   },
+   {
+    "date": "2026-06-16",
+    "equity": 695.4,
+    "deposited": 672.0,
+    "spy": 692.11
+   },
+   {
+    "date": "2026-06-17",
+    "equity": 687.12,
+    "deposited": 672.0,
+    "spy": 683.37
+   },
+   {
+    "date": "2026-06-18",
+    "equity": 685.28,
+    "deposited": 672.0,
+    "spy": 688.58
+   },
+   {
+    "date": "2026-06-22",
+    "equity": 676.63,
+    "deposited": 672.0,
+    "spy": 686.29
+   },
+   {
+    "date": "2026-06-23",
+    "equity": 677.24,
+    "deposited": 672.0,
+    "spy": 676.47
+   },
+   {
+    "date": "2026-06-24",
+    "equity": 681.74,
+    "deposited": 672.0,
+    "spy": 676.2
+   },
+   {
+    "date": "2026-06-25",
+    "equity": 680.95,
+    "deposited": 672.0,
+    "spy": 676.2
+   },
+   {
+    "date": "2026-06-26",
+    "equity": 679.81,
+    "deposited": 672.0,
+    "spy": 672.53
+   },
+   {
+    "date": "2026-06-29",
+    "equity": 674.94,
+    "deposited": 672.0,
+    "spy": 683.15
+   },
+   {
+    "date": "2026-06-30",
+    "equity": 675.31,
+    "deposited": 672.0,
+    "spy": 688.49
+   },
+   {
+    "date": "2026-07-01",
+    "equity": 899.8,
+    "deposited": 896.0,
+    "spy": 911.79
+   },
+   {
+    "date": "2026-07-02",
+    "equity": 893.09,
+    "deposited": 896.0,
+    "spy": 910.8
+   },
+   {
+    "date": "2026-07-06",
+    "equity": 887.73,
+    "deposited": 896.0,
+    "spy": 918.64
+   },
+   {
+    "date": "2026-07-07",
+    "equity": 888.11,
+    "deposited": 896.0,
+    "spy": 914.36
+   },
+   {
+    "date": "2026-07-08",
+    "equity": 879.16,
+    "deposited": 896.0,
+    "spy": 911.32
+   },
+   {
+    "date": "2026-07-09",
+    "equity": 894.8,
+    "deposited": 896.0,
+    "spy": 918.99
+   },
+   {
+    "date": "2026-07-10",
+    "equity": 895.15,
+    "deposited": 896.0,
+    "spy": 923.13
+   },
+   {
+    "date": "2026-07-13",
+    "equity": 896.07,
+    "deposited": 896.0,
+    "spy": 916.03
+   },
+   {
+    "date": "2026-07-14",
+    "equity": 905.2,
+    "deposited": 896.0,
+    "spy": 919.46
+   },
+   {
+    "date": "2026-07-15",
+    "equity": 914.93,
+    "deposited": 896.0,
+    "spy": 922.92
+   },
+   {
+    "date": "2026-07-16",
+    "equity": 918.72,
+    "deposited": 896.0,
+    "spy": 918.15
+   },
+   {
+    "date": "2026-07-17",
+    "equity": 926.06,
+    "deposited": 896.0,
+    "spy": 908.87
+   },
+   {
+    "date": "2026-07-20",
+    "equity": 934.86,
+    "deposited": 896.0,
+    "spy": 907.49
+   },
+   {
+    "date": "2026-07-21",
+    "equity": 925.89,
+    "deposited": 896.0,
+    "spy": 914.83
+   },
+   {
+    "date": "2026-07-22",
+    "equity": 919.21,
+    "deposited": 896.0,
+    "spy": 914.02
+   },
+   {
+    "date": "2026-07-23",
+    "equity": 904.34,
+    "deposited": 896.0,
+    "spy": 902.49
+   },
+   {
+    "date": "2026-07-24",
+    "equity": 894.95,
+    "deposited": 896.0,
+    "spy": 903.52
+   },
+   {
+    "date": "2026-07-27",
+    "equity": 901.15,
+    "deposited": 896.0,
+    "spy": 903.46
+   },
+   {
+    "date": "2026-07-28",
+    "equity": 910.45,
+    "deposited": 896.0,
+    "spy": 905.83
+   },
+   {
+    "date": "2026-07-29",
+    "equity": 904.12,
+    "deposited": 896.0,
+    "spy": 892.11
+   },
+   {
+    "date": "2026-07-30",
+    "equity": 897.04,
+    "deposited": 896.0,
+    "spy": 906.85
+   },
+   {
+    "date": "2026-07-31",
+    "equity": 888.67,
+    "deposited": 896.0,
+    "spy": 913.16
+   },
+   {
+    "date": "2026-08-03",
+    "equity": 1118.39,
+    "deposited": 1120.0,
+    "spy": 1152.99
+   },
+   {
+    "date": "2026-08-04",
+    "equity": 1134.76,
+    "deposited": 1120.0,
+    "spy": 1173.36
+   },
+   {
+    "date": "2026-08-05",
+    "equity": 1144.97,
+    "deposited": 1120.0,
+    "spy": 1171.36
+   },
+   {
+    "date": "2026-08-06",
+    "equity": 1146.52,
+    "deposited": 1120.0,
+    "spy": 1169.61
+   },
+   {
+    "date": "2026-08-07",
+    "equity": 1168.92,
+    "deposited": 1120.0,
+    "spy": 1176.4
+   },
+   {
+    "date": "2026-08-10",
+    "equity": 1192.19,
+    "deposited": 1120.0,
+    "spy": 1176.27
+   },
+   {
+    "date": "2026-08-11",
+    "equity": 1189.15,
+    "deposited": 1120.0,
+    "spy": 1172.47
+   },
+   {
+    "date": "2026-08-12",
+    "equity": 1186.69,
+    "deposited": 1120.0,
+    "spy": 1175.54
+   },
+   {
+    "date": "2026-08-13",
+    "equity": 1194.84,
+    "deposited": 1120.0,
+    "spy": 1183.61
+   },
+   {
+    "date": "2026-08-14",
+    "equity": 1175.27,
+    "deposited": 1120.0,
+    "spy": 1181.26
+   },
+   {
+    "date": "2026-08-17",
+    "equity": 1181.82,
+    "deposited": 1120.0,
+    "spy": 1175.66
+   },
+   {
+    "date": "2026-08-18",
+    "equity": 1183.26,
+    "deposited": 1120.0,
+    "spy": 1167.67
+   },
+   {
+    "date": "2026-08-19",
+    "equity": 1188.93,
+    "deposited": 1120.0,
+    "spy": 1170.29
+   },
+   {
+    "date": "2026-08-20",
+    "equity": 1178.81,
+    "deposited": 1120.0,
+    "spy": 1160.45
+   },
+   {
+    "date": "2026-08-21",
+    "equity": 1174.93,
+    "deposited": 1120.0,
+    "spy": 1165.04
+   },
+   {
+    "date": "2026-08-24",
+    "equity": 1167.53,
+    "deposited": 1120.0,
+    "spy": 1161.81
+   },
+   {
+    "date": "2026-08-25",
+    "equity": 1194.85,
+    "deposited": 1120.0,
+    "spy": 1165.27
+   },
+   {
+    "date": "2026-08-26",
+    "equity": 1196.25,
+    "deposited": 1120.0,
+    "spy": 1165.5
+   },
+   {
+    "date": "2026-08-27",
+    "equity": 1198.93,
+    "deposited": 1120.0,
+    "spy": 1173.47
+   },
+   {
+    "date": "2026-08-28",
+    "equity": 1196.25,
+    "deposited": 1120.0,
+    "spy": 1170.58
+   },
+   {
+    "date": "2026-08-31",
+    "equity": 1179.75,
+    "deposited": 1120.0,
+    "spy": 1166.91
+   },
+   {
+    "date": "2026-09-01",
+    "equity": 1401.48,
+    "deposited": 1344.0,
+    "spy": 1382.83
+   },
+   {
+    "date": "2026-09-02",
+    "equity": 1409.26,
+    "deposited": 1344.0,
+    "spy": 1389.18
+   },
+   {
+    "date": "2026-09-03",
+    "equity": 1421.96,
+    "deposited": 1344.0,
+    "spy": 1403.87
+   },
+   {
+    "date": "2026-09-04",
+    "equity": 1416.87,
+    "deposited": 1344.0,
+    "spy": 1398.35
+   },
+   {
+    "date": "2026-09-08",
+    "equity": 1423.09,
+    "deposited": 1344.0,
+    "spy": 1390.87
+   },
+   {
+    "date": "2026-09-09",
+    "equity": 1421.36,
+    "deposited": 1344.0,
+    "spy": 1384.27
+   },
+   {
+    "date": "2026-09-10",
+    "equity": 1402.79,
+    "deposited": 1344.0,
+    "spy": 1376.0
+   },
+   {
+    "date": "2026-09-11",
+    "equity": 1418.04,
+    "deposited": 1344.0,
+    "spy": 1387.39
+   },
+   {
+    "date": "2026-09-14",
+    "equity": 1406.46,
+    "deposited": 1344.0,
+    "spy": 1381.24
+   },
+   {
+    "date": "2026-09-15",
+    "equity": 1405.88,
+    "deposited": 1344.0,
+    "spy": 1375.19
+   },
+   {
+    "date": "2026-09-16",
+    "equity": 1387.57,
+    "deposited": 1344.0,
+    "spy": 1369.07
+   },
+   {
+    "date": "2026-09-17",
+    "equity": 1393.34,
+    "deposited": 1344.0,
+    "spy": 1384.66
+   },
+   {
+    "date": "2026-09-18",
+    "equity": 1388.13,
+    "deposited": 1344.0,
+    "spy": 1382.81
+   },
+   {
+    "date": "2026-09-21",
+    "equity": 1396.99,
+    "deposited": 1344.0,
+    "spy": 1404.42
+   },
+   {
+    "date": "2026-09-22",
+    "equity": 1395.06,
+    "deposited": 1344.0,
+    "spy": 1404.27
+   },
+   {
+    "date": "2026-09-23",
+    "equity": 1384.16,
+    "deposited": 1344.0,
+    "spy": 1394.27
+   },
+   {
+    "date": "2026-09-24",
+    "equity": 1372.67,
+    "deposited": 1344.0,
+    "spy": 1393.11
+   },
+   {
+    "date": "2026-09-25",
+    "equity": 1370.39,
+    "deposited": 1344.0,
+    "spy": 1400.48
+   },
+   {
+    "date": "2026-09-28",
+    "equity": 1365.51,
+    "deposited": 1344.0,
+    "spy": 1389.84
+   },
+   {
+    "date": "2026-09-29",
+    "equity": 1348.51,
+    "deposited": 1344.0,
+    "spy": 1387.82
+   },
+   {
+    "date": "2026-09-30",
+    "equity": 1351.06,
+    "deposited": 1344.0,
+    "spy": 1384.12
+   },
+   {
+    "date": "2026-10-01",
+    "equity": 1560.56,
+    "deposited": 1568.0,
+    "spy": 1611.24
+   },
+   {
+    "date": "2026-10-02",
+    "equity": 1575.36,
+    "deposited": 1568.0,
+    "spy": 1622.95
+   },
+   {
+    "date": "2026-10-05",
+    "equity": 1582.64,
+    "deposited": 1568.0,
+    "spy": 1634.17
+   },
+   {
+    "date": "2026-10-06",
+    "equity": 1577.44,
+    "deposited": 1568.0,
+    "spy": 1642.87
+   },
+   {
+    "date": "2026-10-07",
+    "equity": 1573.03,
+    "deposited": 1568.0,
+    "spy": 1638.76
+   },
+   {
+    "date": "2026-10-08",
+    "equity": 1558.15,
+    "deposited": 1568.0,
+    "spy": 1631.83
+   },
+   {
+    "date": "2026-10-09",
+    "equity": 1542.47,
+    "deposited": 1568.0,
+    "spy": 1641.63
+   },
+   {
+    "date": "2026-10-12",
+    "equity": 1540.29,
+    "deposited": 1568.0,
+    "spy": 1640.62
+   },
+   {
+    "date": "2026-10-13",
+    "equity": 1534.43,
+    "deposited": 1568.0,
+    "spy": 1640.62
+   },
+   {
+    "date": "2026-10-14",
+    "equity": 1551.85,
+    "deposited": 1568.0,
+    "spy": 1622.95
+   },
+   {
+    "date": "2026-10-15",
+    "equity": 1587.07,
+    "deposited": 1568.0,
+    "spy": 1627.42
+   },
+   {
+    "date": "2026-10-16",
+    "equity": 1583.63,
+    "deposited": 1568.0,
+    "spy": 1609.63
+   },
+   {
+    "date": "2026-10-19",
+    "equity": 1566.6,
+    "deposited": 1568.0,
+    "spy": 1616.52
+   },
+   {
+    "date": "2026-10-20",
+    "equity": 1580.89,
+    "deposited": 1568.0,
+    "spy": 1621.77
+   },
+   {
+    "date": "2026-10-21",
+    "equity": 1594.05,
+    "deposited": 1568.0,
+    "spy": 1630.29
+   },
+   {
+    "date": "2026-10-22",
+    "equity": 1612.97,
+    "deposited": 1568.0,
+    "spy": 1611.1
+   },
+   {
+    "date": "2026-10-23",
+    "equity": 1634.48,
+    "deposited": 1568.0,
+    "spy": 1602.24
+   },
+   {
+    "date": "2026-10-26",
+    "equity": 1610.41,
+    "deposited": 1568.0,
+    "spy": 1613.62
+   },
+   {
+    "date": "2026-10-27",
+    "equity": 1609.61,
+    "deposited": 1568.0,
+    "spy": 1623.05
+   },
+   {
+    "date": "2026-10-28",
+    "equity": 1608.34,
+    "deposited": 1568.0,
+    "spy": 1628.49
+   },
+   {
+    "date": "2026-10-29",
+    "equity": 1628.5,
+    "deposited": 1568.0,
+    "spy": 1622.61
+   },
+   {
+    "date": "2026-10-30",
+    "equity": 1622.4,
+    "deposited": 1568.0,
+    "spy": 1593.57
+   },
+   {
+    "date": "2026-11-02",
+    "equity": 1856.14,
+    "deposited": 1792.0,
+    "spy": 1807.62
+   },
+   {
+    "date": "2026-11-03",
+    "equity": 1863.64,
+    "deposited": 1792.0,
+    "spy": 1813.24
+   },
+   {
+    "date": "2026-11-04",
+    "equity": 1847.81,
+    "deposited": 1792.0,
+    "spy": 1842.93
+   }
+  ],
+  "current_all": [
+   {
+    "date": "2026-04-29",
+    "equity": 223.53,
+    "deposited": 224.0,
+    "spy": 224.19
+   },
+   {
+    "date": "2026-04-30",
+    "equity": 226.35,
+    "deposited": 224.0,
+    "spy": 226.34
+   },
+   {
+    "date": "2026-05-01",
+    "equity": 447.1,
+    "deposited": 448.0,
+    "spy": 450.76
+   },
+   {
+    "date": "2026-05-04",
+    "equity": 449.27,
+    "deposited": 448.0,
+    "spy": 449.26
+   },
+   {
+    "date": "2026-05-05",
+    "equity": 450.48,
+    "deposited": 448.0,
+    "spy": 452.8
+   },
+   {
+    "date": "2026-05-06",
+    "equity": 453.84,
+    "deposited": 448.0,
+    "spy": 459.07
+   },
+   {
+    "date": "2026-05-07",
+    "equity": 449.01,
+    "deposited": 448.0,
+    "spy": 457.67
+   },
+   {
+    "date": "2026-05-08",
+    "equity": 448.21,
+    "deposited": 448.0,
+    "spy": 461.43
+   },
+   {
+    "date": "2026-05-11",
+    "equity": 446.67,
+    "deposited": 448.0,
+    "spy": 462.47
+   },
+   {
+    "date": "2026-05-12",
+    "equity": 436.98,
+    "deposited": 448.0,
+    "spy": 461.84
+   },
+   {
+    "date": "2026-05-13",
+    "equity": 432.64,
+    "deposited": 448.0,
+    "spy": 464.41
+   },
+   {
+    "date": "2026-05-14",
+    "equity": 432.06,
+    "deposited": 448.0,
+    "spy": 468.04
+   },
+   {
+    "date": "2026-05-15",
+    "equity": 433.28,
+    "deposited": 448.0,
+    "spy": 462.4
+   },
+   {
+    "date": "2026-05-18",
+    "equity": 432.01,
+    "deposited": 448.0,
+    "spy": 461.97
+   },
+   {
+    "date": "2026-05-19",
+    "equity": 430.27,
+    "deposited": 448.0,
+    "spy": 459.09
+   },
+   {
+    "date": "2026-05-20",
+    "equity": 433.28,
+    "deposited": 448.0,
+    "spy": 463.79
+   },
+   {
+    "date": "2026-05-21",
+    "equity": 432.89,
+    "deposited": 448.0,
+    "spy": 464.66
+   },
+   {
+    "date": "2026-05-22",
+    "equity": 429.2,
+    "deposited": 448.0,
+    "spy": 466.52
+   },
+   {
+    "date": "2026-05-26",
+    "equity": 429.6,
+    "deposited": 448.0,
+    "spy": 469.51
+   },
+   {
+    "date": "2026-05-27",
+    "equity": 426.53,
+    "deposited": 448.0,
+    "spy": 469.59
+   },
+   {
+    "date": "2026-05-28",
+    "equity": 430.76,
+    "deposited": 448.0,
+    "spy": 472.15
+   },
+   {
+    "date": "2026-05-29",
+    "equity": 435.83,
+    "deposited": 448.0,
+    "spy": 473.19
+   },
+   {
+    "date": "2026-06-01",
+    "equity": 665.71,
+    "deposited": 672.0,
+    "spy": 699.36
+   },
+   {
+    "date": "2026-06-02",
+    "equity": 673.8,
+    "deposited": 672.0,
+    "spy": 700.31
+   },
+   {
+    "date": "2026-06-03",
+    "equity": 679.88,
+    "deposited": 672.0,
+    "spy": 695.43
+   },
+   {
+    "date": "2026-06-04",
+    "equity": 683.11,
+    "deposited": 672.0,
+    "spy": 698.0
+   },
+   {
+    "date": "2026-06-05",
+    "equity": 682.27,
+    "deposited": 672.0,
+    "spy": 680.0
+   },
+   {
+    "date": "2026-06-08",
+    "equity": 682.49,
+    "deposited": 672.0,
+    "spy": 681.65
+   },
+   {
+    "date": "2026-06-09",
+    "equity": 673.62,
+    "deposited": 672.0,
+    "spy": 679.65
+   },
+   {
+    "date": "2026-06-10",
+    "equity": 667.17,
+    "deposited": 672.0,
+    "spy": 669.06
+   },
+   {
+    "date": "2026-06-11",
+    "equity": 667.68,
+    "deposited": 672.0,
+    "spy": 680.21
+   },
+   {
+    "date": "2026-06-12",
+    "equity": 677.23,
+    "deposited": 672.0,
+    "spy": 683.89
+   },
+   {
+    "date": "2026-06-15",
+    "equity": 676.18,
+    "deposited": 672.0,
+    "spy": 695.96
+   },
+   {
+    "date": "2026-06-16",
+    "equity": 668.9,
+    "deposited": 672.0,
+    "spy": 692.11
+   },
+   {
+    "date": "2026-06-17",
+    "equity": 657.29,
+    "deposited": 672.0,
+    "spy": 683.37
+   },
+   {
+    "date": "2026-06-18",
+    "equity": 654.54,
+    "deposited": 672.0,
+    "spy": 688.58
+   },
+   {
+    "date": "2026-06-22",
+    "equity": 644.1,
+    "deposited": 672.0,
+    "spy": 686.29
+   },
+   {
+    "date": "2026-06-23",
+    "equity": 643.81,
+    "deposited": 672.0,
+    "spy": 676.47
+   },
+   {
+    "date": "2026-06-24",
+    "equity": 647.49,
+    "deposited": 672.0,
+    "spy": 676.2
+   },
+   {
+    "date": "2026-06-25",
+    "equity": 641.12,
+    "deposited": 672.0,
+    "spy": 676.2
+   },
+   {
+    "date": "2026-06-26",
+    "equity": 645.63,
+    "deposited": 672.0,
+    "spy": 672.53
+   },
+   {
+    "date": "2026-06-29",
+    "equity": 642.01,
+    "deposited": 672.0,
+    "spy": 683.15
+   },
+   {
+    "date": "2026-06-30",
+    "equity": 646.75,
+    "deposited": 672.0,
+    "spy": 688.49
+   },
+   {
+    "date": "2026-07-01",
+    "equity": 872.05,
+    "deposited": 896.0,
+    "spy": 911.79
+   },
+   {
+    "date": "2026-07-02",
+    "equity": 867.62,
+    "deposited": 896.0,
+    "spy": 910.8
+   },
+   {
+    "date": "2026-07-06",
+    "equity": 863.76,
+    "deposited": 896.0,
+    "spy": 918.64
+   },
+   {
+    "date": "2026-07-07",
+    "equity": 867.68,
+    "deposited": 896.0,
+    "spy": 914.36
+   },
+   {
+    "date": "2026-07-08",
+    "equity": 854.59,
+    "deposited": 896.0,
+    "spy": 911.32
+   },
+   {
+    "date": "2026-07-09",
+    "equity": 859.12,
+    "deposited": 896.0,
+    "spy": 918.99
+   },
+   {
+    "date": "2026-07-10",
+    "equity": 860.35,
+    "deposited": 896.0,
+    "spy": 923.13
+   },
+   {
+    "date": "2026-07-13",
+    "equity": 856.65,
+    "deposited": 896.0,
+    "spy": 916.03
+   },
+   {
+    "date": "2026-07-14",
+    "equity": 879.42,
+    "deposited": 896.0,
+    "spy": 919.46
+   },
+   {
+    "date": "2026-07-15",
+    "equity": 871.4,
+    "deposited": 896.0,
+    "spy": 922.92
+   },
+   {
+    "date": "2026-07-16",
+    "equity": 873.48,
+    "deposited": 896.0,
+    "spy": 918.15
+   },
+   {
+    "date": "2026-07-17",
+    "equity": 874.82,
+    "deposited": 896.0,
+    "spy": 908.87
+   },
+   {
+    "date": "2026-07-20",
+    "equity": 881.38,
+    "deposited": 896.0,
+    "spy": 907.49
+   },
+   {
+    "date": "2026-07-21",
+    "equity": 879.13,
+    "deposited": 896.0,
+    "spy": 914.83
+   },
+   {
+    "date": "2026-07-22",
+    "equity": 867.82,
+    "deposited": 896.0,
+    "spy": 914.02
+   },
+   {
+    "date": "2026-07-23",
+    "equity": 850.76,
+    "deposited": 896.0,
+    "spy": 902.49
+   },
+   {
+    "date": "2026-07-24",
+    "equity": 847.2,
+    "deposited": 896.0,
+    "spy": 903.52
+   },
+   {
+    "date": "2026-07-27",
+    "equity": 847.21,
+    "deposited": 896.0,
+    "spy": 903.46
+   },
+   {
+    "date": "2026-07-28",
+    "equity": 855.88,
+    "deposited": 896.0,
+    "spy": 905.83
+   },
+   {
+    "date": "2026-07-29",
+    "equity": 850.26,
+    "deposited": 896.0,
+    "spy": 892.11
+   },
+   {
+    "date": "2026-07-30",
+    "equity": 855.92,
+    "deposited": 896.0,
+    "spy": 906.85
+   },
+   {
+    "date": "2026-07-31",
+    "equity": 853.05,
+    "deposited": 896.0,
+    "spy": 913.16
+   },
+   {
+    "date": "2026-08-03",
+    "equity": 1073.97,
+    "deposited": 1120.0,
+    "spy": 1152.99
+   },
+   {
+    "date": "2026-08-04",
+    "equity": 1093.0,
+    "deposited": 1120.0,
+    "spy": 1173.36
+   },
+   {
+    "date": "2026-08-05",
+    "equity": 1075.78,
+    "deposited": 1120.0,
+    "spy": 1171.36
+   },
+   {
+    "date": "2026-08-06",
+    "equity": 1082.99,
+    "deposited": 1120.0,
+    "spy": 1169.61
+   },
+   {
+    "date": "2026-08-07",
+    "equity": 1098.53,
+    "deposited": 1120.0,
+    "spy": 1176.4
+   },
+   {
+    "date": "2026-08-10",
+    "equity": 1108.29,
+    "deposited": 1120.0,
+    "spy": 1176.27
+   },
+   {
+    "date": "2026-08-11",
+    "equity": 1102.11,
+    "deposited": 1120.0,
+    "spy": 1172.47
+   },
+   {
+    "date": "2026-08-12",
+    "equity": 1112.31,
+    "deposited": 1120.0,
+    "spy": 1175.54
+   },
+   {
+    "date": "2026-08-13",
+    "equity": 1113.35,
+    "deposited": 1120.0,
+    "spy": 1183.61
+   },
+   {
+    "date": "2026-08-14",
+    "equity": 1103.41,
+    "deposited": 1120.0,
+    "spy": 1181.26
+   },
+   {
+    "date": "2026-08-17",
+    "equity": 1102.29,
+    "deposited": 1120.0,
+    "spy": 1175.66
+   },
+   {
+    "date": "2026-08-18",
+    "equity": 1102.61,
+    "deposited": 1120.0,
+    "spy": 1167.67
+   },
+   {
+    "date": "2026-08-19",
+    "equity": 1105.07,
+    "deposited": 1120.0,
+    "spy": 1170.29
+   },
+   {
+    "date": "2026-08-20",
+    "equity": 1083.1,
+    "deposited": 1120.0,
+    "spy": 1160.45
+   },
+   {
+    "date": "2026-08-21",
+    "equity": 1081.77,
+    "deposited": 1120.0,
+    "spy": 1165.04
+   },
+   {
+    "date": "2026-08-24",
+    "equity": 1064.61,
+    "deposited": 1120.0,
+    "spy": 1161.81
+   },
+   {
+    "date": "2026-08-25",
+    "equity": 1075.63,
+    "deposited": 1120.0,
+    "spy": 1165.27
+   },
+   {
+    "date": "2026-08-26",
+    "equity": 1065.25,
+    "deposited": 1120.0,
+    "spy": 1165.5
+   },
+   {
+    "date": "2026-08-27",
+    "equity": 1062.97,
+    "deposited": 1120.0,
+    "spy": 1173.47
+   },
+   {
+    "date": "2026-08-28",
+    "equity": 1060.93,
+    "deposited": 1120.0,
+    "spy": 1170.58
+   },
+   {
+    "date": "2026-08-31",
+    "equity": 1048.05,
+    "deposited": 1120.0,
+    "spy": 1166.91
+   },
+   {
+    "date": "2026-09-01",
+    "equity": 1262.96,
+    "deposited": 1344.0,
+    "spy": 1382.83
+   },
+   {
+    "date": "2026-09-02",
+    "equity": 1272.2,
+    "deposited": 1344.0,
+    "spy": 1389.18
+   },
+   {
+    "date": "2026-09-03",
+    "equity": 1282.27,
+    "deposited": 1344.0,
+    "spy": 1403.87
+   },
+   {
+    "date": "2026-09-04",
+    "equity": 1269.01,
+    "deposited": 1344.0,
+    "spy": 1398.35
+   },
+   {
+    "date": "2026-09-08",
+    "equity": 1248.9,
+    "deposited": 1344.0,
+    "spy": 1390.87
+   },
+   {
+    "date": "2026-09-09",
+    "equity": 1241.94,
+    "deposited": 1344.0,
+    "spy": 1384.27
+   },
+   {
+    "date": "2026-09-10",
+    "equity": 1230.25,
+    "deposited": 1344.0,
+    "spy": 1376.0
+   },
+   {
+    "date": "2026-09-11",
+    "equity": 1241.26,
+    "deposited": 1344.0,
+    "spy": 1387.39
+   },
+   {
+    "date": "2026-09-14",
+    "equity": 1240.77,
+    "deposited": 1344.0,
+    "spy": 1381.24
+   },
+   {
+    "date": "2026-09-15",
+    "equity": 1219.94,
+    "deposited": 1344.0,
+    "spy": 1375.19
+   },
+   {
+    "date": "2026-09-16",
+    "equity": 1203.92,
+    "deposited": 1344.0,
+    "spy": 1369.07
+   },
+   {
+    "date": "2026-09-17",
+    "equity": 1197.87,
+    "deposited": 1344.0,
+    "spy": 1384.66
+   },
+   {
+    "date": "2026-09-18",
+    "equity": 1196.55,
+    "deposited": 1344.0,
+    "spy": 1382.81
+   },
+   {
+    "date": "2026-09-21",
+    "equity": 1215.84,
+    "deposited": 1344.0,
+    "spy": 1404.42
+   },
+   {
+    "date": "2026-09-22",
+    "equity": 1224.93,
+    "deposited": 1344.0,
+    "spy": 1404.27
+   },
+   {
+    "date": "2026-09-23",
+    "equity": 1198.55,
+    "deposited": 1344.0,
+    "spy": 1394.27
+   },
+   {
+    "date": "2026-09-24",
+    "equity": 1183.57,
+    "deposited": 1344.0,
+    "spy": 1393.11
+   },
+   {
+    "date": "2026-09-25",
+    "equity": 1179.93,
+    "deposited": 1344.0,
+    "spy": 1400.48
+   },
+   {
+    "date": "2026-09-28",
+    "equity": 1170.53,
+    "deposited": 1344.0,
+    "spy": 1389.84
+   },
+   {
+    "date": "2026-09-29",
+    "equity": 1145.99,
+    "deposited": 1344.0,
+    "spy": 1387.82
+   },
+   {
+    "date": "2026-09-30",
+    "equity": 1151.34,
+    "deposited": 1344.0,
+    "spy": 1384.12
+   },
+   {
+    "date": "2026-10-01",
+    "equity": 1368.96,
+    "deposited": 1568.0,
+    "spy": 1611.24
+   },
+   {
+    "date": "2026-10-02",
+    "equity": 1373.37,
+    "deposited": 1568.0,
+    "spy": 1622.95
+   },
+   {
+    "date": "2026-10-05",
+    "equity": 1371.93,
+    "deposited": 1568.0,
+    "spy": 1634.17
+   },
+   {
+    "date": "2026-10-06",
+    "equity": 1363.65,
+    "deposited": 1568.0,
+    "spy": 1642.87
+   },
+   {
+    "date": "2026-10-07",
+    "equity": 1361.17,
+    "deposited": 1568.0,
+    "spy": 1638.76
+   },
+   {
+    "date": "2026-10-08",
+    "equity": 1347.01,
+    "deposited": 1568.0,
+    "spy": 1631.83
+   },
+   {
+    "date": "2026-10-09",
+    "equity": 1351.92,
+    "deposited": 1568.0,
+    "spy": 1641.63
+   },
+   {
+    "date": "2026-10-12",
+    "equity": 1353.71,
+    "deposited": 1568.0,
+    "spy": 1640.62
+   },
+   {
+    "date": "2026-10-13",
+    "equity": 1338.38,
+    "deposited": 1568.0,
+    "spy": 1640.62
+   },
+   {
+    "date": "2026-10-14",
+    "equity": 1354.1,
+    "deposited": 1568.0,
+    "spy": 1622.95
+   },
+   {
+    "date": "2026-10-15",
+    "equity": 1390.23,
+    "deposited": 1568.0,
+    "spy": 1627.42
+   },
+   {
+    "date": "2026-10-16",
+    "equity": 1374.29,
+    "deposited": 1568.0,
+    "spy": 1609.63
+   },
+   {
+    "date": "2026-10-19",
+    "equity": 1372.82,
+    "deposited": 1568.0,
+    "spy": 1616.52
+   },
+   {
+    "date": "2026-10-20",
+    "equity": 1386.67,
+    "deposited": 1568.0,
+    "spy": 1621.77
+   },
+   {
+    "date": "2026-10-21",
+    "equity": 1380.44,
+    "deposited": 1568.0,
+    "spy": 1630.29
+   },
+   {
+    "date": "2026-10-22",
+    "equity": 1403.99,
+    "deposited": 1568.0,
+    "spy": 1611.1
+   },
+   {
+    "date": "2026-10-23",
+    "equity": 1414.35,
+    "deposited": 1568.0,
+    "spy": 1602.24
+   },
+   {
+    "date": "2026-10-26",
+    "equity": 1432.91,
+    "deposited": 1568.0,
+    "spy": 1613.62
+   },
+   {
+    "date": "2026-10-27",
+    "equity": 1445.02,
+    "deposited": 1568.0,
+    "spy": 1623.05
+   },
+   {
+    "date": "2026-10-28",
+    "equity": 1442.64,
+    "deposited": 1568.0,
+    "spy": 1628.49
+   },
+   {
+    "date": "2026-10-29",
+    "equity": 1464.13,
+    "deposited": 1568.0,
+    "spy": 1622.61
+   },
+   {
+    "date": "2026-10-30",
+    "equity": 1469.91,
+    "deposited": 1568.0,
+    "spy": 1593.57
+   },
+   {
+    "date": "2026-11-02",
+    "equity": 1690.76,
+    "deposited": 1792.0,
+    "spy": 1807.62
+   },
+   {
+    "date": "2026-11-03",
+    "equity": 1711.35,
+    "deposited": 1792.0,
+    "spy": 1813.24
+   },
+   {
+    "date": "2026-11-04",
+    "equity": 1741.38,
+    "deposited": 1792.0,
+    "spy": 1842.93
+   }
+  ]
+ }
+}
