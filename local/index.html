@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trading Desk</title>
+<style>
+  /* Layout: a dark desk; header with clocks, then a two-column grid (watchlist + chart | brief) that stacks on narrow screens. */
+  :root {
+    --bg: #0d1013; --panel: #151a1f; --line: #262d35; --fg: #e6e9ec; --muted: #8b949e;
+    --accent: #5aa9e6; --up: #3fb950; --down: #f0605d; --warn: #d8a52b;
+    --mono: ui-monospace, "Cascadia Mono", Consolas, Menlo, monospace;
+    --sans: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 var(--sans); }
+  header { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: baseline; padding: 14px 20px; border-bottom: 1px solid var(--line); }
+  header h1 { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: .02em; }
+  .clock { font-family: var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+  .clock b { color: var(--fg); font-weight: 500; }
+  .pill { display: inline-block; padding: 1px 9px; border-radius: 999px; border: 1px solid var(--line); font-size: 12px; white-space: nowrap; }
+  .pill.up { color: var(--up); border-color: color-mix(in srgb, var(--up) 40%, transparent); }
+  .pill.down { color: var(--down); border-color: color-mix(in srgb, var(--down) 40%, transparent); }
+  .pill.warn { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 40%, transparent); }
+  .pill.info { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+  main { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 16px; padding: 16px 20px 28px; }
+  @media (max-width: 1000px) { main { grid-template-columns: minmax(0, 1fr); } }
+  .col { display: grid; gap: 16px; align-content: start; min-width: 0; }
+  section { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; min-width: 0; }
+  section h2 { margin: 0 0 4px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .note { color: var(--muted); font-size: 12px; margin: 0 0 10px; }
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th { text-align: left; font-weight: 500; color: var(--muted); font-size: 12px; padding: 6px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  td { padding: 7px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; font-family: var(--mono); font-size: 13px; }
+  td.sym { font-family: var(--sans); font-weight: 600; }
+  tr.row { cursor: pointer; }
+  tr.row:hover td { background: #1b2229; }
+  tr.row.sel td { background: #1d2833; }
+  .n { text-align: right; }
+  .up { color: var(--up); } .down { color: var(--down); }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  input { flex: 1 1 260px; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 7px 10px; font: 13px var(--mono); }
+  button { background: var(--accent); color: #06121c; border: 0; border-radius: 6px; padding: 7px 14px; font: 600 13px var(--sans); cursor: pointer; }
+  button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  #chart { width: 100%; height: 340px; display: block; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .legend i { display: inline-block; width: 14px; height: 2px; vertical-align: middle; margin-right: 5px; }
+  ul.list { list-style: none; margin: 0; padding: 0; }
+  ul.list li { padding: 8px 0; border-bottom: 1px solid var(--line); }
+  ul.list li:last-child { border-bottom: 0; }
+  ul.list a { color: var(--fg); text-decoration: none; }
+  ul.list a:hover { color: var(--accent); }
+  .meta { color: var(--muted); font-size: 12px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .err { color: var(--warn); font-size: 12px; }
+  .big { font-family: var(--mono); font-size: 22px; }
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; font-size: 13px; }
+  .kv dt { color: var(--muted); } .kv dd { margin: 0; font-family: var(--mono); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Trading Desk</h1>
+  <span class="clock">New York <b id="ny">--:--</b></span>
+  <span class="clock">Your time <b id="local">--:--</b></span>
+  <span id="session" class="pill">…</span>
+  <span id="market" class="pill">…</span>
+  <span class="clock" id="updated"></span>
+</header>
+
+<main>
+  <div class="col">
+    <section>
+      <h2>Watchlist: opening-range breakout (rule B)</h2>
+      <p class="note">Range = 9:30–9:45 New York (16:30–16:45 in Romania). Signal = first 5-minute close above the range high, until 15:30 New York. Stop = range midpoint, target = 2R. Click a row for its chart. Updates every 5 seconds.</p>
+      <div class="controls">
+        <input id="syms" aria-label="Watchlist symbols, comma separated" spellcheck="false">
+        <button id="save">Update list</button>
+      </div>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Stock</th><th class="n">Price</th><th class="n">Today</th><th class="n">Range high</th><th class="n">Range low</th><th>Status</th><th class="n">Entry</th><th class="n">Stop</th><th class="n">Target</th></tr></thead>
+          <tbody id="watch"><tr><td colspan="9" class="meta">Loading…</td></tr></tbody>
+        </table>
+      </div>
+      <p class="err" id="watchErr"></p>
+    </section>
+
+    <section>
+      <h2 id="chartTitle">5-minute chart</h2>
+      <svg id="chart" role="img" aria-label="Five-minute candle chart with the opening range"></svg>
+      <div class="legend">
+        <span><i style="background:var(--accent)"></i>Range high / low</span>
+        <span><i style="background:var(--down)"></i>Stop</span>
+        <span><i style="background:var(--up)"></i>Target</span>
+        <span><i style="background:var(--warn)"></i>Entry</span>
+      </div>
+    </section>
+  </div>
+
+  <div class="col">
+    <section>
+      <h2>Paper trader (rule B, €200 a month)</h2>
+      <div id="pt" class="meta">Loading…</div>
+    </section>
+    <section>
+      <h2>Earnings today</h2>
+      <p class="note">Avoid trading these on their earnings day. Highlighted = on your watchlist.</p>
+      <div id="earn" class="meta">Loading…</div>
+    </section>
+    <section>
+      <h2>Biggest movers today</h2>
+      <p class="note">Among the 600 liquid stocks, from the previous close. Updates every 2 minutes.</p>
+      <div class="two"><ul class="list" id="up"></ul><ul class="list" id="down"></ul></div>
+    </section>
+    <section>
+      <h2>News for your watchlist</h2>
+      <p class="note">By the time a headline appears, the price has usually moved already. Updates every minute.</p>
+      <ul class="list" id="news"><li class="meta">Loading…</li></ul>
+    </section>
+  </div>
+</main>
+
+<script>
+const DEFAULT = 'SPY,QQQ,AAPL,MSFT,NVDA,AMD,AMZN';
+let syms = DEFAULT, selected = 'SPY', lastWatch = null;
+try { syms = localStorage.getItem('desk.syms') || DEFAULT; selected = localStorage.getItem('desk.sel') || syms.split(',')[0]; } catch (e) {}
+const $ = (id) => document.getElementById(id);
+$('syms').value = syms;
+const f2 = (v) => v == null ? '–' : Number(v).toFixed(2);
+const pct = (v) => v == null ? '–' : (v > 0 ? '+' : '') + v.toFixed(2) + '%';
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+async function get(path) { const r = await fetch(path, { cache: 'no-store' }); const d = await r.json(); if (!r.ok) throw new Error(d.error || r.status); return d; }
+
+/* clocks and session state (New York time from the browser's clock) */
+function nyParts() {
+  const p = new Intl.DateTimeFormat('en-GB', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', second: '2-digit', weekday: 'short', hour12: false }).formatToParts(new Date());
+  const o = {}; p.forEach((x) => o[x.type] = x.value); return o;
+}
+function tick() {
+  const p = nyParts();
+  $('ny').textContent = `${p.weekday} ${p.hour}:${p.minute}:${p.second}`;
+  $('local').textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  const m = (+p.hour) * 60 + (+p.minute), wk = !['Sat', 'Sun'].includes(p.weekday);
+  const s = $('session');
+  let text = 'Market closed', cls = 'pill';
+  if (wk && m < 570) { text = `Opens in ${Math.floor((570 - m) / 60)}h ${(570 - m) % 60}m`; }
+  else if (wk && m < 585) { text = 'Opening range forming'; cls = 'pill info'; }
+  else if (wk && m < 930) { text = 'Entry window open'; cls = 'pill up'; }
+  else if (wk && m < 955) { text = 'No new entries: close positions by 15:55'; cls = 'pill warn'; }
+  else if (wk && m < 960) { text = 'Closing'; cls = 'pill warn'; }
+  s.textContent = text; s.className = cls;
+}
+setInterval(tick, 1000); tick();
+
+/* watchlist */
+const statusPill = {
+  'triggered': ['up', 'Breakout: in trade'], 'target hit': ['up', 'Target hit'], 'stopped out': ['down', 'Stopped out'],
+  'waiting': ['info', 'Waiting'], 'below the range': ['warn', 'Below range'], 'building the range': ['info', 'Building range'],
+  'no breakout today': ['', 'No breakout'], 'before the open': ['', 'Before open'], 'no opening-range data': ['', 'No data'],
+};
+async function loadWatch() {
+  try {
+    const d = await get('/api/watch?symbols=' + encodeURIComponent(syms));
+    lastWatch = d; $('watchErr').textContent = '';
+    const m = $('market');
+    m.textContent = d.market || 'Market filter: n/a'; m.className = 'pill ' + (d.market ? (d.market.startsWith('SPY above') ? 'up' : 'down') : '');
+    $('updated').textContent = 'Data ' + d.as_of_ny.slice(11) + ' NY';
+    const tb = $('watch'); tb.replaceChildren();
+    d.rows.forEach((r) => {
+      const o = r.orb || {}, tr = el('tr', 'row' + (r.symbol === selected ? ' sel' : ''));
+      tr.tabIndex = 0;
+      tr.addEventListener('click', () => select(r.symbol));
+      tr.addEventListener('keydown', (e) => { if (e.key === 'Enter') select(r.symbol); });
+      tr.append(el('td', 'sym', r.symbol), el('td', 'n', f2(r.price)), el('td', 'n ' + (r.change_pct > 0 ? 'up' : r.change_pct < 0 ? 'down' : ''), pct(r.change_pct)),
+        el('td', 'n', f2(o.range_high)), el('td', 'n', f2(o.range_low)));
+      const st = statusPill[o.status] || ['', o.status || '–'], td = el('td');
+      let label = st[1];
+      if (o.status === 'waiting' && o.distance_pct != null) label += ` (${o.distance_pct > 0 ? '+' : ''}${o.distance_pct}% to go)`;
+      if (o.signal_time) label += ` ${o.signal_time}`;
+      if (o.exit_time) label += ` → ${o.exit_time}`;
+      td.append(el('span', 'pill ' + st[0], label));
+      tr.append(td, el('td', 'n', f2(o.entry)), el('td', 'n', f2(o.stop)), el('td', 'n', f2(o.target)));
+      tb.append(tr);
+    });
+  } catch (e) { $('watchErr').textContent = 'Could not load prices: ' + e.message; }
+}
+function select(s) { selected = s; try { localStorage.setItem('desk.sel', s); } catch (e) {} loadWatch(); loadChart(); }
+$('save').addEventListener('click', () => {
+  syms = $('syms').value.toUpperCase().replace(/[^A-Z0-9.,-]/g, '') || DEFAULT;
+  $('syms').value = syms;
+  try { localStorage.setItem('desk.syms', syms); } catch (e) {}
+  if (!syms.split(',').includes(selected)) selected = syms.split(',')[0];
+  loadWatch(); loadChart(); loadNews();
+});
+
+/* chart */
+async function loadChart() {
+  const svg = $('chart'), W = svg.clientWidth || 700, H = 340;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  $('chartTitle').textContent = `5-minute chart: ${selected}`;
+  let d; try { d = await get('/api/bars?symbol=' + encodeURIComponent(selected)); } catch (e) { svg.replaceChildren(); return; }
+  const bars = d.bars, o = d.orb || {};
+  svg.replaceChildren();
+  const ns = 'http://www.w3.org/2000/svg', mk = (t, a) => { const n = document.createElementNS(ns, t); for (const k in a) n.setAttribute(k, a[k]); svg.append(n); return n; };
+  if (!bars.length) { const t = mk('text', { x: W / 2, y: H / 2, 'text-anchor': 'middle', fill: '#8b949e', 'font-size': 13 }); t.textContent = 'No bars yet today: the US market opens at 9:30 New York (16:30 in Romania).'; return; }
+  const levels = [o.range_high, o.range_low, o.stop, o.target, o.entry].filter((v) => v != null);
+  const lo = Math.min(...bars.map((b) => b[3]), ...levels), hi = Math.max(...bars.map((b) => b[2]), ...levels);
+  const pad = (hi - lo) * 0.06 || 1, L = 8, R = 64, T = 10, B = 24;
+  const y = (v) => T + (hi + pad - v) / ((hi - lo) + 2 * pad) * (H - T - B);
+  const slots = 78, step = (W - L - R) / slots;
+  const x = (t) => { const [h, m] = t.split(':').map(Number); return L + ((h * 60 + m - 570) / 5) * step; };
+  for (let i = 0; i <= 4; i++) {
+    const v = lo - pad + i * ((hi - lo) + 2 * pad) / 4;
+    mk('line', { x1: L, x2: W - R, y1: y(v), y2: y(v), stroke: '#262d35' });
+    const t = mk('text', { x: W - R + 6, y: y(v) + 4, fill: '#8b949e', 'font-size': 11, 'font-family': 'ui-monospace, monospace' }); t.textContent = v.toFixed(2);
+  }
+  ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00'].forEach((tm) => { const t = mk('text', { x: x(tm), y: H - 6, fill: '#8b949e', 'font-size': 11, 'text-anchor': 'middle' }); t.textContent = tm; });
+  mk('rect', { x: x('09:30'), y: T, width: 3 * step, height: H - T - B, fill: '#5aa9e6', opacity: 0.07 });
+  bars.forEach((b) => {
+    const up = b[4] >= b[1], c = up ? '#3fb950' : '#f0605d', cx = x(b[0]) + step / 2;
+    mk('line', { x1: cx, x2: cx, y1: y(b[2]), y2: y(b[3]), stroke: c });
+    mk('rect', { x: x(b[0]) + step * 0.15, width: Math.max(1, step * 0.7), y: y(Math.max(b[1], b[4])), height: Math.max(1, Math.abs(y(b[1]) - y(b[4]))), fill: c });
+  });
+  const level = (v, color, dash) => { if (v == null) return; mk('line', { x1: L, x2: W - R, y1: y(v), y2: y(v), stroke: color, 'stroke-dasharray': dash || '', 'stroke-width': 1.5 }); };
+  level(o.range_high, '#5aa9e6'); level(o.range_low, '#5aa9e6');
+  level(o.stop, '#f0605d', '5 4'); level(o.target, '#3fb950', '5 4'); level(o.entry, '#d8a52b', '2 3');
+  if (d.price != null) { const t = mk('text', { x: W - R + 6, y: y(d.price) + 4, fill: '#e6e9ec', 'font-size': 11, 'font-weight': 700, 'font-family': 'ui-monospace, monospace' }); t.textContent = '▸' + d.price.toFixed(2); }
+}
+
+/* brief */
+async function loadNews() {
+  const ul = $('news');
+  try {
+    const d = await get('/api/news?symbols=' + encodeURIComponent(syms));
+    ul.replaceChildren();
+    if (!d.news.length) ul.append(el('li', 'meta', 'No recent headlines.'));
+    d.news.slice(0, 15).forEach((n) => {
+      const li = el('li'), a = el('a', null, n.headline); a.href = n.url; a.target = '_blank'; a.rel = 'noopener';
+      li.append(a, el('div', 'meta', `${new Date(n.created_at).toLocaleString([], { weekday: 'short', hour: '2-digit', minute: '2-digit' })} · ${n.source} · ${(n.symbols || []).slice(0, 5).join(', ')}`));
+      ul.append(li);
+    });
+  } catch (e) { ul.replaceChildren(el('li', 'err', 'News unavailable: ' + e.message)); }
+}
+async function loadMovers() {
+  try {
+    const d = await get('/api/movers');
+    [['up', d.up], ['down', d.down]].forEach(([id, rows]) => {
+      const ul = $(id); ul.replaceChildren();
+      (rows || []).forEach((r) => { const li = el('li'); li.append(el('span', 'sym', r.symbol + ' '), el('span', r.change_pct >= 0 ? 'up' : 'down', pct(r.change_pct)), el('div', 'meta', '$' + f2(r.price))); ul.append(li); });
+    });
+  } catch (e) { $('up').replaceChildren(el('li', 'err', 'Movers unavailable')); }
+}
+async function loadEarnings() {
+  const box = $('earn');
+  try {
+    const d = await get('/api/earnings');
+    box.replaceChildren();
+    if (d.error) { box.append(el('div', 'err', d.error)); return; }
+    const mine = new Set(syms.split(','));
+    const rows = d.rows.slice().sort((a, b) => (mine.has(b.symbol) - mine.has(a.symbol)));
+    const p = el('p', 'meta', `${d.rows.length} companies report today (${d.date}).`); box.append(p);
+    const ul = el('ul', 'list');
+    rows.slice(0, 12).forEach((r) => {
+      const when = { 'time-pre-market': 'before the open', 'time-after-hours': 'after the close' }[r.time] || 'time not given';
+      const li = el('li'); li.append(el('span', mine.has(r.symbol) ? 'pill warn' : 'sym', r.symbol), el('span', 'meta', ` ${r.name} · ${when}`)); ul.append(li);
+    });
+    box.append(ul);
+  } catch (e) { box.replaceChildren(el('div', 'err', 'Earnings unavailable')); }
+}
+async function loadPaper() {
+  const box = $('pt');
+  try {
+    const d = await get('/api/papertrader');
+    box.replaceChildren();
+    if (!d.equity || !d.equity.length) { box.append(el('div', 'meta', 'No results found. Run "git pull" in the repo folder.')); return; }
+    const last = d.equity[d.equity.length - 1], ahead = last.equity_usd - last.spy_benchmark_usd;
+    const dl = el('dl', 'kv');
+    [['Last session', last.date], ['Account', '$' + f2(last.equity_usd)], ['Deposited', '$' + f2(last.deposited_usd)],
+     ['Same money in SPY', '$' + f2(last.spy_benchmark_usd)], ['Ahead of SPY', (ahead >= 0 ? '+$' : '−$') + f2(Math.abs(ahead))],
+     ['Trades so far', String((d.trades || []).length)]].forEach(([k, v]) => { dl.append(el('dt', null, k), el('dd', k === 'Ahead of SPY' ? (ahead >= 0 ? 'up' : 'down') : '', v)); });
+    box.append(dl);
+    const recent = (d.trades || []).filter((t) => t.date === last.date);
+    if (recent.length) {
+      const ul = el('ul', 'list'); ul.style.marginTop = '8px';
+      recent.forEach((t) => { const li = el('li'); li.append(el('span', 'sym', t.symbol + ' '), el('span', t.pnl_usd >= 0 ? 'up' : 'down', (t.pnl_usd >= 0 ? '+$' : '−$') + f2(Math.abs(t.pnl_usd))), el('span', 'meta', ` ${t.outcome}`)); ul.append(li); });
+      box.append(ul);
+    }
+  } catch (e) { box.replaceChildren(el('div', 'err', 'Paper trader data unavailable')); }
+}
+
+loadWatch(); loadChart(); loadNews(); loadMovers(); loadEarnings(); loadPaper();
+setInterval(loadWatch, 5000); setInterval(loadChart, 10000); setInterval(loadNews, 60000);
+setInterval(loadMovers, 120000); setInterval(loadEarnings, 1800000); setInterval(loadPaper, 600000);
+window.addEventListener('resize', () => loadChart());
+</script>
+</body>
+</html>
