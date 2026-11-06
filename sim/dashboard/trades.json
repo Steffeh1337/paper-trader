@@ -178,5 +178,50 @@
     "pnl_usd": 0.4,
     "R": 2.0,
     "tm_expected_R": 0.216
+  },
+  {
+    "date": "2026-11-06",
+    "symbol": "LKQ",
+    "qty": 3,
+    "entry_time": "09:50",
+    "entry": 20.01,
+    "stop": 19.87,
+    "target": 20.29,
+    "exit_time": "10:05",
+    "exit": 20.29,
+    "outcome": "target",
+    "pnl_usd": 0.84,
+    "R": 2.0,
+    "tm_expected_R": 0.386
+  },
+  {
+    "date": "2026-11-06",
+    "symbol": "TEVA",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 41.94,
+    "stop": 41.68,
+    "target": 42.46,
+    "exit_time": "10:25",
+    "exit": 42.46,
+    "outcome": "target",
+    "pnl_usd": 0.52,
+    "R": 2.0,
+    "tm_expected_R": 0.331
+  },
+  {
+    "date": "2026-11-06",
+    "symbol": "LNT",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 72.35,
+    "stop": 72.03,
+    "target": 72.99,
+    "exit_time": "15:55",
+    "exit": 72.67,
+    "outcome": "flat by close",
+    "pnl_usd": 0.32,
+    "R": 1.0,
+    "tm_expected_R": 0.37
   }
 ]

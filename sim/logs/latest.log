@@ -1,7 +1,7 @@
-2026-11-05: downloading 5-minute bars for 600 stocks and SPY from Alpaca...
-2026-11-05  account $224.18  rules {"min_exp_R": null, "target_R": 2.0, "stop": "mid", "breakeven": false, "last_entry": "15:30", "max_trades": 3, "risk": 0.03, "daily_loss": 0.1}
-83 breakouts between 9:50 and 15:30, each scored by the Time Machine at its signal time.
-  09:50 BUY 1 OVV at 63.70 -> 10:00 64.30 (target)  P&L $+0.60
-  09:50 BUY 1 CMS at 71.90 -> 10:30 71.60 (stop)  P&L $-0.30
-  09:50 BUY 1 RELX at 41.61 -> 10:40 42.01 (target)  P&L $+0.40
-End of day: account $224.88 | deposited $224.32 | SPY benchmark $216.62
+2026-11-06: downloading 5-minute bars for 600 stocks and SPY from Alpaca...
+2026-11-06  account $224.88  rules {"min_exp_R": null, "target_R": 2.0, "stop": "mid", "breakeven": false, "last_entry": "15:30", "max_trades": 3, "risk": 0.03, "daily_loss": 0.1}
+290 breakouts between 9:50 and 15:30, each scored by the Time Machine at its signal time.
+  09:50 BUY 3 LKQ at 20.01 -> 10:05 20.29 (target)  P&L $+0.84
+  09:50 BUY 1 TEVA at 41.94 -> 10:25 42.46 (target)  P&L $+0.52
+  09:50 BUY 1 LNT at 72.35 -> 15:55 72.67 (flat by close)  P&L $+0.32
+End of day: account $226.56 | deposited $224.32 | SPY benchmark $217.21

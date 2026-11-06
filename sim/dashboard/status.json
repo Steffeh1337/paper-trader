@@ -1,7 +1,7 @@
 [
   {
-    "last_run_utc": "2026-11-05T21:57:45Z",
-    "last_session": "2026-11-05",
+    "last_run_utc": "2026-11-06T21:48:27Z",
+    "last_session": "2026-11-06",
     "monthly_eur": 200.0,
     "risk_pct": 0.03,
     "daily_risk_pct": 0.1,
@@ -9,7 +9,7 @@
     "scan_at": "09:50 to 15:30",
     "target_r": 2.0,
     "flat_by": "15:55",
-    "max_loss_per_trade_usd": 6.73,
+    "max_loss_per_trade_usd": 6.75,
     "deposits": 1,
     "eur_deposited": 200.0,
     "min_expected_r": null,
