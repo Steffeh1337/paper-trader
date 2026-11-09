@@ -223,5 +223,50 @@
     "pnl_usd": 0.32,
     "R": 1.0,
     "tm_expected_R": 0.37
+  },
+  {
+    "date": "2026-11-09",
+    "symbol": "FCX",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 62.39,
+    "stop": 61.98,
+    "target": 63.21,
+    "exit_time": "09:55",
+    "exit": 61.95,
+    "outcome": "stop",
+    "pnl_usd": -0.44,
+    "R": -1.07,
+    "tm_expected_R": 0.127
+  },
+  {
+    "date": "2026-11-09",
+    "symbol": "AEO",
+    "qty": 3,
+    "entry_time": "09:50",
+    "entry": 21.3,
+    "stop": 20.96,
+    "target": 21.98,
+    "exit_time": "10:20",
+    "exit": 20.95,
+    "outcome": "stop",
+    "pnl_usd": -1.05,
+    "R": -1.03,
+    "tm_expected_R": 0.162
+  },
+  {
+    "date": "2026-11-09",
+    "symbol": "RPRX",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 67.66,
+    "stop": 67.33,
+    "target": 68.32,
+    "exit_time": "10:45",
+    "exit": 68.32,
+    "outcome": "target",
+    "pnl_usd": 0.66,
+    "R": 2.0,
+    "tm_expected_R": 0.249
   }
 ]
