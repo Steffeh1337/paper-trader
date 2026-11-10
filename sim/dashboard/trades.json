@@ -268,5 +268,50 @@
     "pnl_usd": 0.66,
     "R": 2.0,
     "tm_expected_R": 0.249
+  },
+  {
+    "date": "2026-11-10",
+    "symbol": "IBN",
+    "qty": 2,
+    "entry_time": "09:50",
+    "entry": 34.8,
+    "stop": 34.67,
+    "target": 35.06,
+    "exit_time": "09:50",
+    "exit": 34.65,
+    "outcome": "stop",
+    "pnl_usd": -0.3,
+    "R": -1.15,
+    "tm_expected_R": 0.256
+  },
+  {
+    "date": "2026-11-10",
+    "symbol": "INFY",
+    "qty": 5,
+    "entry_time": "09:50",
+    "entry": 12.5,
+    "stop": 12.39,
+    "target": 12.72,
+    "exit_time": "10:10",
+    "exit": 12.38,
+    "outcome": "stop",
+    "pnl_usd": -0.6,
+    "R": -1.09,
+    "tm_expected_R": 0.291
+  },
+  {
+    "date": "2026-11-10",
+    "symbol": "TSN",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 59.98,
+    "stop": 59.78,
+    "target": 60.38,
+    "exit_time": "10:30",
+    "exit": 60.38,
+    "outcome": "target",
+    "pnl_usd": 0.4,
+    "R": 2.0,
+    "tm_expected_R": 0.126
   }
 ]
