@@ -1,7 +1,7 @@
-2026-11-10: downloading 5-minute bars for 600 stocks and SPY from Alpaca...
-2026-11-10  account $225.73  rules {"min_exp_R": null, "target_R": 2.0, "stop": "mid", "breakeven": false, "last_entry": "15:30", "max_trades": 3, "risk": 0.03, "daily_loss": 0.1}
-223 breakouts between 9:50 and 15:30, each scored by the Time Machine at its signal time.
-  09:50 BUY 2 IBN at 34.80 -> 09:50 34.65 (stop)  P&L $-0.30
-  09:50 BUY 5 INFY at 12.50 -> 10:10 12.38 (stop)  P&L $-0.60
-  09:50 BUY 1 TSN at 59.98 -> 10:30 60.38 (target)  P&L $+0.40
-End of day: account $225.23 | deposited $224.32 | SPY benchmark $221.50
+2026-11-11: downloading 5-minute bars for 600 stocks and SPY from Alpaca...
+2026-11-11  account $225.23  rules {"min_exp_R": null, "target_R": 2.0, "stop": "mid", "breakeven": false, "last_entry": "15:30", "max_trades": 3, "risk": 0.03, "daily_loss": 0.1}
+265 breakouts between 9:50 and 15:30, each scored by the Time Machine at its signal time.
+  09:50 BUY 1 RELX at 40.04 -> 09:50 39.87 (stop)  P&L $-0.17
+  09:50 BUY 3 LKQ at 20.06 -> 10:00 19.85 (stop)  P&L $-0.63
+  09:50 BUY 1 PYPL at 59.01 -> 15:55 59.22 (flat by close)  P&L $+0.21
+End of day: account $224.64 | deposited $224.32 | SPY benchmark $224.41

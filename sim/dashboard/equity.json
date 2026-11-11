@@ -47,5 +47,12 @@
     "deposited_usd": 224.32,
     "spy_benchmark_usd": 221.5,
     "trades": 3
+  },
+  {
+    "date": "2026-11-11",
+    "equity_usd": 224.64,
+    "deposited_usd": 224.32,
+    "spy_benchmark_usd": 224.41,
+    "trades": 3
   }
 ]

@@ -313,5 +313,50 @@
     "pnl_usd": 0.4,
     "R": 2.0,
     "tm_expected_R": 0.126
+  },
+  {
+    "date": "2026-11-11",
+    "symbol": "RELX",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 40.04,
+    "stop": 39.89,
+    "target": 40.34,
+    "exit_time": "09:50",
+    "exit": 39.87,
+    "outcome": "stop",
+    "pnl_usd": -0.17,
+    "R": -1.13,
+    "tm_expected_R": 0.334
+  },
+  {
+    "date": "2026-11-11",
+    "symbol": "LKQ",
+    "qty": 3,
+    "entry_time": "09:50",
+    "entry": 20.06,
+    "stop": 19.86,
+    "target": 20.46,
+    "exit_time": "10:00",
+    "exit": 19.85,
+    "outcome": "stop",
+    "pnl_usd": -0.63,
+    "R": -1.05,
+    "tm_expected_R": 0.418
+  },
+  {
+    "date": "2026-11-11",
+    "symbol": "PYPL",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 59.01,
+    "stop": 58.47,
+    "target": 60.09,
+    "exit_time": "15:55",
+    "exit": 59.22,
+    "outcome": "flat by close",
+    "pnl_usd": 0.21,
+    "R": 0.39,
+    "tm_expected_R": 0.255
   }
 ]
