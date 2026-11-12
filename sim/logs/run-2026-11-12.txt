@@ -1,0 +1,7 @@
+2026-11-12: downloading 5-minute bars for 600 stocks and SPY from Alpaca...
+2026-11-12  account $224.64  rules {"min_exp_R": null, "target_R": 2.0, "stop": "mid", "breakeven": false, "last_entry": "15:30", "max_trades": 3, "risk": 0.03, "daily_loss": 0.1}
+189 breakouts between 9:50 and 15:30, each scored by the Time Machine at its signal time.
+  09:50 BUY 5 CLF at 13.22 -> 09:55 13.09 (stop)  P&L $-0.65
+  09:50 BUY 1 RBLX at 52.72 -> 10:00 51.92 (stop)  P&L $-0.80
+  09:50 BUY 1 AR at 38.30 -> 11:10 38.78 (target)  P&L $+0.48
+End of day: account $223.67 | deposited $224.32 | SPY benchmark $223.63

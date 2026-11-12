@@ -358,5 +358,50 @@
     "pnl_usd": 0.21,
     "R": 0.39,
     "tm_expected_R": 0.255
+  },
+  {
+    "date": "2026-11-12",
+    "symbol": "CLF",
+    "qty": 5,
+    "entry_time": "09:50",
+    "entry": 13.22,
+    "stop": 13.1,
+    "target": 13.46,
+    "exit_time": "09:55",
+    "exit": 13.09,
+    "outcome": "stop",
+    "pnl_usd": -0.65,
+    "R": -1.08,
+    "tm_expected_R": 0.189
+  },
+  {
+    "date": "2026-11-12",
+    "symbol": "RBLX",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 52.72,
+    "stop": 51.95,
+    "target": 54.26,
+    "exit_time": "10:00",
+    "exit": 51.92,
+    "outcome": "stop",
+    "pnl_usd": -0.8,
+    "R": -1.04,
+    "tm_expected_R": 0.223
+  },
+  {
+    "date": "2026-11-12",
+    "symbol": "AR",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 38.3,
+    "stop": 38.06,
+    "target": 38.78,
+    "exit_time": "11:10",
+    "exit": 38.78,
+    "outcome": "target",
+    "pnl_usd": 0.48,
+    "R": 2.0,
+    "tm_expected_R": 0.221
   }
 ]
