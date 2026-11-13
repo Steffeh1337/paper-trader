@@ -1,0 +1,7 @@
+2026-11-13: downloading 5-minute bars for 600 stocks and SPY from Alpaca...
+2026-11-13  account $223.67  rules {"min_exp_R": null, "target_R": 2.0, "stop": "mid", "breakeven": false, "last_entry": "15:30", "max_trades": 3, "risk": 0.03, "daily_loss": 0.1}
+163 breakouts between 9:50 and 15:30, each scored by the Time Machine at its signal time.
+  09:50 BUY 1 LNT at 73.66 -> 10:00 73.30 (stop)  P&L $-0.36
+  09:50 BUY 1 RRC at 51.62 -> 11:20 52.12 (target)  P&L $+0.50
+  09:50 BUY 5 INFY at 12.39 -> 15:55 12.30 (flat by close)  P&L $-0.45
+End of day: account $223.36 | deposited $224.32 | SPY benchmark $222.78

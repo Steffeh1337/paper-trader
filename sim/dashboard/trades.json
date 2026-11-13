@@ -403,5 +403,50 @@
     "pnl_usd": 0.48,
     "R": 2.0,
     "tm_expected_R": 0.221
+  },
+  {
+    "date": "2026-11-13",
+    "symbol": "LNT",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 73.66,
+    "stop": 73.36,
+    "target": 74.26,
+    "exit_time": "10:00",
+    "exit": 73.3,
+    "outcome": "stop",
+    "pnl_usd": -0.36,
+    "R": -1.2,
+    "tm_expected_R": 0.381
+  },
+  {
+    "date": "2026-11-13",
+    "symbol": "RRC",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 51.62,
+    "stop": 51.37,
+    "target": 52.12,
+    "exit_time": "11:20",
+    "exit": 52.12,
+    "outcome": "target",
+    "pnl_usd": 0.5,
+    "R": 2.0,
+    "tm_expected_R": 0.208
+  },
+  {
+    "date": "2026-11-13",
+    "symbol": "INFY",
+    "qty": 5,
+    "entry_time": "09:50",
+    "entry": 12.39,
+    "stop": 12.28,
+    "target": 12.61,
+    "exit_time": "15:55",
+    "exit": 12.3,
+    "outcome": "flat by close",
+    "pnl_usd": -0.45,
+    "R": -0.82,
+    "tm_expected_R": 0.168
   }
 ]
