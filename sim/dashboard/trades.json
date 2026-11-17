@@ -493,5 +493,50 @@
     "pnl_usd": -0.27,
     "R": -0.71,
     "tm_expected_R": 0.179
+  },
+  {
+    "date": "2026-11-17",
+    "symbol": "AR",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 38.24,
+    "stop": 38.08,
+    "target": 38.56,
+    "exit_time": "09:50",
+    "exit": 38.06,
+    "outcome": "stop",
+    "pnl_usd": -0.18,
+    "R": -1.12,
+    "tm_expected_R": 0.258
+  },
+  {
+    "date": "2026-11-17",
+    "symbol": "CNM",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 44.31,
+    "stop": 43.86,
+    "target": 45.21,
+    "exit_time": "10:00",
+    "exit": 43.84,
+    "outcome": "stop",
+    "pnl_usd": -0.47,
+    "R": -1.04,
+    "tm_expected_R": 0.303
+  },
+  {
+    "date": "2026-11-17",
+    "symbol": "NI",
+    "qty": 1,
+    "entry_time": "09:50",
+    "entry": 45.28,
+    "stop": 45.14,
+    "target": 45.56,
+    "exit_time": "11:05",
+    "exit": 45.12,
+    "outcome": "stop",
+    "pnl_usd": -0.16,
+    "R": -1.14,
+    "tm_expected_R": 0.181
   }
 ]

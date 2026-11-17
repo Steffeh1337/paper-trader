@@ -1,0 +1,7 @@
+2026-11-17: downloading 5-minute bars for 600 stocks and SPY from Alpaca...
+2026-11-17  account $221.44  rules {"min_exp_R": null, "target_R": 2.0, "stop": "mid", "breakeven": false, "last_entry": "15:30", "max_trades": 3, "risk": 0.03, "daily_loss": 0.1}
+162 breakouts between 9:50 and 15:30, each scored by the Time Machine at its signal time.
+  09:50 BUY 1 AR at 38.24 -> 09:50 38.06 (stop)  P&L $-0.18
+  09:50 BUY 1 CNM at 44.31 -> 10:00 43.84 (stop)  P&L $-0.47
+  09:50 BUY 1 NI at 45.28 -> 11:05 45.12 (stop)  P&L $-0.16
+End of day: account $220.63 | deposited $224.32 | SPY benchmark $216.32
