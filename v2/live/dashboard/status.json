@@ -1,0 +1,15 @@
+[
+  {
+    "last_run_utc": null,
+    "last_session": null,
+    "monthly_eur": 1000,
+    "stop_pct": 0.01,
+    "target_pct": 0.02,
+    "max_trades_per_session": 3,
+    "us_fx_fee": 0.0015,
+    "us_lookback": 20,
+    "us_recent_eur": -112.98,
+    "us_next": "off",
+    "eur_deposited": 0
+  }
+]

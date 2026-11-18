@@ -1,0 +1,319 @@
+<meta name="dash-one-writer">
+<style>
+  .pt { display: grid; gap: var(--cds-gap-lg); font-family: var(--font-anthropic-sans); }
+  .pt-head { display: grid; gap: var(--cds-gap-xs); }
+  .pt-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+  .pt-lede { color: var(--color-fg-muted); margin: 0; max-width: 75ch; }
+  .pt-sub { font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; color: var(--color-fg-muted); min-height: 1.2em; }
+  .pt-tiles { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); }
+  .pt-tile, .pt-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+  .pt-tile { display: grid; gap: var(--cds-gap-xs); align-content: start; }
+  .pt-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+  .pt-big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; min-height: 1.3em; }
+  .pt-good { color: var(--color-ok); } .pt-bad { color: var(--color-bad); }
+  .pt-card h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+  .pt-note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-xs) 0 var(--cds-gap-md); }
+  .pt-chart { position: relative; min-height: 260px; }
+  .pt-chart svg { display: block; touch-action: pan-y; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+  .pt-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; white-space: nowrap; z-index: 2; }
+  .pt-tip .d { color: var(--cds-text-secondary); }
+  .pt-sw { display: inline-block; width: .6rem; height: .6rem; border-radius: 2px; margin-right: .35rem; }
+  .pt-legend { display: flex; flex-wrap: wrap; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-bottom: var(--cds-gap-sm); }
+  .pt-tablebox { max-height: 28rem; overflow: auto; }
+  .pt-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+  .pt-table th { position: sticky; top: 0; background: var(--color-panel); text-align: left; font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .pt-table td { padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+  .pt-table .n { text-align: right; }
+  .pt-pill { display: inline-block; padding: 0 .45rem; border-radius: 999px; border: 1px solid var(--color-border-line); }
+  .pt-pill.target, .pt-pill.on { color: var(--color-ok); }
+  .pt-pill.stop, .pt-pill.off { color: var(--color-bad); }
+  .pt-rules { display: grid; grid-template-columns: max-content 1fr; gap: var(--cds-gap-xs) var(--cds-gap-md); font-size: var(--cds-font-size-caption); margin: 0; }
+  .pt-rules dt { color: var(--color-fg-muted); }
+  .pt-rules dd { margin: 0; font-variant-numeric: tabular-nums; }
+  .pt-empty { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); padding: var(--cds-pad-md) 0; }
+  [data-dash-source-state=empty] { color: transparent; }
+  [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+</style>
+
+<div class="pt">
+  <header class="pt-head">
+    <h1 class="pt-title" id="top">Paper Trader</h1>
+    <p class="pt-lede">Paper day trading in one euro account, funded with €1,000 a month. Mornings: the DAX 40 stocks and a DAX ETF, every trading day. Evenings: the Nasdaq-100 stocks and QQQ, only while that session's own last 20 days were profitable. Each session takes up to three breakouts of its 15-minute opening range, with a stop-loss 1% below the entry and a take-profit 2% above, using fractional shares and the whole account. Compared with the same deposits held in the DAX and in the Nasdaq-100.</p>
+    <p class="pt-sub">Last run <span data-draw="lastrun" data-source="status" data-field="last_run_utc" data-row="0">—</span> for the session of <span data-draw="lastsession" data-source="status" data-field="last_session" data-row="0">—</span>. US session next: <span data-draw="usnext" data-source="status" data-field="us_next" data-row="0">—</span> (last <span data-draw="uslook" data-source="status" data-field="us_lookback" data-row="0">—</span> days on a €1,000 reference: <span data-draw="usrecent" data-source="status" data-field="us_recent_eur" data-row="0">—</span>).</p>
+  </header>
+
+  <section class="pt-tiles" id="summary" aria-label="Summary">
+    <div class="pt-tile"><span class="pt-label">Account</span><span class="pt-big" data-draw="equity" data-source="summary" data-field="equity" data-row="0">—</span><span class="pt-sub" data-draw="equitypct" data-source="summary" data-field="return_pct" data-row="0">—</span></div>
+    <div class="pt-tile"><span class="pt-label">Deposited</span><span class="pt-big" data-draw="deposited" data-source="summary" data-field="deposited" data-row="0">—</span><span class="pt-sub">€1,000 a month</span></div>
+    <div class="pt-tile"><span class="pt-label">Ahead of the DAX</span><span class="pt-big" data-draw="vsdax" data-source="summary" data-field="vs_dax" data-row="0">—</span><span class="pt-sub">same deposits in the DAX: <span data-draw="dax" data-source="summary" data-field="dax" data-row="0">—</span></span></div>
+    <div class="pt-tile"><span class="pt-label">Ahead of the Nasdaq-100</span><span class="pt-big" data-draw="vsndx" data-source="summary" data-field="vs_ndx" data-row="0">—</span><span class="pt-sub">same deposits in QQQ: <span data-draw="ndx" data-source="summary" data-field="ndx" data-row="0">—</span></span></div>
+    <div class="pt-tile"><span class="pt-label">Trades</span><span class="pt-big" data-draw="ntrades" data-source="summary" data-field="trades" data-row="0">—</span><span class="pt-sub"><span data-draw="winrate" data-source="summary" data-field="win_rate" data-row="0">—</span> winners</span></div>
+  </section>
+
+  <section class="pt-card" id="equity-chart">
+    <h2>Account against the DAX and the Nasdaq-100</h2>
+    <p class="pt-note">Value in euros at each trading day's close. The dashed line is the money paid in. Hover, or press and hold on a phone, for exact values.</p>
+    <div class="pt-legend"><span><span class="pt-sw" data-draw="sw0">—</span>Account</span><span><span class="pt-sw" data-draw="sw1">—</span>Same money in the DAX</span><span><span class="pt-sw" data-draw="sw2">—</span>Same money in the Nasdaq-100</span><span><span class="pt-sw" data-draw="sw3">—</span>Deposited</span></div>
+    <div class="pt-chart" data-draw="equitychart" data-source="equity"></div>
+  </section>
+
+  <section class="pt-card" id="sessions">
+    <h2>Profit and loss per session</h2>
+    <p class="pt-note">Each day's result in euros, Europe and the US side by side. When the US session sat out, its bar is empty. Hover or press a day for details, including what the US session would have made on a €1,000 reference.</p>
+    <div class="pt-legend"><span><span class="pt-sw" data-draw="ssw0">—</span>Europe (DAX)</span><span><span class="pt-sw" data-draw="ssw1">—</span>US (Nasdaq-100)</span></div>
+    <div class="pt-chart" data-draw="sessionchart" data-source="sessions"></div>
+  </section>
+
+  <section class="pt-card" id="trades">
+    <h2>Trades</h2>
+    <p class="pt-note">Every trade, newest first. Times are Romanian time. Entry is the next bar's open plus 0.05% slippage (US trades also pay a 0.15% currency fee each way); a bar touching both the stop and the target counts as the stop.</p>
+    <div class="pt-tablebox">
+      <table class="pt-table" data-source="trades" data-row-key="date,symbol">
+        <thead><tr><th data-field="date">Date</th><th data-field="session">Session</th><th data-field="symbol">Instrument</th><th data-field="qty" class="n">Shares</th><th data-field="entry_time">In</th><th data-field="entry" class="n">Entry</th><th data-field="stop" class="n">Stop</th><th data-field="target" class="n">Target</th><th data-field="exit_time">Out</th><th data-field="exit" class="n">Exit</th><th data-field="outcome">Result</th><th data-field="pnl_eur" class="n">P&amp;L €</th></tr></thead>
+        <tbody data-draw="tradesbody" data-source="trades"></tbody>
+      </table>
+    </div>
+    <p class="pt-empty" data-draw="tradesempty" data-source="trades">—</p>
+  </section>
+
+  <section class="pt-card" id="rules">
+    <h2>Rules in force</h2>
+    <p class="pt-note">Chosen from a backtest of the last 60 trading days: the DAX was close to break-even; Nasdaq-100 breakouts lost money, a third of it to the currency fee; GBP/USD rarely moves 1–2% a day and is left out.</p>
+    <dl class="pt-rules">
+      <dt>Monthly deposit</dt><dd>€<span data-draw="monthly" data-source="status" data-field="monthly_eur" data-row="0">—</span>, one account for both sessions</dd>
+      <dt>Europe</dt><dd>DAX 40 stocks + DAX ETF (EXS1). Opening range 10:00–10:15, entries until 14:15, everything closed by 14:30 Romanian time. Every trading day.</dd>
+      <dt>US</dt><dd>Nasdaq-100 stocks + QQQ. Opening range 16:30–16:45, entries until 22:30, everything closed by 22:55 Romanian time. Only while the last <span data-draw="uslook2" data-source="status" data-field="us_lookback" data-row="0">—</span> US sessions were profitable.</dd>
+      <dt>Entry</dt><dd>First 5-minute close above the opening-range high; several at once: the most traded first</dd>
+      <dt>Max trades</dt><dd><span data-draw="maxtrades" data-source="status" data-field="max_trades_per_session" data-row="0">—</span> per session, each up to a third of the account</dd>
+      <dt>Stop-loss</dt><dd><span data-draw="stoppct" data-source="status" data-field="stop_pct" data-row="0">—</span> below the entry</dd>
+      <dt>Take-profit</dt><dd><span data-draw="targetpct" data-source="status" data-field="target_pct" data-row="0">—</span> above the entry</dd>
+      <dt>Costs</dt><dd>0.05% slippage each way; US trades also <span data-draw="fxfee" data-source="status" data-field="us_fx_fee" data-row="0">—</span> currency conversion each way</dd>
+      <dt>Data</dt><dd>Yahoo Finance (DAX), Alpaca IEX (Nasdaq-100), ECB reference rate (EUR/USD)</dd>
+    </dl>
+    <p class="pt-note">Paper only: no broker, no real money. Not financial advice.</p>
+  </section>
+</div>
+
+<script>
+  const eur = (v) => '€' + d3.format(',.2f')(v);
+  const signedEur = (v) => (v > 0 ? '+' : v < 0 ? '−' : '') + '€' + d3.format(',.2f')(Math.abs(v));
+  const pct = d3.format('+.1%');
+  const share = d3.format('.0%');
+  window.pt = { eur, signedEur, pct, share };
+
+  dash.calc('summary', {
+    title: 'Account summary',
+    description: 'Latest account value, deposits, the DAX and Nasdaq-100 benchmarks, trade count and win rate.',
+    inputs: ['equity', 'trades'],
+    fn: (equity, trades) => {
+      if (!equity.length) return [];
+      const last = equity[equity.length - 1];
+      const wins = trades.filter((t) => t.pnl_eur > 0).length;
+      return [{
+        equity: last.equity_eur, deposited: last.deposited_eur, dax: last.dax_eur, ndx: last.nasdaq_eur,
+        return_pct: last.deposited_eur ? last.equity_eur / last.deposited_eur - 1 : 0,
+        vs_dax: Math.round((last.equity_eur - last.dax_eur) * 100) / 100,
+        vs_ndx: Math.round((last.equity_eur - last.nasdaq_eur) * 100) / 100,
+        trades: trades.length, win_rate: trades.length ? wins / trades.length : 0,
+      }];
+    },
+  });
+</script>
+
+<script>
+  const { eur, signedEur, pct, share } = window.pt;
+  const text = (name, id, field, fmt, cls) => dash.draw(name, (el) => {
+    const g = dash.data(id);
+    if (g.status !== 'ok' || !g.data.length) { el.textContent = '—'; el.classList.remove('pt-good', 'pt-bad'); return; }
+    const v = g.data[0][field];
+    el.textContent = fmt(v);
+    if (cls) { el.classList.toggle('pt-good', v > 0); el.classList.toggle('pt-bad', v < 0); }
+  });
+  text('equity', 'summary', 'equity', eur);
+  text('equitypct', 'summary', 'return_pct', (v) => pct(v) + ' on deposits', true);
+  text('deposited', 'summary', 'deposited', eur);
+  text('vsdax', 'summary', 'vs_dax', signedEur, true);
+  text('vsndx', 'summary', 'vs_ndx', signedEur, true);
+  text('dax', 'summary', 'dax', eur);
+  text('ndx', 'summary', 'ndx', eur);
+  text('ntrades', 'summary', 'trades', d3.format(','));
+  text('winrate', 'summary', 'win_rate', share);
+  const when = (v) => new Date(v).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+  const day = (v) => new Date(v + 'T12:00:00Z').toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' });
+  text('lastrun', 'status', 'last_run_utc', when);
+  text('lastsession', 'status', 'last_session', day);
+  text('usnext', 'status', 'us_next', (v) => v === 'on' ? 'on' : 'off (sitting out)');
+  text('uslook', 'status', 'us_lookback', String);
+  text('uslook2', 'status', 'us_lookback', String);
+  text('usrecent', 'status', 'us_recent_eur', signedEur, true);
+  text('monthly', 'status', 'monthly_eur', d3.format(',.0f'));
+  text('maxtrades', 'status', 'max_trades_per_session', String);
+  text('stoppct', 'status', 'stop_pct', d3.format('.1~%'));
+  text('targetpct', 'status', 'target_pct', d3.format('.1~%'));
+  text('fxfee', 'status', 'us_fx_fee', d3.format('.2~%'));
+  ['sw0', 'sw1', 'sw2', 'sw3'].forEach((n, i) => dash.draw(n, (el) => { el.textContent = ''; el.style.background = dash.colors[i]; }));
+  ['ssw0', 'ssw1'].forEach((n, i) => dash.draw(n, (el) => { el.textContent = ''; el.style.background = dash.colors[i]; }));
+</script>
+
+<script>
+  const { eur, signedEur } = window.pt;
+  const parse = (s) => new Date(s + 'T00:00:00Z');
+  const fmtDay = d3.utcFormat('%b %-d');
+  function frame(el, h) {
+    const w = Math.max(280, el.clientWidth);
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${w} ${h}`);
+    return { svg, w, h };
+  }
+  function yAxis(svg, y, w, left, right, fmt) {
+    const g = svg.append('g').attr('font-size', null).attr('font-family', null);
+    y.ticks(5).forEach((t) => {
+      g.append('line').attr('x1', left).attr('x2', w - right).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', 'var(--cds-chart-grid)');
+      g.append('text').attr('x', left - 6).attr('y', y(t)).attr('dy', '0.32em').attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fmt(t));
+    });
+  }
+  function tip(el) {
+    let t = el.querySelector('.pt-tip');
+    if (!t) { t = document.createElement('div'); t.className = 'pt-tip'; t.hidden = true; el.appendChild(t); }
+    return t;
+  }
+  function placeTip(el, t, x, y) {
+    const w = t.offsetWidth, max = el.clientWidth - w - 4;
+    t.style.left = Math.max(4, Math.min(max, x + 12)) + 'px';
+    t.style.top = Math.max(0, y - 10) + 'px';
+  }
+  function setTip(t, title, lines) {
+    t.replaceChildren();
+    const d = document.createElement('div'); d.className = 'd'; d.textContent = title; t.appendChild(d);
+    lines.forEach(([color, name, value]) => {
+      const row = document.createElement('div');
+      if (color) { const s = document.createElement('span'); s.className = 'pt-sw'; s.style.background = color; row.appendChild(s); }
+      row.appendChild(document.createTextNode(name + ' ' + value));
+      t.appendChild(row);
+    });
+  }
+  function bindTip(sel, el, show, hide) {
+    sel.on('pointerdown pointermove', (ev, d) => { show(ev, d); })
+      .on('pointerleave', (ev) => { if (ev.pointerType === 'mouse') hide(); })
+      .on('contextmenu', (ev) => ev.preventDefault());
+    if (!el.ptTouchHide) {
+      el.ptTouchHide = (ev) => { if (!el.contains(ev.target)) el.ptHide && el.ptHide(); };
+      document.addEventListener('pointerdown', el.ptTouchHide);
+    }
+    el.ptHide = hide;
+  }
+  function placeholder(el, g, emptyText) {
+    el.replaceChildren();
+    const p = document.createElement('div');
+    p.style.cssText = 'display:flex;align-items:center;justify-content:center;gap:.4rem;min-height:260px;color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)';
+    if (g.status === 'error') {
+      const dot = document.createElement('span'); dot.style.cssText = 'width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad)';
+      p.append(dot, document.createTextNode('Failed to load'));
+    } else if (g.status === 'ok') {
+      p.textContent = emptyText;
+    } else return;
+    el.appendChild(p);
+  }
+
+  dash.draw('equitychart', (el) => {
+    const g = dash.data('equity');
+    if (g.status !== 'ok' || !g.data.length) { placeholder(el, g, 'The first trading day is recorded after tonight\'s run.'); return; }
+    el.replaceChildren();
+    const rows = g.data.map((r) => ({ ...r, d: parse(r.date) }));
+    const series = [['equity_eur', 'Account'], ['dax_eur', 'DAX'], ['nasdaq_eur', 'Nasdaq-100'], ['deposited_eur', 'Deposited']];
+    const { svg, w, h } = frame(el, 260);
+    const vals = rows.flatMap((r) => series.map(([k]) => r[k])).filter((v) => v != null);
+    const y = d3.scaleLinear([d3.min(vals) * 0.99, d3.max(vals) * 1.01], [h - 28, 12]).nice();
+    const fmt = (v) => '€' + d3.format(',.0f')(v);
+    const probe = svg.append('text').style('font-size', 'var(--cds-font-size-caption)').text(fmt(y.domain()[1]));
+    const left = probe.node().getComputedTextLength() + 12; probe.remove();
+    const right = 12;
+    const x = rows.length > 1 ? d3.scaleUtc(d3.extent(rows, (r) => r.d), [left, w - right]) : () => (left + w - right) / 2;
+    yAxis(svg, y, w, left, right, fmt);
+    const ticks = rows.length > 1 ? x.ticks(Math.min(rows.length, Math.floor(w / 80))) : [rows[0].d];
+    ticks.forEach((t) => svg.append('text').attr('x', x(t)).attr('y', h - 8).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fmtDay(t)));
+    series.forEach(([k], i) => {
+      const pts = rows.filter((r) => r[k] != null);
+      const line = d3.line().x((r) => x(r.d)).y((r) => y(r[k]));
+      svg.append('path').datum(pts).attr('d', line).attr('fill', 'none').attr('stroke', dash.colors[i]).attr('stroke-width', 2)
+        .attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('stroke-dasharray', k === 'deposited_eur' ? '4 4' : null);
+      svg.selectAll(null).data(pts).enter().append('circle').attr('cx', (r) => x(r.d)).attr('cy', (r) => y(r[k])).attr('r', pts.length < 40 ? 3 : 0).attr('fill', dash.colors[i]);
+    });
+    const rule = svg.append('line').attr('y1', 12).attr('y2', h - 28).attr('stroke', 'var(--cds-chart-reference)').attr('opacity', 0);
+    const t = tip(el);
+    const hit = svg.append('rect').attr('x', left).attr('y', 0).attr('width', w - left - right).attr('height', h).attr('fill', 'transparent');
+    bindTip(hit, el, (ev) => {
+      const [mx] = d3.pointer(ev, svg.node());
+      const r = rows.reduce((a, b) => Math.abs(x(b.d) - mx) < Math.abs(x(a.d) - mx) ? b : a);
+      rule.attr('x1', x(r.d)).attr('x2', x(r.d)).attr('opacity', 1);
+      setTip(t, fmtDay(r.d), series.filter(([k]) => r[k] != null).map(([k, n]) => [dash.colors[series.findIndex((s) => s[0] === k)], n, eur(r[k])]));
+      t.hidden = false; placeTip(el, t, x(r.d) * el.clientWidth / w, 20);
+    }, () => { t.hidden = true; rule.attr('opacity', 0); });
+  });
+
+  dash.draw('sessionchart', (el) => {
+    const g = dash.data('sessions');
+    if (g.status !== 'ok' || !g.data.length) { placeholder(el, g, 'Sessions appear here after tonight\'s run.'); return; }
+    el.replaceChildren();
+    const dates = [...new Set(g.data.map((r) => r.date))].slice(-30);
+    const by = (d, s) => g.data.find((r) => r.date === d && r.session === s);
+    const { svg, w, h } = frame(el, 240);
+    const vals = g.data.filter((r) => dates.includes(r.date)).map((r) => r.pnl_eur);
+    const y = d3.scaleLinear([Math.min(-1, d3.min(vals)), Math.max(1, d3.max(vals))], [h - 28, 12]).nice();
+    const fmt = (v) => '€' + d3.format(',.0f')(v);
+    const probe = svg.append('text').style('font-size', 'var(--cds-font-size-caption)').text(fmt(y.domain()[0]));
+    const left = probe.node().getComputedTextLength() + 12; probe.remove();
+    const x0 = d3.scaleBand(dates, [left, w - 12]).padding(0.25);
+    const x1 = d3.scaleBand(['EU', 'US'], [0, x0.bandwidth()]).padding(0.1);
+    yAxis(svg, y, w, left, 12, fmt);
+    svg.append('line').attr('x1', left).attr('x2', w - 12).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', 'var(--cds-chart-axis)');
+    const every = Math.ceil(dates.length / Math.max(1, Math.floor((w - left) / 60)));
+    dates.forEach((d, i) => {
+      if (i % every === 0) svg.append('text').attr('x', x0(d) + x0.bandwidth() / 2).attr('y', h - 8).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fmtDay(parse(d)));
+      ['EU', 'US'].forEach((s, j) => {
+        const r = by(d, s);
+        if (!r) return;
+        const bw = Math.min(28, x1.bandwidth()), bx = x0(d) + x1(s) + (x1.bandwidth() - bw) / 2;
+        if (r.status === 'sat out') {
+          svg.append('rect').attr('x', bx).attr('width', bw).attr('y', y(0) - 6).attr('height', 6).attr('rx', 2).attr('fill', 'none').attr('stroke', dash.colors[j]).attr('stroke-dasharray', '2 2');
+          return;
+        }
+        svg.append('rect').attr('x', bx).attr('width', bw).attr('y', y(Math.max(0, r.pnl_eur))).attr('height', Math.max(1, Math.abs(y(r.pnl_eur) - y(0)))).attr('rx', 3)
+          .attr('fill', r.pnl_eur < 0 ? 'var(--cds-chart-status-critical)' : dash.colors[j]).attr('opacity', r.pnl_eur < 0 ? (j ? 0.6 : 1) : 1);
+      });
+    });
+    const t = tip(el);
+    const hits = svg.selectAll(null).data(dates).enter().append('rect')
+      .attr('x', (d) => x0(d) - x0.step() * x0.paddingInner() / 2).attr('width', x0.step()).attr('y', 0).attr('height', h - 20).attr('fill', 'transparent');
+    bindTip(hits, el, (ev, d) => {
+      const e = by(d, 'EU'), u = by(d, 'US'), lines = [];
+      if (e) lines.push([dash.colors[0], 'Europe', `${signedEur(e.pnl_eur)} (${e.trades} trades)`]);
+      if (u) lines.push([dash.colors[1], 'US', u.status === 'sat out' ? `sat out; would have made ${signedEur(u.us_shadow_eur)} per €1,000` : `${signedEur(u.pnl_eur)} (${u.trades} trades)`]);
+      setTip(t, fmtDay(parse(d)), lines); t.hidden = false; const [mx, my] = d3.pointer(ev, el); placeTip(el, t, mx, my);
+    }, () => { t.hidden = true; });
+  });
+</script>
+
+<script>
+  const { eur, signedEur } = window.pt;
+  const cell = (tr, v, cls) => { const td = document.createElement('td'); td.textContent = v; if (cls) td.className = cls; tr.appendChild(td); return td; };
+  const pill = (tr, v) => { const td = document.createElement('td'); const s = document.createElement('span'); s.className = 'pt-pill ' + String(v).split(' ')[0]; s.textContent = v; td.appendChild(s); tr.appendChild(td); };
+  const price = (v, c) => (c === 'USD' ? '$' : '€') + d3.format(',.2f')(v);
+  dash.draw('tradesbody', (tb) => {
+    tb.replaceChildren();
+    const g = dash.data('trades');
+    if (g.status !== 'ok') return;
+    g.data.slice().reverse().forEach((r) => {
+      const tr = document.createElement('tr'); tr.dataset.key = encodeURIComponent(r.date) + ',' + encodeURIComponent(r.symbol);
+      cell(tr, r.date); cell(tr, r.session === 'EU' ? 'Europe' : 'US'); cell(tr, r.symbol); cell(tr, d3.format(',.4~f')(r.qty), 'n'); cell(tr, r.entry_time);
+      cell(tr, price(r.entry, r.currency), 'n'); cell(tr, price(r.stop, r.currency), 'n'); cell(tr, price(r.target, r.currency), 'n'); cell(tr, r.exit_time);
+      cell(tr, price(r.exit, r.currency), 'n'); pill(tr, r.outcome);
+      const p = cell(tr, signedEur(r.pnl_eur), 'n'); p.classList.add(r.pnl_eur >= 0 ? 'pt-good' : 'pt-bad');
+      tb.appendChild(tr);
+    });
+  });
+  dash.draw('tradesempty', (el) => {
+    const g = dash.data('trades');
+    el.hidden = !(g.status === 'ok' && g.data.length === 0);
+    el.textContent = 'No trades yet: the first session is recorded after tonight\'s run.';
+  });
+</script>
