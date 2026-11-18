@@ -37,19 +37,21 @@ SESSIONS = {
 
 # ------------------------------------------------------------------ data
 
-def yahoo(symbol, rng="5d", pause=3.0):
+def yahoo(symbol, rng="5d", pause=3.0, tries=4):
     """Raw Yahoo 5-minute chart result, slowly and politely (it rate-limits)."""
     url = "https://query2.finance.yahoo.com/v8/finance/chart/%s?range=%s&interval=5m" % (urllib.parse.quote(symbol), rng)
-    for attempt in range(4):
+    for attempt in range(tries):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=30) as r:
                 res = json.load(r)["chart"]["result"][0]
             time.sleep(pause)
             return res
         except urllib.error.HTTPError as e:
-            time.sleep(30 * (attempt + 1) if e.code == 429 else 5)
+            if attempt + 1 < tries:
+                time.sleep(30 * (attempt + 1) if e.code == 429 else 5)
         except (urllib.error.URLError, OSError, ValueError, KeyError, IndexError, TypeError):
-            time.sleep(5)
+            if attempt + 1 < tries:
+                time.sleep(5)
     return None
 
 

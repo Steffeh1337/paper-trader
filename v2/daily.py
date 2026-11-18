@@ -154,7 +154,28 @@ def run(day):
 
     # ---- data
     eu_syms = inst["dax"] + [inst["dax_etf"]]
-    eu = {s: C.yahoo_bars(C.yahoo(s, "5d"), C.RO) for s in eu_syms}
+    # The DAX ETF first, patiently (it decides whether the market was open and drives the benchmark);
+    # then the stocks at a steady pace with one retry, within a time cap, so Yahoo's throttling
+    # can only make the day's universe smaller, never stall the run.
+    import time as _time
+    etf_res = C.yahoo(inst["dax_etf"], "5d", pause=5.0, tries=5)
+    eu = {inst["dax_etf"]: C.yahoo_bars(etf_res, C.RO)}
+    deadline, skipped = _time.time() + rules.get("eu_fetch_minutes", 20) * 60, list(inst["dax"])
+    for attempt, pause in enumerate((4.0, 8.0, 12.0)):     # passes over the stocks still missing
+        if attempt:
+            if not skipped or _time.time() + 90 > deadline:
+                break
+            _time.sleep(90)                                   # let Yahoo's rate limit cool down
+        still = []
+        for s in skipped:
+            res = C.yahoo(s, "5d", pause=pause, tries=1) if _time.time() < deadline else None
+            if res is None:
+                still.append(s)
+            else:
+                eu[s] = C.yahoo_bars(res, C.RO)
+        skipped = still
+    for s in skipped:
+        eu[s] = {}
     eu_open = bool(eu.get(inst["dax_etf"], {}).get(day.isoformat()))
     us_syms = inst["ndx"] + [inst["ndx_etf"]]
     us = C.alpaca_bars(us_syms, day.isoformat() + "T00:00:00Z", (day + dt.timedelta(days=1)).isoformat() + "T00:00:00Z")
@@ -163,7 +184,10 @@ def run(day):
         log("%s: both markets were closed. Nothing to do." % day)
         return 0
     rate = ecb_eurusd(day)
-    log("%s  EUR/USD %.4f (ECB)  DAX %s, Nasdaq %s" % (day, rate, "open" if eu_open else "closed", "open" if us_open else "closed"))
+    log("%s  EUR/USD %.4f (ECB)  DAX %s, Nasdaq %s" % (day, rate, "open" if eu_open else ("no data (Yahoo unavailable)" if etf_res is None else "closed"),
+                                                        "open" if us_open else "closed"))
+    if skipped:
+        log("Yahoo data missing for %d of %d DAX stocks today (throttled): %s" % (len(skipped), len(inst["dax"]), " ".join(skipped)))
 
     # ---- deposits (to the EUR balance) and benchmarks (bought at the deposit day's open)
     month = day.strftime("%Y-%m")
@@ -204,6 +228,7 @@ def run(day):
             t.update(session="EU", currency="EUR", pnl_eur=t["pnl_usd"], entry_ro=t["entry_time"], exit_ro=t["exit_time"])
         trades_today += t_eu
         sess_rows.append(["EU", "traded", len(c_eu), len(t_eu), round(state["cash_eur"] - start, 2), ""])
+        state["eu_missing_today"] = len(skipped)
         log("Europe (DAX): %d breakouts, %d trades, P&L EUR %+.2f" % (len(c_eu), len(t_eu), state["cash_eur"] - start))
 
     # ---- US: Nasdaq-100 from the USD balance, only while switched on; always simulated on a reference
