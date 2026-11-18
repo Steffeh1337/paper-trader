@@ -4,3 +4,4 @@ backtest/cache/
 backtest/fetch.log
 backtest/*.log
 sim/cache/
+v2/cache/

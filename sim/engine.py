@@ -33,40 +33,42 @@ DEFAULT_RULES = {
 }
 
 
-def fill(c, stop_kind, target_R, breakeven, stop_pct=0.01, target_pct=None, flat_by="15:55"):
+def fill(c, stop_kind, target_R, breakeven, stop_pct=0.01, target_pct=None, flat_by="15:55", cost=0.0):
+    """cost: extra cost each way as a share of the price (e.g. 0.0015 for a currency conversion fee)."""
     bars = c["bars"]
     if not bars:
         return None
-    entry = round(bars[0][1] * (1 + SLIP), 2)
+    nd = 5 if bars[0][1] < 10 else 2          # forex-like prices (e.g. 1.3123) keep more decimals
+    entry = round(bars[0][1] * (1 + SLIP + cost), nd)
     if stop_kind == "pct":
-        stop = math.floor(entry * (1 - stop_pct) * 100) / 100
+        stop = round(entry * (1 - stop_pct), nd)
     else:
         stop = math.floor(((c["or_high"] + c["or_low"]) / 2 if stop_kind == "mid" else c["or_low"]) * 100) / 100
     if entry <= stop:
         return None
     rps = entry - stop
-    target = round(entry * (1 + target_pct), 2) if target_pct else round(entry + target_R * rps, 2)
+    target = round(entry * (1 + target_pct), nd) if target_pct else round(entry + target_R * rps, 2)
     be_level = entry + rps
     armed = False
     for j, (start, o, h, l, cl) in enumerate(bars):
         if start >= flat_by:
             return {"entry": entry, "entry_time": bars[0][0], "stop": stop, "target": target,
-                    "exit": round(o * (1 - SLIP), 2), "exit_time": flat_by, "rps": rps, "how": "flat by close"}
+                    "exit": round(o * (1 - SLIP - cost), nd), "exit_time": flat_by, "rps": rps, "how": "flat by close"}
         cur_stop = entry if armed else stop
         if l <= cur_stop:
             px = cur_stop if j == 0 else min(o, cur_stop)
             return {"entry": entry, "entry_time": bars[0][0], "stop": stop, "target": target,
-                    "exit": round(px * (1 - SLIP), 2), "exit_time": start, "rps": rps,
+                    "exit": round(px * (1 - SLIP - cost), nd), "exit_time": start, "rps": rps,
                     "how": "breakeven" if armed else "stop"}
         if h >= target:
             px = target if j == 0 else max(o, target)
             return {"entry": entry, "entry_time": bars[0][0], "stop": stop, "target": target,
-                    "exit": round(px, 2), "exit_time": start, "rps": rps, "how": "target"}
+                    "exit": round(px * (1 - cost), nd), "exit_time": start, "rps": rps, "how": "target"}
         if breakeven and h >= be_level:
             armed = True
     last = bars[-1]
     return {"entry": entry, "entry_time": bars[0][0], "stop": stop, "target": target,
-            "exit": round(last[4] * (1 - SLIP), 2), "exit_time": last[0], "rps": rps, "how": "flat by close"}
+            "exit": round(last[4] * (1 - SLIP - cost), nd), "exit_time": last[0], "rps": rps, "how": "flat by close"}
 
 
 def trade_day(cands, cash, rules, fill_of=None):
@@ -74,7 +76,7 @@ def trade_day(cands, cash, rules, fill_of=None):
     Returns (end_cash, trades, decisions)."""
     p = dict(DEFAULT_RULES, **rules)
     fill_of = fill_of or (lambda c: fill(c, p["stop"], p["target_R"], p["breakeven"], p["stop_pct"],
-                                         p["target_pct"], p["flat_by"]))
+                                         p["target_pct"], p["flat_by"], c.get("cost", p.get("cost", 0.0))))
     eq0 = cash
     cap = eq0 * p["daily_loss"]
     open_pos, trades, decisions = [], [], {}
