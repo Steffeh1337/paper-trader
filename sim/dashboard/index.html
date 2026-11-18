@@ -44,12 +44,12 @@
 <div class="pt">
   <header class="pt-head">
     <h1 class="pt-title" id="top">Paper Trader</h1>
-    <p class="pt-lede">Automatic day trading on paper with the day-trader-skill, funded with €200 a month. Every trading day after the US close, the simulator replays the session on Alpaca's 5-minute bars for the 600 most-traded US stocks priced $5 to $150: it takes the first three 15-minute opening-range breakouts of the day (several at once: best Time Machine score first), targets 2R with the stop at the range midpoint, and fills them from real bars. These rules (variant B) were chosen by the six-month backtest below. The benchmark puts the same money into SPY on the same day.</p>
+    <p class="pt-lede">Automatic day trading on paper with the day-trader-skill, funded with €1,000 a month: €500 for US stocks and €500 for European stocks, each in its own account. Every trading day the simulator replays both sessions from real 5-minute bars: it takes the first three breakouts of the 15-minute opening range, with a stop-loss 1% below the entry and a take-profit 2% above, using fractional shares. US: 600 liquid stocks (Alpaca data), range 16:30–16:45 Romanian time, closed by 22:55. Europe: the Euro Stoxx 50 stocks (Yahoo data), range 10:00–10:15, closed by 14:30. Each account is compared with the same money in its market's index: SPY for the US, the Euro Stoxx 50 for Europe.</p>
     <p class="pt-sub">Last run <span data-draw="lastrun" data-source="status" data-field="last_run_utc" data-row="0">—</span> for the session of <span data-draw="lastsession" data-source="status" data-field="last_session" data-row="0">—</span>.</p>
   </header>
 
   <section class="pt-tiles" id="summary" aria-label="Summary">
-    <div class="pt-tile"><span class="pt-label">Day-trading account</span><span class="pt-big" data-draw="equity" data-source="summary" data-field="equity" data-row="0">—</span><span class="pt-sub" data-draw="equitypct" data-source="summary" data-field="return_pct" data-row="0">—</span></div>
+    <div class="pt-tile"><span class="pt-label">US account (USD)</span><span class="pt-big" data-draw="equity" data-source="summary" data-field="equity" data-row="0">—</span><span class="pt-sub" data-draw="equitypct" data-source="summary" data-field="return_pct" data-row="0">—</span></div>
     <div class="pt-tile"><span class="pt-label">Same money in SPY</span><span class="pt-big" data-draw="spy" data-source="summary" data-field="spy" data-row="0">—</span><span class="pt-sub" data-draw="spypct" data-source="summary" data-field="spy_return_pct" data-row="0">—</span></div>
     <div class="pt-tile"><span class="pt-label">Ahead of SPY</span><span class="pt-big" data-draw="vsspy" data-source="summary" data-field="vs_spy" data-row="0">—</span><span class="pt-sub">positive means day trading is winning</span></div>
     <div class="pt-tile"><span class="pt-label">Deposited</span><span class="pt-big" data-draw="deposited" data-source="summary" data-field="deposited" data-row="0">—</span><span class="pt-sub">€<span data-draw="eur" data-source="status" data-field="eur_deposited" data-row="0">—</span> converted at each month's rate</span></div>
@@ -58,15 +58,36 @@
   </section>
 
   <section class="pt-card" id="equity-chart">
-    <h2>Account against SPY</h2>
+    <h2>US account against SPY</h2>
     <p class="pt-note">Value at each day's close, in US dollars. The dashed line is the money paid in. Hover, or press and hold on a phone, to see exact values.</p>
     <div class="pt-legend"><span><span class="pt-sw" data-draw="sw0">—</span>Day-trading account</span><span><span class="pt-sw" data-draw="sw1">—</span>SPY benchmark</span><span><span class="pt-sw" data-draw="sw2">—</span>Deposited</span></div>
     <div class="pt-chart" data-draw="equitychart" data-source="equity"></div>
   </section>
 
+  <section class="pt-card" id="europe">
+    <h2>Europe: account against the Euro Stoxx 50</h2>
+    <p class="pt-note">€500 a month, Euro Stoxx 50 stocks, range 10:00–10:15 Romanian time, entries until <span data-draw="euwindow" data-source="eu_status" data-field="window" data-row="0">—</span>, everything closed by <span data-draw="euflat" data-source="eu_status" data-field="flat_by" data-row="0">—</span>. Values in euros at each day's close. Last European session: <span data-draw="eusession" data-source="eu_status" data-field="last_session" data-row="0">—</span>.</p>
+    <div class="pt-tiles">
+      <div class="pt-tile"><span class="pt-label">European account (EUR)</span><span class="pt-big" data-draw="euequity" data-source="eu_summary" data-field="equity" data-row="0">—</span><span class="pt-sub" data-draw="eupct" data-source="eu_summary" data-field="return_pct" data-row="0">—</span></div>
+      <div class="pt-tile"><span class="pt-label">Same money in the Euro Stoxx 50</span><span class="pt-big" data-draw="eubench" data-source="eu_summary" data-field="bench" data-row="0">—</span><span class="pt-sub" data-draw="eubenchpct" data-source="eu_summary" data-field="bench_return_pct" data-row="0">—</span></div>
+      <div class="pt-tile"><span class="pt-label">Ahead of the index</span><span class="pt-big" data-draw="euvs" data-source="eu_summary" data-field="vs_bench" data-row="0">—</span><span class="pt-sub">positive means day trading is winning</span></div>
+      <div class="pt-tile"><span class="pt-label">Deposited</span><span class="pt-big" data-draw="eudep" data-source="eu_summary" data-field="deposited" data-row="0">—</span><span class="pt-sub">€500 a month</span></div>
+      <div class="pt-tile"><span class="pt-label">Trades</span><span class="pt-big" data-draw="euntrades" data-source="eu_summary" data-field="trades" data-row="0">—</span><span class="pt-sub"><span data-draw="euwin" data-source="eu_summary" data-field="win_rate" data-row="0">—</span> winners</span></div>
+    </div>
+    <div class="pt-legend" style="margin-top: var(--cds-gap-md)"><span><span class="pt-sw" data-draw="esw0">—</span>European account</span><span><span class="pt-sw" data-draw="esw1">—</span>Euro Stoxx 50 benchmark</span><span><span class="pt-sw" data-draw="esw2">—</span>Deposited</span></div>
+    <div class="pt-chart" data-draw="euchart" data-source="eu_equity"></div>
+    <h2 id="eu-trades">European trades</h2>
+    <div class="pt-tablebox">
+      <table class="pt-table" data-source="eu_trades" data-row-key="date,symbol">
+        <thead><tr><th data-field="date">Date</th><th data-field="symbol">Stock</th><th data-field="qty" class="n">Shares</th><th data-field="entry_time">In</th><th data-field="entry" class="n">Entry</th><th data-field="stop" class="n">Stop</th><th data-field="target" class="n">Target</th><th data-field="exit_time">Out</th><th data-field="exit" class="n">Exit</th><th data-field="outcome">Result</th><th data-field="pnl_eur" class="n">P&amp;L</th></tr></thead>
+        <tbody data-draw="eutradesbody" data-source="eu_trades"></tbody>
+      </table>
+    </div>
+  </section>
+
   <div class="pt-grid">
     <section class="pt-card" id="pnl-chart">
-      <h2>Profit and loss per day</h2>
+      <h2>US profit and loss per day</h2>
       <p class="pt-note">Sum of the day's closed trades, in US dollars. Hover or press a day for its value.</p>
       <div class="pt-chart" data-draw="pnlchart" data-source="daily_pnl"></div>
     </section>
@@ -85,8 +106,8 @@
   </section>
 
   <section class="pt-card" id="trades">
-    <h2>Trades</h2>
-    <p class="pt-note">Every simulated trade, newest first. Entry is the open of the bar after the signal plus 0.05% slippage; a bar that touches both the stop and the target counts as the stop.</p>
+    <h2>US trades</h2>
+    <p class="pt-note">Every simulated US trade, newest first. Entry is the open of the bar after the signal plus 0.05% slippage; a bar that touches both the stop and the target counts as the stop.</p>
     <div class="pt-tablebox">
       <table class="pt-table" data-source="trades" data-row-key="date,symbol">
         <thead><tr><th data-field="date">Date</th><th data-field="symbol">Stock</th><th data-field="qty" class="n">Shares</th><th data-field="entry_time">In</th><th data-field="entry" class="n">Entry</th><th data-field="stop" class="n">Stop</th><th data-field="target" class="n">Target</th><th data-field="exit_time">Out</th><th data-field="exit" class="n">Exit</th><th data-field="outcome">Result</th><th data-field="pnl_usd" class="n">P&amp;L</th><th data-field="R" class="n">R</th><th data-field="tm_expected_R" class="n">Expected R</th></tr></thead>
@@ -96,7 +117,7 @@
   </section>
 
   <section class="pt-card" id="candidates">
-    <h2>What the scanner saw</h2>
+    <h2>What the US scanner saw</h2>
     <p class="pt-note">Every breakout of the day in the order it fired, with the Time Machine's odds where it ran and what the simulator did with it. Pick a day:</p>
     <div class="pt-tabs" data-draw="daytabs" data-source="days"></div>
     <div class="pt-tablebox">
@@ -126,16 +147,18 @@
     <h2>Rules in force</h2>
     <p class="pt-note">Set in the simulator; the risk limits scale with the account.</p>
     <dl class="pt-rules">
-      <dt>Monthly deposit</dt><dd>€<span data-draw="monthly" data-source="status" data-field="monthly_eur" data-row="0">—</span></dd>
+      <dt>Monthly deposit</dt><dd>€<span data-draw="monthly" data-source="status" data-field="monthly_eur" data-row="0">—</span> to the US account, €<span data-draw="eumonthly" data-source="eu_status" data-field="monthly_eur" data-row="0">—</span> to the European account</dd>
       <dt>Max loss per trade</dt><dd><span data-draw="riskpct" data-source="status" data-field="risk_pct" data-row="0">—</span> of the account, now $<span data-draw="maxloss" data-source="status" data-field="max_loss_per_trade_usd" data-row="0">—</span></dd>
       <dt>Daily loss limit</dt><dd>no new trades once the day's net loss plus open risk reaches <span data-draw="dailypct" data-source="status" data-field="daily_risk_pct" data-row="0">—</span> of the account</dd>
       <dt>Max trades per day</dt><dd><span data-draw="maxtrades" data-source="status" data-field="max_trades" data-row="0">—</span></dd>
-      <dt>Entry window</dt><dd><span data-draw="scanat" data-source="status" data-field="scan_at" data-row="0">—</span> New York, breakouts of the 15-minute opening range</dd>
-      <dt>Target</dt><dd><span data-draw="targetr" data-source="status" data-field="target_r" data-row="0">—</span>R, R being the distance from the entry to the stop</dd>
+      <dt>US entry window</dt><dd><span data-draw="scanat" data-source="status" data-field="scan_at" data-row="0">—</span> New York (16:50–22:30 Romanian time), after the 9:30–9:45 opening range</dd>
+      <dt>Europe entry window</dt><dd><span data-draw="euwindow2" data-source="eu_status" data-field="window" data-row="0">—</span> Romanian time, after the 10:00–10:15 opening range; flat by <span data-draw="euflat2" data-source="eu_status" data-field="flat_by" data-row="0">—</span></dd>
+      <dt>Take-profit</dt><dd><span data-draw="targetpct" data-source="status" data-field="target_pct" data-row="0">—</span> above the entry</dd>
       <dt>Time Machine filter</dt><dd data-draw="minr" data-source="status" data-field="min_expected_r" data-row="0">—</dd>
-      <dt>Stop</dt><dd><span data-draw="stoprule" data-source="status" data-field="stop_rule" data-row="0">—</span>; breakeven move <span data-draw="breakeven" data-source="status" data-field="breakeven" data-row="0">—</span></dd>
+      <dt>Stop-loss</dt><dd><span data-draw="stoppct" data-source="status" data-field="stop_pct" data-row="0">—</span> below the entry</dd>
+      <dt>Shares</dt><dd data-draw="fractional" data-source="status" data-field="fractional" data-row="0">—</dd>
       <dt>Data</dt><dd data-draw="datasrc" data-source="status" data-field="data" data-row="0">—</dd>
-      <dt>Flat by</dt><dd><span data-draw="flatby" data-source="status" data-field="flat_by" data-row="0">—</span> New York, no overnight positions</dd>
+      <dt>US flat by</dt><dd><span data-draw="flatby" data-source="status" data-field="flat_by" data-row="0">—</span> New York (22:55 Romanian time), no overnight positions</dd>
     </dl>
     <p class="pt-note">Paper only: no broker, no real money. Not financial advice. A few weeks of results is a small sample.</p>
   </section>
@@ -149,6 +172,24 @@
   const r2 = (v) => (v > 0 ? '+' : '') + d3.format('.2f')(v);
   const ok = (id) => dash.data(id).status === 'ok';
   window.pt = { money, signedMoney, pct, share, r2, ok, day: null };
+
+  dash.calc('eu_summary', {
+    title: 'European account summary',
+    description: 'Latest European account, deposits and Euro Stoxx 50 value, with trade count and win rate.',
+    inputs: ['eu_equity', 'eu_trades'],
+    fn: (eu_equity, eu_trades) => {
+      if (!eu_equity.length) return [];
+      const last = eu_equity[eu_equity.length - 1];
+      const wins = eu_trades.filter((t) => t.pnl_eur > 0).length;
+      return [{
+        equity: last.equity_eur, deposited: last.deposited_eur, bench: last.benchmark_eur,
+        return_pct: last.deposited_eur ? last.equity_eur / last.deposited_eur - 1 : 0,
+        bench_return_pct: last.deposited_eur ? last.benchmark_eur / last.deposited_eur - 1 : 0,
+        vs_bench: Math.round((last.equity_eur - last.benchmark_eur) * 100) / 100,
+        trades: eu_trades.length, win_rate: eu_trades.length ? wins / eu_trades.length : 0,
+      }];
+    },
+  });
 
   dash.calc('summary', {
     title: 'Account summary',
@@ -240,11 +281,25 @@
   text('dailypct', 'status', 'daily_risk_pct', share);
   text('maxtrades', 'status', 'max_trades', String);
   text('scanat', 'status', 'scan_at', String);
-  text('targetr', 'status', 'target_r', String);
+  text('targetpct', 'status', 'target_pct', (v) => v == null ? '2R' : d3.format('.1~%')(v));
+  text('stoppct', 'status', 'stop_pct', (v) => v == null ? 'at the opening-range midpoint' : d3.format('.1~%')(v));
+  text('fractional', 'status', 'fractional', (v) => v ? 'fractional, as Trading 212 allows' : 'whole shares only');
+  text('eumonthly', 'eu_status', 'monthly_eur', d3.format(',.0f'));
+  text('euwindow', 'eu_status', 'window', String); text('euwindow2', 'eu_status', 'window', String);
+  text('euflat', 'eu_status', 'flat_by', String); text('euflat2', 'eu_status', 'flat_by', String);
+  text('eusession', 'eu_status', 'last_session', day);
+  const eur = d3.format(',.2f'), euro = (v) => '€' + eur(v), signedEuro = (v) => (v > 0 ? '+' : v < 0 ? '−' : '') + '€' + eur(Math.abs(v));
+  text('euequity', 'eu_summary', 'equity', euro);
+  text('eupct', 'eu_summary', 'return_pct', (v) => pct(v) + ' on deposits', true);
+  text('eubench', 'eu_summary', 'bench', euro);
+  text('eubenchpct', 'eu_summary', 'bench_return_pct', (v) => pct(v) + ' on deposits', true);
+  text('euvs', 'eu_summary', 'vs_bench', signedEuro, true);
+  text('eudep', 'eu_summary', 'deposited', euro);
+  text('euntrades', 'eu_summary', 'trades', d3.format(','));
+  text('euwin', 'eu_summary', 'win_rate', share);
+  ['esw0', 'esw1', 'esw2'].forEach((n, i) => dash.draw(n, (el) => { el.textContent = ''; el.style.background = dash.colors[i]; }));
   text('flatby', 'status', 'flat_by', String);
   text('minr', 'status', 'min_expected_r', (v) => v == null ? 'off: every breakout qualifies' : 'expected R above ' + r2(v) + ' and a positive history');
-  text('stoprule', 'status', 'stop_rule', (v) => v === 'low' ? 'at the opening-range low' : 'at the opening-range midpoint');
-  text('breakeven', 'status', 'breakeven', (v) => v ? 'on at +1R' : 'off');
   text('datasrc', 'status', 'data', String);
   ['sw0', 'sw1', 'sw2'].forEach((n, i) => dash.draw(n, (el) => { el.textContent = ''; el.style.background = dash.colors[i]; }));
   dash.draw('cw0', (el) => { el.textContent = ''; el.style.background = 'var(--cds-chart-muted)'; });
@@ -311,16 +366,16 @@
     }
   }
 
-  dash.draw('equitychart', (el) => {
-    const g = dash.data('equity');
+  const equityChart = (el, id, series, cur) => {
+    const g = dash.data(id);
     if (g.status !== 'ok' || !g.data.length) { placeholder(el, g); return; }
     el.replaceChildren();
     const rows = g.data.map((r) => ({ ...r, d: parse(r.date) }));
-    const series = [['equity_usd', 'Account'], ['spy_benchmark_usd', 'SPY'], ['deposited_usd', 'Deposited']];
+    const money = (v) => cur + d3.format(',.2f')(v);
     const { svg, w, h } = frame(el, 260);
     const vals = rows.flatMap((r) => series.map(([k]) => r[k]));
     const y = d3.scaleLinear([d3.min(vals) * 0.98, d3.max(vals) * 1.02], [h - 28, 12]).nice();
-    const fmt = d3.format('$,.0f');
+    const fmt = (v) => cur + d3.format(',.0f')(v);
     const probe = svg.append('text').style('font-size', 'var(--cds-font-size-caption)').text(fmt(y.domain()[1]));
     const left = probe.node().getComputedTextLength() + 12; probe.remove();
     const right = 12;
@@ -331,7 +386,7 @@
     series.forEach(([k], i) => {
       const line = d3.line().x((r) => x(r.d)).y((r) => y(r[k]));
       svg.append('path').datum(rows).attr('d', line).attr('fill', 'none').attr('stroke', dash.colors[i]).attr('stroke-width', 2)
-        .attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('stroke-dasharray', k === 'deposited_usd' ? '4 4' : null);
+        .attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round').attr('stroke-dasharray', k.startsWith('deposited') ? '4 4' : null);
       svg.selectAll(null).data(rows).enter().append('circle').attr('cx', (r) => x(r.d)).attr('cy', (r) => y(r[k])).attr('r', rows.length < 40 ? 3 : 0).attr('fill', dash.colors[i]);
     });
     const rule = svg.append('line').attr('y1', 12).attr('y2', h - 28).attr('stroke', 'var(--cds-chart-reference)').attr('opacity', 0);
@@ -344,7 +399,9 @@
       setTip(t, fmtDay(r.d), series.map(([k, n], i) => [dash.colors[i], n, money(r[k])]));
       t.hidden = false; placeTip(el, t, x(r.d) * el.clientWidth / w, 20);
     }, () => { t.hidden = true; rule.attr('opacity', 0); });
-  });
+  };
+  dash.draw('equitychart', (el) => equityChart(el, 'equity', [['equity_usd', 'Account'], ['spy_benchmark_usd', 'SPY'], ['deposited_usd', 'Deposited']], '$'));
+  dash.draw('euchart', (el) => equityChart(el, 'eu_equity', [['equity_eur', 'Account'], ['benchmark_eur', 'Euro Stoxx 50'], ['deposited_eur', 'Deposited']], '€'));
 
   dash.draw('pnlchart', (el) => {
     const g = dash.data('daily_pnl');
@@ -485,7 +542,7 @@
     if (g.status !== 'ok') return;
     g.data.slice().reverse().forEach((r) => {
       const tr = document.createElement('tr'); tr.dataset.key = key(r);
-      cell(tr, r.date); cell(tr, r.symbol); cell(tr, r.qty, 'n'); cell(tr, r.entry_time);
+      cell(tr, r.date); cell(tr, r.symbol); cell(tr, d3.format(',.4~f')(r.qty), 'n'); cell(tr, r.entry_time);
       cell(tr, money(r.entry), 'n'); cell(tr, money(r.stop), 'n'); cell(tr, money(r.target), 'n'); cell(tr, r.exit_time);
       cell(tr, money(r.exit), 'n'); pill(tr, r.outcome);
       const p = cell(tr, signedMoney(r.pnl_usd), 'n'); p.classList.add(r.pnl_usd >= 0 ? 'pt-good' : 'pt-bad');
@@ -504,6 +561,21 @@
       cell(tr, r.variant);
       [r.first, r.unseen, r.all].forEach((v) => { const td = cell(tr, pc(v), 'n'); td.classList.add(v >= 0 ? 'pt-good' : 'pt-bad'); });
       cell(tr, pc(r.spy_all), 'n'); cell(tr, d3.format(',')(r.trades_all), 'n'); cell(tr, r2(r.avg_R_all), 'n'); cell(tr, money(r.max_dd_all), 'n');
+      tb.appendChild(tr);
+    });
+  });
+
+  dash.draw('eutradesbody', (tb) => {
+    tb.replaceChildren();
+    const g = dash.data('eu_trades');
+    if (g.status !== 'ok') return;
+    const e = (v) => '€' + d3.format(',.2f')(v);
+    g.data.slice().reverse().forEach((r) => {
+      const tr = document.createElement('tr'); tr.dataset.key = key(r);
+      cell(tr, r.date); cell(tr, r.symbol); cell(tr, d3.format(',.4~f')(r.qty), 'n'); cell(tr, r.entry_time);
+      cell(tr, e(r.entry), 'n'); cell(tr, e(r.stop), 'n'); cell(tr, e(r.target), 'n'); cell(tr, r.exit_time);
+      cell(tr, e(r.exit), 'n'); pill(tr, r.outcome);
+      const p = cell(tr, (r.pnl_eur > 0 ? '+' : r.pnl_eur < 0 ? '−' : '') + e(Math.abs(r.pnl_eur)), 'n'); p.classList.add(r.pnl_eur >= 0 ? 'pt-good' : 'pt-bad');
       tb.appendChild(tr);
     });
   });

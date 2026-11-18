@@ -20,7 +20,11 @@ BUFFER = 0.05
 DEFAULT_RULES = {
     "min_exp_R": 0.0,       # None: no Time Machine filter; a number: expected R above it AND positive history
     "target_R": 2.0,
-    "stop": "mid",          # "mid": opening-range midpoint, "low": opening-range low
+    "stop": "mid",          # "mid": opening-range midpoint, "low": opening-range low, "pct": stop_pct below the entry
+    "stop_pct": 0.01,       # with stop "pct"
+    "target_pct": None,     # a number: take profit this far above the entry instead of target_R
+    "fractional": False,    # fractional shares (as Trading 212 allows) instead of whole shares
+    "flat_by": "15:55",     # anything open is sold at this bar's open (exchange-local time of the bars)
     "breakeven": False,     # move the stop to the entry once the trade is up 1R
     "last_entry": "15:30",
     "max_trades": 10,
@@ -29,22 +33,25 @@ DEFAULT_RULES = {
 }
 
 
-def fill(c, stop_kind, target_R, breakeven):
+def fill(c, stop_kind, target_R, breakeven, stop_pct=0.01, target_pct=None, flat_by="15:55"):
     bars = c["bars"]
     if not bars:
         return None
-    stop = math.floor(((c["or_high"] + c["or_low"]) / 2 if stop_kind == "mid" else c["or_low"]) * 100) / 100
     entry = round(bars[0][1] * (1 + SLIP), 2)
+    if stop_kind == "pct":
+        stop = math.floor(entry * (1 - stop_pct) * 100) / 100
+    else:
+        stop = math.floor(((c["or_high"] + c["or_low"]) / 2 if stop_kind == "mid" else c["or_low"]) * 100) / 100
     if entry <= stop:
         return None
     rps = entry - stop
-    target = round(entry + target_R * rps, 2)
+    target = round(entry * (1 + target_pct), 2) if target_pct else round(entry + target_R * rps, 2)
     be_level = entry + rps
     armed = False
     for j, (start, o, h, l, cl) in enumerate(bars):
-        if start >= "15:55":
+        if start >= flat_by:
             return {"entry": entry, "entry_time": bars[0][0], "stop": stop, "target": target,
-                    "exit": round(o * (1 - SLIP), 2), "exit_time": "15:55", "rps": rps, "how": "flat by close"}
+                    "exit": round(o * (1 - SLIP), 2), "exit_time": flat_by, "rps": rps, "how": "flat by close"}
         cur_stop = entry if armed else stop
         if l <= cur_stop:
             px = cur_stop if j == 0 else min(o, cur_stop)
@@ -66,7 +73,8 @@ def trade_day(cands, cash, rules, fill_of=None):
     """cands: one day's breakouts. cash: the account at the open (all flat).
     Returns (end_cash, trades, decisions)."""
     p = dict(DEFAULT_RULES, **rules)
-    fill_of = fill_of or (lambda c: fill(c, p["stop"], p["target_R"], p["breakeven"]))
+    fill_of = fill_of or (lambda c: fill(c, p["stop"], p["target_R"], p["breakeven"], p["stop_pct"],
+                                         p["target_pct"], p["flat_by"]))
     eq0 = cash
     cap = eq0 * p["daily_loss"]
     open_pos, trades, decisions = [], [], {}
@@ -114,9 +122,14 @@ def trade_day(cands, cash, rules, fill_of=None):
             decisions[sym] = "no fill: opened below the stop"
             continue
         usable = cash - eq0 * BUFFER
-        qty = min(int(eq0 * p["risk"] // f["rps"]), int(eq0 * POS_CAP // f["entry"]),
-                  int(max(0.0, usable) // f["entry"]), int(room // f["rps"]))
-        if qty < 1:
+        sizes = (eq0 * p["risk"] / f["rps"], eq0 * POS_CAP / f["entry"], max(0.0, usable) / f["entry"], room / f["rps"])
+        if p["fractional"]:
+            qty = math.floor(min(sizes) * 10000) / 10000
+            too_small = qty * f["entry"] < 1.0       # brokers' minimum order is about 1 unit of currency
+        else:
+            qty = int(min(sizes))
+            too_small = qty < 1
+        if too_small:
             decisions[sym] = "skipped: no cash or risk room for one share"
             continue
         cash -= qty * f["entry"]

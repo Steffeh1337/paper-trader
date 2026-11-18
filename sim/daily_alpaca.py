@@ -107,16 +107,20 @@ def run(day, data_dir=None):
 
     pf_path = os.path.join(D.TRADER, "portfolio.json")
     pf = D.read_json(pf_path, {"cash": 0.0, "positions": []})
+    # Monthly deposit: top the month up to rules["monthly_eur"] (a raised budget is topped up the same month).
     month = day.strftime("%Y-%m")
-    if not any(d["month"] == month for d in state["deposits"]):
+    target_eur = float(rules.get("monthly_eur", D.MONTHLY_EUR))
+    have_eur = sum(d["eur"] for d in state["deposits"] if d["month"] == month)
+    if have_eur < target_eur - 0.005:
+        eur = round(target_eur - have_eur, 2)
         rate = eurusd(day)
-        usd = round(D.MONTHLY_EUR * rate, 2)
+        usd = round(eur * rate, 2)
         pf["cash"] = round(pf.get("cash", 0.0) + usd, 2)
         spy_open = spy_day[0]["o"]
         state["spy_shares"] = state.get("spy_shares", 0.0) + usd / spy_open
-        state["deposits"].append({"month": month, "date": day.isoformat(), "eur": D.MONTHLY_EUR,
+        state["deposits"].append({"month": month, "date": day.isoformat(), "eur": eur,
                                   "eurusd": rate, "usd": usd, "spy_price": round(spy_open, 2)})
-        log("Deposit: EUR %.0f at %.4f (ECB) = $%.2f. Benchmark bought SPY at $%.2f." % (D.MONTHLY_EUR, rate, usd, spy_open))
+        log("Deposit: EUR %.2f at %.4f (ECB) = $%.2f. Benchmark bought SPY at $%.2f." % (eur, rate, usd, spy_open))
     equity_start = pf["cash"]
     log("%s  account $%.2f  rules %s" % (day, equity_start, json.dumps(rules)))
 
@@ -134,7 +138,7 @@ def run(day, data_dir=None):
                                     "exit", "outcome", "pnl_usd", "R", "tm_expected_R"],
                      [day] + [t[k] for k in ("symbol", "qty", "entry_time", "entry", "stop", "target", "exit_time",
                                              "exit", "outcome", "pnl_usd", "R", "tm_expected_R")])
-        log("  %s BUY %d %s at %.2f -> %s %.2f (%s)  P&L $%+.2f" % (t["entry_time"], t["qty"], t["symbol"], t["entry"],
+        log("  %s BUY %g %s at %.2f -> %s %.2f (%s)  P&L $%+.2f" % (t["entry_time"], t["qty"], t["symbol"], t["entry"],
                                                                    t["exit_time"], t["exit"], t["outcome"], t["pnl_usd"]))
     for c in sorted(cands, key=lambda c: (c["time"], -c["exp_R"])):
         D.append_csv(D.CANDS_CSV, ["date", "time", "symbol", "price", "pct_over", "expected_R", "p_target", "p_stop",
@@ -165,7 +169,11 @@ def run(day, data_dir=None):
                    "scan_at": "09:50 to " + rules["last_entry"], "target_r": rules["target_R"],
                    "max_loss_per_trade_usd": round(equity_start * rules["risk"], 2),
                    "min_expected_r": rules["min_exp_R"], "stop_rule": rules["stop"], "breakeven": rules["breakeven"],
-                   "data": "Alpaca (IEX)"})
+                   "data": "Alpaca (IEX)", "monthly_eur": rules.get("monthly_eur", D.MONTHLY_EUR),
+                   "eur_deposited": round(sum(d["eur"] for d in state["deposits"]), 2),
+                   "stop_pct": rules.get("stop_pct") if rules["stop"] == "pct" else None,
+                   "target_pct": rules.get("target_pct"), "fractional": rules.get("fractional", False),
+                   "flat_by": rules.get("flat_by", "15:55")})
     D.write_json(os.path.join(D.DASH, "status.json"), [status])
     if not data_dir:
         shutil.rmtree(WORK, ignore_errors=True)

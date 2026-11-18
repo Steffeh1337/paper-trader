@@ -1,0 +1,15 @@
+{
+  "monthly_eur": 500,
+  "min_exp_R": null,
+  "stop": "pct",
+  "stop_pct": 0.01,
+  "target_pct": 0.02,
+  "target_R": 2.0,
+  "breakeven": false,
+  "last_entry": "14:15",
+  "flat_by": "14:30",
+  "max_trades": 3,
+  "risk": 0.03,
+  "daily_loss": 0.1,
+  "fractional": true
+}
