@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "date": "2026-11-18",
+    "session": "EU",
+    "status": "traded",
+    "breakouts": 8.0,
+    "trades": 3.0,
+    "pnl_eur": -1.28,
+    "us_shadow_eur": null
+  },
+  {
+    "date": "2026-11-18",
+    "session": "US",
+    "status": "sat out",
+    "breakouts": 19.0,
+    "trades": 0.0,
+    "pnl_eur": 0.0,
+    "us_shadow_eur": 17.99
+  }
+]

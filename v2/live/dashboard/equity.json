@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "date": "2026-11-18",
+    "equity_eur": 998.72,
+    "deposited_eur": 1000.0,
+    "dax_eur": 992.09,
+    "nasdaq_eur": 998.64,
+    "trades": 3.0,
+    "cash_eur": 998.72,
+    "cash_usd": 0.0
+  }
+]

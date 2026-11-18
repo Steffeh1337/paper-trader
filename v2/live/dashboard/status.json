@@ -1,7 +1,7 @@
 [
   {
-    "last_run_utc": null,
-    "last_session": null,
+    "last_run_utc": "2026-11-18T22:29:25Z",
+    "last_session": "2026-11-18",
     "monthly_eur": 1000,
     "stop_pct": 0.01,
     "target_pct": 0.02,
@@ -9,7 +9,7 @@
     "fx_fee": 0.0015,
     "usd_share": 0.5,
     "fees_eur": 0.0,
-    "cash_eur": 0.0,
+    "cash_eur": 998.72,
     "cash_usd": 0.0,
     "us_range_ro": "16:30-17:00",
     "us_last_entry_ro": "18:30",
@@ -18,8 +18,8 @@
     "eu_last_entry_ro": "12:00",
     "eu_flat_ro": "15:25",
     "us_lookback": 20,
-    "us_recent_eur": -31.19,
+    "us_recent_eur": -25.63,
     "us_next": "off",
-    "eur_deposited": 0
+    "eur_deposited": 1000
   }
 ]

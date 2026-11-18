@@ -1,1 +1,53 @@
-[]
+[
+  {
+    "date": "2026-11-18",
+    "session": "EU",
+    "symbol": "DBK.DE",
+    "currency": "EUR",
+    "qty": 10.8196,
+    "entry_time": "10:20",
+    "entry": 30.5,
+    "stop": 30.2,
+    "target": 31.11,
+    "exit_time": "15:25",
+    "exit": 30.25,
+    "outcome": "flat by close",
+    "pnl": -2.7,
+    "pnl_eur": -2.7,
+    "R": -0.83
+  },
+  {
+    "date": "2026-11-18",
+    "session": "EU",
+    "symbol": "VNA.DE",
+    "currency": "EUR",
+    "qty": 19.4805,
+    "entry_time": "10:20",
+    "entry": 16.94,
+    "stop": 16.77,
+    "target": 17.28,
+    "exit_time": "15:25",
+    "exit": 17.1,
+    "outcome": "flat by close",
+    "pnl": 3.12,
+    "pnl_eur": 3.12,
+    "R": 0.94
+  },
+  {
+    "date": "2026-11-18",
+    "session": "EU",
+    "symbol": "EOAN.DE",
+    "currency": "EUR",
+    "qty": 15.3603,
+    "entry_time": "10:25",
+    "entry": 18.88,
+    "stop": 18.69,
+    "target": 19.26,
+    "exit_time": "15:25",
+    "exit": 18.77,
+    "outcome": "flat by close",
+    "pnl": -1.69,
+    "pnl_eur": -1.69,
+    "R": -0.58
+  }
+]

@@ -1,10 +1,21 @@
 {
-  "days": [],
-  "deposits": [],
-  "cash_eur": 0.0,
+  "days": [
+    "2026-11-18"
+  ],
+  "deposits": [
+    {
+      "month": "2026-11",
+      "date": "2026-11-18",
+      "eur": 1000,
+      "eurusd": 1.0968,
+      "dax_price": 214.89999389648438,
+      "qqq_price": 660.88
+    }
+  ],
+  "cash_eur": 998.72,
   "cash_usd": 0.0,
-  "dax_units": 0.0,
-  "qqq_units": 0.0,
+  "dax_units": 4.653327261059356,
+  "qqq_units": 1.6596053746519792,
   "fees_eur": 0.0,
   "us_shadow": [
     [
@@ -86,7 +97,14 @@
     [
       "2026-11-17",
       -10.41
+    ],
+    [
+      "2026-11-18",
+      17.99
     ]
   ],
-  "note": "us_shadow seeded from the backtest data (30-minute range, USD balance) for the 20 US sessions before the start"
+  "note": "us_shadow seeded from the backtest data (30-minute range, USD balance) for the 20 US sessions before the start",
+  "eu_missing_today": 17,
+  "last_dax_close": 213.1999969482422,
+  "last_qqq_close": 659.98
 }
