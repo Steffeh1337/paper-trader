@@ -1,10 +1,10 @@
 """Shared pieces of the v2 strategy: data download, sessions and opening-range candidates.
 
-Sessions (all instruments trade the same rule: 15-minute opening range, first 5-minute
-close above its high, stop 1% below the entry, target 2% above, max 3 trades a session):
-  EU  DAX stocks / DAX ETF       range 10:00-10:15 Romanian time, entries to 14:15, flat 14:30
-  US  Nasdaq-100 / QQQ / GBPUSD  range 9:30-9:45 New York (16:30-16:45 Romanian time),
-                                 entries to 15:30 New York, flat 15:55 New York
+Sessions (first 5-minute close above the opening-range high, stop 1% below the entry,
+target 2% above, max 3 trades a session):
+  EU  DAX stocks / DAX ETF  range 10:00-10:15 Romanian time, entries to 12:00, flat 15:25
+  US  Nasdaq-100 / QQQ      range 9:30-10:00 New York (16:30-17:00 Romanian time),
+                            entries to 11:30 New York, flat 15:55 New York
 """
 import concurrent.futures as cf
 import datetime as dt
@@ -24,8 +24,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 INSTRUMENTS = os.path.join(HERE, "instruments.json")
 
 SESSIONS = {
-    "EU": {"tz": RO, "open": "10:00", "range_end": "10:15", "last_entry": "14:15", "flat_by": "14:30"},
-    "US": {"tz": NY, "open": "09:30", "range_end": "09:45", "last_entry": "15:30", "flat_by": "15:55"},
+    # Europe (DAX), Romanian time: 15-minute opening range after Xetra's 9:00 CET open, entries only in the
+    # first two hours (the active morning, before the midday lull), flat at 15:25, before US data at 15:30
+    # and the US open at 16:30.
+    "EU": {"tz": RO, "open": "10:00", "range_end": "10:15", "last_entry": "12:00", "flat_by": "15:25"},
+    # US (Nasdaq-100), New York time: 30-minute opening range (9:30-10:00), entries until 11:30 (the active
+    # first two hours, before the lunch lull), flat at 15:55. In Romanian time: 16:30-17:00, 18:30, 22:55
+    # (one hour earlier in the weeks when US and EU daylight-saving dates differ).
+    "US": {"tz": NY, "open": "09:30", "range_end": "10:00", "last_entry": "11:30", "flat_by": "15:55"},
 }
 
 

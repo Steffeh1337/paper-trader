@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""v2 daily paper-trading run: one EUR pot, DAX in the morning, Nasdaq-100 in the evening.
+"""v2 daily paper-trading run: DAX in the morning, Nasdaq-100 in the evening, one account in EUR and USD.
 
-Rules (v2/rules.json):
-  money     EUR 1,000 deposited each month (topped up on the month's first run)
-  EU        DAX 40 stocks + DAX ETF (EXS1), range 10:00-10:15 Romanian time, entries to 14:15,
-            flat 14:30, every trading day, up to 3 trades, full pot available
-  US        Nasdaq-100 stocks + QQQ, range 9:30-9:45 New York (16:30-16:45 Romanian time),
-            entries to 15:30, flat 15:55 New York, up to 3 trades, full pot available,
-            0.15% currency-conversion fee each way; traded only while the US session's own
-            results over the previous 20 trading days are positive. It is simulated every day
-            on a EUR 1,000 reference ("shadow") to decide that.
-  exits     stop-loss 1% below the entry, take-profit 2% above, fractional shares,
-            same-bar breakouts: the most traded (opening-range turnover) first
+Rules (v2/rules.json; times from expert guidance on intraday activity, tested on the last 60 days):
+  money     EUR 1,000 deposited each month into the EUR balance
+  EU        DAX 40 stocks + DAX ETF (EXS1) from the EUR balance, every trading day.
+            Romanian time: range 10:00-10:15, entries until 12:00, flat 15:25 (before US data at 15:30)
+  US        Nasdaq-100 stocks + QQQ from the USD balance, only while the US session's own results over
+            its previous 20 sessions are positive (it is simulated every day on a EUR 1,000 reference).
+            New York time: range 9:30-10:00, entries until 11:30, flat 15:55
+            (Romanian time 16:30-17:00, 18:30, 22:55; an hour earlier when daylight-saving dates differ)
+  currency  while the US trades, half the account is held in USD; otherwise everything is in EUR.
+            Converting only when that changes pays Trading 212's 0.15% fee once, not on every trade.
+  exits     stop-loss 1% below the entry, take-profit 2% above, fractional shares, up to 3 trades per
+            session, each up to a third of its balance; same-bar breakouts: the most traded first
 Benchmarks: the same deposits held in the DAX ETF (EXS1) and in QQQ.
 Data: Yahoo (DAX, slowly), Alpaca IEX (Nasdaq-100), ECB reference rate (EUR/USD).
 
@@ -118,21 +119,42 @@ def candidates(bars_by_symbol, day, session, cost):
     return out
 
 
+def total_eur(state, rate):
+    return state["cash_eur"] + state["cash_usd"] / rate
+
+
+def convert(state, rules, rate, eur_to_usd=None, usd_to_eur=None):
+    """One currency conversion inside the account, paying the broker's fee once."""
+    fee = rules["fx_fee"]
+    if eur_to_usd:
+        state["cash_eur"] -= eur_to_usd
+        state["cash_usd"] += eur_to_usd * rate * (1 - fee)
+        state["fees_eur"] = state.get("fees_eur", 0.0) + eur_to_usd * fee
+        log("Converted EUR %.2f to USD %.2f (fee %.2f%%)." % (eur_to_usd, eur_to_usd * rate * (1 - fee), 100 * fee))
+    if usd_to_eur:
+        state["cash_usd"] -= usd_to_eur
+        state["cash_eur"] += usd_to_eur / rate * (1 - fee)
+        state["fees_eur"] = state.get("fees_eur", 0.0) + usd_to_eur / rate * fee
+        log("Converted USD %.2f to EUR %.2f (fee %.2f%%)." % (usd_to_eur, usd_to_eur / rate * (1 - fee), 100 * fee))
+    state["cash_eur"], state["cash_usd"] = round(state["cash_eur"], 2), round(state["cash_usd"], 2)
+
+
 def run(day):
     os.makedirs(os.path.join(LIVE, "logs"), exist_ok=True)
     open(LOG, "w").close()
     rules = read_json(RULES)
     inst = read_json(C.INSTRUMENTS)
-    state = read_json(STATE, {"days": [], "deposits": [], "cash": 0.0, "dax_units": 0.0, "qqq_units": 0.0, "us_shadow": []})
+    state = read_json(STATE, {})
+    state.setdefault("days", []); state.setdefault("deposits", []); state.setdefault("us_shadow", [])
+    state.setdefault("cash_eur", state.pop("cash", 0.0)); state.setdefault("cash_usd", 0.0)
+    state.setdefault("dax_units", 0.0); state.setdefault("qqq_units", 0.0)
     if day.isoformat() in state["days"]:
         log("%s was already simulated. Nothing to do." % day)
         return 0
 
     # ---- data
     eu_syms = inst["dax"] + [inst["dax_etf"]]
-    eu = {}
-    for s in eu_syms:
-        eu[s] = C.yahoo_bars(C.yahoo(s, "5d"), C.RO)
+    eu = {s: C.yahoo_bars(C.yahoo(s, "5d"), C.RO) for s in eu_syms}
     eu_open = bool(eu.get(inst["dax_etf"], {}).get(day.isoformat()))
     us_syms = inst["ndx"] + [inst["ndx_etf"]]
     us = C.alpaca_bars(us_syms, day.isoformat() + "T00:00:00Z", (day + dt.timedelta(days=1)).isoformat() + "T00:00:00Z")
@@ -143,55 +165,66 @@ def run(day):
     rate = ecb_eurusd(day)
     log("%s  EUR/USD %.4f (ECB)  DAX %s, Nasdaq %s" % (day, rate, "open" if eu_open else "closed", "open" if us_open else "closed"))
 
-    # ---- deposits and benchmarks (bought at the deposit day's open)
+    # ---- deposits (to the EUR balance) and benchmarks (bought at the deposit day's open)
     month = day.strftime("%Y-%m")
     have = sum(d["eur"] for d in state["deposits"] if d["month"] == month)
     if have < rules["monthly_eur"] - 0.005 and eu_open and us_open:
         eur = round(rules["monthly_eur"] - have, 2)
         dax_open = eu[inst["dax_etf"]][day.isoformat()][0][1]
         qqq_open = us[inst["ndx_etf"]][day.isoformat()][0][1]
-        state["cash"] = round(state["cash"] + eur, 2)
+        state["cash_eur"] = round(state["cash_eur"] + eur, 2)
         state["dax_units"] += eur / dax_open
         state["qqq_units"] += eur * rate / qqq_open
         state["deposits"].append({"month": month, "date": day.isoformat(), "eur": eur, "eurusd": rate,
                                   "dax_price": dax_open, "qqq_price": qqq_open})
         log("Deposit: EUR %.2f. Benchmarks bought the DAX ETF at EUR %.2f and QQQ at $%.2f." % (eur, dax_open, qqq_open))
 
+    # ---- the US switch, from the US session's own last N sessions (decided before the day starts)
+    look = [p for _, p in state["us_shadow"][-rules["us_lookback"]:]]
+    gate_on = len(look) >= rules["us_lookback"] and sum(look) > 0
+
+    # ---- currencies: while the US trades, keep usd_share of the account in USD; otherwise all in EUR.
+    #      Converting only here (not per trade) pays the fee once, not on every trade.
+    if gate_on:
+        want_usd_eur = rules["usd_share"] * total_eur(state, rate)
+        gap = want_usd_eur - state["cash_usd"] / rate
+        if gap > rules["rebalance_min_eur"]:
+            convert(state, rules, rate, eur_to_usd=min(gap, state["cash_eur"]))
+    elif state["cash_usd"] > 0:
+        convert(state, rules, rate, usd_to_eur=state["cash_usd"])
+
     trades_today, sess_rows = [], []
 
-    # ---- Europe: DAX, every trading day
+    # ---- Europe: DAX, every trading day, from the EUR balance
     if eu_open:
         c_eu = candidates({s: eu[s] for s in eu_syms}, day, "EU", 0.0)
-        start = state["cash"]
-        state["cash"], t_eu, _ = engine.trade_day(c_eu, start, session_rules(rules, "EU"))
+        start = state["cash_eur"]
+        state["cash_eur"], t_eu, _ = engine.trade_day(c_eu, start, session_rules(rules, "EU"))
         for t in t_eu:
             t.update(session="EU", currency="EUR", pnl_eur=t["pnl_usd"], entry_ro=t["entry_time"], exit_ro=t["exit_time"])
         trades_today += t_eu
-        sess_rows.append(["EU", "traded", len(c_eu), len(t_eu), round(state["cash"] - start, 2), ""])
-        log("Europe (DAX): %d breakouts, %d trades, P&L EUR %+.2f" % (len(c_eu), len(t_eu), state["cash"] - start))
+        sess_rows.append(["EU", "traded", len(c_eu), len(t_eu), round(state["cash_eur"] - start, 2), ""])
+        log("Europe (DAX): %d breakouts, %d trades, P&L EUR %+.2f" % (len(c_eu), len(t_eu), state["cash_eur"] - start))
 
-    # ---- US: Nasdaq-100, only while its own last 20 sessions were positive
+    # ---- US: Nasdaq-100 from the USD balance, only while switched on; always simulated on a reference
     if us_open:
-        c_us = candidates({s: us[s] for s in us_syms}, day, "US", rules["us_fx_fee"])
-        look = [p for _, p in state["us_shadow"][-rules["us_lookback"]:]]
-        gate_on = len(look) >= rules["us_lookback"] and sum(look) > 0
+        c_us = candidates({s: us[s] for s in us_syms}, day, "US", 0.0)
         ref = 1000.0 * rate
         end_ref, _, _ = engine.trade_day([dict(c) for c in c_us], ref, session_rules(rules, "US"))
         shadow = round((end_ref - ref) / rate, 2)
-        if gate_on:
-            start_usd = state["cash"] * rate
-            end_usd, t_us, _ = engine.trade_day(c_us, start_usd, session_rules(rules, "US"))
-            before = state["cash"]
-            state["cash"] = round(end_usd / rate, 2)
+        if gate_on and state["cash_usd"] > 0:
+            start_usd = state["cash_usd"]
+            state["cash_usd"], t_us, _ = engine.trade_day(c_us, start_usd, session_rules(rules, "US"))
+            pnl_eur = round((state["cash_usd"] - start_usd) / rate, 2)
             for t in t_us:
                 t.update(session="US", currency="USD", pnl_eur=round(t["pnl_usd"] / rate, 2),
                          entry_ro=ny_to_ro(day, t["entry_time"]), exit_ro=ny_to_ro(day, t["exit_time"]))
             trades_today += t_us
-            sess_rows.append(["US", "traded", len(c_us), len(t_us), round(state["cash"] - before, 2), shadow])
-            log("US (Nasdaq-100): %d breakouts, %d trades, P&L EUR %+.2f" % (len(c_us), len(t_us), state["cash"] - before))
+            sess_rows.append(["US", "traded", len(c_us), len(t_us), pnl_eur, shadow])
+            log("US (Nasdaq-100): %d breakouts, %d trades, P&L EUR %+.2f" % (len(c_us), len(t_us), pnl_eur))
         else:
             sess_rows.append(["US", "sat out", len(c_us), 0, 0.0, shadow])
-            log("US (Nasdaq-100): sat out (last %d sessions EUR %+.2f on a EUR 1,000 reference); today's shadow EUR %+.2f"
+            log("US (Nasdaq-100): sat out (last %d sessions EUR %+.2f per EUR 1,000); today it would have made EUR %+.2f"
                 % (len(look), sum(look), shadow))
         state["us_shadow"].append([day.isoformat(), shadow])
 
@@ -210,15 +243,17 @@ def run(day):
     qqq_close = us[inst["ndx_etf"]][day.isoformat()][-1][4] if us_open else state.get("last_qqq_close")
     state["last_dax_close"], state["last_qqq_close"] = dax_close, qqq_close
     deposited = sum(d["eur"] for d in state["deposits"])
+    equity = round(total_eur(state, rate), 2)
     dax_val = state["dax_units"] * dax_close if dax_close else None
     qqq_val = state["qqq_units"] * qqq_close / rate if qqq_close else None
-    append_csv(EQUITY, ["date", "equity_eur", "deposited_eur", "dax_eur", "nasdaq_eur", "trades"],
-               [day, state["cash"], round(deposited, 2), round(dax_val, 2) if dax_val else "", round(qqq_val, 2) if qqq_val else "",
-                len(trades_today)])
+    append_csv(EQUITY, ["date", "equity_eur", "deposited_eur", "dax_eur", "nasdaq_eur", "trades", "cash_eur", "cash_usd"],
+               [day, equity, round(deposited, 2), round(dax_val, 2) if dax_val else "", round(qqq_val, 2) if qqq_val else "",
+                len(trades_today), state["cash_eur"], state["cash_usd"]])
     state["days"].append(day.isoformat())
     write_json(STATE, state)
-    log("End of day: account EUR %.2f | deposited EUR %.2f | DAX EUR %s | Nasdaq-100 EUR %s"
-        % (state["cash"], deposited, "%.2f" % dax_val if dax_val else "-", "%.2f" % qqq_val if qqq_val else "-"))
+    log("End of day: account EUR %.2f (EUR %.2f + USD %.2f) | deposited EUR %.2f | DAX EUR %s | Nasdaq-100 EUR %s"
+        % (equity, state["cash_eur"], state["cash_usd"], deposited, "%.2f" % dax_val if dax_val else "-",
+           "%.2f" % qqq_val if qqq_val else "-"))
     export(rules, state, day)
     return 0
 
@@ -238,7 +273,13 @@ def export(rules, state, day):
     write_json(os.path.join(DASH, "status.json"), [{
         "last_run_utc": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "last_session": day.isoformat(),
         "monthly_eur": rules["monthly_eur"], "stop_pct": rules["stop_pct"], "target_pct": rules["target_pct"],
-        "max_trades_per_session": rules["max_trades_per_session"], "us_fx_fee": rules["us_fx_fee"],
+        "max_trades_per_session": rules["max_trades_per_session"], "fx_fee": rules["fx_fee"],
+        "usd_share": rules["usd_share"], "fees_eur": round(state.get("fees_eur", 0.0), 2),
+        "cash_eur": state["cash_eur"], "cash_usd": state["cash_usd"],
+        "us_range_ro": ny_to_ro(day, C.SESSIONS["US"]["open"]) + "-" + ny_to_ro(day, C.SESSIONS["US"]["range_end"]),
+        "us_last_entry_ro": ny_to_ro(day, C.SESSIONS["US"]["last_entry"]), "us_flat_ro": ny_to_ro(day, C.SESSIONS["US"]["flat_by"]),
+        "eu_range_ro": C.SESSIONS["EU"]["open"] + "-" + C.SESSIONS["EU"]["range_end"],
+        "eu_last_entry_ro": C.SESSIONS["EU"]["last_entry"], "eu_flat_ro": C.SESSIONS["EU"]["flat_by"],
         "us_lookback": rules["us_lookback"], "us_recent_eur": round(sum(look), 2),
         "us_next": "on" if len(look) >= rules["us_lookback"] and sum(look) > 0 else "off",
         "eur_deposited": round(sum(d["eur"] for d in state["deposits"]), 2),

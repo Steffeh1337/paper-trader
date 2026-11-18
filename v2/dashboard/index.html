@@ -38,7 +38,7 @@
 <div class="pt">
   <header class="pt-head">
     <h1 class="pt-title" id="top">Paper Trader</h1>
-    <p class="pt-lede">Paper day trading in one euro account, funded with €1,000 a month. Mornings: the DAX 40 stocks and a DAX ETF, every trading day. Evenings: the Nasdaq-100 stocks and QQQ, only while that session's own last 20 days were profitable. Each session takes up to three breakouts of its 15-minute opening range, with a stop-loss 1% below the entry and a take-profit 2% above, using fractional shares and the whole account. Compared with the same deposits held in the DAX and in the Nasdaq-100.</p>
+    <p class="pt-lede">Paper day trading in one account, funded with €1,000 a month. Mornings: the DAX 40 stocks and a DAX ETF, every trading day, from the euro balance. Evenings: the Nasdaq-100 stocks and QQQ, from a dollar balance, only while that session's own last 20 days were profitable. Each session takes up to three breakouts of its opening range in the first two hours, with a stop-loss 1% below the entry and a take-profit 2% above, using fractional shares. Compared with the same deposits held in the DAX and in the Nasdaq-100.</p>
     <p class="pt-sub">Last run <span data-draw="lastrun" data-source="status" data-field="last_run_utc" data-row="0">—</span> for the session of <span data-draw="lastsession" data-source="status" data-field="last_session" data-row="0">—</span>. US session next: <span data-draw="usnext" data-source="status" data-field="us_next" data-row="0">—</span> (last <span data-draw="uslook" data-source="status" data-field="us_lookback" data-row="0">—</span> days on a €1,000 reference: <span data-draw="usrecent" data-source="status" data-field="us_recent_eur" data-row="0">—</span>).</p>
   </header>
 
@@ -66,7 +66,7 @@
 
   <section class="pt-card" id="trades">
     <h2>Trades</h2>
-    <p class="pt-note">Every trade, newest first. Times are Romanian time. Entry is the next bar's open plus 0.05% slippage (US trades also pay a 0.15% currency fee each way); a bar touching both the stop and the target counts as the stop.</p>
+    <p class="pt-note">Every trade, newest first. Times are Romanian time. Entry is the next bar's open plus 0.05% slippage; a bar touching both the stop and the target counts as the stop.</p>
     <div class="pt-tablebox">
       <table class="pt-table" data-source="trades" data-row-key="date,symbol">
         <thead><tr><th data-field="date">Date</th><th data-field="session">Session</th><th data-field="symbol">Instrument</th><th data-field="qty" class="n">Shares</th><th data-field="entry_time">In</th><th data-field="entry" class="n">Entry</th><th data-field="stop" class="n">Stop</th><th data-field="target" class="n">Target</th><th data-field="exit_time">Out</th><th data-field="exit" class="n">Exit</th><th data-field="outcome">Result</th><th data-field="pnl_eur" class="n">P&amp;L €</th></tr></thead>
@@ -78,16 +78,17 @@
 
   <section class="pt-card" id="rules">
     <h2>Rules in force</h2>
-    <p class="pt-note">Chosen from a backtest of the last 60 trading days: the DAX was close to break-even; Nasdaq-100 breakouts lost money, a third of it to the currency fee; GBP/USD rarely moves 1–2% a day and is left out.</p>
+    <p class="pt-note">Chosen from a backtest of the last 60 trading days and common advice on intraday activity (breakouts in the first two hours, nothing new in the midday lull). The DAX was roughly break-even; the Nasdaq-100 was break-even only from a dollar balance and with a 30-minute range; GBP/USD rarely moves 1–2% a day and is left out.</p>
     <dl class="pt-rules">
-      <dt>Monthly deposit</dt><dd>€<span data-draw="monthly" data-source="status" data-field="monthly_eur" data-row="0">—</span>, one account for both sessions</dd>
-      <dt>Europe</dt><dd>DAX 40 stocks + DAX ETF (EXS1). Opening range 10:00–10:15, entries until 14:15, everything closed by 14:30 Romanian time. Every trading day.</dd>
-      <dt>US</dt><dd>Nasdaq-100 stocks + QQQ. Opening range 16:30–16:45, entries until 22:30, everything closed by 22:55 Romanian time. Only while the last <span data-draw="uslook2" data-source="status" data-field="us_lookback" data-row="0">—</span> US sessions were profitable.</dd>
+      <dt>Monthly deposit</dt><dd>€<span data-draw="monthly" data-source="status" data-field="monthly_eur" data-row="0">—</span> into the euro balance</dd>
+      <dt>Europe</dt><dd>DAX 40 stocks + DAX ETF (EXS1), every trading day, from the euro balance. Romanian time: opening range <span data-draw="eurange" data-source="status" data-field="eu_range_ro" data-row="0">—</span>, entries until <span data-draw="eulast" data-source="status" data-field="eu_last_entry_ro" data-row="0">—</span> (the active first two hours), everything closed by <span data-draw="euflat" data-source="status" data-field="eu_flat_ro" data-row="0">—</span>, before US data at 15:30.</dd>
+      <dt>US</dt><dd>Nasdaq-100 stocks + QQQ, from the dollar balance, only while the last <span data-draw="uslook2" data-source="status" data-field="us_lookback" data-row="0">—</span> US sessions were profitable. Romanian time: 30-minute opening range <span data-draw="usrange" data-source="status" data-field="us_range_ro" data-row="0">—</span>, entries until <span data-draw="uslast" data-source="status" data-field="us_last_entry_ro" data-row="0">—</span>, everything closed by <span data-draw="usflat" data-source="status" data-field="us_flat_ro" data-row="0">—</span>. These follow New York's 9:30 open, so they move an hour earlier in the weeks when US and European clocks change on different dates.</dd>
+      <dt>Currencies</dt><dd>While the US session trades, <span data-draw="usdshare" data-source="status" data-field="usd_share" data-row="0">—</span> of the account is held in dollars; otherwise everything is in euros. Money is converted only when that changes, so the <span data-draw="fxfee" data-source="status" data-field="fx_fee" data-row="0">—</span> conversion fee is paid once, not on every trade. Fees paid so far: <span data-draw="fees" data-source="status" data-field="fees_eur" data-row="0">—</span>.</dd>
       <dt>Entry</dt><dd>First 5-minute close above the opening-range high; several at once: the most traded first</dd>
       <dt>Max trades</dt><dd><span data-draw="maxtrades" data-source="status" data-field="max_trades_per_session" data-row="0">—</span> per session, each up to a third of the account</dd>
       <dt>Stop-loss</dt><dd><span data-draw="stoppct" data-source="status" data-field="stop_pct" data-row="0">—</span> below the entry</dd>
       <dt>Take-profit</dt><dd><span data-draw="targetpct" data-source="status" data-field="target_pct" data-row="0">—</span> above the entry</dd>
-      <dt>Costs</dt><dd>0.05% slippage each way; US trades also <span data-draw="fxfee" data-source="status" data-field="us_fx_fee" data-row="0">—</span> currency conversion each way</dd>
+      <dt>Costs</dt><dd>0.05% slippage each way on every trade</dd>
       <dt>Data</dt><dd>Yahoo Finance (DAX), Alpaca IEX (Nasdaq-100), ECB reference rate (EUR/USD)</dd>
     </dl>
     <p class="pt-note">Paper only: no broker, no real money. Not financial advice.</p>
@@ -150,7 +151,15 @@
   text('maxtrades', 'status', 'max_trades_per_session', String);
   text('stoppct', 'status', 'stop_pct', d3.format('.1~%'));
   text('targetpct', 'status', 'target_pct', d3.format('.1~%'));
-  text('fxfee', 'status', 'us_fx_fee', d3.format('.2~%'));
+  text('fxfee', 'status', 'fx_fee', d3.format('.2~%'));
+  text('usdshare', 'status', 'usd_share', d3.format('.0%'));
+  text('fees', 'status', 'fees_eur', eur);
+  text('eurange', 'status', 'eu_range_ro', (v) => v.replace('-', '–'));
+  text('eulast', 'status', 'eu_last_entry_ro', String);
+  text('euflat', 'status', 'eu_flat_ro', String);
+  text('usrange', 'status', 'us_range_ro', (v) => v.replace('-', '–'));
+  text('uslast', 'status', 'us_last_entry_ro', String);
+  text('usflat', 'status', 'us_flat_ro', String);
   ['sw0', 'sw1', 'sw2', 'sw3'].forEach((n, i) => dash.draw(n, (el) => { el.textContent = ''; el.style.background = dash.colors[i]; }));
   ['ssw0', 'ssw1'].forEach((n, i) => dash.draw(n, (el) => { el.textContent = ''; el.style.background = dash.colors[i]; }));
 </script>

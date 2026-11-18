@@ -24,7 +24,7 @@ import common as C   # noqa: E402
 import engine        # noqa: E402
 
 CACHE = os.path.join(HERE, "cache")
-FX_FEE = float(os.environ.get("FX_FEE", "0.0015"))
+FX_FEE = float(os.environ.get("FX_FEE", "0.0015"))   # per-trade fee for US trades from a EUR balance (the live run holds USD instead)
 RULES = {"min_exp_R": None, "stop": "pct", "stop_pct": 0.01, "target_pct": 0.02, "max_trades": 3, "risk": 0.03,
          "daily_loss": 0.10, "fractional": True}
 
