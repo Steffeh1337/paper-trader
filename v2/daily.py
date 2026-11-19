@@ -231,15 +231,17 @@ def record(day, trades, sess_row):
     append_csv(SESSIONS_CSV, ["date", "session", "status", "breakouts", "trades", "pnl_eur", "shadow_eur", "reason"], [day] + sess_row)
 
 
-def eu_switch(day):
-    """Europe trades only if the DAX index rose during its opening range (10:00-10:15), known at 10:15.
-    The index (^GDAXI) has a value every 5 minutes; the ETF's thin bars can be missing."""
+def eu_switch(day, etf_day_bars=None):
+    """Europe trades only if the DAX rose during its opening range (10:00-10:15), known at 10:15.
+    The index (^GDAXI) has a value every 5 minutes; if Yahoo refuses it, the DAX ETF's own bars are used."""
     bars = C.yahoo_bars(C.yahoo("^GDAXI", "5d", pause=5.0, tries=5), C.RO).get(day.isoformat(), [])
-    rng = [b for b in bars if "10:00" <= b[0] < "10:15"]
+    rng, source = [b for b in bars if "10:00" <= b[0] < "10:15"], "DAX"
+    if len(rng) < 2 and etf_day_bars:
+        rng, source = [b for b in etf_day_bars if "10:00" <= b[0] < "10:15"], "DAX ETF"
     if len(rng) < 2:
-        return False, "no DAX index data for the opening range"
+        return None, "no DAX data for the opening range"
     up = rng[-1][4] > rng[0][1]
-    return up, "DAX %s in its opening range (%.0f -> %.0f)" % ("rose" if up else "fell", rng[0][1], rng[-1][4])
+    return up, "%s %s in its opening range (%.2f -> %.2f)" % (source, "rose" if up else "fell", rng[0][1], rng[-1][4])
 
 
 def us_switch(day):
@@ -258,6 +260,7 @@ def run_eu(day):
     if day.isoformat() in state["eu_days"]:
         log("Europe %s was already simulated. Nothing to do." % day)
         return 0
+    on, why = eu_switch(day)                           # first, while Yahoo still answers freely
     eu, etf_ok, skipped = fetch_eu(inst, rules)
     bars_etf = eu[inst["dax_etf"]].get(day.isoformat())
     if not bars_etf:
@@ -267,7 +270,9 @@ def run_eu(day):
     if skipped:
         log("Yahoo data missing for %d of %d DAX stocks today (throttled): %s" % (len(skipped), len(inst["dax"]), " ".join(skipped)))
     deposit(state, rules, day, rate, bars_etf[0][1])
-    on, why = eu_switch(day)
+    if on is None:
+        on, why = eu_switch(day, bars_etf)
+        on = bool(on)
     c_eu = candidates({s: eu[s] for s in inst["dax"] + [inst["dax_etf"]]}, day, "EU", 0.0)
     end_ref, _, _ = engine.trade_day([dict(c) for c in c_eu], 1000.0, session_rules(rules, "EU"))
     shadow = round(end_ref - 1000.0, 2)
