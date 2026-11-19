@@ -1,5 +1,5 @@
-date,session,status,breakouts,trades,pnl_eur,us_shadow_eur
-2026-11-18,EU,traded,8,3,-1.28,
-2026-11-18,US,sat out,19,0,0.0,17.99
-2026-11-19,EU,traded,7,3,-3.47,
-2026-11-19,US,sat out,11,0,0.0,-9.97
+date,session,status,breakouts,trades,pnl_eur,shadow_eur,reason
+2026-11-18,EU,traded,8,3,-1.28,,every trading day (rules until 19 Nov)
+2026-11-18,US,sat out,19,0,0.0,17.99,last 20 US sessions negative (rules until 19 Nov)
+2026-11-19,EU,traded,7,3,-3.47,,every trading day (rules until 19 Nov)
+2026-11-19,US,sat out,11,0,0.0,-9.97,last 20 US sessions negative (rules until 19 Nov)

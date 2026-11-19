@@ -38,8 +38,8 @@
 <div class="pt">
   <header class="pt-head">
     <h1 class="pt-title" id="top">Paper Trader</h1>
-    <p class="pt-lede">Paper day trading in one account, funded with €1,000 a month. Mornings: the DAX 40 stocks and a DAX ETF, every trading day, from the euro balance. Evenings: the Nasdaq-100 stocks and QQQ, from a dollar balance, only while that session's own last 20 days were profitable. Each session takes up to three breakouts of its opening range in the first two hours, with a stop-loss 1% below the entry and a take-profit 2% above, using fractional shares. Compared with the same deposits held in the DAX and in the Nasdaq-100.</p>
-    <p class="pt-sub">Last run <span data-draw="lastrun" data-source="status" data-field="last_run_utc" data-row="0">—</span> for the session of <span data-draw="lastsession" data-source="status" data-field="last_session" data-row="0">—</span>. US session next: <span data-draw="usnext" data-source="status" data-field="us_next" data-row="0">—</span> (last <span data-draw="uslook" data-source="status" data-field="us_lookback" data-row="0">—</span> days on a €1,000 reference: <span data-draw="usrecent" data-source="status" data-field="us_recent_eur" data-row="0">—</span>).</p>
+    <p class="pt-lede">Paper day trading in one account, funded with €1,000 a month. Each market has a daily switch decided before it trades. Europe (the DAX 40 stocks and a DAX ETF, from the euro balance) trades only when the DAX rises during its opening range. The US (the Nasdaq-100 stocks and QQQ, from a dollar balance) trades only when QQQ closed above its 20-day average the day before. Each session takes up to three breakouts of its opening range in the first two hours, with a stop-loss 1% below the entry and a take-profit 2% above, using fractional shares. Europe is updated around 15:40 and the US around 23:40, Romanian time.</p>
+    <p class="pt-sub">Last update <span data-draw="lastrun" data-source="status" data-field="last_run_utc" data-row="0">—</span>. Europe <span data-draw="eudate" data-source="status" data-field="eu_switch_date" data-row="0">—</span>: <span data-draw="euswitch" data-source="status" data-field="eu_switch" data-row="0">—</span> (<span data-draw="euwhy" data-source="status" data-field="eu_why" data-row="0">—</span>). US <span data-draw="usdate" data-source="status" data-field="us_switch_date" data-row="0">—</span>: <span data-draw="usswitch" data-source="status" data-field="us_switch" data-row="0">—</span> (<span data-draw="uswhy" data-source="status" data-field="us_why" data-row="0">—</span>).</p>
   </header>
 
   <section class="pt-tiles" id="summary" aria-label="Summary">
@@ -59,7 +59,7 @@
 
   <section class="pt-card" id="sessions">
     <h2>Profit and loss per session</h2>
-    <p class="pt-note">Each day's result in euros, Europe and the US side by side. When the US session sat out, its bar is empty. Hover or press a day for details, including what the US session would have made on a €1,000 reference.</p>
+    <p class="pt-note">Each day's result in euros, Europe and the US side by side. A session that sat out shows an empty outline. Hover or press a day for details, including what a session that sat out would have made on a €1,000 reference.</p>
     <div class="pt-legend"><span><span class="pt-sw" data-draw="ssw0">—</span>Europe (DAX)</span><span><span class="pt-sw" data-draw="ssw1">—</span>US (Nasdaq-100)</span></div>
     <div class="pt-chart" data-draw="sessionchart" data-source="sessions"></div>
   </section>
@@ -78,12 +78,12 @@
 
   <section class="pt-card" id="rules">
     <h2>Rules in force</h2>
-    <p class="pt-note">Chosen from a backtest of the last 60 trading days and common advice on intraday activity (breakouts in the first two hours, nothing new in the midday lull). The DAX was roughly break-even; the Nasdaq-100 was break-even only from a dollar balance and with a 30-minute range; GBP/USD rarely moves 1–2% a day and is left out.</p>
+    <p class="pt-note">Chosen from a backtest of the last 60 trading days and common advice on intraday activity (breakouts in the first two hours, nothing new in the midday lull). Long-only breakouts did better when their market was rising, so each market has a switch based on its own index, decided before it trades; six such switches were compared, so some of their edge may be luck. GBP/USD rarely moves 1–2% a day and is left out.</p>
     <dl class="pt-rules">
       <dt>Monthly deposit</dt><dd>€<span data-draw="monthly" data-source="status" data-field="monthly_eur" data-row="0">—</span> into the euro balance</dd>
-      <dt>Europe</dt><dd>DAX 40 stocks + DAX ETF (EXS1), every trading day, from the euro balance. Romanian time: opening range <span data-draw="eurange" data-source="status" data-field="eu_range_ro" data-row="0">—</span>, entries until <span data-draw="eulast" data-source="status" data-field="eu_last_entry_ro" data-row="0">—</span> (the active first two hours), everything closed by <span data-draw="euflat" data-source="status" data-field="eu_flat_ro" data-row="0">—</span>, before US data at 15:30.</dd>
-      <dt>US</dt><dd>Nasdaq-100 stocks + QQQ, from the dollar balance, only while the last <span data-draw="uslook2" data-source="status" data-field="us_lookback" data-row="0">—</span> US sessions were profitable. Romanian time: 30-minute opening range <span data-draw="usrange" data-source="status" data-field="us_range_ro" data-row="0">—</span>, entries until <span data-draw="uslast" data-source="status" data-field="us_last_entry_ro" data-row="0">—</span>, everything closed by <span data-draw="usflat" data-source="status" data-field="us_flat_ro" data-row="0">—</span>. These follow New York's 9:30 open, so they move an hour earlier in the weeks when US and European clocks change on different dates.</dd>
-      <dt>Currencies</dt><dd>While the US session trades, <span data-draw="usdshare" data-source="status" data-field="usd_share" data-row="0">—</span> of the account is held in dollars; otherwise everything is in euros. Money is converted only when that changes, so the <span data-draw="fxfee" data-source="status" data-field="fx_fee" data-row="0">—</span> conversion fee is paid once, not on every trade. Fees paid so far: <span data-draw="fees" data-source="status" data-field="fees_eur" data-row="0">—</span>.</dd>
+      <dt>Europe</dt><dd>DAX 40 stocks + DAX ETF (EXS1), from the euro balance, only on days the DAX index rises during its opening range (decided at 10:15, before any entry). Romanian time: opening range <span data-draw="eurange" data-source="status" data-field="eu_range_ro" data-row="0">—</span>, entries until <span data-draw="eulast" data-source="status" data-field="eu_last_entry_ro" data-row="0">—</span> (the active first two hours), everything closed by <span data-draw="euflat" data-source="status" data-field="eu_flat_ro" data-row="0">—</span>, before US data at 15:30.</dd>
+      <dt>US</dt><dd>Nasdaq-100 stocks + QQQ, from the dollar balance, only on days QQQ closed above its 20-day average the day before (decided before the open). Romanian time: 30-minute opening range <span data-draw="usrange" data-source="status" data-field="us_range_ro" data-row="0">—</span>, entries until <span data-draw="uslast" data-source="status" data-field="us_last_entry_ro" data-row="0">—</span>, everything closed by <span data-draw="usflat" data-source="status" data-field="us_flat_ro" data-row="0">—</span>. These follow New York's 9:30 open, so they move an hour earlier in the weeks when US and European clocks change on different dates.</dd>
+      <dt>Currencies</dt><dd>While the US switch is on, <span data-draw="usdshare" data-source="status" data-field="usd_share" data-row="0">—</span> of the account is held in dollars; otherwise everything is in euros. Money is converted only when that changes, so the <span data-draw="fxfee" data-source="status" data-field="fx_fee" data-row="0">—</span> conversion fee is paid once, not on every trade. Fees paid so far: <span data-draw="fees" data-source="status" data-field="fees_eur" data-row="0">—</span>.</dd>
       <dt>Entry</dt><dd>First 5-minute close above the opening-range high; several at once: the most traded first</dd>
       <dt>Max trades</dt><dd><span data-draw="maxtrades" data-source="status" data-field="max_trades_per_session" data-row="0">—</span> per session, each up to a third of the account</dd>
       <dt>Stop-loss</dt><dd><span data-draw="stoppct" data-source="status" data-field="stop_pct" data-row="0">—</span> below the entry</dd>
@@ -142,11 +142,13 @@
   const when = (v) => new Date(v).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
   const day = (v) => new Date(v + 'T12:00:00Z').toLocaleDateString(undefined, { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' });
   text('lastrun', 'status', 'last_run_utc', when);
-  text('lastsession', 'status', 'last_session', day);
-  text('usnext', 'status', 'us_next', (v) => v === 'on' ? 'on' : 'off (sitting out)');
-  text('uslook', 'status', 'us_lookback', String);
-  text('uslook2', 'status', 'us_lookback', String);
-  text('usrecent', 'status', 'us_recent_eur', signedEur, true);
+    const sw = (v) => v === 'on' ? 'traded' : v === 'off' ? 'sat out' : '—';
+  text('eudate', 'status', 'eu_switch_date', (v) => v ? day(v) : '—');
+  text('usdate', 'status', 'us_switch_date', (v) => v ? day(v) : '—');
+  text('euswitch', 'status', 'eu_switch', sw);
+  text('usswitch', 'status', 'us_switch', sw);
+  text('euwhy', 'status', 'eu_why', (v) => v || '—');
+  text('uswhy', 'status', 'us_why', (v) => v || '—');
   text('monthly', 'status', 'monthly_eur', d3.format(',.0f'));
   text('maxtrades', 'status', 'max_trades_per_session', String);
   text('stoppct', 'status', 'stop_pct', d3.format('.1~%'));
@@ -295,8 +297,9 @@
       .attr('x', (d) => x0(d) - x0.step() * x0.paddingInner() / 2).attr('width', x0.step()).attr('y', 0).attr('height', h - 20).attr('fill', 'transparent');
     bindTip(hits, el, (ev, d) => {
       const e = by(d, 'EU'), u = by(d, 'US'), lines = [];
-      if (e) lines.push([dash.colors[0], 'Europe', `${signedEur(e.pnl_eur)} (${e.trades} trades)`]);
-      if (u) lines.push([dash.colors[1], 'US', u.status === 'sat out' ? `sat out; would have made ${signedEur(u.us_shadow_eur)} per €1,000` : `${signedEur(u.pnl_eur)} (${u.trades} trades)`]);
+      const line = (r) => r.status === 'sat out' ? (r.shadow_eur == null ? 'sat out' : `sat out; would have made ${signedEur(r.shadow_eur)} per €1,000`) : `${signedEur(r.pnl_eur)} (${r.trades} trades)`;
+      if (e) lines.push([dash.colors[0], 'Europe', line(e)]);
+      if (u) lines.push([dash.colors[1], 'US', line(u)]);
       setTip(t, fmtDay(parse(d)), lines); t.hidden = false; const [mx, my] = d3.pointer(ev, el); placeTip(el, t, mx, my);
     }, () => { t.hidden = true; });
   });

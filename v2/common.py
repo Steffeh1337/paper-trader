@@ -139,3 +139,19 @@ def candidate(symbol, day_bars, session, kind):
             return {"symbol": symbol, "kind": kind, "session": session, "time": close_t, "entry_ref": b[4],
                     "or_high": hi, "or_low": lo, "exp_R": 0.0, "hist_R": None, "turnover": turnover, "bars": after}
     return None
+
+
+def alpaca_daily(symbol, start, end):
+    """[(date, close), ...] daily bars from Alpaca (IEX), oldest first."""
+    hdr = {"APCA-API-KEY-ID": os.environ["APCA_API_KEY_ID"], "APCA-API-SECRET-KEY": os.environ["APCA_API_SECRET_KEY"]}
+    p = {"symbols": symbol, "timeframe": "1Day", "start": start + "T00:00:00Z", "end": end + "T00:00:00Z",
+         "feed": "iex", "limit": 1000, "adjustment": "split"}
+    for attempt in range(5):
+        try:
+            req = urllib.request.Request("https://data.alpaca.markets/v2/stocks/bars?" + urllib.parse.urlencode(p), headers=hdr)
+            with urllib.request.urlopen(req, timeout=60) as r:
+                doc = json.load(r)
+            return [(b["t"][:10], b["c"]) for b in (doc.get("bars") or {}).get(symbol, [])]
+        except (urllib.error.URLError, OSError):
+            time.sleep(5 * (attempt + 1))
+    return []

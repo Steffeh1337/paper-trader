@@ -1,23 +1,26 @@
 #!/usr/bin/env python3
-"""v2 daily paper-trading run: DAX in the morning, Nasdaq-100 in the evening, one account in EUR and USD.
+"""v2 daily paper-trading run: DAX in the afternoon run, Nasdaq-100 in the night run, one account in EUR and USD.
 
-Rules (v2/rules.json; times from expert guidance on intraday activity, tested on the last 60 days):
+Rules (v2/rules.json; trading windows from common guidance on intraday activity, switches tested on the last 60 days):
   money     EUR 1,000 deposited each month into the EUR balance
-  EU        DAX 40 stocks + DAX ETF (EXS1) from the EUR balance, every trading day.
+  EU        DAX 40 stocks + DAX ETF (EXS1) from the EUR balance. Switch: trades only if the DAX index rose during
+            its opening range (10:00-10:15 Romanian time), known before any entry.
             Romanian time: range 10:00-10:15, entries until 12:00, flat 15:25 (before US data at 15:30)
-  US        Nasdaq-100 stocks + QQQ from the USD balance, only while the US session's own results over
-            its previous 20 sessions are positive (it is simulated every day on a EUR 1,000 reference).
+  US        Nasdaq-100 stocks + QQQ from the USD balance. Switch: trades only if QQQ's previous close was above
+            its 20-day average, known before the open.
             New York time: range 9:30-10:00, entries until 11:30, flat 15:55
             (Romanian time 16:30-17:00, 18:30, 22:55; an hour earlier when daylight-saving dates differ)
-  currency  while the US trades, half the account is held in USD; otherwise everything is in EUR.
+  currency  while the US switch is on, half the account is held in USD; otherwise everything is in EUR.
             Converting only when that changes pays Trading 212's 0.15% fee once, not on every trade.
   exits     stop-loss 1% below the entry, take-profit 2% above, fractional shares, up to 3 trades per
             session, each up to a third of its balance; same-bar breakouts: the most traded first
+  sat out   a session that sits out is still simulated on a EUR 1,000 reference, shown on the dashboard
+
+  python3 v2/daily.py --session EU    # after the DAX session (from 15:30 Romanian time)
+  python3 v2/daily.py --session US    # after the US close (from 23:20 Romanian time)
 Benchmarks: the same deposits held in the DAX ETF (EXS1) and in QQQ.
 Data: Yahoo (DAX, slowly), Alpaca IEX (Nasdaq-100), ECB reference rate (EUR/USD).
 
-  python3 v2/daily.py                 # today, after the US close
-  python3 v2/daily.py --date 2026-11-18
 
 Paper only. Never places orders. Not financial advice.
 """
@@ -139,146 +142,216 @@ def convert(state, rules, rate, eur_to_usd=None, usd_to_eur=None):
     state["cash_eur"], state["cash_usd"] = round(state["cash_eur"], 2), round(state["cash_usd"], 2)
 
 
-def run(day):
-    os.makedirs(os.path.join(LIVE, "logs"), exist_ok=True)
-    open(LOG, "w").close()
-    rules = read_json(RULES)
-    inst = read_json(C.INSTRUMENTS)
-    state = read_json(STATE, {})
-    state.setdefault("days", []); state.setdefault("deposits", []); state.setdefault("us_shadow", [])
-    state.setdefault("cash_eur", state.pop("cash", 0.0)); state.setdefault("cash_usd", 0.0)
-    state.setdefault("dax_units", 0.0); state.setdefault("qqq_units", 0.0)
-    if day.isoformat() in state["days"]:
-        log("%s was already simulated. Nothing to do." % day)
-        return 0
-
-    # ---- data
-    eu_syms = inst["dax"] + [inst["dax_etf"]]
-    # The DAX ETF first, patiently (it decides whether the market was open and drives the benchmark);
-    # then the stocks at a steady pace with one retry, within a time cap, so Yahoo's throttling
-    # can only make the day's universe smaller, never stall the run.
+def fetch_eu(inst, rules, only_etf=False):
+    """DAX bars from Yahoo: the ETF first and patiently, then the stocks in slower passes within a time cap,
+    so Yahoo's throttling can only shrink the day's list of stocks, never stall the run."""
     import time as _time
     etf_res = C.yahoo(inst["dax_etf"], "5d", pause=5.0, tries=5)
     eu = {inst["dax_etf"]: C.yahoo_bars(etf_res, C.RO)}
-    deadline, skipped = _time.time() + rules.get("eu_fetch_minutes", 20) * 60, list(inst["dax"])
-    for attempt, pause in enumerate((4.0, 8.0, 12.0)):     # passes over the stocks still missing
+    skipped = [] if only_etf else list(inst["dax"])
+    deadline = _time.time() + rules.get("eu_fetch_minutes", 20) * 60
+    for attempt, pause in enumerate((4.0, 8.0, 12.0)):
         if attempt:
             if not skipped or _time.time() + 90 > deadline:
                 break
             _time.sleep(90)                                   # let Yahoo's rate limit cool down
         still = []
-        for s in skipped:
-            res = C.yahoo(s, "5d", pause=pause, tries=1) if _time.time() < deadline else None
+        for sym in skipped:
+            res = C.yahoo(sym, "5d", pause=pause, tries=1) if _time.time() < deadline else None
             if res is None:
-                still.append(s)
+                still.append(sym)
             else:
-                eu[s] = C.yahoo_bars(res, C.RO)
+                eu[sym] = C.yahoo_bars(res, C.RO)
         skipped = still
-    for s in skipped:
-        eu[s] = {}
-    eu_open = bool(eu.get(inst["dax_etf"], {}).get(day.isoformat()))
-    us_syms = inst["ndx"] + [inst["ndx_etf"]]
-    us = C.alpaca_bars(us_syms, day.isoformat() + "T00:00:00Z", (day + dt.timedelta(days=1)).isoformat() + "T00:00:00Z")
-    us_open = len(us.get(inst["ndx_etf"], {}).get(day.isoformat(), [])) >= 70
-    if not eu_open and not us_open:
-        log("%s: both markets were closed. Nothing to do." % day)
-        return 0
-    rate = ecb_eurusd(day)
-    log("%s  EUR/USD %.4f (ECB)  DAX %s, Nasdaq %s" % (day, rate, "open" if eu_open else ("no data (Yahoo unavailable)" if etf_res is None else "closed"),
-                                                        "open" if us_open else "closed"))
-    if skipped:
-        log("Yahoo data missing for %d of %d DAX stocks today (throttled): %s" % (len(skipped), len(inst["dax"]), " ".join(skipped)))
+    for sym in skipped:
+        eu[sym] = {}
+    return eu, etf_res is not None, skipped
 
-    # ---- deposits (to the EUR balance) and benchmarks (bought at the deposit day's open)
+
+def load_state():
+    state = read_json(STATE, {})
+    for k, v in (("days", []), ("eu_days", []), ("us_days", []), ("deposits", []), ("us_shadow", []), ("cash_usd", 0.0),
+                 ("dax_units", 0.0), ("qqq_units", 0.0), ("pending_qqq_eur", 0.0), ("fees_eur", 0.0)):
+        state.setdefault(k, v)
+    state.setdefault("cash_eur", state.pop("cash", 0.0))
+    # days run before the switch to two runs a day had both sessions
+    for d in state["days"]:
+        if d not in state["eu_days"]:
+            state["eu_days"].append(d)
+        if d not in state["us_days"]:
+            state["us_days"].append(d)
+    return state
+
+
+def deposit(state, rules, day, rate, dax_price):
     month = day.strftime("%Y-%m")
     have = sum(d["eur"] for d in state["deposits"] if d["month"] == month)
-    if have < rules["monthly_eur"] - 0.005 and eu_open and us_open:
-        eur = round(rules["monthly_eur"] - have, 2)
-        dax_open = eu[inst["dax_etf"]][day.isoformat()][0][1]
-        qqq_open = us[inst["ndx_etf"]][day.isoformat()][0][1]
-        state["cash_eur"] = round(state["cash_eur"] + eur, 2)
-        state["dax_units"] += eur / dax_open
-        state["qqq_units"] += eur * rate / qqq_open
-        state["deposits"].append({"month": month, "date": day.isoformat(), "eur": eur, "eurusd": rate,
-                                  "dax_price": dax_open, "qqq_price": qqq_open})
-        log("Deposit: EUR %.2f. Benchmarks bought the DAX ETF at EUR %.2f and QQQ at $%.2f." % (eur, dax_open, qqq_open))
+    if have >= rules["monthly_eur"] - 0.005:
+        return
+    eur = round(rules["monthly_eur"] - have, 2)
+    state["cash_eur"] = round(state["cash_eur"] + eur, 2)
+    if dax_price:
+        state["dax_units"] += eur / dax_price
+    state["pending_qqq_eur"] = round(state.get("pending_qqq_eur", 0.0) + eur, 2)   # QQQ bought at the next US open
+    state["deposits"].append({"month": month, "date": day.isoformat(), "eur": eur, "eurusd": rate, "dax_price": dax_price})
+    log("Deposit: EUR %.2f. Benchmark bought the DAX ETF at EUR %s; QQQ is bought at the next US open." % (eur, dax_price))
 
-    # ---- the US switch, from the US session's own last N sessions (decided before the day starts)
-    look = [p for _, p in state["us_shadow"][-rules["us_lookback"]:]]
-    gate_on = len(look) >= rules["us_lookback"] and sum(look) > 0
 
-    # ---- currencies: while the US trades, keep usd_share of the account in USD; otherwise all in EUR.
-    #      Converting only here (not per trade) pays the fee once, not on every trade.
-    if gate_on:
-        want_usd_eur = rules["usd_share"] * total_eur(state, rate)
-        gap = want_usd_eur - state["cash_usd"] / rate
-        if gap > rules["rebalance_min_eur"]:
-            convert(state, rules, rate, eur_to_usd=min(gap, state["cash_eur"]))
-    elif state["cash_usd"] > 0:
-        convert(state, rules, rate, usd_to_eur=state["cash_usd"])
+def upsert_equity(day, state, rate, n_trades):
+    rows = list(csv.DictReader(open(EQUITY))) if os.path.exists(EQUITY) else []
+    rows = [r for r in rows if r["date"] != day.isoformat()]
+    prev_trades = 0
+    for r in list(csv.DictReader(open(EQUITY))) if os.path.exists(EQUITY) else []:
+        if r["date"] == day.isoformat():
+            prev_trades = int(float(r.get("trades") or 0))
+    dax_val = state["dax_units"] * state["last_dax_close"] if state.get("last_dax_close") else None
+    qqq_val = state["qqq_units"] * state["last_qqq_close"] / rate if state.get("last_qqq_close") and state["qqq_units"] else None
+    deposited = sum(d["eur"] for d in state["deposits"])
+    pending = state.get("pending_qqq_eur", 0.0)          # deposits not yet in QQQ count at face value
+    rows.append({"date": day.isoformat(), "equity_eur": round(total_eur(state, rate), 2), "deposited_eur": round(deposited, 2),
+                 "dax_eur": round(dax_val, 2) if dax_val else "",
+                 "nasdaq_eur": round((qqq_val or 0) + pending, 2) if (qqq_val or pending) else "",
+                 "trades": prev_trades + n_trades, "cash_eur": state["cash_eur"], "cash_usd": state["cash_usd"]})
+    rows.sort(key=lambda r: r["date"])
+    with open(EQUITY, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["date", "equity_eur", "deposited_eur", "dax_eur", "nasdaq_eur", "trades", "cash_eur", "cash_usd"])
+        w.writeheader()
+        w.writerows(rows)
+    return rows[-1]
 
-    trades_today, sess_rows = [], []
 
-    # ---- Europe: DAX, every trading day, from the EUR balance
-    if eu_open:
-        c_eu = candidates({s: eu[s] for s in eu_syms}, day, "EU", 0.0)
-        start = state["cash_eur"]
-        state["cash_eur"], t_eu, _ = engine.trade_day(c_eu, start, session_rules(rules, "EU"))
-        for t in t_eu:
-            t.update(session="EU", currency="EUR", pnl_eur=t["pnl_usd"], entry_ro=t["entry_time"], exit_ro=t["exit_time"])
-        trades_today += t_eu
-        sess_rows.append(["EU", "traded", len(c_eu), len(t_eu), round(state["cash_eur"] - start, 2), ""])
-        state["eu_missing_today"] = len(skipped)
-        log("Europe (DAX): %d breakouts, %d trades, P&L EUR %+.2f" % (len(c_eu), len(t_eu), state["cash_eur"] - start))
-
-    # ---- US: Nasdaq-100 from the USD balance, only while switched on; always simulated on a reference
-    if us_open:
-        c_us = candidates({s: us[s] for s in us_syms}, day, "US", 0.0)
-        ref = 1000.0 * rate
-        end_ref, _, _ = engine.trade_day([dict(c) for c in c_us], ref, session_rules(rules, "US"))
-        shadow = round((end_ref - ref) / rate, 2)
-        if gate_on and state["cash_usd"] > 0:
-            start_usd = state["cash_usd"]
-            state["cash_usd"], t_us, _ = engine.trade_day(c_us, start_usd, session_rules(rules, "US"))
-            pnl_eur = round((state["cash_usd"] - start_usd) / rate, 2)
-            for t in t_us:
-                t.update(session="US", currency="USD", pnl_eur=round(t["pnl_usd"] / rate, 2),
-                         entry_ro=ny_to_ro(day, t["entry_time"]), exit_ro=ny_to_ro(day, t["exit_time"]))
-            trades_today += t_us
-            sess_rows.append(["US", "traded", len(c_us), len(t_us), pnl_eur, shadow])
-            log("US (Nasdaq-100): %d breakouts, %d trades, P&L EUR %+.2f" % (len(c_us), len(t_us), pnl_eur))
-        else:
-            sess_rows.append(["US", "sat out", len(c_us), 0, 0.0, shadow])
-            log("US (Nasdaq-100): sat out (last %d sessions EUR %+.2f per EUR 1,000); today it would have made EUR %+.2f"
-                % (len(look), sum(look), shadow))
-        state["us_shadow"].append([day.isoformat(), shadow])
-
-    for t in trades_today:
+def record(day, trades, sess_row):
+    for t in trades:
         append_csv(TRADES, ["date", "session", "symbol", "currency", "qty", "entry_time", "entry", "stop", "target",
                             "exit_time", "exit", "outcome", "pnl", "pnl_eur", "R"],
                    [day, t["session"], t["symbol"], t["currency"], t["qty"], t["entry_ro"], t["entry"], t["stop"], t["target"],
                     t["exit_ro"], t["exit"], t["outcome"], t["pnl_usd"], t["pnl_eur"], t["R"]])
         log("  %s %s %s %g @ %s -> %s %s (%s)  EUR %+.2f" % (t["session"], t["entry_ro"], t["symbol"], t["qty"], t["entry"],
                                                            t["exit_ro"], t["exit"], t["outcome"], t["pnl_eur"]))
-    for r in sess_rows:
-        append_csv(SESSIONS_CSV, ["date", "session", "status", "breakouts", "trades", "pnl_eur", "us_shadow_eur"], [day] + r)
+    append_csv(SESSIONS_CSV, ["date", "session", "status", "breakouts", "trades", "pnl_eur", "shadow_eur", "reason"], [day] + sess_row)
 
-    # ---- end of day values
-    dax_close = eu[inst["dax_etf"]][day.isoformat()][-1][4] if eu_open else state.get("last_dax_close")
-    qqq_close = us[inst["ndx_etf"]][day.isoformat()][-1][4] if us_open else state.get("last_qqq_close")
-    state["last_dax_close"], state["last_qqq_close"] = dax_close, qqq_close
-    deposited = sum(d["eur"] for d in state["deposits"])
-    equity = round(total_eur(state, rate), 2)
-    dax_val = state["dax_units"] * dax_close if dax_close else None
-    qqq_val = state["qqq_units"] * qqq_close / rate if qqq_close else None
-    append_csv(EQUITY, ["date", "equity_eur", "deposited_eur", "dax_eur", "nasdaq_eur", "trades", "cash_eur", "cash_usd"],
-               [day, equity, round(deposited, 2), round(dax_val, 2) if dax_val else "", round(qqq_val, 2) if qqq_val else "",
-                len(trades_today), state["cash_eur"], state["cash_usd"]])
-    state["days"].append(day.isoformat())
+
+def eu_switch(day):
+    """Europe trades only if the DAX index rose during its opening range (10:00-10:15), known at 10:15.
+    The index (^GDAXI) has a value every 5 minutes; the ETF's thin bars can be missing."""
+    bars = C.yahoo_bars(C.yahoo("^GDAXI", "5d", pause=5.0, tries=5), C.RO).get(day.isoformat(), [])
+    rng = [b for b in bars if "10:00" <= b[0] < "10:15"]
+    if len(rng) < 2:
+        return False, "no DAX index data for the opening range"
+    up = rng[-1][4] > rng[0][1]
+    return up, "DAX %s in its opening range (%.0f -> %.0f)" % ("rose" if up else "fell", rng[0][1], rng[-1][4])
+
+
+def us_switch(day):
+    """The US trades only if QQQ's previous close was above its 20-day average, known before the open."""
+    rows = C.alpaca_daily("QQQ", (day - dt.timedelta(days=45)).isoformat(), day.isoformat())
+    closes = [c for d, c in rows if d < day.isoformat()]
+    if len(closes) < 20:
+        return False, "not enough QQQ history", None, None
+    sma = sum(closes[-20:]) / 20
+    up = closes[-1] > sma
+    return up, "QQQ %s its 20-day average ($%.2f vs $%.2f)" % ("above" if up else "below", closes[-1], sma), closes[-1], sma
+
+
+def run_eu(day):
+    rules, inst, state = read_json(RULES), read_json(C.INSTRUMENTS), load_state()
+    if day.isoformat() in state["eu_days"]:
+        log("Europe %s was already simulated. Nothing to do." % day)
+        return 0
+    eu, etf_ok, skipped = fetch_eu(inst, rules)
+    bars_etf = eu[inst["dax_etf"]].get(day.isoformat())
+    if not bars_etf:
+        log("%s: %s. Europe has nothing to do." % (day, "DAX closed (weekend or holiday)" if etf_ok else "no DAX data (Yahoo unavailable)"))
+        return 0
+    rate = ecb_eurusd(day)
+    if skipped:
+        log("Yahoo data missing for %d of %d DAX stocks today (throttled): %s" % (len(skipped), len(inst["dax"]), " ".join(skipped)))
+    deposit(state, rules, day, rate, bars_etf[0][1])
+    on, why = eu_switch(day)
+    c_eu = candidates({s: eu[s] for s in inst["dax"] + [inst["dax_etf"]]}, day, "EU", 0.0)
+    end_ref, _, _ = engine.trade_day([dict(c) for c in c_eu], 1000.0, session_rules(rules, "EU"))
+    shadow = round(end_ref - 1000.0, 2)
+    trades = []
+    if on:
+        start = state["cash_eur"]
+        state["cash_eur"], trades, _ = engine.trade_day(c_eu, start, session_rules(rules, "EU"))
+        for t in trades:
+            t.update(session="EU", currency="EUR", pnl_eur=t["pnl_usd"], entry_ro=t["entry_time"], exit_ro=t["exit_time"])
+        pnl = round(state["cash_eur"] - start, 2)
+        log("Europe (DAX): %s -> traded. %d breakouts, %d trades, P&L EUR %+.2f" % (why, len(c_eu), len(trades), pnl))
+        record(day, trades, ["EU", "traded", len(c_eu), len(trades), pnl, shadow, why])
+    else:
+        log("Europe (DAX): %s -> sat out. It would have made EUR %+.2f per EUR 1,000." % (why, shadow))
+        record(day, [], ["EU", "sat out", len(c_eu), 0, 0.0, shadow, why])
+    state["last_dax_close"] = [b for b in bars_etf if b[0] <= "15:25"][-1][4]
+    state["eu_days"].append(day.isoformat())
+    state["eu_today"] = {"date": day.isoformat(), "switch": "on" if on else "off", "why": why, "missing": len(skipped)}
+    row = upsert_equity(day, state, rate, len(trades))
     write_json(STATE, state)
-    log("End of day: account EUR %.2f (EUR %.2f + USD %.2f) | deposited EUR %.2f | DAX EUR %s | Nasdaq-100 EUR %s"
-        % (equity, state["cash_eur"], state["cash_usd"], deposited, "%.2f" % dax_val if dax_val else "-",
-           "%.2f" % qqq_val if qqq_val else "-"))
+    log("After Europe: account EUR %s | deposited EUR %s | DAX EUR %s" % (row["equity_eur"], row["deposited_eur"], row["dax_eur"]))
+    export(rules, state, day)
+    return 0
+
+
+def run_us(day):
+    rules, inst, state = read_json(RULES), read_json(C.INSTRUMENTS), load_state()
+    if day.isoformat() in state["us_days"]:
+        log("US %s was already simulated. Nothing to do." % day)
+        return 0
+    us_syms = inst["ndx"] + [inst["ndx_etf"]]
+    us = C.alpaca_bars(us_syms, day.isoformat() + "T00:00:00Z", (day + dt.timedelta(days=1)).isoformat() + "T00:00:00Z")
+    qqq = us.get(inst["ndx_etf"], {}).get(day.isoformat(), [])
+    if len(qqq) < 70:
+        log("%s: Nasdaq closed (weekend or holiday). US has nothing to do." % day)
+        return 0
+    rate = ecb_eurusd(day)
+    if day.isoformat() not in state["eu_days"]:          # a European holiday: the month's deposit lands here
+        deposit(state, rules, day, rate, None)
+    if state.get("pending_qqq_eur"):
+        state["qqq_units"] += state["pending_qqq_eur"] * rate / qqq[0][1]
+        log("Benchmark bought QQQ at $%.2f with EUR %.2f." % (qqq[0][1], state["pending_qqq_eur"]))
+        state["pending_qqq_eur"] = 0.0
+    on, why, qqq_prev, sma = us_switch(day)
+    # currencies: while the US switch is on keep usd_share of the account in USD, otherwise all in EUR
+    if on:
+        gap = rules["usd_share"] * total_eur(state, rate) - state["cash_usd"] / rate
+        if gap > rules["rebalance_min_eur"]:
+            convert(state, rules, rate, eur_to_usd=min(gap, state["cash_eur"]))
+    elif state["cash_usd"] > 0:
+        convert(state, rules, rate, usd_to_eur=state["cash_usd"])
+    c_us = candidates({s: us[s] for s in us_syms}, day, "US", 0.0)
+    ref = 1000.0 * rate
+    end_ref, _, _ = engine.trade_day([dict(c) for c in c_us], ref, session_rules(rules, "US"))
+    shadow = round((end_ref - ref) / rate, 2)
+    state["us_shadow"].append([day.isoformat(), shadow])
+    trades = []
+    if on and state["cash_usd"] > 0:
+        start = state["cash_usd"]
+        state["cash_usd"], trades, _ = engine.trade_day(c_us, start, session_rules(rules, "US"))
+        pnl = round((state["cash_usd"] - start) / rate, 2)
+        for t in trades:
+            t.update(session="US", currency="USD", pnl_eur=round(t["pnl_usd"] / rate, 2),
+                     entry_ro=ny_to_ro(day, t["entry_time"]), exit_ro=ny_to_ro(day, t["exit_time"]))
+        log("US (Nasdaq-100): %s -> traded. %d breakouts, %d trades, P&L EUR %+.2f" % (why, len(c_us), len(trades), pnl))
+        record(day, trades, ["US", "traded", len(c_us), len(trades), pnl, shadow, why])
+    else:
+        log("US (Nasdaq-100): %s -> sat out. It would have made EUR %+.2f per EUR 1,000." % (why, shadow))
+        record(day, [], ["US", "sat out", len(c_us), 0, 0.0, shadow, why])
+    state["last_qqq_close"] = qqq[-1][4]
+    if day.isoformat() in state["eu_days"]:                  # the DAX's real close, now that it is in
+        eu, ok, _ = fetch_eu(inst, rules, only_etf=True)
+        bars_etf = eu[inst["dax_etf"]].get(day.isoformat())
+        if bars_etf:
+            state["last_dax_close"] = bars_etf[-1][4]
+    state["us_days"].append(day.isoformat())
+    if day.isoformat() not in state["days"]:
+        state["days"].append(day.isoformat())
+    state["us_today"] = {"date": day.isoformat(), "switch": "on" if on else "off", "why": why}
+    state["qqq_prev_close"], state["qqq_sma20"] = qqq_prev, sma
+    row = upsert_equity(day, state, rate, len(trades))
+    write_json(STATE, state)
+    log("End of day: account EUR %s (EUR %.2f + USD %.2f) | deposited EUR %s | DAX EUR %s | Nasdaq-100 EUR %s"
+        % (row["equity_eur"], state["cash_eur"], state["cash_usd"], row["deposited_eur"], row["dax_eur"], row["nasdaq_eur"]))
     export(rules, state, day)
     return 0
 
@@ -288,13 +361,13 @@ def export(rules, state, day):
     num = lambda v: None if v in ("", None) else float(v)
     for name, path, text in (("equity", EQUITY, ("date",)),
                              ("trades", TRADES, ("date", "session", "symbol", "currency", "entry_time", "exit_time", "outcome")),
-                             ("sessions", SESSIONS_CSV, ("date", "session", "status"))):
+                             ("sessions", SESSIONS_CSV, ("date", "session", "status", "reason"))):
         rows = []
         if os.path.exists(path):
             for r in csv.DictReader(open(path)):
                 rows.append({k: (v if k in text else num(v)) for k, v in r.items()})
         write_json(os.path.join(DASH, name + ".json"), rows)
-    look = [p for _, p in state["us_shadow"][-rules["us_lookback"]:]]
+    eu_t, us_t = state.get("eu_today", {}), state.get("us_today", {})
     write_json(os.path.join(DASH, "status.json"), [{
         "last_run_utc": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "last_session": day.isoformat(),
         "monthly_eur": rules["monthly_eur"], "stop_pct": rules["stop_pct"], "target_pct": rules["target_pct"],
@@ -305,23 +378,38 @@ def export(rules, state, day):
         "us_last_entry_ro": ny_to_ro(day, C.SESSIONS["US"]["last_entry"]), "us_flat_ro": ny_to_ro(day, C.SESSIONS["US"]["flat_by"]),
         "eu_range_ro": C.SESSIONS["EU"]["open"] + "-" + C.SESSIONS["EU"]["range_end"],
         "eu_last_entry_ro": C.SESSIONS["EU"]["last_entry"], "eu_flat_ro": C.SESSIONS["EU"]["flat_by"],
-        "us_lookback": rules["us_lookback"], "us_recent_eur": round(sum(look), 2),
-        "us_next": "on" if len(look) >= rules["us_lookback"] and sum(look) > 0 else "off",
+        "eu_switch_date": eu_t.get("date"), "eu_switch": eu_t.get("switch"), "eu_why": eu_t.get("why"),
+        "eu_missing_stocks": eu_t.get("missing"),
+        "us_switch_date": us_t.get("date"), "us_switch": us_t.get("switch"), "us_why": us_t.get("why"),
         "eur_deposited": round(sum(d["eur"] for d in state["deposits"]), 2),
     }])
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("--date", help="YYYY-MM-DD (default: today in New York)")
+    ap.add_argument("--date", help="YYYY-MM-DD (default: today)")
+    ap.add_argument("--session", choices=["EU", "US", "both"], default="both",
+                    help="EU after the DAX session (from 15:30 Romanian time), US after the US close, both at night")
     a = ap.parse_args()
-    now = dt.datetime.now(C.NY)
-    day = dt.date.fromisoformat(a.date) if a.date else now.date()
-    if day == now.date() and now.time() < dt.time(16, 20):
-        print("The US session for %s is not over yet (%s in New York). Run after 16:20 New York (23:20 Romanian time)."
-              % (day, now.strftime("%H:%M")))
-        return 1
-    return run(day)
+    os.makedirs(os.path.join(LIVE, "logs"), exist_ok=True)
+    open(LOG, "w").close()
+    now_ro, now_ny = dt.datetime.now(C.RO), dt.datetime.now(C.NY)
+    if a.session in ("EU", "both"):
+        day = dt.date.fromisoformat(a.date) if a.date else now_ro.date()
+        if day == now_ro.date() and now_ro.time() < dt.time(15, 30):
+            print("Europe's session for %s is not over yet (%s Romanian time). Run after 15:30." % (day, now_ro.strftime("%H:%M")))
+            return 1
+        rc = run_eu(day)
+        if rc:
+            return rc
+    if a.session in ("US", "both"):
+        day = dt.date.fromisoformat(a.date) if a.date else now_ny.date()
+        if day == now_ny.date() and now_ny.time() < dt.time(16, 20):
+            print("The US session for %s is not over yet (%s New York). Run after 16:20 New York (23:20 Romanian time)."
+                  % (day, now_ny.strftime("%H:%M")))
+            return 1
+        return run_us(day)
+    return 0
 
 
 if __name__ == "__main__":
