@@ -1,9 +1,8 @@
-2026-11-18  EUR/USD 1.0968 (ECB)  DAX open, Nasdaq open
-Yahoo data missing for 17 of 40 DAX stocks today (throttled): BEI.DE BMW.DE CON.DE DB1.DE FRE.DE HEN3.DE HNR1.DE IFX.DE P911.DE PAH3.DE RHM.DE RWE.DE SAP.DE SHL.DE SIE.DE SRT3.DE SY1.DE
-Deposit: EUR 1000.00. Benchmarks bought the DAX ETF at EUR 214.90 and QQQ at $660.88.
-Europe (DAX): 8 breakouts, 3 trades, P&L EUR -1.28
-US (Nasdaq-100): sat out (last 20 sessions EUR -31.19 per EUR 1,000); today it would have made EUR +17.99
-  EU 10:20 DBK.DE 10.8196 @ 30.5 -> 15:25 30.25 (flat by close)  EUR -2.70
-  EU 10:20 VNA.DE 19.4805 @ 16.94 -> 15:25 17.1 (flat by close)  EUR +3.12
-  EU 10:25 EOAN.DE 15.3603 @ 18.88 -> 15:25 18.77 (flat by close)  EUR -1.69
-End of day: account EUR 998.72 (EUR 998.72 + USD 0.00) | deposited EUR 1000.00 | DAX EUR 992.09 | Nasdaq-100 EUR 998.64
+2026-11-19  EUR/USD 1.0992 (ECB)  DAX open, Nasdaq open
+Yahoo data missing for 29 of 40 DAX stocks today (throttled): BAS.DE BAYN.DE BEI.DE BNR.DE CBK.DE DB1.DE DHL.DE DTG.DE ENR.DE EOAN.DE FRE.DE G1A.DE HEI.DE HEN3.DE HNR1.DE IFX.DE MBG.DE MRK.DE MTX.DE MUV2.DE PAH3.DE QIA.DE RWE.DE SAP.DE SRT3.DE SY1.DE VNA.DE VOW3.DE ZAL.DE
+Europe (DAX): 7 breakouts, 3 trades, P&L EUR -3.47
+US (Nasdaq-100): sat out (last 20 sessions EUR -25.63 per EUR 1,000); today it would have made EUR -9.97
+  EU 10:20 ADS.DE 1.8866 @ 174.69 -> 14:50 172.85 (stop)  EUR -3.47
+  EU 10:20 DBK.DE 10.8058 @ 30.5 -> 15:25 30.45 (flat by close)  EUR -0.54
+  EU 10:20 P911.DE 6.7092 @ 43.17 -> 15:25 43.25 (flat by close)  EUR +0.54
+End of day: account EUR 995.25 (EUR 995.25 + USD 0.00) | deposited EUR 1000.00 | DAX EUR 976.73 | Nasdaq-100 EUR 973.98

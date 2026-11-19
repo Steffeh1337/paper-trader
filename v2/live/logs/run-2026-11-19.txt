@@ -1,0 +1,8 @@
+2026-11-19  EUR/USD 1.0992 (ECB)  DAX open, Nasdaq open
+Yahoo data missing for 29 of 40 DAX stocks today (throttled): BAS.DE BAYN.DE BEI.DE BNR.DE CBK.DE DB1.DE DHL.DE DTG.DE ENR.DE EOAN.DE FRE.DE G1A.DE HEI.DE HEN3.DE HNR1.DE IFX.DE MBG.DE MRK.DE MTX.DE MUV2.DE PAH3.DE QIA.DE RWE.DE SAP.DE SRT3.DE SY1.DE VNA.DE VOW3.DE ZAL.DE
+Europe (DAX): 7 breakouts, 3 trades, P&L EUR -3.47
+US (Nasdaq-100): sat out (last 20 sessions EUR -25.63 per EUR 1,000); today it would have made EUR -9.97
+  EU 10:20 ADS.DE 1.8866 @ 174.69 -> 14:50 172.85 (stop)  EUR -3.47
+  EU 10:20 DBK.DE 10.8058 @ 30.5 -> 15:25 30.45 (flat by close)  EUR -0.54
+  EU 10:20 P911.DE 6.7092 @ 43.17 -> 15:25 43.25 (flat by close)  EUR +0.54
+End of day: account EUR 995.25 (EUR 995.25 + USD 0.00) | deposited EUR 1000.00 | DAX EUR 976.73 | Nasdaq-100 EUR 973.98

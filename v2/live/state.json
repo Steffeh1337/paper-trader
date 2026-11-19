@@ -1,6 +1,7 @@
 {
   "days": [
-    "2026-11-18"
+    "2026-11-18",
+    "2026-11-19"
   ],
   "deposits": [
     {
@@ -12,7 +13,7 @@
       "qqq_price": 660.88
     }
   ],
-  "cash_eur": 998.72,
+  "cash_eur": 995.25,
   "cash_usd": 0.0,
   "dax_units": 4.653327261059356,
   "qqq_units": 1.6596053746519792,
@@ -101,10 +102,14 @@
     [
       "2026-11-18",
       17.99
+    ],
+    [
+      "2026-11-19",
+      -9.97
     ]
   ],
   "note": "us_shadow seeded from the backtest data (30-minute range, USD balance) for the 20 US sessions before the start",
-  "eu_missing_today": 17,
-  "last_dax_close": 213.1999969482422,
-  "last_qqq_close": 659.98
+  "eu_missing_today": 29,
+  "last_dax_close": 209.89999389648438,
+  "last_qqq_close": 645.095
 }

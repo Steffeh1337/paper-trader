@@ -1,3 +1,5 @@
 date,session,status,breakouts,trades,pnl_eur,us_shadow_eur
 2026-11-18,EU,traded,8,3,-1.28,
 2026-11-18,US,sat out,19,0,0.0,17.99
+2026-11-19,EU,traded,7,3,-3.47,
+2026-11-19,US,sat out,11,0,0.0,-9.97
