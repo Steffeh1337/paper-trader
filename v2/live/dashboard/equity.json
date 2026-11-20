@@ -18,5 +18,15 @@
     "trades": 3.0,
     "cash_eur": 995.25,
     "cash_usd": 0.0
+  },
+  {
+    "date": "2026-11-20",
+    "equity_eur": 995.25,
+    "deposited_eur": 1000.0,
+    "dax_eur": 952.77,
+    "nasdaq_eur": 973.98,
+    "trades": 0.0,
+    "cash_eur": 995.25,
+    "cash_usd": 0.0
   }
 ]

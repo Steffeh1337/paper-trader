@@ -1,7 +1,7 @@
 [
   {
-    "last_run_utc": "2026-11-19T21:45:57Z",
-    "last_session": "2026-11-19",
+    "last_run_utc": "2026-11-20T13:59:50Z",
+    "last_session": "2026-11-20",
     "monthly_eur": 1000,
     "stop_pct": 0.01,
     "target_pct": 0.02,
@@ -17,9 +17,13 @@
     "eu_range_ro": "10:00-10:15",
     "eu_last_entry_ro": "12:00",
     "eu_flat_ro": "15:25",
-    "us_lookback": 20,
-    "us_recent_eur": -30.01,
-    "us_next": "off",
+    "eu_switch_date": "2026-11-20",
+    "eu_switch": "off",
+    "eu_why": "DAX fell in its opening range (25187.51 -> 25145.06)",
+    "eu_missing_stocks": 17,
+    "us_switch_date": null,
+    "us_switch": null,
+    "us_why": null,
     "eur_deposited": 1000
   }
 ]

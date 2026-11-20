@@ -6,7 +6,8 @@
     "breakouts": 8.0,
     "trades": 3.0,
     "pnl_eur": -1.28,
-    "us_shadow_eur": null
+    "shadow_eur": null,
+    "reason": "every trading day (rules until 19 Nov)"
   },
   {
     "date": "2026-11-18",
@@ -15,7 +16,8 @@
     "breakouts": 19.0,
     "trades": 0.0,
     "pnl_eur": 0.0,
-    "us_shadow_eur": 17.99
+    "shadow_eur": 17.99,
+    "reason": "last 20 US sessions negative (rules until 19 Nov)"
   },
   {
     "date": "2026-11-19",
@@ -24,7 +26,8 @@
     "breakouts": 7.0,
     "trades": 3.0,
     "pnl_eur": -3.47,
-    "us_shadow_eur": null
+    "shadow_eur": null,
+    "reason": "every trading day (rules until 19 Nov)"
   },
   {
     "date": "2026-11-19",
@@ -33,6 +36,17 @@
     "breakouts": 11.0,
     "trades": 0.0,
     "pnl_eur": 0.0,
-    "us_shadow_eur": -9.97
+    "shadow_eur": -9.97,
+    "reason": "last 20 US sessions negative (rules until 19 Nov)"
+  },
+  {
+    "date": "2026-11-20",
+    "session": "EU",
+    "status": "sat out",
+    "breakouts": 7.0,
+    "trades": 0.0,
+    "pnl_eur": 0.0,
+    "shadow_eur": -3.69,
+    "reason": "DAX fell in its opening range (25187.51 -> 25145.06)"
   }
 ]

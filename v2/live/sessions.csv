@@ -3,3 +3,4 @@ date,session,status,breakouts,trades,pnl_eur,shadow_eur,reason
 2026-11-18,US,sat out,19,0,0.0,17.99,last 20 US sessions negative (rules until 19 Nov)
 2026-11-19,EU,traded,7,3,-3.47,,every trading day (rules until 19 Nov)
 2026-11-19,US,sat out,11,0,0.0,-9.97,last 20 US sessions negative (rules until 19 Nov)
+2026-11-20,EU,sat out,7,0,0.0,-3.69,DAX fell in its opening range (25187.51 -> 25145.06)
