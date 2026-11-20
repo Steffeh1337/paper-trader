@@ -1,7 +1,8 @@
 {
   "days": [
     "2026-11-18",
-    "2026-11-19"
+    "2026-11-19",
+    "2026-11-20"
   ],
   "deposits": [
     {
@@ -106,12 +107,16 @@
     [
       "2026-11-19",
       -9.97
+    ],
+    [
+      "2026-11-20",
+      -9.45
     ]
   ],
   "note": "us_shadow seeded from the backtest data (30-minute range, USD balance) for the 20 US sessions before the start",
   "eu_missing_today": 29,
-  "last_dax_close": 204.75,
-  "last_qqq_close": 645.095,
+  "last_dax_close": 204.3000030517578,
+  "last_qqq_close": 613.69,
   "eu_days": [
     "2026-11-18",
     "2026-11-19",
@@ -119,7 +124,8 @@
   ],
   "us_days": [
     "2026-11-18",
-    "2026-11-19"
+    "2026-11-19",
+    "2026-11-20"
   ],
   "pending_qqq_eur": 0.0,
   "eu_today": {
@@ -127,5 +133,12 @@
     "switch": "off",
     "why": "DAX fell in its opening range (25187.51 -> 25145.06)",
     "missing": 17
-  }
+  },
+  "us_today": {
+    "date": "2026-11-20",
+    "switch": "off",
+    "why": "QQQ below its 20-day average ($645.10 vs $683.37)"
+  },
+  "qqq_prev_close": 645.095,
+  "qqq_sma20": 683.3695
 }
