@@ -5,3 +5,4 @@ date,session,status,breakouts,trades,pnl_eur,shadow_eur,reason
 2026-11-19,US,sat out,11,0,0.0,-9.97,last 20 US sessions negative (rules until 19 Nov)
 2026-11-20,EU,sat out,7,0,0.0,-3.69,DAX fell in its opening range (25187.51 -> 25145.06)
 2026-11-20,US,sat out,39,0,0.0,-9.45,QQQ below its 20-day average ($645.10 vs $683.37)
+2026-11-23,EU,sat out,18,0,0.0,3.23,DAX fell in its opening range (24907.19 -> 24875.99)

@@ -115,12 +115,13 @@
   ],
   "note": "us_shadow seeded from the backtest data (30-minute range, USD balance) for the 20 US sessions before the start",
   "eu_missing_today": 29,
-  "last_dax_close": 204.3000030517578,
+  "last_dax_close": 206.0500030517578,
   "last_qqq_close": 613.69,
   "eu_days": [
     "2026-11-18",
     "2026-11-19",
-    "2026-11-20"
+    "2026-11-20",
+    "2026-11-23"
   ],
   "us_days": [
     "2026-11-18",
@@ -129,10 +130,10 @@
   ],
   "pending_qqq_eur": 0.0,
   "eu_today": {
-    "date": "2026-11-20",
+    "date": "2026-11-23",
     "switch": "off",
-    "why": "DAX fell in its opening range (25187.51 -> 25145.06)",
-    "missing": 17
+    "why": "DAX fell in its opening range (24907.19 -> 24875.99)",
+    "missing": 12
   },
   "us_today": {
     "date": "2026-11-20",
