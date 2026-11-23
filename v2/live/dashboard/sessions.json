@@ -68,5 +68,15 @@
     "pnl_eur": 0.0,
     "shadow_eur": 3.23,
     "reason": "DAX fell in its opening range (24907.19 -> 24875.99)"
+  },
+  {
+    "date": "2026-11-23",
+    "session": "US",
+    "status": "sat out",
+    "breakouts": 59.0,
+    "trades": 0.0,
+    "pnl_eur": 0.0,
+    "shadow_eur": -3.96,
+    "reason": "QQQ below its 20-day average ($609.75 vs $678.65)"
   }
 ]
