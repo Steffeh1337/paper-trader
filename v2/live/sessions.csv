@@ -7,3 +7,4 @@ date,session,status,breakouts,trades,pnl_eur,shadow_eur,reason
 2026-11-20,US,sat out,39,0,0.0,-9.45,QQQ below its 20-day average ($645.10 vs $683.37)
 2026-11-23,EU,sat out,18,0,0.0,3.23,DAX fell in its opening range (24907.19 -> 24875.99)
 2026-11-23,US,sat out,59,0,0.0,-3.96,QQQ below its 20-day average ($609.75 vs $678.65)
+2026-11-24,EU,traded,14,3,-1.96,-1.97,trades every day (switch not used; DAX fell in its opening range (25308.31 -> 25284.91))

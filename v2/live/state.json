@@ -15,7 +15,7 @@
       "qqq_price": 660.88
     }
   ],
-  "cash_eur": 995.25,
+  "cash_eur": 993.29,
   "cash_usd": 0.0,
   "dax_units": 4.653327261059356,
   "qqq_units": 1.6596053746519792,
@@ -120,13 +120,14 @@
   ],
   "note": "us_shadow seeded from the backtest data (30-minute range, USD balance) for the 20 US sessions before the start",
   "eu_missing_today": 29,
-  "last_dax_close": 208.75,
+  "last_dax_close": 206.5500030517578,
   "last_qqq_close": 651.55,
   "eu_days": [
     "2026-11-18",
     "2026-11-19",
     "2026-11-20",
-    "2026-11-23"
+    "2026-11-23",
+    "2026-11-24"
   ],
   "us_days": [
     "2026-11-18",
@@ -136,10 +137,10 @@
   ],
   "pending_qqq_eur": 0.0,
   "eu_today": {
-    "date": "2026-11-23",
-    "switch": "off",
-    "why": "DAX fell in its opening range (24907.19 -> 24875.99)",
-    "missing": 12
+    "date": "2026-11-24",
+    "switch": "on",
+    "why": "trades every day (switch not used; DAX fell in its opening range (25308.31 -> 25284.91))",
+    "missing": 2
   },
   "us_today": {
     "date": "2026-11-23",
