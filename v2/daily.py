@@ -14,6 +14,8 @@ Rules (v2/rules.json; trading windows from common guidance on intraday activity,
             Converting only when that changes pays Trading 212's 0.15% fee once, not on every trade.
   exits     stop-loss 1% below the entry, take-profit 2% above, fractional shares, up to 3 trades per
             session, each up to a third of its balance; same-bar breakouts: the most traded first
+  switches  "use_switches": false in rules.json (from 24 Nov 2026): both sessions trade every day and the
+            switch reading is only recorded. With it true, a session trades only when its switch is on.
   sat out   a session that sits out is still simulated on a EUR 1,000 reference, shown on the dashboard
 
   python3 v2/daily.py --session EU    # after the DAX session (from 15:30 Romanian time)
@@ -260,7 +262,8 @@ def run_eu(day):
     if day.isoformat() in state["eu_days"]:
         log("Europe %s was already simulated. Nothing to do." % day)
         return 0
-    on, why = eu_switch(day)                           # first, while Yahoo still answers freely
+    use_sw = rules.get("use_switches", True)
+    on, why = eu_switch(day) if use_sw else (None, "")   # first, while Yahoo still answers freely
     eu, etf_ok, skipped = fetch_eu(inst, rules)
     bars_etf = eu[inst["dax_etf"]].get(day.isoformat())
     if not bars_etf:
@@ -273,6 +276,8 @@ def run_eu(day):
     if on is None:
         on, why = eu_switch(day, bars_etf)
         on = bool(on)
+    if not use_sw:                                     # every day for now; the reading is kept for reference
+        on, why = True, "trades every day (switch not used; %s)" % why
     c_eu = candidates({s: eu[s] for s in inst["dax"] + [inst["dax_etf"]]}, day, "EU", 0.0)
     end_ref, _, _ = engine.trade_day([dict(c) for c in c_eu], 1000.0, session_rules(rules, "EU"))
     shadow = round(end_ref - 1000.0, 2)
@@ -317,6 +322,8 @@ def run_us(day):
         log("Benchmark bought QQQ at $%.2f with EUR %.2f." % (qqq[0][1], state["pending_qqq_eur"]))
         state["pending_qqq_eur"] = 0.0
     on, why, qqq_prev, sma = us_switch(day)
+    if not rules.get("use_switches", True):            # every day for now; the reading is kept for reference
+        on, why = True, "trades every day (switch not used; %s)" % why
     # currencies: while the US switch is on keep usd_share of the account in USD, otherwise all in EUR
     if on:
         gap = rules["usd_share"] * total_eur(state, rate) - state["cash_usd"] / rate
