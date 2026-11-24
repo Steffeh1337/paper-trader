@@ -1,6 +1,6 @@
 [
   {
-    "last_run_utc": "2026-11-24T13:49:43Z",
+    "last_run_utc": "2026-11-24T21:42:30Z",
     "last_session": "2026-11-24",
     "monthly_eur": 1000,
     "stop_pct": 0.01,
@@ -8,9 +8,9 @@
     "max_trades_per_session": 3,
     "fx_fee": 0.0015,
     "usd_share": 0.5,
-    "fees_eur": 0.0,
-    "cash_eur": 993.29,
-    "cash_usd": 0.0,
+    "fees_eur": 0.74,
+    "cash_eur": 496.64,
+    "cash_usd": 548.51,
     "us_range_ro": "16:30-17:00",
     "us_last_entry_ro": "18:30",
     "us_flat_ro": "22:55",
@@ -21,9 +21,9 @@
     "eu_switch": "on",
     "eu_why": "trades every day (switch not used; DAX fell in its opening range (25308.31 -> 25284.91))",
     "eu_missing_stocks": 2,
-    "us_switch_date": "2026-11-23",
-    "us_switch": "off",
-    "us_why": "QQQ below its 20-day average ($609.75 vs $678.65)",
+    "us_switch_date": "2026-11-24",
+    "us_switch": "on",
+    "us_why": "trades every day (switch not used; QQQ below its 20-day average ($651.18 vs $675.60))",
     "eur_deposited": 1000
   }
 ]

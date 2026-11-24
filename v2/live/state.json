@@ -3,7 +3,8 @@
     "2026-11-18",
     "2026-11-19",
     "2026-11-20",
-    "2026-11-23"
+    "2026-11-23",
+    "2026-11-24"
   ],
   "deposits": [
     {
@@ -15,11 +16,11 @@
       "qqq_price": 660.88
     }
   ],
-  "cash_eur": 993.29,
-  "cash_usd": 0.0,
+  "cash_eur": 496.64,
+  "cash_usd": 548.51,
   "dax_units": 4.653327261059356,
   "qqq_units": 1.6596053746519792,
-  "fees_eur": 0.0,
+  "fees_eur": 0.7449675,
   "us_shadow": [
     [
       "2026-10-21",
@@ -116,12 +117,16 @@
     [
       "2026-11-23",
       -3.96
+    ],
+    [
+      "2026-11-24",
+      8.93
     ]
   ],
   "note": "us_shadow seeded from the backtest data (30-minute range, USD balance) for the 20 US sessions before the start",
   "eu_missing_today": 29,
-  "last_dax_close": 206.5500030517578,
-  "last_qqq_close": 651.55,
+  "last_dax_close": 206.14999389648438,
+  "last_qqq_close": 637.6,
   "eu_days": [
     "2026-11-18",
     "2026-11-19",
@@ -133,7 +138,8 @@
     "2026-11-18",
     "2026-11-19",
     "2026-11-20",
-    "2026-11-23"
+    "2026-11-23",
+    "2026-11-24"
   ],
   "pending_qqq_eur": 0.0,
   "eu_today": {
@@ -143,10 +149,10 @@
     "missing": 2
   },
   "us_today": {
-    "date": "2026-11-23",
-    "switch": "off",
-    "why": "QQQ below its 20-day average ($609.75 vs $678.65)"
+    "date": "2026-11-24",
+    "switch": "on",
+    "why": "trades every day (switch not used; QQQ below its 20-day average ($651.18 vs $675.60))"
   },
-  "qqq_prev_close": 609.75,
-  "qqq_sma20": 678.6465000000001
+  "qqq_prev_close": 651.18,
+  "qqq_sma20": 675.6
 }
