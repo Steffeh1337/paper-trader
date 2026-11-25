@@ -1,0 +1,5 @@
+US (Nasdaq-100): trades every day (switch not used; QQQ below its 20-day average ($638.12 vs $671.44)) -> traded. 39 breakouts, 3 trades, P&L EUR -5.20
+  US 17:05 MU 0.3114 @ 581.18 -> 17:05 575.08 (stop)  EUR -1.74
+  US 17:05 AVGO 0.6265 @ 288.88 -> 17:10 285.85 (stop)  EUR -1.74
+  US 17:05 GOOG 0.6799 @ 266.21 -> 17:25 263.42 (stop)  EUR -1.74
+End of day: account EUR 993.12 (EUR 496.71 + USD 542.82) | deposited EUR 1000 | DAX EUR 946.72 | Nasdaq-100 EUR 962.1

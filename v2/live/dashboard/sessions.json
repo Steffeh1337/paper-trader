@@ -108,5 +108,15 @@
     "pnl_eur": 0.07,
     "shadow_eur": 0.13,
     "reason": "trades every day (switch not used; DAX ETF fell in its opening range (206.45 -> 206.35))"
+  },
+  {
+    "date": "2026-11-25",
+    "session": "US",
+    "status": "traded",
+    "breakouts": 39.0,
+    "trades": 3.0,
+    "pnl_eur": -5.2,
+    "shadow_eur": -10.38,
+    "reason": "trades every day (switch not used; QQQ below its 20-day average ($638.12 vs $671.44))"
   }
 ]

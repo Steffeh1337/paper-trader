@@ -1,6 +1,5 @@
-Yahoo data missing for 5 of 40 DAX stocks today (throttled): AIR.DE BMW.DE G1A.DE HEI.DE MTX.DE
-Europe (DAX): trades every day (switch not used; DAX ETF fell in its opening range (206.45 -> 206.35)) -> traded. 20 breakouts, 3 trades, P&L EUR +0.07
-  EU 10:20 MBG.DE 4.2824 @ 38.27 -> 11:15 39.04 (target)  EUR +3.30
-  EU 10:20 RHM.DE 0.2184 @ 750.38 -> 13:10 742.51 (stop)  EUR -1.72
-  EU 10:20 BNR.DE 2.5624 @ 56.21 -> 13:55 55.62 (stop)  EUR -1.51
-After Europe: account EUR 997.04 | deposited EUR 1000 | DAX EUR 954.86
+US (Nasdaq-100): trades every day (switch not used; QQQ below its 20-day average ($638.12 vs $671.44)) -> traded. 39 breakouts, 3 trades, P&L EUR -5.20
+  US 17:05 MU 0.3114 @ 581.18 -> 17:05 575.08 (stop)  EUR -1.74
+  US 17:05 AVGO 0.6265 @ 288.88 -> 17:10 285.85 (stop)  EUR -1.74
+  US 17:05 GOOG 0.6799 @ 266.21 -> 17:25 263.42 (stop)  EUR -1.74
+End of day: account EUR 993.12 (EUR 496.71 + USD 542.82) | deposited EUR 1000 | DAX EUR 946.72 | Nasdaq-100 EUR 962.1

@@ -1,6 +1,6 @@
 [
   {
-    "last_run_utc": "2026-11-25T13:54:19Z",
+    "last_run_utc": "2026-11-25T21:41:05Z",
     "last_session": "2026-11-25",
     "monthly_eur": 1000,
     "stop_pct": 0.01,
@@ -10,7 +10,7 @@
     "usd_share": 0.5,
     "fees_eur": 0.74,
     "cash_eur": 496.71,
-    "cash_usd": 548.51,
+    "cash_usd": 542.82,
     "us_range_ro": "16:30-17:00",
     "us_last_entry_ro": "18:30",
     "us_flat_ro": "22:55",
@@ -21,9 +21,9 @@
     "eu_switch": "on",
     "eu_why": "trades every day (switch not used; DAX ETF fell in its opening range (206.45 -> 206.35))",
     "eu_missing_stocks": 5,
-    "us_switch_date": "2026-11-24",
+    "us_switch_date": "2026-11-25",
     "us_switch": "on",
-    "us_why": "trades every day (switch not used; QQQ below its 20-day average ($651.18 vs $675.60))",
+    "us_why": "trades every day (switch not used; QQQ below its 20-day average ($638.12 vs $671.44))",
     "eur_deposited": 1000
   }
 ]
