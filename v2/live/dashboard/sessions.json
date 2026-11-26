@@ -118,5 +118,15 @@
     "pnl_eur": -5.2,
     "shadow_eur": -10.38,
     "reason": "trades every day (switch not used; QQQ below its 20-day average ($638.12 vs $671.44))"
+  },
+  {
+    "date": "2026-11-26",
+    "session": "EU",
+    "status": "traded",
+    "breakouts": 21.0,
+    "trades": 3.0,
+    "pnl_eur": 1.59,
+    "shadow_eur": 3.21,
+    "reason": "trades every day (switch not used; DAX fell in its opening range (25153.11 -> 25128.36))"
   }
 ]
