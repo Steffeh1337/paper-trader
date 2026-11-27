@@ -311,7 +311,7 @@ def run_us(day):
     us_syms = inst["ndx"] + [inst["ndx_etf"]]
     us = C.alpaca_bars(us_syms, day.isoformat() + "T00:00:00Z", (day + dt.timedelta(days=1)).isoformat() + "T00:00:00Z")
     qqq = us.get(inst["ndx_etf"], {}).get(day.isoformat(), [])
-    if len(qqq) < 70:
+    if len(qqq) < 30:                                   # a 13:00 early close has about 42 bars
         log("%s: Nasdaq closed (weekend or holiday). US has nothing to do." % day)
         return 0
     rate = ecb_eurusd(day)
