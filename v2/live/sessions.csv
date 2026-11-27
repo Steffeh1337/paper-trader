@@ -12,3 +12,4 @@ date,session,status,breakouts,trades,pnl_eur,shadow_eur,reason
 2026-11-25,EU,traded,20,3,0.07,0.13,trades every day (switch not used; DAX ETF fell in its opening range (206.45 -> 206.35))
 2026-11-25,US,traded,39,3,-5.2,-10.38,trades every day (switch not used; QQQ below its 20-day average ($638.12 vs $671.44))
 2026-11-26,EU,traded,21,3,1.59,3.21,trades every day (switch not used; DAX fell in its opening range (25153.11 -> 25128.36))
+2026-11-27,EU,traded,14,3,-5.73,-11.5,trades every day (switch not used; DAX rose in its opening range (25409.54 -> 25409.67))

@@ -128,5 +128,15 @@
     "pnl_eur": 1.59,
     "shadow_eur": 3.21,
     "reason": "trades every day (switch not used; DAX fell in its opening range (25153.11 -> 25128.36))"
+  },
+  {
+    "date": "2026-11-27",
+    "session": "EU",
+    "status": "traded",
+    "breakouts": 14.0,
+    "trades": 3.0,
+    "pnl_eur": -5.73,
+    "shadow_eur": -11.5,
+    "reason": "trades every day (switch not used; DAX rose in its opening range (25409.54 -> 25409.67))"
   }
 ]

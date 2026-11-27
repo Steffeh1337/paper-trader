@@ -1,0 +1,6 @@
+Yahoo data missing for 13 of 40 DAX stocks today (throttled): BMW.DE BNR.DE DB1.DE EOAN.DE FRE.DE MTX.DE QIA.DE RHM.DE RWE.DE SHL.DE SY1.DE VNA.DE ZAL.DE
+Europe (DAX): trades every day (switch not used; DAX rose in its opening range (25409.54 -> 25409.67)) -> traded. 14 breakouts, 3 trades, P&L EUR -5.73
+  EU 10:20 IFX.DE 3.7178 @ 44.23 -> 13:40 43.77 (stop)  EUR -1.71
+  EU 10:25 CON.DE 2.3364 @ 70.38 -> 13:45 69.47 (stop)  EUR -2.13
+  EU 10:30 SRT3.DE 0.5004 @ 288.74 -> 14:00 284.96 (stop)  EUR -1.89
+After Europe: account EUR 987.17 | deposited EUR 1000 | DAX EUR 973.94
