@@ -1,0 +1,21 @@
+{
+  "monthly_eur": 1000,
+  "risk_per_trade": 0.01,
+  "rr": 2,
+  "max_trades_per_instrument": 3,
+  "leverage": 20,
+  "fx_fee": 0.0015,
+  "flat_by": "22:55",
+  "news_block": {"DAX": ["EUR", "USD"], "NAS": ["USD"]},
+  "instruments": {
+    "DAX": {"name": "DAX 40 (GER40 CFD)", "oanda": "DE30_EUR", "currency": "EUR",
+            "windows": [["10:15", "16:15"], ["16:45", "19:00"], ["20:00", "21:30"]],
+            "hodlod": true, "rule_1615": true,
+            "points": {"buffer": 2.0, "min_risk": 3.0, "spread": 1.5}},
+    "NAS": {"name": "Nasdaq-100 (US100 CFD)", "oanda": "NAS100_USD", "alpaca": "QQQ", "currency": "USD",
+            "windows": [["16:45", "19:00"], ["20:00", "21:30"]],
+            "hodlod": false, "rule_1615": false,
+            "points": {"buffer": 2.0, "min_risk": 3.0, "spread": 1.5},
+            "qqq": {"buffer": 0.05, "min_risk": 0.08, "spread": 0.02}}
+  }
+}

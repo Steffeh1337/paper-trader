@@ -1,0 +1,31 @@
+{
+ "DAX (cash index, from 10:00)": {
+  "days": 59,
+  "trades": 71,
+  "win_rate": 0.451,
+  "avg_R": 0.05,
+  "total_eur_on_1000": 35.54,
+  "outcomes": {
+   "16:15 rule": 25,
+   "target": 10,
+   "stop": 20,
+   "flat by close": 16
+  },
+  "long": 32,
+  "short": 39
+ },
+ "Nasdaq-100 (QQQ)": {
+  "days": 57,
+  "trades": 17,
+  "win_rate": 0.412,
+  "avg_R": -0.11,
+  "total_eur_on_1000": -18.31,
+  "outcomes": {
+   "target": 3,
+   "stop": 8,
+   "flat by close": 6
+  },
+  "long": 10,
+  "short": 7
+ }
+}
